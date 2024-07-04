@@ -1,5 +1,8 @@
 import 'package:dess/Source/Screens/Forms/form_page.dart';
+import 'package:dess/Source/Screens/Home/avaliation_page.dart';
 import 'package:dess/Source/Screens/Home/home_page.dart';
+import 'package:dess/Source/Screens/Home/manage_page.dart';
+import 'package:dess/Source/Screens/Home/passport_page.dart';
 import 'package:dess/Source/Screens/Register/initial_page.dart';
 import 'package:dess/Source/Screens/Register/login_page.dart';
 import 'package:dess/Source/Screens/Register/register_page.dart';
