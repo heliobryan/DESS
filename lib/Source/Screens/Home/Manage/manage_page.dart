@@ -333,7 +333,8 @@ class ManagePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () =>
+                        Navigator.popAndPushNamed(context, 'healthPage'),
                   ),
                 ),
               ],

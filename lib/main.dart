@@ -1,5 +1,6 @@
 import 'package:dess/Source/Screens/Forms/form_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/comp_page.dart';
+import 'package:dess/Source/Screens/Home/Manage/health_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/sponsor_page.dart';
 import 'package:dess/Source/Screens/Home/avaliation_page.dart';
 import 'package:dess/Source/Screens/Home/home_page.dart';
@@ -41,6 +42,7 @@ class DesApp extends StatelessWidget {
         'imageManagePage': (context) => const ImageManagePage(),
         'compPage': (context) => const CompPage(),
         'sponsorPage': (context) => const SponsorPage(),
+        'healthPage': (context) => const HealthPage(),
       },
     );
   }
