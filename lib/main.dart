@@ -1,7 +1,10 @@
 import 'package:dess/Source/Screens/Forms/form_page.dart';
+import 'package:dess/Source/Screens/Home/Manage/comp_page.dart';
+import 'package:dess/Source/Screens/Home/Manage/sponsor_page.dart';
 import 'package:dess/Source/Screens/Home/avaliation_page.dart';
 import 'package:dess/Source/Screens/Home/home_page.dart';
-import 'package:dess/Source/Screens/Home/manage_page.dart';
+import 'package:dess/Source/Screens/Home/Manage/image_manage_page.dart';
+import 'package:dess/Source/Screens/Home/Manage/manage_page.dart';
 import 'package:dess/Source/Screens/Home/passport_page.dart';
 import 'package:dess/Source/Screens/Register/initial_page.dart';
 import 'package:dess/Source/Screens/Register/login_page.dart';
@@ -35,6 +38,9 @@ class DesApp extends StatelessWidget {
         'avaliationPage': (context) => const AvaliationPage(),
         'managePage': (context) => const ManagePage(),
         'passportPage': (context) => const PassportPage(),
+        'imageManagePage': (context) => const ImageManagePage(),
+        'compPage': (context) => const CompPage(),
+        'sponsorPage': (context) => const SponsorPage(),
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'package:dess/Source/Screens/Home/avaliation_page.dart';
-import 'package:dess/Source/Screens/Home/manage_page.dart';
+import 'package:dess/Source/Screens/Home/Manage/image_manage_page.dart';
+import 'package:dess/Source/Screens/Home/Manage/manage_page.dart';
 import 'package:dess/Source/Screens/Home/passport_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
@@ -19,6 +20,7 @@ class _HomePageState extends State<HomePage> {
     const AvaliationPage(),
     const PassportPage(),
     const ManagePage(),
+    const ImageManagePage(),
   ];
 
   @override

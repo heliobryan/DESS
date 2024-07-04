@@ -9,21 +9,14 @@ class PassportPage extends StatelessWidget {
       backgroundColor: const Color(0xFF1E1E1E),
       appBar: AppBar(
         backgroundColor: const Color(0xFF1E1E1E),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: Colors.white,
-          ),
-          onPressed: () {},
-        ),
         centerTitle: true,
         title: const Text(
-          'Passaporte B',
+          'Passaporte B.',
           style: TextStyle(
-            fontFamily: 'STRETCH',
-            fontSize: 20,
-            color: Colors.white,
-          ),
+              fontFamily: 'STRETCH',
+              fontSize: 20,
+              color: Colors.white,
+              fontWeight: FontWeight.w200),
         ),
         actions: [
           IconButton(

@@ -115,7 +115,8 @@ class ManagePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () =>
+                        Navigator.popAndPushNamed(context, 'imageManagePage'),
                   ),
                 ),
               ],
@@ -187,7 +188,7 @@ class ManagePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () => Navigator.popAndPushNamed(context, 'compPage'),
                   ),
                 ),
               ],
@@ -259,7 +260,8 @@ class ManagePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    onTap: () {},
+                    onTap: () =>
+                        Navigator.popAndPushNamed(context, 'sponsorPage'),
                   ),
                 ),
               ],
