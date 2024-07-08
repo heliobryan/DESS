@@ -1,42 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
 
-class PassportPage extends StatelessWidget {
-  const PassportPage({super.key});
+class AvapsiPage extends StatelessWidget {
+  const AvapsiPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1E1E1E),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: const Color(0xFF1E1E1E),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
+            size: 25,
+          ),
+          onPressed: () => Navigator.pop(context, 'avaliationPage'),
+        ),
+        title: const Text(
+          'Técnica',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontFamily: 'STRETCH',
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.exit_to_app,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(width: 90),
-                const Text(
-                  'Passaporte B.',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'STRETCH',
-                  ),
-                ),
-                const SizedBox(width: 40),
-                IconButton(
-                  icon: const Icon(
-                    Icons.exit_to_app,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
-            ),
             const SizedBox(height: 20),
             Container(
               width: 112,
@@ -112,7 +117,7 @@ class PassportPage extends StatelessWidget {
                   ),
                   child: const Center(
                     child: Text(
-                      'Atual (Sub 13)',
+                      'Foco',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -139,7 +144,7 @@ class PassportPage extends StatelessWidget {
                   ),
                   child: const Center(
                     child: Text(
-                      'Sub 15',
+                      'Confiança',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -166,7 +171,7 @@ class PassportPage extends StatelessWidget {
                   ),
                   child: const Center(
                     child: Text(
-                      'Sub 16',
+                      'Resiliência',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -207,76 +212,43 @@ class PassportPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             SizedBox(
-              width: 315,
-              height: 243,
-              child: OutlineGradientButton(
-                radius: const Radius.circular(12),
-                strokeWidth: 1,
-                gradient: const LinearGradient(
-                  colors: <Color>[
-                    Color(0xFF981DB9),
-                    Color(0xFF0F76CE),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+              width: 361,
+              height: 100,
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                  border: GradientBoxBorder(
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        Color(0xFF981DB9),
+                        Color(0xFF0F76CE),
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                  ),
                 ),
                 child: const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      SizedBox(height: 5),
                       Text(
-                        'Dados Biológicos Atuais',
+                        'Avaliação - O atleta está concentrado?',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'OUTFIT',
                           fontWeight: FontWeight.bold,
-                          fontSize: 25,
+                          fontSize: 15,
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Peso:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Altura:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Idade:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'IMC:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [],
                       ),
                     ],
                   ),
                 ),
-                onTap: () {},
               ),
             ),
           ],

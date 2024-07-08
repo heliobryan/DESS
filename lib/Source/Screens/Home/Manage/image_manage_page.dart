@@ -21,8 +21,7 @@ class ImageManagePage extends StatelessWidget {
                     color: Colors.white,
                     size: 20,
                   ),
-                  onPressed: () =>
-                      Navigator.popAndPushNamed(context, 'homePage'),
+                  onPressed: () => Navigator.pop(context, 'managePage'),
                 ),
                 const SizedBox(width: 70),
                 const Column(

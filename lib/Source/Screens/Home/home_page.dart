@@ -1,9 +1,10 @@
-import 'package:dess/Source/Screens/Home/avaliation_page.dart';
+import 'package:dess/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/manage_page.dart';
 import 'package:dess/Source/Screens/Home/passport_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
+import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -133,12 +134,12 @@ class _Home1PageState extends State<Home1Page> {
           ),
         ),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
-            SizedBox(
+            const SizedBox(height: 20),
+            const SizedBox(
               width: 347,
               height: 27,
               child: TextField(
@@ -178,13 +179,103 @@ class _Home1PageState extends State<Home1Page> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            Text(
+            const SizedBox(height: 20),
+            const Text(
               'Alunos',
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'STRETCH',
                 fontSize: 18,
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 341,
+              height: 62,
+              child: OutlineGradientButton(
+                strokeWidth: 1,
+                radius: const Radius.circular(12),
+                gradient: const LinearGradient(
+                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                ),
+                child: const Row(
+                  children: [],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 341,
+              height: 62,
+              child: OutlineGradientButton(
+                strokeWidth: 1,
+                radius: const Radius.circular(12),
+                gradient: const LinearGradient(
+                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                ),
+                child: const Row(
+                  children: [],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 341,
+              height: 62,
+              child: OutlineGradientButton(
+                strokeWidth: 1,
+                radius: const Radius.circular(12),
+                gradient: const LinearGradient(
+                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                ),
+                child: const Row(
+                  children: [],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 341,
+              height: 62,
+              child: OutlineGradientButton(
+                strokeWidth: 1,
+                radius: const Radius.circular(12),
+                gradient: const LinearGradient(
+                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                ),
+                child: const Row(
+                  children: [],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 341,
+              height: 62,
+              child: OutlineGradientButton(
+                strokeWidth: 1,
+                radius: const Radius.circular(12),
+                gradient: const LinearGradient(
+                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                ),
+                child: const Row(
+                  children: [],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: 341,
+              height: 62,
+              child: OutlineGradientButton(
+                strokeWidth: 1,
+                radius: const Radius.circular(12),
+                gradient: const LinearGradient(
+                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                ),
+                child: const Row(
+                  children: [],
+                ),
               ),
             ),
           ],

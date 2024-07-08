@@ -1,8 +1,10 @@
 import 'package:dess/Source/Screens/Forms/form_page.dart';
+import 'package:dess/Source/Screens/Home/Avaliation/avapsi.dart';
+import 'package:dess/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/comp_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/health_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/sponsor_page.dart';
-import 'package:dess/Source/Screens/Home/avaliation_page.dart';
+import 'package:dess/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/Source/Screens/Home/home_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/manage_page.dart';
@@ -43,6 +45,8 @@ class DesApp extends StatelessWidget {
         'compPage': (context) => const CompPage(),
         'sponsorPage': (context) => const SponsorPage(),
         'healthPage': (context) => const HealthPage(),
+        'avatecPage': (context) => const AvatecPage(),
+        'avapsiPage': (context) => const AvapsiPage(),
       },
     );
   }

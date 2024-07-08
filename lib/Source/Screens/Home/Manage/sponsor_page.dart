@@ -14,7 +14,7 @@ class SponsorPage extends StatelessWidget {
             color: Colors.white,
             size: 20,
           ),
-          onPressed: () => Navigator.popAndPushNamed(context, 'homePage'),
+          onPressed: () => Navigator.pop(context, 'managePage'),
         ),
         actions: [
           IconButton(
@@ -56,7 +56,7 @@ class SponsorPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(width: 50),
                     Icon(
@@ -81,7 +81,7 @@ class SponsorPage extends StatelessWidget {
                     image: AssetImage('assets/images/gradientline.png')),
                 const SizedBox(height: 15),
                 const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(width: 50),
                     Icon(
@@ -106,7 +106,7 @@ class SponsorPage extends StatelessWidget {
                     image: AssetImage('assets/images/gradientline.png')),
                 const SizedBox(height: 15),
                 const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(width: 50),
                     Icon(
@@ -131,7 +131,7 @@ class SponsorPage extends StatelessWidget {
                     image: AssetImage('assets/images/gradientline.png')),
                 const SizedBox(height: 15),
                 const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(width: 50),
                     Icon(

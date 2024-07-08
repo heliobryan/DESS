@@ -14,7 +14,7 @@ class CompPage extends StatelessWidget {
             color: Colors.white,
             size: 20,
           ),
-          onPressed: () => Navigator.popAndPushNamed(context, 'homePage'),
+          onPressed: () => Navigator.pop(context, 'managePage'),
         ),
         actions: [
           IconButton(

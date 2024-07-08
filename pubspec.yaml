@@ -93,6 +93,8 @@ flutter:
       - assets/images/health.png
       - assets/images/cash.png
       - assets/images/gradientline.png
+      - assets/images/staron.png
+      - assets/images/staroff.png
       
       
     
