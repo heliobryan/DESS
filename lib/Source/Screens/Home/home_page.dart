@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dess/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/Source/Screens/Home/Manage/manage_page.dart';
@@ -114,7 +116,7 @@ class _Home1PageState extends State<Home1Page> {
     return Scaffold(
       backgroundColor: const Color(0xFF1E1E1E),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1E1E1E),
+        backgroundColor: Colors.transparent,
         actions: [
           IconButton(
             icon: const Icon(
@@ -134,152 +136,214 @@ class _Home1PageState extends State<Home1Page> {
           ),
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(height: 20),
-            const SizedBox(
-              width: 347,
-              height: 27,
-              child: TextField(
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'OUTFIT',
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                ),
-                decoration: InputDecoration(
-                  prefix: Text('   '),
-                  contentPadding: EdgeInsets.all(1),
-                  suffixIcon: Icon(
-                    Icons.search,
-                    color: Color(0xFF0F76CE),
+      body: Stack(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                width: 292,
+                height: 146,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: <Color>[
+                      Color(0xFF981DB9),
+                      Color(0xFF0F76CE),
+                      Color(0xFF0F76CE),
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
                   ),
-                  border: GradientOutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(9)),
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 100, sigmaY: 200),
+                  child: Container(
+                    color: Colors.black.withOpacity(0),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                    width: 292,
+                    height: 146,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
                     ),
-                    width: 1,
-                  ),
-                  focusedBorder: GradientOutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 150, sigmaY: 200),
+                      child: Container(
+                        color: Colors.black.withOpacity(0),
+                      ),
                     ),
-                    width: 1,
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                const SizedBox(
+                  width: 347,
+                  height: 27,
+                  child: TextField(
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'OUTFIT',
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    decoration: InputDecoration(
+                      prefix: Text('   '),
+                      contentPadding: EdgeInsets.all(1),
+                      suffixIcon: Icon(
+                        Icons.search,
+                        color: Color(0xFF0F76CE),
+                      ),
+                      border: GradientOutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(9)),
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF981DB9),
+                            Color(0xFF0F76CE),
+                          ],
+                        ),
+                        width: 1,
+                      ),
+                      focusedBorder: GradientOutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF981DB9),
+                            Color(0xFF0F76CE),
+                          ],
+                        ),
+                        width: 1,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Alunos',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'STRETCH',
+                    fontSize: 18,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: 341,
+                  height: 62,
+                  child: OutlineGradientButton(
+                    strokeWidth: 1,
+                    radius: const Radius.circular(12),
+                    gradient: const LinearGradient(
+                      colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                    ),
+                    child: const Row(
+                      children: [],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: 341,
+                  height: 62,
+                  child: OutlineGradientButton(
+                    strokeWidth: 1,
+                    radius: const Radius.circular(12),
+                    gradient: const LinearGradient(
+                      colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                    ),
+                    child: const Row(
+                      children: [],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: 341,
+                  height: 62,
+                  child: OutlineGradientButton(
+                    strokeWidth: 1,
+                    radius: const Radius.circular(12),
+                    gradient: const LinearGradient(
+                      colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                    ),
+                    child: const Row(
+                      children: [],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: 341,
+                  height: 62,
+                  child: OutlineGradientButton(
+                    strokeWidth: 1,
+                    radius: const Radius.circular(12),
+                    gradient: const LinearGradient(
+                      colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                    ),
+                    child: const Row(
+                      children: [],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: 341,
+                  height: 62,
+                  child: OutlineGradientButton(
+                    strokeWidth: 1,
+                    radius: const Radius.circular(12),
+                    gradient: const LinearGradient(
+                      colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                    ),
+                    child: const Row(
+                      children: [],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: 341,
+                  height: 62,
+                  child: OutlineGradientButton(
+                    strokeWidth: 1,
+                    radius: const Radius.circular(12),
+                    gradient: const LinearGradient(
+                      colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                    ),
+                    child: const Row(
+                      children: [],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 20),
-            const Text(
-              'Alunos',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'STRETCH',
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: 341,
-              height: 62,
-              child: OutlineGradientButton(
-                strokeWidth: 1,
-                radius: const Radius.circular(12),
-                gradient: const LinearGradient(
-                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                ),
-                child: const Row(
-                  children: [],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: 341,
-              height: 62,
-              child: OutlineGradientButton(
-                strokeWidth: 1,
-                radius: const Radius.circular(12),
-                gradient: const LinearGradient(
-                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                ),
-                child: const Row(
-                  children: [],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: 341,
-              height: 62,
-              child: OutlineGradientButton(
-                strokeWidth: 1,
-                radius: const Radius.circular(12),
-                gradient: const LinearGradient(
-                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                ),
-                child: const Row(
-                  children: [],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: 341,
-              height: 62,
-              child: OutlineGradientButton(
-                strokeWidth: 1,
-                radius: const Radius.circular(12),
-                gradient: const LinearGradient(
-                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                ),
-                child: const Row(
-                  children: [],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: 341,
-              height: 62,
-              child: OutlineGradientButton(
-                strokeWidth: 1,
-                radius: const Radius.circular(12),
-                gradient: const LinearGradient(
-                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                ),
-                child: const Row(
-                  children: [],
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: 341,
-              height: 62,
-              child: OutlineGradientButton(
-                strokeWidth: 1,
-                radius: const Radius.circular(12),
-                gradient: const LinearGradient(
-                  colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                ),
-                child: const Row(
-                  children: [],
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

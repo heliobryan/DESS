@@ -217,8 +217,6 @@ class PassportPage extends StatelessWidget {
                     Color(0xFF981DB9),
                     Color(0xFF0F76CE),
                   ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
                 ),
                 child: const Center(
                   child: Column(
