@@ -38,7 +38,9 @@ dependencies:
   outline_gradient_button: ^2.0.1+1
   gradient_borders: ^1.0.1
   intl: ^0.19.0
-  blur: ^4.0.0
+  flutter_svg: ^2.0.10+1
+  firebase_core: ^3.2.0
+  firebase_auth: ^5.1.2
  
 
 dev_dependencies:
@@ -96,6 +98,11 @@ flutter:
       - assets/images/gradientline.png
       - assets/images/staron.png
       - assets/images/staroff.png
+      - assets/images/sportvetor.svg
+      - assets/images/passvetor.svg
+      - assets/images/managevetor.svg
+      - assets/images/homevetor.svg
+
  
 
       

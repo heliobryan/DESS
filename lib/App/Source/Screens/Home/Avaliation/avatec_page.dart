@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
@@ -41,6 +43,33 @@ class AvatecPage extends StatelessWidget {
       ),
       body: Stack(
         children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                width: 292,
+                height: 146,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: <Color>[
+                      Color(0xFF981DB9),
+                      Color(0xFF0F76CE),
+                      Color(0xFF0F76CE),
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 100, sigmaY: 200),
+                  child: Container(
+                    color: Colors.black.withOpacity(0),
+                  ),
+                ),
+              ),
+            ],
+          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

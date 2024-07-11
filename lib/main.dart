@@ -1,21 +1,26 @@
-import 'package:dess/Source/Screens/Forms/form_page.dart';
-import 'package:dess/Source/Screens/Home/Avaliation/avapsi.dart';
-import 'package:dess/Source/Screens/Home/Avaliation/avatec_page.dart';
-import 'package:dess/Source/Screens/Home/Manage/comp_page.dart';
-import 'package:dess/Source/Screens/Home/Manage/health_page.dart';
-import 'package:dess/Source/Screens/Home/Manage/sponsor_page.dart';
-import 'package:dess/Source/Screens/Home/Avaliation/avaliation_page.dart';
-import 'package:dess/Source/Screens/Home/home_page.dart';
-import 'package:dess/Source/Screens/Home/Manage/image_manage_page.dart';
-import 'package:dess/Source/Screens/Home/Manage/manage_page.dart';
-import 'package:dess/Source/Screens/Home/passport_page.dart';
-import 'package:dess/Source/Screens/Register/initial_page.dart';
-import 'package:dess/Source/Screens/Register/login_page.dart';
-import 'package:dess/Source/Screens/Register/register_page.dart';
-import 'package:dess/Source/Screens/Register/splash_page.dart';
+import 'package:dess/App/Source/Screens/Forms/form_page.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avapsi.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
+import 'package:dess/App/Source/Screens/Home/Manage/comp_page.dart';
+import 'package:dess/App/Source/Screens/Home/Manage/health_page.dart';
+import 'package:dess/App/Source/Screens/Home/Manage/sponsor_page.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
+import 'package:dess/App/Source/Screens/Home/home_page.dart';
+import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
+import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
+import 'package:dess/App/Source/Screens/Home/passport_page.dart';
+import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:dess/App/Source/Screens/Register/register_page.dart';
+import 'package:dess/App/Source/Screens/Register/splash_page.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:dess/firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     const DesApp(),
   );
@@ -28,12 +33,11 @@ class DesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'homePage',
+      initialRoute: 'registerPage',
       routes: {
         'initialPage': (context) => const InitialPage(),
         'splashPage': (context) => const SplashPage(),
         'registerPage': (context) => const RegisterPage(),
-        'loginPage': (context) => const LoginPage(),
         'form1Page': (context) => const Form1Page(),
         'form2Page': (context) => const Form2Page(),
         'form3Page': (context) => const Form3Page(),
