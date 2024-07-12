@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:dess/App/Source/Auth/autenticator_service.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
@@ -137,7 +138,9 @@ class _Home1PageState extends State<Home1Page> {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              AuthService().signOut();
+            },
           ),
         ],
         title: const Text(

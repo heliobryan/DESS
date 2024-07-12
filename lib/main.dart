@@ -12,6 +12,7 @@ import 'package:dess/App/Source/Screens/Home/passport_page.dart';
 import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:dess/App/Source/Screens/Register/register_page.dart';
 import 'package:dess/App/Source/Screens/Register/splash_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:dess/firebase_options.dart';
@@ -32,8 +33,9 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      home: const SplashPage(),
       debugShowCheckedModeBanner: false,
-      initialRoute: 'registerPage',
+      initialRoute: 'screenPage',
       routes: {
         'initialPage': (context) => const InitialPage(),
         'splashPage': (context) => const SplashPage(),
@@ -51,7 +53,26 @@ class DesApp extends StatelessWidget {
         'healthPage': (context) => const HealthPage(),
         'avatecPage': (context) => const AvatecPage(),
         'avapsiPage': (context) => const AvapsiPage(),
+        'screenPage': (context) => const ScreenRoute(),
+        'cardPage': (context) => const HealthCard(),
       },
     );
+  }
+}
+
+class ScreenRoute extends StatelessWidget {
+  const ScreenRoute({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.userChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return const HomePage();
+          } else {
+            return const RegisterPage();
+          }
+        });
   }
 }

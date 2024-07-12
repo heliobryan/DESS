@@ -1,5 +1,6 @@
 import 'package:dess/App/Source/Components/components.dart';
-import 'package:dess/Services/autenticator_service.dart';
+import 'package:dess/App/Source/Auth/autenticator_service.dart';
+import 'package:dess/App/Source/Core/snack_bar.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -13,9 +14,10 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPass = TextEditingController();
   bool wantreg = true;
   final _formKey = GlobalKey<FormState>();
-  AuthService _authService = AuthService();
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -121,6 +123,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 if (!value.contains('@')) {
                                   return 'Email Inválido';
                                 }
+                                if (!value.contains('.com')) {
+                                  return 'Email Inválido';
+                                }
                                 return null;
                               },
                               decoration: emailAuthDecoration('Email'),
@@ -134,11 +139,11 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               controller: _passwordController,
                               obscureText: true,
-                              validator: (String? value) {
-                                if (value == null) {
+                              validator: (String? pass) {
+                                if (pass == null) {
                                   return 'Senha Inválida';
                                 }
-                                if (value.length < 5) {
+                                if (pass.length < 5) {
                                   return 'Senha muito curta';
                                 }
                                 return null;
@@ -157,6 +162,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                     obscureText: true,
+                                    controller: _confirmPass,
+                                    validator: (String? value) {
+                                      if (value != _passwordController.text) {
+                                        return 'As senhas não conferem';
+                                      }
+                                      return null;
+                                    },
                                     decoration: passwordAuthDecoration(
                                         'Digite novamente a senha'),
                                   ),
@@ -297,14 +309,23 @@ class _RegisterPageState extends State<RegisterPage> {
     String name = _nameController.text;
     String email = _emailController.text;
     String password = _passwordController.text;
+    String confirmPass = _confirmPass.text;
     if (_formKey.currentState!.validate()) {
       if (wantreg) {
         print('Entrada Validada');
+        _authService
+            .signUser(email: email, password: password)
+            .then((String? erro) {
+          if (erro != null) {
+            showSnackBar(context: context, text: erro);
+          }
+        });
       } else {
         print('Cadastro Validado');
         print(
             '${_emailController.text}, ${_nameController.text}, ${_passwordController.text}');
-        _authService.userRegister(name: name, password: password, email: email);
+        _authService.userRegister(
+            name: name, password: password, email: email, confirm: confirmPass);
       }
     } else {
       print('Form Inválido');
