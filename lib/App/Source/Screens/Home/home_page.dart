@@ -1,10 +1,11 @@
 import 'dart:ui';
-
-import 'package:dess/App/Source/Auth/autenticator_service.dart';
+import 'package:dess/App/Source/Components/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
-import 'package:dess/App/Source/Screens/Home/passport_page.dart';
+import 'package:dess/App/Source/Screens/Home/Passport/passport_page.dart';
+import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
@@ -19,7 +20,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentPageIndex = 0;
-
   final List<Widget> _screens = [
     const Home1Page(),
     const AvaliationPage(),
@@ -123,7 +123,7 @@ class Home1Page extends StatefulWidget {
 }
 
 class _Home1PageState extends State<Home1Page> {
-  final now = DateTime.now();
+  final _firebaseAuth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +139,7 @@ class _Home1PageState extends State<Home1Page> {
               size: 30,
             ),
             onPressed: () {
-              AuthService().signOut();
+              signOut();
             },
           ),
         ],
@@ -154,6 +154,7 @@ class _Home1PageState extends State<Home1Page> {
       ),
       body: Stack(
         children: [
+          const GradientBack(),
           ListView(
             children: [
               Center(
@@ -300,6 +301,21 @@ class _Home1PageState extends State<Home1Page> {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: 341,
+                      height: 62,
+                      child: OutlineGradientButton(
+                        strokeWidth: 1,
+                        radius: const Radius.circular(12),
+                        gradient: const LinearGradient(
+                          colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
+                        ),
+                        child: const Row(
+                          children: [],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -308,6 +324,17 @@ class _Home1PageState extends State<Home1Page> {
         ],
       ),
     );
+  }
+
+  signOut() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InitialPage(),
+            ),
+          ),
+        );
   }
 }
 

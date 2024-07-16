@@ -1,3 +1,4 @@
+import 'package:dess/App/Source/Components/components.dart';
 import 'package:flutter/material.dart';
 
 class InitialPage extends StatelessWidget {
@@ -9,6 +10,7 @@ class InitialPage extends StatelessWidget {
       backgroundColor: const Color(0xFF1E1E1E),
       body: Stack(
         children: [
+          const GradientBack(),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

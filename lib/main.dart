@@ -8,8 +8,9 @@ import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/home_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
-import 'package:dess/App/Source/Screens/Home/passport_page.dart';
+import 'package:dess/App/Source/Screens/Home/Passport/passport_page.dart';
 import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:dess/App/Source/Screens/Register/login_page.dart';
 import 'package:dess/App/Source/Screens/Register/register_page.dart';
 import 'package:dess/App/Source/Screens/Register/splash_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -33,9 +34,8 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SplashPage(),
+      home: const InitialPage(),
       debugShowCheckedModeBanner: false,
-      initialRoute: 'screenPage',
       routes: {
         'initialPage': (context) => const InitialPage(),
         'splashPage': (context) => const SplashPage(),
@@ -55,6 +55,7 @@ class DesApp extends StatelessWidget {
         'avapsiPage': (context) => const AvapsiPage(),
         'screenPage': (context) => const ScreenRoute(),
         'cardPage': (context) => const HealthCard(),
+        'loginPage': (context) => const LoginPage(),
       },
     );
   }

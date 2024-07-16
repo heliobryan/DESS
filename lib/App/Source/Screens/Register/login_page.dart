@@ -1,21 +1,21 @@
 import 'package:dess/App/Source/Components/components.dart';
 import 'package:dess/App/Source/Screens/Home/home_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController _nameController = TextEditingController();
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPass = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+
   bool wantreg = true;
   final _formKey = GlobalKey<FormState>();
   final _firebaseAuth = FirebaseAuth.instance;
@@ -28,26 +28,20 @@ class _RegisterPageState extends State<RegisterPage> {
         children: [
           const GradientBack(),
           ListView(
-            physics: const NeverScrollableScrollPhysics(),
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 100),
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      'CADASTRE-SE',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontFamily: 'STRETCH',
-                      ),
+                    const Image(
+                      image: AssetImage('assets/images/ENNTRE.png'),
                     ),
                     Column(
                       children: [
                         const SizedBox(height: 15),
                         const Text(
-                          'Já possui uma conta?',
+                          'Não possui uma conta?',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.white,
@@ -57,7 +51,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         TextButton(
                           child: const Text(
-                            'Entre',
+                            'Cadastre-se',
                             style: TextStyle(
                               fontFamily: 'OUTFIT',
                               color: Color(0xFF0F76CE),
@@ -66,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ),
                           onPressed: () =>
-                              Navigator.pushNamed(context, 'loginPage'),
+                              Navigator.pushNamed(context, 'registerPage'),
                         ),
                       ],
                     ),
@@ -77,29 +71,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         key: _formKey,
                         child: Column(
                           children: [
-                            Column(
-                              children: [
-                                const SizedBox(height: 15),
-                                TextFormField(
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  controller: _nameController,
-                                  validator: (String? value) {
-                                    if (value == null) {
-                                      return 'Nome Inválido';
-                                    }
-                                    if (value.length < 4) {
-                                      return 'Nome muito curto';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: nameAuthDecoration('Nome'),
-                                ),
-                              ],
-                            ),
                             const SizedBox(height: 15),
                             TextFormField(
                               style: const TextStyle(
@@ -145,28 +116,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               },
                               decoration: passAuthDecoration('Senha'),
                             ),
-                            Column(
-                              children: [
-                                const SizedBox(height: 15),
-                                TextFormField(
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  obscureText: true,
-                                  controller: _confirmPass,
-                                  validator: (String? value) {
-                                    if (value != _passwordController.text) {
-                                      return 'As senhas não conferem';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: passwordAuthDecoration(
-                                      'Digite novamente a senha'),
-                                ),
-                              ],
-                            ),
                           ],
                         ),
                       ),
@@ -193,7 +142,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
-                          userRegister();
+                          userLogin();
                         },
                       ),
                     ),
@@ -299,27 +248,23 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Future<UserCredential> signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-    final credential = GoogleAuthProvider.credential(
+  signInWithGoogle() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    Navigator.pushNamed(context, 'homePage');
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    print(userCredential.user?.displayName);
   }
 
-  //Future<UserCredential> signInWithFacebook() async {
-  //final LoginResult loginResult = await FacebookAuth.instance.login();
-  //final OAuthCredential facebookAuthCredential =
-  //FacebookAuthProvider.credential(loginResult.accessToken.token);
-  //return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
-  //}
-
-  userRegister() async {
+  userLogin() async {
     _firebaseAuth
-        .createUserWithEmailAndPassword(
+        .signInWithEmailAndPassword(
             email: _emailController.text, password: _passwordController.text)
         .then((UserCredential userCredential) {
       userCredential.user!.updateDisplayName(_nameController.text);
