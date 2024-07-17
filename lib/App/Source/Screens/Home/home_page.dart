@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:dess/App/Source/Components/components.dart';
+import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
@@ -335,74 +335,5 @@ class _Home1PageState extends State<Home1Page> {
             ),
           ),
         );
-  }
-}
-
-class GradientPage extends StatelessWidget {
-  const GradientPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                width: 282,
-                height: 146,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[
-                      Color(0xFF981DB9),
-                      Color(0xFF0F76CE),
-                      Color(0xFF0F76CE),
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                ),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 200, sigmaY: 110),
-                  child: Container(),
-                ),
-              ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: 100,
-                    height: 100,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Color(0xFF981DB9),
-                          Color(0xFF981DB9),
-                          Color(0xFF0F76CE),
-                        ],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                      ),
-                    ),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
-                      child: Container(),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
   }
 }

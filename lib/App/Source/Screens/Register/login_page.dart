@@ -1,4 +1,4 @@
-import 'package:dess/App/Source/Components/components.dart';
+import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -250,6 +250,7 @@ class _LoginPageState extends State<LoginPage> {
 
   signInWithGoogle() async {
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    // ignore: use_build_context_synchronously
     Navigator.pushNamed(context, 'homePage');
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
     AuthCredential credential = GoogleAuthProvider.credential(
@@ -259,6 +260,7 @@ class _LoginPageState extends State<LoginPage> {
 
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
+    // ignore: avoid_print
     print(userCredential.user?.displayName);
   }
 

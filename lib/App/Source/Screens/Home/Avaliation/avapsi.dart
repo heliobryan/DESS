@@ -1,4 +1,4 @@
-import 'package:dess/App/Source/Components/components.dart';
+import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
