@@ -3,6 +3,7 @@ import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class AvafisPage extends StatefulWidget {
   const AvafisPage({super.key});
@@ -287,123 +288,41 @@ class _AvafisPageState extends State<AvafisPage> {
                   SizedBox(
                     width: 361,
                     height: 100,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
+                    child: OutlineGradientButton(
+                      strokeWidth: 1,
+                      gradient: const LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
                       ),
+                      radius: const Radius.circular(12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 8),
                       child: const Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(height: 5),
-                            Text(
-                              'Avaliação - O atleta está concentrado?',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
+                            Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Avaliação - Sprint 10M',
+                                    style: TextStyle(
+                                      fontFamily: 'OUTFIT',
+                                      fontSize: 15,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: 361,
-                    height: 100,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                      ),
-                      child: const Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 5),
-                            Text(
-                              'Avaliação - O atleta está concentrado?',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: 361,
-                    height: 100,
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                        border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
-                        ),
-                      ),
-                      child: const Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(height: 5),
-                            Text(
-                              'Avaliação - O atleta está concentrado?',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ],
-                        ),
-                      ),
+                      onTap: () => Navigator.pushNamed(context, 'avatecPage'),
                     ),
                   ),
                 ],
