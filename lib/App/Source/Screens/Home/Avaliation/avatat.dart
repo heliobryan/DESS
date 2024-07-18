@@ -1,10 +1,18 @@
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-class AvatatPage extends StatelessWidget {
+class AvatatPage extends StatefulWidget {
   const AvatatPage({super.key});
 
+  @override
+  State<AvatatPage> createState() => _AvatatPageState();
+}
+
+class _AvatatPageState extends State<AvatatPage> {
+  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +43,9 @@ class AvatatPage extends StatelessWidget {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              signOut();
+            },
           ),
         ],
       ),
@@ -403,5 +413,16 @@ class AvatatPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  signOut() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InitialPage(),
+            ),
+          ),
+        );
   }
 }

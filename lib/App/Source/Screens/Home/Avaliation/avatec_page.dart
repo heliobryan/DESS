@@ -1,11 +1,19 @@
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
-class AvatecPage extends StatelessWidget {
+class AvatecPage extends StatefulWidget {
   const AvatecPage({super.key});
 
+  @override
+  State<AvatecPage> createState() => _AvatecPageState();
+}
+
+class _AvatecPageState extends State<AvatecPage> {
+  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +44,9 @@ class AvatecPage extends StatelessWidget {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              signOut();
+            },
           ),
         ],
       ),
@@ -381,5 +391,16 @@ class AvatecPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  signOut() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InitialPage(),
+            ),
+          ),
+        );
   }
 }

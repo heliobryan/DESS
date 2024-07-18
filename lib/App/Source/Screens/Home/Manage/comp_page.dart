@@ -1,10 +1,18 @@
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-class CompPage extends StatelessWidget {
+class CompPage extends StatefulWidget {
   const CompPage({super.key});
 
+  @override
+  State<CompPage> createState() => _CompPageState();
+}
+
+class _CompPageState extends State<CompPage> {
+  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +32,9 @@ class CompPage extends StatelessWidget {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              signOut();
+            },
           ),
         ],
         centerTitle: true,
@@ -717,5 +727,16 @@ class CompPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  signOut() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InitialPage(),
+            ),
+          ),
+        );
   }
 }

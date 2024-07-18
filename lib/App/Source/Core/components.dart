@@ -318,23 +318,24 @@ class BackgroundImage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Positioned(
-          top: 1,
-          child: SvgPicture.asset(
-            'assets/images/background2.svg',
-            height: 776,
-            width: 773,
-          ),
+        SvgPicture.asset(
+          'assets/images/background1.svg',
+          height: 723,
+          width: 723,
         ),
-        Positioned(
-          bottom: 1,
-          child: SvgPicture.asset(
-            'assets/images/background1.svg',
-            height: 776,
-            width: 773,
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            SvgPicture.asset(
+              'assets/images/background2.svg',
+            ),
+          ],
         ),
       ],
     );
   }
+}
+
+class CardColor {
+  bool cardColor = true;
 }

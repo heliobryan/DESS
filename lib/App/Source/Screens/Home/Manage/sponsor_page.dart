@@ -1,9 +1,17 @@
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class SponsorPage extends StatelessWidget {
+class SponsorPage extends StatefulWidget {
   const SponsorPage({super.key});
 
+  @override
+  State<SponsorPage> createState() => _SponsorPageState();
+}
+
+class _SponsorPageState extends State<SponsorPage> {
+  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +32,9 @@ class SponsorPage extends StatelessWidget {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              signOut();
+            },
           ),
         ],
         centerTitle: true,
@@ -194,5 +204,16 @@ class SponsorPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  signOut() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InitialPage(),
+            ),
+          ),
+        );
   }
 }

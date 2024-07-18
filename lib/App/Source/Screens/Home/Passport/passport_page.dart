@@ -1,11 +1,19 @@
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
-class PassportPage extends StatelessWidget {
+class PassportPage extends StatefulWidget {
   const PassportPage({super.key});
 
+  @override
+  State<PassportPage> createState() => _PassportPageState();
+}
+
+class _PassportPageState extends State<PassportPage> {
+  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +45,9 @@ class PassportPage extends StatelessWidget {
                       color: Colors.white,
                       size: 30,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      signOut();
+                    },
                   ),
                 ],
               ),
@@ -286,5 +296,16 @@ class PassportPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  signOut() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InitialPage(),
+            ),
+          ),
+        );
   }
 }

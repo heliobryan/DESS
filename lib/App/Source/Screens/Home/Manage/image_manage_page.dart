@@ -1,9 +1,17 @@
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ImageManagePage extends StatelessWidget {
+class ImageManagePage extends StatefulWidget {
   const ImageManagePage({super.key});
 
+  @override
+  State<ImageManagePage> createState() => _ImageManagePageState();
+}
+
+class _ImageManagePageState extends State<ImageManagePage> {
+  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +62,9 @@ class ImageManagePage extends StatelessWidget {
                       color: Colors.white,
                       size: 30,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      signOut();
+                    },
                   ),
                 ],
               ),
@@ -187,5 +197,16 @@ class ImageManagePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  signOut() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InitialPage(),
+            ),
+          ),
+        );
   }
 }

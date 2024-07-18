@@ -1,10 +1,18 @@
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-class AvafisPage extends StatelessWidget {
+class AvafisPage extends StatefulWidget {
   const AvafisPage({super.key});
 
+  @override
+  State<AvafisPage> createState() => _AvafisPageState();
+}
+
+class _AvafisPageState extends State<AvafisPage> {
+  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +43,9 @@ class AvafisPage extends StatelessWidget {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              signOut;
+            },
           ),
         ],
       ),
@@ -403,5 +413,16 @@ class AvafisPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  signOut() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InitialPage(),
+            ),
+          ),
+        );
   }
 }
