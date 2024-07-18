@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 InputDecoration nameAuthDecoration(String label) {
   return InputDecoration(
@@ -286,6 +287,54 @@ class GradientBack extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class BackgroudImage extends StatelessWidget {
+  const BackgroudImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned(
+          top: 10,
+          child: SvgPicture.asset(
+            'assets/images/background.svg',
+            height: 266,
+            width: 450,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class BackgroundImage2 extends StatelessWidget {
+  const BackgroundImage2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned(
+          top: 1,
+          child: SvgPicture.asset(
+            'assets/images/background2.svg',
+            height: 776,
+            width: 773,
+          ),
+        ),
+        Positioned(
+          bottom: 1,
+          child: SvgPicture.asset(
+            'assets/images/background1.svg',
+            height: 776,
+            width: 773,
+          ),
+        ),
+      ],
     );
   }
 }

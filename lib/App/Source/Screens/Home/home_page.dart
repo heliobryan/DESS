@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
@@ -155,6 +154,7 @@ class _Home1PageState extends State<Home1Page> {
       body: Stack(
         children: [
           const GradientBack(),
+          const BackgroundImage2(),
           ListView(
             children: [
               Center(

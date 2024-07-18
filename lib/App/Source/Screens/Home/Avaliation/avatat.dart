@@ -2,8 +2,8 @@ import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-class AvapsiPage extends StatelessWidget {
-  const AvapsiPage({super.key});
+class AvatatPage extends StatelessWidget {
+  const AvatatPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class AvapsiPage extends StatelessWidget {
           onPressed: () => Navigator.pop(context, 'avaliationPage'),
         ),
         title: const Text(
-          'Psicológica',
+          'Tática',
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -136,7 +136,53 @@ class AvapsiPage extends StatelessWidget {
                               ),
                             ),
                             child: const Text(
-                              'Foco',
+                              'Estratégia',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontFamily: 'OUTFIT',
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 105,
+                    height: 23,
+                    decoration: const BoxDecoration(
+                      border: GradientBoxBorder(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF981DB9),
+                            Color(0xFF0F76CE),
+                          ],
+                        ),
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.transparent,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(12),
+                                ),
+                              ),
+                              side: const BorderSide(
+                                color: Colors.transparent,
+                              ),
+                            ),
+                            child: const Text(
+                              'Análise',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
@@ -182,56 +228,10 @@ class AvapsiPage extends StatelessWidget {
                               ),
                             ),
                             child: const Text(
-                              'Confiança',
+                              'Comunicação',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 13,
-                                  fontFamily: 'OUTFIT',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 105,
-                    height: 23,
-                    decoration: const BoxDecoration(
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                    ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.transparent,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(12),
-                                ),
-                              ),
-                              side: const BorderSide(
-                                color: Colors.transparent,
-                              ),
-                            ),
-                            child: const Text(
-                              'Resiliência',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13,
+                                  fontSize: 9,
                                   fontFamily: 'OUTFIT',
                                   fontWeight: FontWeight.bold),
                             ),

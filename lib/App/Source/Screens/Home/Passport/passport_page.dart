@@ -13,6 +13,7 @@ class PassportPage extends StatelessWidget {
       body: Stack(
         children: [
           const GradientBack(),
+          const BackgroudImage(),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

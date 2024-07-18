@@ -2,8 +2,8 @@ import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-class AvapsiPage extends StatelessWidget {
-  const AvapsiPage({super.key});
+class AvafisPage extends StatelessWidget {
+  const AvafisPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class AvapsiPage extends StatelessWidget {
           onPressed: () => Navigator.pop(context, 'avaliationPage'),
         ),
         title: const Text(
-          'Psicológica',
+          'Física',
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -136,7 +136,7 @@ class AvapsiPage extends StatelessWidget {
                               ),
                             ),
                             child: const Text(
-                              'Foco',
+                              'Força',
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
@@ -182,10 +182,10 @@ class AvapsiPage extends StatelessWidget {
                               ),
                             ),
                             child: const Text(
-                              'Confiança',
+                              'Velocidade',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 13,
+                                  fontSize: 12,
                                   fontFamily: 'OUTFIT',
                                   fontWeight: FontWeight.bold),
                             ),
@@ -228,10 +228,10 @@ class AvapsiPage extends StatelessWidget {
                               ),
                             ),
                             child: const Text(
-                              'Resiliência',
+                              'Flexibilidade',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 13,
+                                  fontSize: 10,
                                   fontFamily: 'OUTFIT',
                                   fontWeight: FontWeight.bold),
                             ),

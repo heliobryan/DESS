@@ -105,10 +105,10 @@ flutter:
       - assets/images/managevetor.svg
       - assets/images/homevetor.svg
       - assets/images/vertline.png
+      - assets/images/background.svg
+      - assets/images/background1.svg
+      - assets/images/background2.svg
 
- 
-
-      
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
