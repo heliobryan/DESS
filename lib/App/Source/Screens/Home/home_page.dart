@@ -32,83 +32,77 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _screens[currentPageIndex],
       bottomNavigationBar: Container(
-        height: 56,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: <Color>[
-              Color(0xFF981DB9),
-              Color(0xFF0F76CE),
-            ],
+          height: 56,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: <Color>[
+                Color(0xFF981DB9),
+                Color(0xFF0F76CE),
+              ],
+            ),
           ),
-        ),
-        child: BottomNavigationBarTheme(
-          data: const BottomNavigationBarThemeData(
-            selectedIconTheme: IconThemeData(
-              color: Colors.white,
+          child: NavigationBarTheme(
+            data: const NavigationBarThemeData(
+              indicatorColor: Colors.transparent,
+              overlayColor: WidgetStatePropertyAll(Colors.transparent),
+              labelTextStyle: WidgetStatePropertyAll(
+                TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'OUTFIT',
+                  color: Colors.white,
+                ),
+              ),
+              iconTheme: WidgetStatePropertyAll(
+                IconThemeData(
+                  color: Colors.white,
+                  size: 24,
+                ),
+              ),
             ),
-            unselectedLabelStyle: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OUTFIT',
-            ),
-            selectedLabelStyle: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-              fontFamily: 'OUTFIT',
-            ),
-            backgroundColor: Colors.transparent,
-            type: BottomNavigationBarType.fixed,
-            showUnselectedLabels: true,
-            elevation: 0,
-          ),
-          child: BottomNavigationBar(
-            fixedColor: Colors.white,
-            unselectedItemColor: Colors.white,
-            currentIndex: currentPageIndex,
-            onTap: (int index) {
-              setState(
-                () {
+            child: NavigationBar(
+              backgroundColor: Colors.transparent,
+              onDestinationSelected: (int index) {
+                setState(() {
                   currentPageIndex = index;
-                },
-              );
-            },
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/images/homevetor.svg',
-                  height: 21,
-                  width: 27,
+                });
+              },
+              destinations: [
+                NavigationDestination(
+                  icon: SvgPicture.asset(
+                    'assets/images/homevetor.svg',
+                    height: 21,
+                    width: 21,
+                  ),
+                  label: 'Home',
                 ),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/images/sportvetor.svg',
-                  height: 21,
-                  width: 21,
+                NavigationDestination(
+                  icon: SvgPicture.asset(
+                    'assets/images/sportvetor.svg',
+                    height: 21,
+                    width: 21,
+                  ),
+                  label: 'Avaliações',
                 ),
-                label: 'Avaliações',
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/images/passvetor.svg',
-                  height: 20,
-                  width: 18,
+                NavigationDestination(
+                  icon: SvgPicture.asset(
+                    'assets/images/passvetor.svg',
+                    height: 21,
+                    width: 21,
+                  ),
+                  label: 'Passaporte B.',
                 ),
-                label: 'Passaporte B.',
-              ),
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset(
-                  'assets/images/managevetor.svg',
-                  height: 21,
-                  width: 18,
+                NavigationDestination(
+                  icon: SvgPicture.asset(
+                    'assets/images/managevetor.svg',
+                    height: 21,
+                    width: 21,
+                  ),
+                  label: 'Gestão',
                 ),
-                label: 'Gestão',
-              ),
-            ],
-          ),
-        ),
-      ),
+              ],
+            ),
+          )),
       backgroundColor: const Color(0xFF1E1E1E),
     );
   }
@@ -154,7 +148,6 @@ class _Home1PageState extends State<Home1Page> {
       body: Stack(
         children: [
           const GradientBack(),
-          const BackgroundImage2(),
           ListView(
             children: [
               Center(

@@ -204,38 +204,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         const SizedBox(height: 15),
-                        SizedBox(
-                          width: 316,
-                          height: 40,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              foregroundColor: Colors.black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                            ),
-                            child: const Row(
-                              children: [
-                                Image(
-                                  image: AssetImage(
-                                    'assets/images/facebookvetor.png',
-                                  ),
-                                ),
-                                Text(
-                                  '        Continuar com Facebook',
-                                  style: TextStyle(
-                                    color: Color(0xFF121212),
-                                    fontSize: 16,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                        const SizedBox(height: 50),
                       ],
                     ),
                   ],

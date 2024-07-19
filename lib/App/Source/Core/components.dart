@@ -310,32 +310,3 @@ class BackgroudImage extends StatelessWidget {
     );
   }
 }
-
-class BackgroundImage2 extends StatelessWidget {
-  const BackgroundImage2({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        SvgPicture.asset(
-          'assets/images/background1.svg',
-          height: 723,
-          width: 723,
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            SvgPicture.asset(
-              'assets/images/background2.svg',
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class CardColor {
-  bool cardColor = true;
-}

@@ -3,17 +3,17 @@ import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
 
-class AvafisPage extends StatefulWidget {
-  const AvafisPage({super.key});
+class StopTimePage extends StatefulWidget {
+  const StopTimePage({super.key});
 
   @override
-  State<AvafisPage> createState() => _AvafisPageState();
+  State<StopTimePage> createState() => _StopTimePageState();
 }
 
-class _AvafisPageState extends State<AvafisPage> {
+class _StopTimePageState extends State<StopTimePage> {
   final _firebaseAuth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -254,6 +254,16 @@ class _AvafisPageState extends State<AvafisPage> {
                   ),
                 ],
               ),
+              const SizedBox(height: 40),
+              const Text(
+                'Atacante - Sub 13 - Society',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontFamily: 'OUTFIT',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               const SizedBox(height: 20),
               Container(
                 width: 149,
@@ -283,49 +293,8 @@ class _AvafisPageState extends State<AvafisPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Column(
-                children: [
-                  SizedBox(
-                    width: 361,
-                    height: 100,
-                    child: OutlineGradientButton(
-                      strokeWidth: 1,
-                      gradient: const LinearGradient(
-                        colors: <Color>[
-                          Color(0xFF981DB9),
-                          Color(0xFF0F76CE),
-                        ],
-                      ),
-                      radius: const Radius.circular(12),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
-                      child: const Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Avaliação - Sprint 10M',
-                                    style: TextStyle(
-                                      fontFamily: 'OUTFIT',
-                                      fontSize: 15,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      onTap: () => Navigator.pushNamed(context, 'stopPage'),
-                    ),
-                  ),
-                ],
+              const Column(
+                children: [],
               ),
             ],
           ),
