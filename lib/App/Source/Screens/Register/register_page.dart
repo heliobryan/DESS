@@ -1,5 +1,5 @@
 import 'package:dess/App/Source/Core/components.dart';
-import 'package:dess/App/Source/Screens/Home/home_page.dart';
+import 'package:dess/App/Source/Screens/Forms/form_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -288,7 +288,7 @@ class _RegisterPageState extends State<RegisterPage> {
       userCredential.user!.updateDisplayName(_nameController.text);
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => const Form1Page()),
           (route) => false);
       // ignore: argument_type_not_assignable_to_error_handler
     }).catchError((FirebaseAuthException firebaseAuthException) {});

@@ -1,6 +1,6 @@
-import 'dart:ui';
-
+import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 class Form1Page extends StatelessWidget {
   const Form1Page({super.key});
@@ -11,64 +11,7 @@ class Form1Page extends StatelessWidget {
       backgroundColor: const Color(0xFF1E1E1E),
       body: Stack(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                width: 292,
-                height: 146,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[
-                      Color(0xFF0F76CE),
-                      Color(0xFF0F76CE),
-                      Color(0xFF981DB9),
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                ),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 200, sigmaY: 300),
-                  child: Container(
-                    color: Colors.black.withOpacity(0),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: 292,
-                    height: 146,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Color.fromARGB(255, 29, 0, 36),
-                          Color.fromARGB(149, 3, 65, 119),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 200, sigmaY: 50),
-                      child: Container(
-                        color: Colors.black.withOpacity(0),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          const GradientBack(),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -178,64 +121,7 @@ class Form2Page extends StatelessWidget {
       backgroundColor: const Color(0xFF1E1E1E),
       body: Stack(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                width: 292,
-                height: 146,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[
-                      Color(0xFF0F76CE),
-                      Color(0xFF0F76CE),
-                      Color(0xFF981DB9),
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                ),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 200, sigmaY: 300),
-                  child: Container(
-                    color: Colors.black.withOpacity(0),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: 292,
-                    height: 146,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Color.fromARGB(255, 29, 0, 36),
-                          Color.fromARGB(149, 3, 65, 119),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 200, sigmaY: 50),
-                      child: Container(
-                        color: Colors.black.withOpacity(0),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          const GradientBack(),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -307,64 +193,7 @@ class Form3Page extends StatelessWidget {
       backgroundColor: const Color(0xFF1E1E1E),
       body: Stack(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                width: 292,
-                height: 146,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[
-                      Color(0xFF0F76CE),
-                      Color(0xFF0F76CE),
-                      Color(0xFF981DB9),
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                ),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 200, sigmaY: 300),
-                  child: Container(
-                    color: Colors.black.withOpacity(0),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: 292,
-                    height: 146,
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Color.fromARGB(255, 29, 0, 36),
-                          Color.fromARGB(149, 3, 65, 119),
-                        ],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaX: 200, sigmaY: 50),
-                      child: Container(
-                        color: Colors.black.withOpacity(0),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          const GradientBack(),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -389,42 +218,178 @@ class Form3Page extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 90),
-                IconButton(
-                  style: IconButton.styleFrom(
-                    foregroundColor: const Color(0xFF981DB9),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                Container(
+                  width: 341,
+                  height: 62,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    ),
+                    border: GradientBoxBorder(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
+                      ),
+                    ),
                   ),
-                  icon: Image.asset('assets/images/sub9vetor.png'),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  style: IconButton.styleFrom(
-                    foregroundColor: const Color(0xFF981DB9),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF981DB9),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                      side: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'SUB 9',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'OUTFIT',
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {},
                   ),
-                  icon: Image.asset('assets/images/sub11vetor.png'),
-                  onPressed: () {},
                 ),
-                IconButton(
-                  style: IconButton.styleFrom(
-                    foregroundColor: const Color(0xFF981DB9),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                const SizedBox(height: 20),
+                Container(
+                  width: 341,
+                  height: 62,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    ),
+                    border: GradientBoxBorder(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
+                      ),
+                    ),
                   ),
-                  icon: Image.asset('assets/images/sub10vetor.png'),
-                  onPressed: () {},
-                ),
-                IconButton(
-                  style: IconButton.styleFrom(
-                    foregroundColor: const Color(0xFF981DB9),
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5))),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF981DB9),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                      side: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'SUB 11',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'OUTFIT',
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {},
                   ),
-                  icon: Image.asset('assets/images/sub13vetor.png'),
-                  onPressed: () {},
                 ),
+                const SizedBox(height: 20),
+                Container(
+                  width: 341,
+                  height: 62,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    ),
+                    border: GradientBoxBorder(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
+                      ),
+                    ),
+                  ),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF981DB9),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                      side: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'SUB 10',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'OUTFIT',
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  width: 341,
+                  height: 62,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    ),
+                    border: GradientBoxBorder(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
+                      ),
+                    ),
+                  ),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF981DB9),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                      side: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'SUB 13',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'OUTFIT',
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+                const SizedBox(height: 20),
               ],
             ),
           ),

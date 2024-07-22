@@ -552,8 +552,51 @@ class HealthCard1 extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(width: 50),
+            const Column(
+              children: [
+                SizedBox(height: 10),
+                Text(
+                  'Lesão',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'STRETCH',
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  'Entorse de Tornozelo',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+                Text(
+                  '31/03/23',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+                Text(
+                  'a 07/04/23 (7 dias)',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
+        onTap: () => Navigator.pushNamed(context, 'cardPage'),
       ),
     );
   }
@@ -618,8 +661,51 @@ class HealthCard2 extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(width: 50),
+            const Column(
+              children: [
+                SizedBox(height: 10),
+                Text(
+                  'Lesão',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'STRETCH',
+                    fontSize: 20,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  'Entorse de Tornozelo',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+                Text(
+                  '31/03/23',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+                Text(
+                  'a 07/04/23 (7 dias)',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
+        onTap: () => Navigator.pushNamed(context, 'cardPage'),
       ),
     );
   }

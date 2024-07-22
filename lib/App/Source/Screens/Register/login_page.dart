@@ -218,13 +218,13 @@ class _LoginPageState extends State<LoginPage> {
 
   signInWithGoogle() async {
     GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    // ignore: use_build_context_synchronously
-    Navigator.pushNamed(context, 'homePage');
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
     AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
+
+    Navigator.pushNamed(context, 'homePage');
 
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
