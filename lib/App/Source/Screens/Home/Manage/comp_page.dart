@@ -3,6 +3,7 @@ import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class CompPage extends StatefulWidget {
   const CompPage({super.key});
@@ -49,677 +50,91 @@ class _CompPageState extends State<CompPage> {
         ),
       ),
       backgroundColor: const Color(0xFF1E1E1E),
-      body: Stack(
+      body: const Stack(
         children: [
-          const GradientBack(),
+          GradientBack(),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(height: 30),
-              const Text(
-                'Jogadas',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontFamily: 'OUTFIT',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 30),
-              Column(
+              SizedBox(height: 30),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      const SizedBox(width: 10),
-                      const Column(
-                        children: [
-                          Text(
-                            'Jogos Escolares de',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            ' Minas Gerais-JEMG',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Programação',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Listas',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    'Jogadas',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontFamily: 'OUTFIT',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  const SizedBox(height: 10),
-                  const Image(
-                      image: AssetImage('assets/images/gradientline.png'))
                 ],
               ),
-              const SizedBox(height: 10),
-              Column(
+              SizedBox(height: 20),
+              CompCard(),
+              SizedBox(height: 10),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      const SizedBox(width: 10),
-                      const Column(
-                        children: [
-                          Text(
-                            'Copa da Amizade',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 25),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Programação',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Listas',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Image(
+                    image: AssetImage('assets/images/gradientline.png'),
                   ),
-                  const SizedBox(height: 10),
-                  const Image(
-                      image: AssetImage('assets/images/gradientline.png'))
                 ],
               ),
-              const SizedBox(height: 10),
-              Column(
+              SizedBox(height: 20),
+              CompCard(),
+              SizedBox(height: 10),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      const SizedBox(width: 10),
-                      const Column(
-                        children: [
-                          Text(
-                            'Copa Menino',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            'Maluquinho',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 50),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Programação',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Listas',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Image(
+                    image: AssetImage('assets/images/gradientline.png'),
                   ),
-                  const SizedBox(height: 10),
-                  const Image(
-                      image: AssetImage('assets/images/gradientline.png'))
                 ],
               ),
-              const SizedBox(height: 10),
-              Column(
+              SizedBox(height: 20),
+              CompCard(),
+              SizedBox(height: 10),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      const SizedBox(width: 10),
-                      const Column(
-                        children: [
-                          Text(
-                            'Jogos Estudantis',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            'De Caratinga',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 30),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Programação',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Listas',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Image(
+                    image: AssetImage('assets/images/gradientline.png'),
                   ),
-                  const SizedBox(height: 10),
-                  const Image(
-                      image: AssetImage('assets/images/gradientline.png'))
                 ],
               ),
-              const SizedBox(height: 10),
-              Column(
+              SizedBox(height: 20),
+              CompCard(),
+              SizedBox(height: 10),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      const SizedBox(width: 10),
-                      const Column(
-                        children: [
-                          Text(
-                            'Copa Uzipa',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 60),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Programação',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Listas',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Image(
+                    image: AssetImage('assets/images/gradientline.png'),
                   ),
-                  const SizedBox(height: 10),
-                  const Image(
-                      image: AssetImage('assets/images/gradientline.png'))
                 ],
               ),
-              const SizedBox(height: 10),
-              Column(
+              SizedBox(height: 20),
+              CompCard(),
+              SizedBox(height: 10),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      const SizedBox(width: 10),
-                      const Column(
-                        children: [
-                          Text(
-                            'Copa Caratinga',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 35),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Programação',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Listas',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Image(
+                    image: AssetImage('assets/images/gradientline.png'),
                   ),
-                  const SizedBox(height: 10),
-                  const Image(
-                      image: AssetImage('assets/images/gradientline.png'))
                 ],
               ),
-              const SizedBox(height: 10),
-              Column(
+              SizedBox(height: 20),
+              CompCard(),
+              SizedBox(height: 10),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      const SizedBox(width: 10),
-                      const Column(
-                        children: [
-                          Text(
-                            'Jogos Escolares de',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            ' Minas Gerais-JEMG',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Programação',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Container(
-                        width: 77,
-                        height: 16,
-                        decoration: const BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'Listas',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Image(
+                    image: AssetImage('assets/images/gradientline.png'),
                   ),
-                  const SizedBox(height: 10),
                 ],
               ),
             ],
@@ -738,5 +153,190 @@ class _CompPageState extends State<CompPage> {
             ),
           ),
         );
+  }
+}
+
+class InfoPage extends StatelessWidget {
+  const InfoPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context, const CompPage()),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+      ),
+      backgroundColor: const Color(0xFF1E1E1E),
+      body: Stack(
+        children: [
+          const GradientBack(),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: 296,
+                  height: 54,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(38),
+                    ),
+                    border: GradientBoxBorder(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
+                      ),
+                    ),
+                  ),
+                  child: Center(
+                    child: GradientText(
+                      'Programação',
+                      style: const TextStyle(
+                        fontFamily: 'STRETCH',
+                        fontSize: 25,
+                      ),
+                      colors: const <Color>[
+                        Color(0xFF981DB9),
+                        Color(0xFF0F76CE),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Local do Evento',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'STRETCH',
+                    fontSize: 25,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(height: 10),
+                    const Text(
+                      'Jogos escolares de',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontFamily: 'OUTFIT',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      'Minas Gerais - Jemg',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontFamily: 'OUTFIT',
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    GradientText(
+                      'Arena Comunitária',
+                      style: const TextStyle(
+                        fontFamily: 'OUTFIT',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                      ),
+                      colors: const <Color>[
+                        Color(0xFF981DB9),
+                        Color(0xFF0F76CE),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Rua do Lazer, 789',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'OUTFIT',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const Text(
+                      'Bairro Vila Alegre',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'OUTFIT',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const Text(
+                      'Cidade: Belo Horizonte',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'OUTFIT',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const Text(
+                      'Estado: MG',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'OUTFIT',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const Text(
+                      'CEP: 34567-890',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'OUTFIT',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      'Data e Horário',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'STRETCH',
+                        fontSize: 25,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      '03/06/23',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'OUTFIT',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const Text(
+                      '18h',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'OUTFIT',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

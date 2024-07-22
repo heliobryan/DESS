@@ -3,7 +3,6 @@ import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class HealthPage extends StatefulWidget {
   const HealthPage({super.key});
@@ -55,11 +54,11 @@ class _HealthPageState extends State<HealthPage> {
           const GradientBack(),
           Center(
             child: ListView(
-              children: [
+              children: const [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'Lesões ou Fraturas',
                       style: TextStyle(
                         color: Colors.white,
@@ -68,246 +67,15 @@ class _HealthPageState extends State<HealthPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 330,
-                      height: 129,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              children: [
-                                const Text(
-                                  'Status',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: const Color(0xFF00FF38),
-                                      width: 5.0,
-                                    ),
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                const Text(
-                                  'Recuperado',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 330,
-                      height: 129,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              children: [
-                                const Text(
-                                  'Status',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: const Color(0xFF00FF38),
-                                      width: 5.0,
-                                    ),
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                const Text(
-                                  'Recuperado',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 330,
-                      height: 129,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
-                        onTap: () => Navigator.pushNamed(
-                          context,
-                          'cardPage',
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              children: [
-                                const Text(
-                                  'Status',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: const Color(0xFF00FF38),
-                                      width: 5.0,
-                                    ),
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                const Text(
-                                  'Recuperado',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 330,
-                      height: 129,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Column(
-                              children: [
-                                const Text(
-                                  'Status',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: const Color(0xFFE70000),
-                                      width: 5.0,
-                                    ),
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                const Text(
-                                  'Em recuperação',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    SizedBox(height: 25),
+                    HealthCard1(),
+                    SizedBox(height: 25),
+                    HealthCard1(),
+                    SizedBox(height: 25),
+                    HealthCard1(),
+                    SizedBox(height: 25),
+                    HealthCard2(),
+                    SizedBox(height: 25),
                   ],
                 ),
               ],
@@ -330,14 +98,14 @@ class _HealthPageState extends State<HealthPage> {
   }
 }
 
-class HealthCard extends StatefulWidget {
-  const HealthCard({super.key});
+class HealthEditor extends StatefulWidget {
+  const HealthEditor({super.key});
 
   @override
-  State<HealthCard> createState() => _HealthCardState();
+  State<HealthEditor> createState() => _HealthEditorState();
 }
 
-class _HealthCardState extends State<HealthCard> {
+class _HealthEditorState extends State<HealthEditor> {
   bool cardColor = true;
 
   @override

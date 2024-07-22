@@ -69,7 +69,33 @@ class _SponsorPageState extends State<SponsorPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(width: 50),
+                      Icon(
+                        Icons.account_circle_outlined,
+                        color: Colors.white,
+                        size: 35,
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        'Adidas',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'OUTFIT',
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  const Image(
+                    image: AssetImage('assets/images/gradientline.png'),
+                  ),
+                  const SizedBox(height: 15),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(width: 50),
                       Icon(
@@ -94,7 +120,7 @@ class _SponsorPageState extends State<SponsorPage> {
                       image: AssetImage('assets/images/gradientline.png')),
                   const SizedBox(height: 15),
                   const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(width: 50),
                       Icon(
@@ -116,35 +142,11 @@ class _SponsorPageState extends State<SponsorPage> {
                   ),
                   const SizedBox(height: 15),
                   const Image(
-                      image: AssetImage('assets/images/gradientline.png')),
-                  const SizedBox(height: 15),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(width: 50),
-                      Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                        size: 35,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        'Adidas',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                    image: AssetImage('assets/images/gradientline.png'),
                   ),
                   const SizedBox(height: 15),
-                  const Image(
-                      image: AssetImage('assets/images/gradientline.png')),
-                  const SizedBox(height: 15),
                   const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(width: 50),
                       Icon(
@@ -166,35 +168,39 @@ class _SponsorPageState extends State<SponsorPage> {
                   ),
                   const SizedBox(height: 35),
                   SizedBox(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF1E1E1E),
-                          foregroundColor: const Color(0xFF1E1E1E)),
-                      child: Container(
-                        width: 335,
-                        height: 40,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                    child: Container(
+                      height: 40,
+                      width: 335,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
                         ),
-                        child: const Center(
-                          child: Text(
-                            'Salvar',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OUTFIT',
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF981DB9),
+                            Color(0xFF0F76CE),
+                          ],
                         ),
                       ),
-                      onPressed: () {},
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: Colors.transparent,
+                          backgroundColor: Colors.transparent,
+                          side: const BorderSide(
+                            color: Colors.transparent,
+                          ),
+                        ),
+                        child: const Text(
+                          'Salvar',
+                          style: TextStyle(
+                            fontFamily: 'OUTFIT',
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        onPressed: () {},
+                      ),
                     ),
                   ),
                 ],

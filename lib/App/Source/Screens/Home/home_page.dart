@@ -8,7 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -149,13 +148,13 @@ class _Home1PageState extends State<Home1Page> {
         children: [
           const GradientBack(),
           ListView(
-            children: [
+            children: const [
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 20),
-                    const SizedBox(
+                    SizedBox(height: 20),
+                    SizedBox(
                       width: 347,
                       height: 27,
                       child: TextField(
@@ -195,8 +194,8 @@ class _Home1PageState extends State<Home1Page> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
+                    SizedBox(height: 20),
+                    Text(
                       'Alunos',
                       style: TextStyle(
                         color: Colors.white,
@@ -204,111 +203,24 @@ class _Home1PageState extends State<Home1Page> {
                         fontSize: 18,
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 341,
-                      height: 62,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                        ),
-                        child: const Row(
-                          children: [],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 341,
-                      height: 62,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                        ),
-                        child: const Row(
-                          children: [],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 341,
-                      height: 62,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                        ),
-                        child: const Row(
-                          children: [],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 341,
-                      height: 62,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                        ),
-                        child: const Row(
-                          children: [],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 341,
-                      height: 62,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                        ),
-                        child: const Row(
-                          children: [],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 341,
-                      height: 62,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                        ),
-                        child: const Row(
-                          children: [],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 341,
-                      height: 62,
-                      child: OutlineGradientButton(
-                        strokeWidth: 1,
-                        radius: const Radius.circular(12),
-                        gradient: const LinearGradient(
-                          colors: <Color>[Color(0xFF981DB9), Color(0xFF0F76CE)],
-                        ),
-                        child: const Row(
-                          children: [],
-                        ),
-                      ),
-                    ),
+                    SizedBox(height: 20),
+                    CardPlayer(),
+                    SizedBox(height: 20),
+                    CardPlayer(),
+                    SizedBox(height: 20),
+                    CardPlayer(),
+                    SizedBox(height: 20),
+                    CardPlayer(),
+                    SizedBox(height: 20),
+                    CardPlayer(),
+                    SizedBox(height: 20),
+                    CardPlayer(),
+                    SizedBox(height: 20),
+                    CardPlayer(),
+                    SizedBox(height: 20),
+                    CardPlayer(),
+                    SizedBox(height: 20),
+                    CardPlayer(),
                   ],
                 ),
               ),

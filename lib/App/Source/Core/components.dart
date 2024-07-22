@@ -1,7 +1,8 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 InputDecoration nameAuthDecoration(String label) {
   return InputDecoration(
@@ -307,6 +308,319 @@ class BackgroudImage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class CardPlayer extends StatelessWidget {
+  const CardPlayer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 62,
+      width: 341,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(12),
+        ),
+        border: GradientBoxBorder(
+          gradient: LinearGradient(
+            colors: <Color>[
+              Color(0xFF981DB9),
+              Color(0xFF0F76CE),
+            ],
+          ),
+        ),
+      ),
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: const Color(0xFF981DB9),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+          ),
+          side: const BorderSide(color: Colors.transparent),
+        ),
+        child: const Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: 20),
+              Icon(
+                Icons.account_circle_outlined,
+                color: Colors.white,
+                size: 40,
+              ),
+              SizedBox(width: 20),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10),
+                  Text(
+                    'Gabriel Henrique Almeida',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontFamily: 'OUTFIT',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'Atacante - Sub 13 - Society',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontFamily: 'OUTFIT',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        onPressed: () {},
+      ),
+    );
+  }
+}
+
+class CompCard extends StatelessWidget {
+  const CompCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 365,
+      height: 62,
+      child: Row(
+        children: [
+          const Icon(
+            Icons.account_circle_outlined,
+            color: Colors.white,
+            size: 40,
+          ),
+          const SizedBox(width: 10),
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 10),
+              Text(
+                'Jogos escolares de',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontFamily: 'OUTFIT',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Minas Gerais - Jemg',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontFamily: 'OUTFIT',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(width: 20),
+          Container(
+            width: 85,
+            height: 30,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+              border: GradientBoxBorder(
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    Color(0xFF981DB9),
+                    Color(0xFF0F76CE),
+                  ],
+                ),
+              ),
+            ),
+            child: TextButton(
+              child: const Text(
+                'Programação',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontFamily: 'OUTFIT',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () => Navigator.pushNamed(context, 'infoPage'),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Container(
+            width: 85,
+            height: 30,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(12),
+              ),
+              border: GradientBoxBorder(
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    Color(0xFF981DB9),
+                    Color(0xFF0F76CE),
+                  ],
+                ),
+              ),
+            ),
+            child: TextButton(
+              child: const Text(
+                'Listas',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontFamily: 'OUTFIT',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {},
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HealthCard1 extends StatelessWidget {
+  const HealthCard1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 330,
+      height: 129,
+      child: OutlineGradientButton(
+        strokeWidth: 1,
+        radius: const Radius.circular(12),
+        gradient: const LinearGradient(
+          colors: <Color>[
+            Color(0xFF981DB9),
+            Color(0xFF0F76CE),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            Column(
+              children: [
+                const Text(
+                  'Status',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: const Color(0xFF00FF38),
+                      width: 5.0,
+                    ),
+                    color: Colors.transparent,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                const Text(
+                  'Recuperado',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class HealthCard2 extends StatelessWidget {
+  const HealthCard2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 330,
+      height: 129,
+      child: OutlineGradientButton(
+        strokeWidth: 1,
+        radius: const Radius.circular(12),
+        gradient: const LinearGradient(
+          colors: <Color>[
+            Color(0xFF981DB9),
+            Color(0xFF0F76CE),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              width: 20,
+            ),
+            Column(
+              children: [
+                const Text(
+                  'Status',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: const Color(0xFFE70000),
+                      width: 5.0,
+                    ),
+                    color: Colors.transparent,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                const Text(
+                  'Em recuperação',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

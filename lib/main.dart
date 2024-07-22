@@ -57,11 +57,12 @@ class DesApp extends StatelessWidget {
         'avatecPage': (context) => const AvatecPage(),
         'avapsiPage': (context) => const AvapsiPage(),
         'screenPage': (context) => const ScreenRoute(),
-        'cardPage': (context) => const HealthCard(),
+        'cardPage': (context) => const HealthEditor(),
         'loginPage': (context) => const LoginPage(),
         'avafisPage': (context) => const AvafisPage(),
         'avatatPage': (context) => const AvatatPage(),
         'stopPage': (context) => const StopTimePage(),
+        'infoPage': (context) => const InfoPage(),
       },
     );
   }
