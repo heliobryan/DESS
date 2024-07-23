@@ -3,11 +3,10 @@ import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Passport/passport_page.dart';
-import 'package:dess/App/Source/Screens/Register/initial_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -115,8 +114,6 @@ class Home1Page extends StatefulWidget {
 }
 
 class _Home1PageState extends State<Home1Page> {
-  final _firebaseAuth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,9 +127,10 @@ class _Home1PageState extends State<Home1Page> {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {
-              signOut();
-            },
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) => const ExitButton(),
+            ),
           ),
         ],
         title: const Text(
@@ -148,8 +146,27 @@ class _Home1PageState extends State<Home1Page> {
         children: [
           const GradientBack(),
           ListView(
-            children: const [
-              Center(
+            children: [
+              Positioned(
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      DateFormat.MMMMEEEEd().format(
+                        DateTime.now(),
+                      ),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'STRETCH',
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -229,16 +246,5 @@ class _Home1PageState extends State<Home1Page> {
         ],
       ),
     );
-  }
-
-  signOut() async {
-    await _firebaseAuth.signOut().then(
-          (user) => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const InitialPage(),
-            ),
-          ),
-        );
   }
 }

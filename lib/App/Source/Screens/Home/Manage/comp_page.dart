@@ -33,9 +33,10 @@ class _CompPageState extends State<CompPage> {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {
-              signOut();
-            },
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) => const ExitButton(),
+            ),
           ),
         ],
         centerTitle: true,

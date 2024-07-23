@@ -1,6 +1,4 @@
 import 'package:dess/App/Source/Core/components.dart';
-import 'package:dess/App/Source/Screens/Register/initial_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
@@ -12,13 +10,20 @@ class AvaliationPage extends StatefulWidget {
 }
 
 class _AvaliationPageState extends State<AvaliationPage> {
-  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF1E1E1E),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
         actions: [
           IconButton(
             icon: const Icon(
@@ -26,9 +31,10 @@ class _AvaliationPageState extends State<AvaliationPage> {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {
-              signOut();
-            },
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) => const ExitButton(),
+            ),
           ),
         ],
         centerTitle: true,
@@ -201,16 +207,5 @@ class _AvaliationPageState extends State<AvaliationPage> {
         ],
       ),
     );
-  }
-
-  signOut() async {
-    await _firebaseAuth.signOut().then(
-          (user) => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const InitialPage(),
-            ),
-          ),
-        );
   }
 }

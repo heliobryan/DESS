@@ -1,6 +1,4 @@
 import 'package:dess/App/Source/Core/components.dart';
-import 'package:dess/App/Source/Screens/Register/initial_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
@@ -13,7 +11,6 @@ class AvatecPage extends StatefulWidget {
 }
 
 class _AvatecPageState extends State<AvatecPage> {
-  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,9 +41,10 @@ class _AvatecPageState extends State<AvatecPage> {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {
-              signOut();
-            },
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) => const ExitButton(),
+            ),
           ),
         ],
       ),
@@ -273,14 +271,7 @@ class _AvatecPageState extends State<AvatecPage> {
                     ),
                   ),
                   child: const Center(
-                    child: Text(
-                      'Data',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold),
-                    ),
+                    child: Text(''),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -391,16 +382,5 @@ class _AvatecPageState extends State<AvatecPage> {
         ],
       ),
     );
-  }
-
-  signOut() async {
-    await _firebaseAuth.signOut().then(
-          (user) => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const InitialPage(),
-            ),
-          ),
-        );
   }
 }

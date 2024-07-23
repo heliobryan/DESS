@@ -1,6 +1,4 @@
 import 'package:dess/App/Source/Core/components.dart';
-import 'package:dess/App/Source/Screens/Register/initial_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
@@ -12,7 +10,6 @@ class HealthPage extends StatefulWidget {
 }
 
 class _HealthPageState extends State<HealthPage> {
-  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,9 +30,10 @@ class _HealthPageState extends State<HealthPage> {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {
-              signOut();
-            },
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) => const ExitButton(),
+            ),
           ),
         ],
         centerTitle: true,
@@ -84,17 +82,6 @@ class _HealthPageState extends State<HealthPage> {
         ],
       ),
     );
-  }
-
-  signOut() async {
-    await _firebaseAuth.signOut().then(
-          (user) => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const InitialPage(),
-            ),
-          ),
-        );
   }
 }
 

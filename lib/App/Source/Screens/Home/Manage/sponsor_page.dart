@@ -1,6 +1,4 @@
 import 'package:dess/App/Source/Core/components.dart';
-import 'package:dess/App/Source/Screens/Register/initial_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SponsorPage extends StatefulWidget {
@@ -11,7 +9,6 @@ class SponsorPage extends StatefulWidget {
 }
 
 class _SponsorPageState extends State<SponsorPage> {
-  final _firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +29,10 @@ class _SponsorPageState extends State<SponsorPage> {
               color: Colors.white,
               size: 30,
             ),
-            onPressed: () {
-              signOut();
-            },
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) => const ExitButton(),
+            ),
           ),
         ],
         centerTitle: true,
@@ -210,16 +208,5 @@ class _SponsorPageState extends State<SponsorPage> {
         ],
       ),
     );
-  }
-
-  signOut() async {
-    await _firebaseAuth.signOut().then(
-          (user) => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const InitialPage(),
-            ),
-          ),
-        );
   }
 }

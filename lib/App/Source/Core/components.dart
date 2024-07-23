@@ -1,7 +1,11 @@
 import 'dart:ui';
+import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:intl/intl.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 InputDecoration nameAuthDecoration(String label) {
@@ -56,106 +60,6 @@ InputDecoration emailAuthDecoration(String label) {
     prefixIcon: const Icon(
       Icons.email_outlined,
       color: Color(0xFF484D54),
-    ),
-    hintStyle: const TextStyle(
-      color: Color(0xFF666F7B),
-      fontFamily: 'OUTFIT',
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-    ),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(
-        color: Color(0xFF464C54),
-      ),
-    ),
-    errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(
-        color: Color(0xFFAD0000),
-      ),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-    ),
-    focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(
-        color: Color(0xFFAD0000),
-      ),
-    ),
-  );
-}
-
-InputDecoration passAuthDecoration(String label) {
-  return InputDecoration(
-    hintText: label,
-    fillColor: const Color(0xFF282E36),
-    filled: true,
-    contentPadding: const EdgeInsets.all(12),
-    prefixIcon: const Icon(
-      Icons.lock_outline,
-      color: Color(0xFF484D54),
-    ),
-    suffixIcon: IconButton(
-      icon: const Icon(
-        Icons.remove_red_eye_outlined,
-        color: Color(0xFF484D54),
-      ),
-      onPressed: () {},
-    ),
-    hintStyle: const TextStyle(
-      color: Color(0xFF666F7B),
-      fontFamily: 'OUTFIT',
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-    ),
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(
-        color: Color(0xFF464C54),
-      ),
-    ),
-    errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(
-        color: Color(0xFFAD0000),
-      ),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-    ),
-    focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(
-        color: Color(0xFFAD0000),
-      ),
-    ),
-  );
-}
-
-InputDecoration passwordAuthDecoration(String label) {
-  return InputDecoration(
-    hintText: label,
-    fillColor: const Color(0xFF282E36),
-    filled: true,
-    contentPadding: const EdgeInsets.all(12),
-    prefixIcon: const Icon(
-      Icons.lock_outline,
-      color: Color(0xFF484D54),
-    ),
-    suffixIcon: IconButton(
-      icon: const Icon(
-        Icons.remove_red_eye_outlined,
-        color: Color(0xFF484D54),
-      ),
-      onPressed: () {},
     ),
     hintStyle: const TextStyle(
       color: Color(0xFF666F7B),
@@ -381,7 +285,7 @@ class CardPlayer extends StatelessWidget {
             ],
           ),
         ),
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, 'avaliationPage'),
       ),
     );
   }
@@ -710,3 +614,108 @@ class HealthCard2 extends StatelessWidget {
     );
   }
 }
+
+class ExitButton extends StatefulWidget {
+  const ExitButton({super.key});
+
+  @override
+  State<ExitButton> createState() => _ExitButtonState();
+}
+
+class _ExitButtonState extends State<ExitButton> {
+  final _firebaseAuth = FirebaseAuth.instance;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text(
+        'Tem certeza que deseja sair?',
+        style: TextStyle(
+          color: Colors.black,
+          fontFamily: 'STRETCH',
+          fontSize: 20,
+        ),
+      ),
+      actions: <Widget>[
+        Row(
+          children: [
+            SizedBox(
+              width: 127,
+              height: 31,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  backgroundColor: const Color(0xFF0F76CE),
+                ),
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Não',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OUTFIT',
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 20),
+            SizedBox(
+              width: 127,
+              height: 31,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  backgroundColor: const Color(0xFF981DB9),
+                ),
+                onPressed: () {
+                  signOut();
+                },
+                child: const Text(
+                  'Sim',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OUTFIT',
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+
+  signOut() async {
+    await _firebaseAuth.signOut().then(
+          (user) => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const InitialPage(),
+            ),
+          ),
+        );
+  }
+}
+
+class Day extends StatelessWidget {
+  const Day({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Text(
+      DateFormat.ABBR_MONTH_DAY().format(DateTime.now),
+    );
+  }
+}
+style: TextStyle(
+        color: Colors.white,
+        fontSize: 15,
+        fontFamily: 'OUTFIT',
+      ),

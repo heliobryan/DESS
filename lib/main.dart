@@ -37,7 +37,7 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SplashPage(),
+      home: const HomePage(),
       debugShowCheckedModeBanner: false,
       routes: {
         'initialPage': (context) => const InitialPage(),
