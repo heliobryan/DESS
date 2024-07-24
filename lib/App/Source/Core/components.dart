@@ -2,10 +2,8 @@ import 'dart:ui';
 import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:intl/intl.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 InputDecoration nameAuthDecoration(String label) {
@@ -704,18 +702,112 @@ class _ExitButtonState extends State<ExitButton> {
   }
 }
 
-class Day extends StatelessWidget {
-  const Day({super.key});
+class PsiCard extends StatefulWidget {
+  const PsiCard({super.key});
 
   @override
+  State<PsiCard> createState() => _PsiCardState();
+}
+
+class _PsiCardState extends State<PsiCard> {
+  bool showStar1 = true;
+  bool showStar2 = true;
+  bool showStar3 = true;
+  bool showStar4 = true;
+  bool showStar5 = true;
+  @override
   Widget build(BuildContext context) {
-    return  Text(
-      DateFormat.ABBR_MONTH_DAY().format(DateTime.now),
+    return SizedBox(
+      width: 361,
+      height: 100,
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          border: GradientBoxBorder(
+            gradient: LinearGradient(
+              colors: <Color>[
+                Color(0xFF981DB9),
+                Color(0xFF0F76CE),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 5),
+              const Text(
+                'Avaliação - O atleta está concentrado?',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'OUTFIT',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: SvgPicture.asset('assets/images/staron.svg'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showStar1 = !showStar1;
+                      });
+                    },
+                    icon: (showStar1)
+                        ? SvgPicture.asset('assets/images/staroff.svg')
+                        : SvgPicture.asset('assets/images/staron.svg'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showStar2 = !showStar2;
+                        showStar1 = !showStar1;
+                      });
+                    },
+                    icon: (showStar2)
+                        ? SvgPicture.asset('assets/images/staroff.svg')
+                        : SvgPicture.asset('assets/images/staron.svg'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showStar3 = !showStar3;
+                        showStar2 = !showStar2;
+                        showStar1 = !showStar1;
+                      });
+                    },
+                    icon: (showStar3)
+                        ? SvgPicture.asset('assets/images/staroff.svg')
+                        : SvgPicture.asset('assets/images/staron.svg'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showStar4 = !showStar4;
+                        showStar3 = !showStar3;
+                        showStar2 = !showStar2;
+                        showStar1 = !showStar1;
+                      });
+                    },
+                    icon: (showStar4)
+                        ? SvgPicture.asset('assets/images/staroff.svg')
+                        : SvgPicture.asset('assets/images/staron.svg'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
-style: TextStyle(
-        color: Colors.white,
-        fontSize: 15,
-        fontFamily: 'OUTFIT',
-      ),
