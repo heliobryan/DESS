@@ -1,6 +1,7 @@
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:intl/intl.dart';
 
 class AvapsiPage extends StatefulWidget {
   const AvapsiPage({super.key});
@@ -108,148 +109,248 @@ class _AvapsiPageState extends State<AvapsiPage> {
                 ],
               ),
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: 105,
-                    height: 23,
-                    decoration: const BoxDecoration(
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const SizedBox(width: 20),
+                    Container(
+                      width: 105,
+                      height: 23,
+                      decoration: const BoxDecoration(
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF981DB9),
+                              Color(0xFF0F76CE),
+                            ],
+                          ),
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.transparent,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                ),
+                                side: const BorderSide(
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                              child: const Text(
+                                'Foco',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              onPressed: () {},
+                            ),
                           ],
                         ),
                       ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
                     ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.transparent,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(12),
+                    const SizedBox(width: 20),
+                    Container(
+                      width: 105,
+                      height: 23,
+                      decoration: const BoxDecoration(
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF981DB9),
+                              Color(0xFF0F76CE),
+                            ],
+                          ),
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.transparent,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                ),
+                                side: const BorderSide(
+                                  color: Colors.transparent,
                                 ),
                               ),
-                              side: const BorderSide(
-                                color: Colors.transparent,
+                              child: const Text(
+                                'Confiança',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold),
                               ),
+                              onPressed: () {},
                             ),
-                            child: const Text(
-                              'Foco',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontFamily: 'OUTFIT',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 105,
-                    height: 23,
-                    decoration: const BoxDecoration(
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
                           ],
                         ),
                       ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
                     ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.transparent,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(12),
+                    const SizedBox(width: 20),
+                    Container(
+                      width: 105,
+                      height: 23,
+                      decoration: const BoxDecoration(
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF981DB9),
+                              Color(0xFF0F76CE),
+                            ],
+                          ),
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.transparent,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                ),
+                                side: const BorderSide(
+                                  color: Colors.transparent,
                                 ),
                               ),
-                              side: const BorderSide(
-                                color: Colors.transparent,
+                              child: const Text(
+                                'Resiliência',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 9,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold),
                               ),
+                              onPressed: () {},
                             ),
-                            child: const Text(
-                              'Confiança',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                  fontFamily: 'OUTFIT',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            onPressed: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: 105,
-                    height: 23,
-                    decoration: const BoxDecoration(
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
                           ],
                         ),
                       ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
                     ),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.transparent,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(12),
+                    const SizedBox(width: 20),
+                    Container(
+                      width: 105,
+                      height: 23,
+                      decoration: const BoxDecoration(
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF981DB9),
+                              Color(0xFF0F76CE),
+                            ],
+                          ),
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.transparent,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                ),
+                                side: const BorderSide(
+                                  color: Colors.transparent,
                                 ),
                               ),
-                              side: const BorderSide(
-                                color: Colors.transparent,
+                              child: const Text(
+                                'Respeito',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold),
                               ),
+                              onPressed: () {},
                             ),
-                            child: const Text(
-                              'Resiliência',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                  fontFamily: 'OUTFIT',
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            onPressed: () {},
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 20),
+                    Container(
+                      width: 105,
+                      height: 23,
+                      decoration: const BoxDecoration(
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF981DB9),
+                              Color(0xFF0F76CE),
+                            ],
+                          ),
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            OutlinedButton(
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.transparent,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                ),
+                                side: const BorderSide(
+                                  color: Colors.transparent,
+                                ),
+                              ),
+                              child: const Text(
+                                'Humildade',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 20),
               Container(
@@ -268,14 +369,29 @@ class _AvapsiPageState extends State<AvapsiPage> {
                     Radius.circular(12),
                   ),
                 ),
-                child: const Center(
-                  child: Text(
-                    'Data',
-                    style: TextStyle(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.transparent,
+                    side: const BorderSide(color: Colors.transparent),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Center(
+                    child: Text(
+                      DateFormat.yMd().format(
+                        DateTime.now(),
+                      ),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),

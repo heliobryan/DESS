@@ -1,6 +1,6 @@
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 class AvaliationPage extends StatefulWidget {
   const AvaliationPage({super.key});
@@ -52,155 +52,232 @@ class _AvaliationPageState extends State<AvaliationPage> {
           const GradientBack(),
           Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: 295,
-                  child: OutlineGradientButton(
-                    strokeWidth: 1,
-                    gradient: const LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
+                const SizedBox(height: 170),
+                Container(
+                  width: 315,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
                     ),
-                    radius: const Radius.circular(12),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.sports_soccer,
-                          color: Colors.white,
-                          size: 25,
+                    border: GradientBoxBorder(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
+                      ),
+                    ),
+                  ),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
                         ),
-                        SizedBox(width: 60),
-                        Text(
-                          'Técnica',
-                          style: TextStyle(
+                      ),
+                      foregroundColor: const Color(0xFF981DB9),
+                      side: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    onPressed: () => Navigator.pushNamed(context, 'avatecPage'),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(width: 5),
+                          Icon(
+                            Icons.sports_soccer,
                             color: Colors.white,
-                            fontSize: 25,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
+                            size: 25,
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 60),
+                          Text(
+                            'Técnica',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontFamily: 'OUTFIT',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    onTap: () => Navigator.pushNamed(context, 'avatecPage'),
                   ),
                 ),
-                const SizedBox(height: 40),
-                SizedBox(
-                  width: 295,
-                  child: OutlineGradientButton(
-                    strokeWidth: 1,
-                    gradient: const LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
+                const SizedBox(height: 30),
+                Container(
+                  width: 315,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
                     ),
-                    radius: const Radius.circular(12),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 10),
-                        ImageIcon(
-                          AssetImage(
-                            'assets/images/neurology.png',
-                          ),
-                          color: Colors.white,
-                          size: 25,
+                    border: GradientBoxBorder(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
+                      ),
+                    ),
+                  ),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
                         ),
-                        SizedBox(width: 45),
-                        Text(
-                          'Psicológica',
-                          style: TextStyle(
+                      ),
+                      foregroundColor: const Color(0xFF981DB9),
+                      side: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    onPressed: () => Navigator.pushNamed(context, 'avapsiPage'),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(width: 5),
+                          ImageIcon(
+                            AssetImage('assets/images/neurology.png'),
                             color: Colors.white,
-                            fontSize: 25,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
+                            size: 20,
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 50),
+                          Text(
+                            'Psicológica',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontFamily: 'OUTFIT',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    onTap: () => Navigator.pushNamed(context, 'avapsiPage'),
                   ),
                 ),
-                const SizedBox(height: 40),
-                SizedBox(
-                  width: 295,
-                  child: OutlineGradientButton(
-                    strokeWidth: 1,
-                    gradient: const LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
+                const SizedBox(height: 30),
+                Container(
+                  width: 315,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
                     ),
-                    radius: const Radius.circular(12),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 10),
-                        ImageIcon(
-                          AssetImage('assets/images/exercise.png'),
-                          color: Colors.white,
-                          size: 25,
+                    border: GradientBoxBorder(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
+                      ),
+                    ),
+                  ),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
                         ),
-                        SizedBox(width: 80),
-                        Text(
-                          'Física',
-                          style: TextStyle(
+                      ),
+                      foregroundColor: const Color(0xFF981DB9),
+                      side: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    onPressed: () => Navigator.pushNamed(context, 'avafisPage'),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(width: 5),
+                          ImageIcon(
+                            AssetImage('assets/images/exercise.png'),
                             color: Colors.white,
-                            fontSize: 25,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
+                            size: 20,
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 75),
+                          Text(
+                            'Física',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontFamily: 'OUTFIT',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    onTap: () => Navigator.pushNamed(context, 'avafisPage'),
                   ),
                 ),
-                const SizedBox(height: 40),
-                SizedBox(
-                  width: 295,
-                  child: OutlineGradientButton(
-                    strokeWidth: 1,
-                    gradient: const LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
+                const SizedBox(height: 30),
+                Container(
+                  width: 315,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
                     ),
-                    radius: const Radius.circular(12),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        SizedBox(width: 10),
-                        ImageIcon(
-                          AssetImage('assets/images/sprint.png'),
-                          color: Colors.white,
-                          size: 25,
+                    border: GradientBoxBorder(
+                      gradient: LinearGradient(
+                        colors: <Color>[
+                          Color(0xFF981DB9),
+                          Color(0xFF0F76CE),
+                        ],
+                      ),
+                    ),
+                  ),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
                         ),
-                        SizedBox(width: 70),
-                        Text(
-                          'Tática',
-                          style: TextStyle(
+                      ),
+                      foregroundColor: const Color(0xFF981DB9),
+                      side: const BorderSide(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    onPressed: () => Navigator.pushNamed(context, 'avatatPage'),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(width: 5),
+                          ImageIcon(
+                            AssetImage('assets/images/sprint.png'),
                             color: Colors.white,
-                            fontSize: 25,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
+                            size: 20,
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 70),
+                          Text(
+                            'Tática',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontFamily: 'OUTFIT',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    onTap: () => Navigator.pushNamed(context, 'avatatPage'),
                   ),
                 ),
-                const SizedBox(height: 40),
               ],
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:intl/intl.dart';
 
 class AvatatPage extends StatefulWidget {
   const AvatatPage({super.key});
@@ -268,14 +269,29 @@ class _AvatatPageState extends State<AvatatPage> {
                     Radius.circular(12),
                   ),
                 ),
-                child: const Center(
-                  child: Text(
-                    'Data',
-                    style: TextStyle(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.transparent,
+                    side: const BorderSide(color: Colors.transparent),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Center(
+                    child: Text(
+                      DateFormat.yMd().format(
+                        DateTime.now(),
+                      ),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),

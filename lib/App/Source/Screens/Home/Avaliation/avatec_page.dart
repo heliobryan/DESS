@@ -1,7 +1,7 @@
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
+import 'package:intl/intl.dart';
 
 class AvatecPage extends StatefulWidget {
   const AvatecPage({super.key});
@@ -110,148 +110,295 @@ class _AvatecPageState extends State<AvatecPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      width: 105,
-                      height: 23,
-                      decoration: const BoxDecoration(
-                        border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const SizedBox(width: 20),
+                      Container(
+                        width: 105,
+                        height: 23,
+                        decoration: const BoxDecoration(
+                          border: GradientBoxBorder(
+                            gradient: LinearGradient(
+                              colors: <Color>[
+                                Color(0xFF981DB9),
+                                Color(0xFF0F76CE),
+                              ],
+                            ),
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.transparent,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  side: const BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Passes',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontFamily: 'OUTFIT',
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onPressed: () {},
+                              ),
                             ],
                           ),
                         ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
-                        ),
                       ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.transparent,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(12),
+                      const SizedBox(width: 20),
+                      Container(
+                        width: 105,
+                        height: 23,
+                        decoration: const BoxDecoration(
+                          border: GradientBoxBorder(
+                            gradient: LinearGradient(
+                              colors: <Color>[
+                                Color(0xFF981DB9),
+                                Color(0xFF0F76CE),
+                              ],
+                            ),
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.transparent,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  side: const BorderSide(
+                                    color: Colors.transparent,
                                   ),
                                 ),
-                                side: const BorderSide(
-                                  color: Colors.transparent,
+                                child: const Text(
+                                  'Finalização',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontFamily: 'OUTFIT',
+                                      fontWeight: FontWeight.bold),
                                 ),
+                                onPressed: () {},
                               ),
-                              child: const Text(
-                                'Passes',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              onPressed: () {},
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 105,
-                      height: 23,
-                      decoration: const BoxDecoration(
-                        border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
                             ],
                           ),
                         ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
-                        ),
                       ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.transparent,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(12),
+                      const SizedBox(width: 20),
+                      Container(
+                        width: 105,
+                        height: 23,
+                        decoration: const BoxDecoration(
+                          border: GradientBoxBorder(
+                            gradient: LinearGradient(
+                              colors: <Color>[
+                                Color(0xFF981DB9),
+                                Color(0xFF0F76CE),
+                              ],
+                            ),
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.transparent,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  side: const BorderSide(
+                                    color: Colors.transparent,
                                   ),
                                 ),
-                                side: const BorderSide(
-                                  color: Colors.transparent,
+                                child: const Text(
+                                  'Contr. de bola',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 9,
+                                      fontFamily: 'OUTFIT',
+                                      fontWeight: FontWeight.bold),
                                 ),
+                                onPressed: () {},
                               ),
-                              child: const Text(
-                                'Finalização',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              onPressed: () {},
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 105,
-                      height: 23,
-                      decoration: const BoxDecoration(
-                        border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
                             ],
                           ),
                         ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
-                        ),
                       ),
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            OutlinedButton(
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.transparent,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(12),
+                      const SizedBox(width: 20),
+                      Container(
+                        width: 105,
+                        height: 23,
+                        decoration: const BoxDecoration(
+                          border: GradientBoxBorder(
+                            gradient: LinearGradient(
+                              colors: <Color>[
+                                Color(0xFF981DB9),
+                                Color(0xFF0F76CE),
+                              ],
+                            ),
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.transparent,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  side: const BorderSide(
+                                    color: Colors.transparent,
                                   ),
                                 ),
-                                side: const BorderSide(
-                                  color: Colors.transparent,
+                                child: const Text(
+                                  'Cabeceio',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                      fontFamily: 'OUTFIT',
+                                      fontWeight: FontWeight.bold),
                                 ),
+                                onPressed: () {},
                               ),
-                              child: const Text(
-                                'Contr. de bola',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 9,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              onPressed: () {},
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 20),
+                      Container(
+                        width: 105,
+                        height: 23,
+                        decoration: const BoxDecoration(
+                          border: GradientBoxBorder(
+                            gradient: LinearGradient(
+                              colors: <Color>[
+                                Color(0xFF981DB9),
+                                Color(0xFF0F76CE),
+                              ],
+                            ),
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.transparent,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  side: const BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Dribles',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                      fontFamily: 'OUTFIT',
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Container(
+                        width: 105,
+                        height: 23,
+                        decoration: const BoxDecoration(
+                          border: GradientBoxBorder(
+                            gradient: LinearGradient(
+                              colors: <Color>[
+                                Color(0xFF981DB9),
+                                Color(0xFF0F76CE),
+                              ],
+                            ),
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                        ),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                  foregroundColor: Colors.transparent,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  side: const BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Intercepçẽos',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10,
+                                      fontFamily: 'OUTFIT',
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onPressed: () {},
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 20),
                 Container(
@@ -270,31 +417,57 @@ class _AvatecPageState extends State<AvatecPage> {
                       Radius.circular(12),
                     ),
                   ),
-                  child: const Center(
-                    child: Text(''),
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.transparent,
+                      side: const BorderSide(color: Colors.transparent),
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Center(
+                      child: Text(
+                        DateFormat.yMd().format(
+                          DateTime.now(),
+                        ),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontFamily: 'OUTFIT',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: 361,
-                  height: 111,
-                  child: OutlineGradientButton(
-                    radius: const Radius.circular(12),
-                    strokeWidth: 1,
-                    gradient: const LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+                  height: 100,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      border: GradientBoxBorder(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF981DB9),
+                            Color(0xFF0F76CE),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
                     ),
                     child: const Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          SizedBox(height: 5),
                           Text(
-                            'Avaliação - Domínio e Passe',
+                            'Avaliação - O atleta está concentrado?',
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'OUTFIT',
@@ -302,33 +475,40 @@ class _AvatecPageState extends State<AvatecPage> {
                               fontSize: 15,
                             ),
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [],
+                          ),
                         ],
                       ),
                     ),
-                    onTap: () {},
                   ),
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: 361,
-                  height: 111,
-                  child: OutlineGradientButton(
-                    radius: const Radius.circular(12),
-                    strokeWidth: 1,
-                    gradient: const LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+                  height: 100,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      border: GradientBoxBorder(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF981DB9),
+                            Color(0xFF0F76CE),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
                     ),
                     child: const Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          SizedBox(height: 5),
                           Text(
-                            'Avaliação - Cruzamento',
+                            'Avaliação - O atleta está concentrado?',
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'OUTFIT',
@@ -336,33 +516,40 @@ class _AvatecPageState extends State<AvatecPage> {
                               fontSize: 15,
                             ),
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [],
+                          ),
                         ],
                       ),
                     ),
-                    onTap: () {},
                   ),
                 ),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: 361,
-                  height: 111,
-                  child: OutlineGradientButton(
-                    radius: const Radius.circular(12),
-                    strokeWidth: 1,
-                    gradient: const LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+                  height: 100,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      border: GradientBoxBorder(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF981DB9),
+                            Color(0xFF0F76CE),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
                     ),
                     child: const Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          SizedBox(height: 5),
                           Text(
-                            'Avaliação - Passe na frente',
+                            'Avaliação - O atleta está concentrado?',
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'OUTFIT',
@@ -370,10 +557,13 @@ class _AvatecPageState extends State<AvatecPage> {
                               fontSize: 15,
                             ),
                           ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [],
+                          ),
                         ],
                       ),
                     ),
-                    onTap: () {},
                   ),
                 ),
               ],

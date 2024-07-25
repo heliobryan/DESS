@@ -52,11 +52,11 @@ class _HealthPageState extends State<HealthPage> {
           const GradientBack(),
           Center(
             child: ListView(
-              children: const [
+              children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Lesões ou Fraturas',
                       style: TextStyle(
                         color: Colors.white,
@@ -65,15 +65,454 @@ class _HealthPageState extends State<HealthPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 25),
-                    HealthCard1(),
-                    SizedBox(height: 25),
-                    HealthCard1(),
-                    SizedBox(height: 25),
-                    HealthCard1(),
-                    SizedBox(height: 25),
-                    HealthCard2(),
-                    SizedBox(height: 25),
+                    const SizedBox(height: 30),
+                    Container(
+                      width: 330,
+                      height: 129,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF981DB9),
+                              Color(0xFF0F76CE),
+                            ],
+                          ),
+                        ),
+                      ),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.transparent),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(width: 20),
+                            Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                const Text(
+                                  'Status',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: const Color(0xFFE70000),
+                                      width: 5.0,
+                                    ),
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  'Em recuperação',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 50),
+                            const Column(
+                              children: [
+                                SizedBox(height: 10),
+                                Text(
+                                  'Lesão',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'STRETCH',
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  'Entorse de Tornozelo',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  '31/03/23',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  'a 07/04/23 (7 dias)',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    Container(
+                      width: 330,
+                      height: 129,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF981DB9),
+                              Color(0xFF0F76CE),
+                            ],
+                          ),
+                        ),
+                      ),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.transparent),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(width: 20),
+                            Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                const Text(
+                                  'Status',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: const Color(0xFFE70000),
+                                      width: 5.0,
+                                    ),
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  'Em recuperação',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 50),
+                            const Column(
+                              children: [
+                                SizedBox(height: 10),
+                                Text(
+                                  'Lesão',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'STRETCH',
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  'Entorse de Tornozelo',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  '31/03/23',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  'a 07/04/23 (7 dias)',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    Container(
+                      width: 330,
+                      height: 129,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF981DB9),
+                              Color(0xFF0F76CE),
+                            ],
+                          ),
+                        ),
+                      ),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.transparent),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(width: 20),
+                            Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                const Text(
+                                  'Status',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: const Color(0xFFE70000),
+                                      width: 5.0,
+                                    ),
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  'Em recuperação',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 50),
+                            const Column(
+                              children: [
+                                SizedBox(height: 10),
+                                Text(
+                                  'Lesão',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'STRETCH',
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  'Entorse de Tornozelo',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  '31/03/23',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  'a 07/04/23 (7 dias)',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    Container(
+                      width: 330,
+                      height: 129,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF981DB9),
+                              Color(0xFF0F76CE),
+                            ],
+                          ),
+                        ),
+                      ),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.transparent),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(width: 20),
+                            Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                const Text(
+                                  'Status',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: const Color(0xFFE70000),
+                                      width: 5.0,
+                                    ),
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                const Text(
+                                  'Em recuperação',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 50),
+                            const Column(
+                              children: [
+                                SizedBox(height: 10),
+                                Text(
+                                  'Lesão',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'STRETCH',
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  'Entorse de Tornozelo',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  '31/03/23',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Text(
+                                  'a 07/04/23 (7 dias)',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'OUTFIT',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ],

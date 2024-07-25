@@ -1,7 +1,7 @@
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:outline_gradient_button/outline_gradient_button.dart';
+import 'package:intl/intl.dart';
 
 class PassportPage extends StatefulWidget {
   const PassportPage({super.key});
@@ -206,87 +206,107 @@ class _PassportPageState extends State<PassportPage> {
                     Radius.circular(12),
                   ),
                 ),
-                child: const Center(
-                  child: Text(
-                    'Data',
-                    style: TextStyle(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.transparent,
+                    side: const BorderSide(color: Colors.transparent),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {},
+                  child: Center(
+                    child: Text(
+                      DateFormat.yMd().format(
+                        DateTime.now(),
+                      ),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 15,
                         fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox(
+              const SizedBox(height: 30),
+              Container(
                 width: 315,
                 height: 243,
-                child: OutlineGradientButton(
-                  radius: const Radius.circular(12),
-                  strokeWidth: 1,
-                  gradient: const LinearGradient(
-                    colors: <Color>[
-                      Color(0xFF981DB9),
-                      Color(0xFF0F76CE),
-                    ],
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12),
                   ),
-                  child: const Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Dados Biológicos Atuais',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'Peso:',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'Altura:',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'Idade:',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'IMC:',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          ),
-                        ),
+                  border: GradientBoxBorder(
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        Color(0xFF981DB9),
+                        Color(0xFF0F76CE),
                       ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                     ),
                   ),
-                  onTap: () {},
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Dados Biológicos Atuais',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                          fontFamily: 'OUTFIT',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 20),
+                      Text(
+                        'Peso:',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'OUTFIT',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Altura:',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'OUTFIT',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Idade:',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'OUTFIT',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'IMC',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'OUTFIT',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
