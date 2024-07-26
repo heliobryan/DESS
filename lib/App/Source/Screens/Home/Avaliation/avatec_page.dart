@@ -444,124 +444,45 @@ class _AvatecPageState extends State<AvatecPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                SizedBox(
-                  width: 361,
-                  height: 100,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                        ),
-                      ),
-                    ),
-                    child: const Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 5),
-                          Text(
-                            'Avaliação - O atleta está concentrado?',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 20),
-                SizedBox(
-                  width: 361,
-                  height: 100,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
+                Visibility(
+                  child: SizedBox(
+                    width: 361,
+                    height: 100,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                        border: GradientBoxBorder(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF981DB9),
+                              Color(0xFF0F76CE),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                          ),
                         ),
                       ),
-                    ),
-                    child: const Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 5),
-                          Text(
-                            'Avaliação - O atleta está concentrado?',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                      child: const Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(height: 5),
+                            Text(
+                              'Avaliação - O atleta está concentrado?',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'OUTFIT',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: 361,
-                  height: 100,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [],
+                            ),
                           ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
                         ),
-                      ),
-                    ),
-                    child: const Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 5),
-                          Text(
-                            'Avaliação - O atleta está concentrado?',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [],
-                          ),
-                        ],
                       ),
                     ),
                   ),
@@ -572,5 +493,32 @@ class _AvatecPageState extends State<AvatecPage> {
         ],
       ),
     );
+  }
+}
+
+class PassPage extends StatelessWidget {
+  const PassPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold();
+  }
+}
+
+class FinalPage extends StatelessWidget {
+  const FinalPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold();
+  }
+}
+
+class ControlPage extends StatelessWidget {
+  const ControlPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold();
   }
 }
