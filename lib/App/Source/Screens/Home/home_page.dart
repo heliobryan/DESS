@@ -31,13 +31,8 @@ class _HomePageState extends State<HomePage> {
       body: _screens[currentPageIndex],
       bottomNavigationBar: Container(
           height: 56,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: <Color>[
-                Color(0xFF981DB9),
-                Color(0xFF0F76CE),
-              ],
-            ),
+          decoration: BoxDecoration(
+            gradient: gradientLk(),
           ),
           child: NavigationBarTheme(
             data: const NavigationBarThemeData(
@@ -133,13 +128,9 @@ class _Home1PageState extends State<Home1Page> {
             ),
           ),
         ],
-        title: const Text(
-          'BEM VINDDO',
-          style: TextStyle(
-            fontFamily: 'STRETCH',
-            fontSize: 20,
-            color: Colors.white,
-          ),
+        title: Text(
+          'BEM VINDO RICARDO',
+          style: comp20Str(),
         ),
       ),
       body: Stack(
@@ -157,87 +148,66 @@ class _Home1PageState extends State<Home1Page> {
                       DateFormat.MMMMEEEEd().format(
                         DateTime.now(),
                       ),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'STRETCH',
-                        fontSize: 15,
-                      ),
+                      style: comp15Str(),
                     ),
                   ],
                 ),
               ),
-              const Center(
+              Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     SizedBox(
                       width: 347,
                       height: 27,
                       child: TextField(
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp20Out(),
                         decoration: InputDecoration(
-                          prefix: Text('   '),
-                          contentPadding: EdgeInsets.all(1),
-                          suffixIcon: Icon(
+                          prefix: const Text('   '),
+                          contentPadding: const EdgeInsets.all(1),
+                          suffixIcon: const Icon(
                             Icons.search,
                             color: Color(0xFF0F76CE),
                           ),
                           border: GradientOutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(9)),
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(9)),
+                            gradient: gradientLk(),
                             width: 1,
                           ),
                           focusedBorder: GradientOutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8)),
-                            gradient: LinearGradient(
-                              colors: <Color>[
-                                Color(0xFF981DB9),
-                                Color(0xFF0F76CE),
-                              ],
-                            ),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                            gradient: gradientLk(),
                             width: 1,
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       'Alunos',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'STRETCH',
-                        fontSize: 18,
-                      ),
+                      style: comp20Str(),
                     ),
-                    SizedBox(height: 20),
-                    CardPlayer(),
-                    SizedBox(height: 20),
-                    CardPlayer(),
-                    SizedBox(height: 20),
-                    CardPlayer(),
-                    SizedBox(height: 20),
-                    CardPlayer(),
-                    SizedBox(height: 20),
-                    CardPlayer(),
-                    SizedBox(height: 20),
-                    CardPlayer(),
-                    SizedBox(height: 20),
-                    CardPlayer(),
-                    SizedBox(height: 20),
-                    CardPlayer(),
-                    SizedBox(height: 20),
-                    CardPlayer(),
+                    const SizedBox(height: 20),
+                    const CardPlayer(),
+                    const SizedBox(height: 20),
+                    const CardPlayer(),
+                    const SizedBox(height: 20),
+                    const CardPlayer(),
+                    const SizedBox(height: 20),
+                    const CardPlayer(),
+                    const SizedBox(height: 20),
+                    const CardPlayer(),
+                    const SizedBox(height: 20),
+                    const CardPlayer(),
+                    const SizedBox(height: 20),
+                    const CardPlayer(),
+                    const SizedBox(height: 20),
+                    const CardPlayer(),
+                    const SizedBox(height: 20),
+                    const CardPlayer(),
                   ],
                 ),
               ),

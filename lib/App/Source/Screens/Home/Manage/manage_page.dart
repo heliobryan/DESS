@@ -25,23 +25,15 @@ class _ManagePageState extends State<ManagePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(width: 115),
-                  const Column(
+                  Column(
                     children: [
                       Text(
                         'Gestão de',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'STRETCH',
-                        ),
+                        style: comp20Str(),
                       ),
                       Text(
                         'Carreira',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'STRETCH',
-                        ),
+                        style: comp20Str(),
                       ),
                     ],
                   ),
@@ -67,17 +59,12 @@ class _ManagePageState extends State<ManagePage> {
                   Container(
                     width: 330,
                     height: 129,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                       border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
+                        gradient: gradientLk(),
                       ),
                     ),
                     child: Center(
@@ -92,30 +79,20 @@ class _ManagePageState extends State<ManagePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(height: 20),
-                              const Text(
+                              Text(
                                 'Gestão de Imagem',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'OUTFIT',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: comp20Out(),
                               ),
                               const SizedBox(height: 10),
                               Container(
                                 width: 193,
                                 height: 23,
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.all(
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(12),
                                   ),
                                   border: GradientBoxBorder(
-                                    gradient: LinearGradient(
-                                      colors: <Color>[
-                                        Color(0xFF981DB9),
-                                        Color(0xFF0F76CE),
-                                      ],
-                                    ),
+                                    gradient: gradientLk(),
                                   ),
                                 ),
                                 child: OutlinedButton(
@@ -127,14 +104,9 @@ class _ManagePageState extends State<ManagePage> {
                                     context,
                                     'imageManagePage',
                                   ),
-                                  child: const Text(
+                                  child: Text(
                                     'Melhores desempenhos',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'OUTFIT',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: comp15Out(),
                                   ),
                                 ),
                               ),
@@ -148,17 +120,12 @@ class _ManagePageState extends State<ManagePage> {
                   Container(
                     width: 330,
                     height: 129,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                       border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
+                        gradient: gradientLk(),
                       ),
                     ),
                     child: Center(
@@ -173,30 +140,20 @@ class _ManagePageState extends State<ManagePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(height: 20),
-                              const Text(
+                              Text(
                                 'Competições',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'OUTFIT',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: comp20Out(),
                               ),
                               const SizedBox(height: 10),
                               Container(
                                 width: 193,
                                 height: 23,
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.all(
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(12),
                                   ),
                                   border: GradientBoxBorder(
-                                    gradient: LinearGradient(
-                                      colors: <Color>[
-                                        Color(0xFF981DB9),
-                                        Color(0xFF0F76CE),
-                                      ],
-                                    ),
+                                    gradient: gradientLk(),
                                   ),
                                 ),
                                 child: OutlinedButton(
@@ -206,14 +163,9 @@ class _ManagePageState extends State<ManagePage> {
                                   ),
                                   onPressed: () =>
                                       Navigator.pushNamed(context, 'compPage'),
-                                  child: const Text(
+                                  child: Text(
                                     'Já foram jogadas',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'OUTFIT',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: comp15Out(),
                                   ),
                                 ),
                               ),
@@ -227,17 +179,12 @@ class _ManagePageState extends State<ManagePage> {
                   Container(
                     width: 330,
                     height: 129,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                       border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
+                        gradient: gradientLk(),
                       ),
                     ),
                     child: Center(
@@ -252,30 +199,20 @@ class _ManagePageState extends State<ManagePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(height: 20),
-                              const Text(
+                              Text(
                                 'Patrocinío',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'OUTFIT',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: comp20Out(),
                               ),
                               const SizedBox(height: 10),
                               Container(
                                 width: 193,
                                 height: 23,
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.all(
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(12),
                                   ),
                                   border: GradientBoxBorder(
-                                    gradient: LinearGradient(
-                                      colors: <Color>[
-                                        Color(0xFF981DB9),
-                                        Color(0xFF0F76CE),
-                                      ],
-                                    ),
+                                    gradient: gradientLk(),
                                   ),
                                 ),
                                 child: OutlinedButton(
@@ -285,14 +222,9 @@ class _ManagePageState extends State<ManagePage> {
                                   ),
                                   onPressed: () => Navigator.pushNamed(
                                       context, 'sponsorPage'),
-                                  child: const Text(
+                                  child: Text(
                                     'Propostas',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'OUTFIT',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: comp15Out(),
                                   ),
                                 ),
                               ),
@@ -306,17 +238,12 @@ class _ManagePageState extends State<ManagePage> {
                   Container(
                     width: 330,
                     height: 129,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                       border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
+                        gradient: gradientLk(),
                       ),
                     ),
                     child: Center(
@@ -331,30 +258,20 @@ class _ManagePageState extends State<ManagePage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const SizedBox(height: 20),
-                              const Text(
+                              Text(
                                 'Saúde',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'OUTFIT',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: comp20Out(),
                               ),
                               const SizedBox(height: 10),
                               Container(
                                 width: 193,
                                 height: 23,
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.all(
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
                                     Radius.circular(12),
                                   ),
                                   border: GradientBoxBorder(
-                                    gradient: LinearGradient(
-                                      colors: <Color>[
-                                        Color(0xFF981DB9),
-                                        Color(0xFF0F76CE),
-                                      ],
-                                    ),
+                                    gradient: gradientLk(),
                                   ),
                                 ),
                                 child: OutlinedButton(
@@ -364,14 +281,9 @@ class _ManagePageState extends State<ManagePage> {
                                   ),
                                   onPressed: () => Navigator.pushNamed(
                                       context, 'healthPage'),
-                                  child: const Text(
+                                  child: Text(
                                     'Lesões ou Fraturas',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'OUTFIT',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: comp15Out(),
                                   ),
                                 ),
                               ),

@@ -16,23 +16,13 @@ class Form1Page extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'QUAL ESPORTE',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'STRETCH',
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: comp20Str(),
                 ),
-                const Text(
+                Text(
                   'VOCÊ DA TREINO?',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'STRETCH',
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: comp20Str(),
                 ),
                 const SizedBox(height: 10),
                 IconButton(
@@ -49,13 +39,9 @@ class Form1Page extends StatelessWidget {
                   onPressed: () {},
                 ),
                 const SizedBox(height: 5),
-                const Text(
+                Text(
                   'FUTEBOL',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontFamily: 'STRETCH',
-                  ),
+                  style: comp15Str(),
                 ),
                 const SizedBox(height: 5),
                 IconButton(
@@ -72,13 +58,9 @@ class Form1Page extends StatelessWidget {
                   onPressed: () {},
                 ),
                 const SizedBox(height: 5),
-                const Text(
+                Text(
                   'BASQUETE',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontFamily: 'STRETCH',
-                  ),
+                  style: comp15Str(),
                 ),
                 const SizedBox(height: 5),
                 IconButton(
@@ -95,13 +77,9 @@ class Form1Page extends StatelessWidget {
                   onPressed: () {},
                 ),
                 const SizedBox(height: 5),
-                const Text(
+                Text(
                   'VÔLEI',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontFamily: 'STRETCH',
-                  ),
+                  style: comp15Str(),
                 ),
               ],
             ),
@@ -127,23 +105,13 @@ class Form2Page extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(height: 70),
-                const Text(
+                Text(
                   'QUAL ESCOLA',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'STRETCH',
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: comp20Str(),
                 ),
-                const Text(
+                Text(
                   'VOCÊ DA TREINO?',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'STRETCH',
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: comp20Str(),
                 ),
                 const SizedBox(height: 180),
                 IconButton(
@@ -159,21 +127,13 @@ class Form2Page extends StatelessWidget {
                       image: AssetImage('assets/images/vetorfla.png')),
                   onPressed: () {},
                 ),
-                const Text(
+                Text(
                   'Escola',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontFamily: 'STRETCH',
-                  ),
+                  style: comp15Str(),
                 ),
-                const Text(
+                Text(
                   'Flamengo',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontFamily: 'STRETCH',
-                  ),
+                  style: comp15Str(),
                 ),
               ],
             ),
@@ -199,23 +159,13 @@ class Form3Page extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(height: 90),
-                const Text(
+                Text(
                   'QUAL FAIXA',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'STRETCH',
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: comp20Str(),
                 ),
-                const Text(
+                Text(
                   'ÉTARIA?',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'STRETCH',
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: comp20Str(),
                 ),
                 const SizedBox(height: 90),
                 Container(
@@ -246,15 +196,10 @@ class Form3Page extends StatelessWidget {
                         color: Colors.transparent,
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         'SUB 9',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp40Out(),
                       ),
                     ),
                     onPressed: () {},
@@ -289,15 +234,10 @@ class Form3Page extends StatelessWidget {
                         color: Colors.transparent,
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         'SUB 11',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp40Out(),
                       ),
                     ),
                     onPressed: () {},
@@ -332,15 +272,10 @@ class Form3Page extends StatelessWidget {
                         color: Colors.transparent,
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         'SUB 10',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp40Out(),
                       ),
                     ),
                     onPressed: () {},
@@ -375,15 +310,10 @@ class Form3Page extends StatelessWidget {
                         color: Colors.transparent,
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         'SUB 13',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp40Out(),
                       ),
                     ),
                     onPressed: () {},

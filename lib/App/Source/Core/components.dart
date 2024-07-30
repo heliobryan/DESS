@@ -244,38 +244,28 @@ class CardPlayer extends StatelessWidget {
           ),
           side: const BorderSide(color: Colors.transparent),
         ),
-        child: const Center(
+        child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(width: 20),
-              Icon(
+              const SizedBox(width: 20),
+              const Icon(
                 Icons.account_circle_outlined,
                 color: Colors.white,
                 size: 40,
               ),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     'Gabriel Henrique Almeida',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp15Out(),
                   ),
                   Text(
                     'Atacante - Sub 13 - Society',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp15Out(),
                   ),
                 ],
               ),
@@ -304,27 +294,17 @@ class CompCard extends StatelessWidget {
             size: 40,
           ),
           const SizedBox(width: 10),
-          const Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 'Jogos escolares de',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontFamily: 'OUTFIT',
-                  fontWeight: FontWeight.bold,
-                ),
+                style: comp13Out(),
               ),
               Text(
                 'Minas Gerais - Jemg',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontFamily: 'OUTFIT',
-                  fontWeight: FontWeight.bold,
-                ),
+                style: comp13Out(),
               ),
             ],
           ),
@@ -346,14 +326,9 @@ class CompCard extends StatelessWidget {
               ),
             ),
             child: TextButton(
-              child: const Text(
+              child: Text(
                 'Programação',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 10,
-                  fontFamily: 'OUTFIT',
-                  fontWeight: FontWeight.bold,
-                ),
+                style: comp10Out(),
               ),
               onPressed: () => Navigator.pushNamed(context, 'infoPage'),
             ),
@@ -376,14 +351,9 @@ class CompCard extends StatelessWidget {
               ),
             ),
             child: TextButton(
-              child: const Text(
+              child: Text(
                 'Listas',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 11,
-                  fontFamily: 'OUTFIT',
-                  fontWeight: FontWeight.bold,
-                ),
+                style: comp11Out(),
               ),
               onPressed: () {},
             ),
@@ -407,13 +377,9 @@ class _ExitButtonState extends State<ExitButton> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text(
+      title: Text(
         'Tem certeza que deseja sair?',
-        style: TextStyle(
-          color: Colors.black,
-          fontFamily: 'STRETCH',
-          fontSize: 20,
-        ),
+        style: comp20(),
       ),
       actions: <Widget>[
         Row(
@@ -429,14 +395,9 @@ class _ExitButtonState extends State<ExitButton> {
                   backgroundColor: const Color(0xFF0F76CE),
                 ),
                 onPressed: () => Navigator.pop(context),
-                child: const Text(
+                child: Text(
                   'Não',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'OUTFIT',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: comp16Out(),
                 ),
               ),
             ),
@@ -454,14 +415,9 @@ class _ExitButtonState extends State<ExitButton> {
                 onPressed: () {
                   signOut();
                 },
-                child: const Text(
+                child: Text(
                   'Sim',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'OUTFIT',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: comp16Out(),
                 ),
               ),
             ),
@@ -591,4 +547,158 @@ class _PsiCardState extends State<PsiCard> {
       ),
     );
   }
+}
+
+TextStyle comp20Str() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 20,
+    fontFamily: 'STRETCH',
+  );
+}
+
+TextStyle comp25Str() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 25,
+    fontFamily: 'STRETCH',
+  );
+}
+
+TextStyle comp15Str() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 15,
+    fontFamily: 'STRETCH',
+  );
+}
+
+TextStyle comp9Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 9,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle comp16Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 15,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle comp15Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 15,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle comp25Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 25,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle comp13Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 13,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle comp10Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 10,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle comp11Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 11,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle comp12Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 12,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle comp20Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 20,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle comp20() {
+  return const TextStyle(
+    color: Colors.black,
+    fontSize: 20,
+    fontFamily: 'STRETCH',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+TextStyle comp40Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 40,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
+LinearGradient gradientLk() {
+  return const LinearGradient(
+    colors: <Color>[
+      Color(0xFF981DB9),
+      Color(0xFF0F76CE),
+    ],
+  );
+}
+
+LinearGradient gradientCenter() {
+  return const LinearGradient(
+    colors: <Color>[
+      Color(0xFF981DB9),
+      Color(0xFF0F76CE),
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+}
+
+LinearGradient gradientDD() {
+  return const LinearGradient(
+    colors: <Color>[
+      Color(0xFF981DB9),
+      Color(0xFF0F76CE),
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }

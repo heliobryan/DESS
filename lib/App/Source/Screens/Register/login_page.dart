@@ -39,14 +39,9 @@ class _LoginPageState extends State<LoginPage> {
                     Column(
                       children: [
                         const SizedBox(height: 15),
-                        const Text(
+                        Text(
                           'Não possui uma conta?',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: comp16Out(),
                         ),
                         TextButton(
                           child: const Text(
@@ -182,13 +177,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           backgroundColor: const Color(0xFF981DB9),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Entrar ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold),
+                          style: comp16Out(),
                         ),
                         onPressed: () {
                           userLogin();
@@ -196,22 +187,17 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image(
+                        const Image(
                           image: AssetImage('assets/images/line.png'),
                         ),
                         Text(
                           '   Ou   ',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: comp16Out(),
                         ),
-                        Image(
+                        const Image(
                           image: AssetImage('assets/images/line.png'),
                         ),
                       ],

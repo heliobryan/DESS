@@ -38,13 +38,9 @@ class _HealthPageState extends State<HealthPage> {
         ],
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        title: const Text(
+        title: Text(
           'Saúde',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontFamily: 'STRETCH',
-          ),
+          style: comp20Str(),
         ),
       ),
       body: Stack(
@@ -56,30 +52,20 @@ class _HealthPageState extends State<HealthPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'Lesões ou Fraturas',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OUTFIT',
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: comp20Out(),
                     ),
                     const SizedBox(height: 30),
                     Container(
                       width: 330,
                       height: 129,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
                       ),
                       child: OutlinedButton(
@@ -97,14 +83,9 @@ class _HealthPageState extends State<HealthPage> {
                             Column(
                               children: [
                                 const SizedBox(height: 10),
-                                const Text(
+                                Text(
                                   'Status',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: comp13Out(),
                                 ),
                                 const SizedBox(height: 5),
                                 Container(
@@ -120,56 +101,32 @@ class _HealthPageState extends State<HealthPage> {
                                   ),
                                 ),
                                 const SizedBox(height: 5),
-                                const Text(
+                                Text(
                                   'Em recuperação',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: comp10Out(),
                                 ),
                               ],
                             ),
                             const SizedBox(width: 50),
-                            const Column(
+                            Column(
                               children: [
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   'Lesão',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'STRETCH',
-                                    fontSize: 20,
-                                  ),
+                                  style: comp20Out(),
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Text(
                                   'Entorse de Tornozelo',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                                 Text(
                                   '31/03/23',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                                 Text(
                                   'a 07/04/23 (7 dias)',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                               ],
                             ),
@@ -181,17 +138,12 @@ class _HealthPageState extends State<HealthPage> {
                     Container(
                       width: 330,
                       height: 129,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
                       ),
                       child: OutlinedButton(
@@ -209,14 +161,9 @@ class _HealthPageState extends State<HealthPage> {
                             Column(
                               children: [
                                 const SizedBox(height: 10),
-                                const Text(
+                                Text(
                                   'Status',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: comp13Out(),
                                 ),
                                 const SizedBox(height: 5),
                                 Container(
@@ -232,56 +179,32 @@ class _HealthPageState extends State<HealthPage> {
                                   ),
                                 ),
                                 const SizedBox(height: 5),
-                                const Text(
+                                Text(
                                   'Em recuperação',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: comp10Out(),
                                 ),
                               ],
                             ),
                             const SizedBox(width: 50),
-                            const Column(
+                            Column(
                               children: [
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   'Lesão',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'STRETCH',
-                                    fontSize: 20,
-                                  ),
+                                  style: comp20Str(),
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Text(
                                   'Entorse de Tornozelo',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                                 Text(
                                   '31/03/23',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                                 Text(
                                   'a 07/04/23 (7 dias)',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                               ],
                             ),
@@ -293,17 +216,12 @@ class _HealthPageState extends State<HealthPage> {
                     Container(
                       width: 330,
                       height: 129,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
                       ),
                       child: OutlinedButton(
@@ -321,14 +239,9 @@ class _HealthPageState extends State<HealthPage> {
                             Column(
                               children: [
                                 const SizedBox(height: 10),
-                                const Text(
+                                Text(
                                   'Status',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: comp13Out(),
                                 ),
                                 const SizedBox(height: 5),
                                 Container(
@@ -344,56 +257,32 @@ class _HealthPageState extends State<HealthPage> {
                                   ),
                                 ),
                                 const SizedBox(height: 5),
-                                const Text(
+                                Text(
                                   'Em recuperação',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: comp10Out(),
                                 ),
                               ],
                             ),
                             const SizedBox(width: 50),
-                            const Column(
+                            Column(
                               children: [
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   'Lesão',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'STRETCH',
-                                    fontSize: 20,
-                                  ),
+                                  style: comp20Str(),
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Text(
                                   'Entorse de Tornozelo',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                                 Text(
                                   '31/03/23',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                                 Text(
                                   'a 07/04/23 (7 dias)',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                               ],
                             ),
@@ -405,17 +294,12 @@ class _HealthPageState extends State<HealthPage> {
                     Container(
                       width: 330,
                       height: 129,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
                       ),
                       child: OutlinedButton(
@@ -433,14 +317,9 @@ class _HealthPageState extends State<HealthPage> {
                             Column(
                               children: [
                                 const SizedBox(height: 10),
-                                const Text(
+                                Text(
                                   'Status',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: comp13Out(),
                                 ),
                                 const SizedBox(height: 5),
                                 Container(
@@ -456,56 +335,29 @@ class _HealthPageState extends State<HealthPage> {
                                   ),
                                 ),
                                 const SizedBox(height: 5),
-                                const Text(
+                                Text(
                                   'Em recuperação',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 10,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: comp10Out(),
                                 ),
                               ],
                             ),
                             const SizedBox(width: 50),
-                            const Column(
+                            Column(
                               children: [
-                                SizedBox(height: 10),
-                                Text(
-                                  'Lesão',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'STRETCH',
-                                    fontSize: 20,
-                                  ),
-                                ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 10),
+                                Text('Lesão', style: comp20Str()),
+                                const SizedBox(height: 5),
                                 Text(
                                   'Entorse de Tornozelo',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                                 Text(
                                   '31/03/23',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                                 Text(
                                   'a 07/04/23 (7 dias)',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  ),
+                                  style: comp15Out(),
                                 ),
                               ],
                             ),

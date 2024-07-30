@@ -35,25 +35,16 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'CADASTRE-SE',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontFamily: 'STRETCH',
-                      ),
+                      style: comp20Str(),
                     ),
                     Column(
                       children: [
                         const SizedBox(height: 15),
-                        const Text(
+                        Text(
                           'Já possui uma conta?',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: comp16Out(),
                         ),
                         TextButton(
                           child: const Text(
@@ -282,13 +273,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           backgroundColor: const Color(0xFF981DB9),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Entrar ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold),
+                          style: comp16Out(),
                         ),
                         onPressed: () {
                           userRegister();
@@ -296,22 +283,17 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image(
+                        const Image(
                           image: AssetImage('assets/images/line.png'),
                         ),
                         Text(
                           '   Ou   ',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: comp16Out(),
                         ),
-                        Image(
+                        const Image(
                           image: AssetImage('assets/images/line.png'),
                         ),
                       ],

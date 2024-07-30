@@ -38,13 +38,9 @@ class _AvaliationPageState extends State<AvaliationPage> {
           ),
         ],
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Avaliações',
-          style: TextStyle(
-            fontFamily: 'STRETCH',
-            fontSize: 20,
-            color: Colors.white,
-          ),
+          style: comp20Str(),
         ),
       ),
       body: Stack(
@@ -58,17 +54,12 @@ class _AvaliationPageState extends State<AvaliationPage> {
                 Container(
                   width: 315,
                   height: 50,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(12),
                     ),
                     border: GradientBoxBorder(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Color(0xFF981DB9),
-                          Color(0xFF0F76CE),
-                        ],
-                      ),
+                      gradient: gradientLk(),
                     ),
                   ),
                   child: OutlinedButton(
@@ -84,26 +75,21 @@ class _AvaliationPageState extends State<AvaliationPage> {
                       ),
                     ),
                     onPressed: () => Navigator.pushNamed(context, 'avatecPage'),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 5),
-                          Icon(
+                          const SizedBox(width: 5),
+                          const Icon(
                             Icons.sports_soccer,
                             color: Colors.white,
                             size: 25,
                           ),
-                          SizedBox(width: 60),
+                          const SizedBox(width: 60),
                           Text(
                             'Técnica',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: comp25Out(),
                           ),
                         ],
                       ),
@@ -114,17 +100,12 @@ class _AvaliationPageState extends State<AvaliationPage> {
                 Container(
                   width: 315,
                   height: 50,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(12),
                     ),
                     border: GradientBoxBorder(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Color(0xFF981DB9),
-                          Color(0xFF0F76CE),
-                        ],
-                      ),
+                      gradient: gradientLk(),
                     ),
                   ),
                   child: OutlinedButton(
@@ -140,26 +121,21 @@ class _AvaliationPageState extends State<AvaliationPage> {
                       ),
                     ),
                     onPressed: () => Navigator.pushNamed(context, 'avapsiPage'),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 5),
-                          ImageIcon(
+                          const SizedBox(width: 5),
+                          const ImageIcon(
                             AssetImage('assets/images/neurology.png'),
                             color: Colors.white,
                             size: 20,
                           ),
-                          SizedBox(width: 50),
+                          const SizedBox(width: 50),
                           Text(
                             'Psicológica',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: comp25Out(),
                           ),
                         ],
                       ),
@@ -170,17 +146,12 @@ class _AvaliationPageState extends State<AvaliationPage> {
                 Container(
                   width: 315,
                   height: 50,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(12),
                     ),
                     border: GradientBoxBorder(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Color(0xFF981DB9),
-                          Color(0xFF0F76CE),
-                        ],
-                      ),
+                      gradient: gradientLk(),
                     ),
                   ),
                   child: OutlinedButton(
@@ -196,26 +167,21 @@ class _AvaliationPageState extends State<AvaliationPage> {
                       ),
                     ),
                     onPressed: () => Navigator.pushNamed(context, 'avafisPage'),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 5),
-                          ImageIcon(
+                          const SizedBox(width: 5),
+                          const ImageIcon(
                             AssetImage('assets/images/exercise.png'),
                             color: Colors.white,
                             size: 20,
                           ),
-                          SizedBox(width: 75),
+                          const SizedBox(width: 75),
                           Text(
                             'Física',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: comp25Out(),
                           ),
                         ],
                       ),
@@ -226,17 +192,12 @@ class _AvaliationPageState extends State<AvaliationPage> {
                 Container(
                   width: 315,
                   height: 50,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(12),
                     ),
                     border: GradientBoxBorder(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Color(0xFF981DB9),
-                          Color(0xFF0F76CE),
-                        ],
-                      ),
+                      gradient: gradientLk(),
                     ),
                   ),
                   child: OutlinedButton(
@@ -252,26 +213,21 @@ class _AvaliationPageState extends State<AvaliationPage> {
                       ),
                     ),
                     onPressed: () => Navigator.pushNamed(context, 'avatatPage'),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(width: 5),
-                          ImageIcon(
+                          const SizedBox(width: 5),
+                          const ImageIcon(
                             AssetImage('assets/images/sprint.png'),
                             color: Colors.white,
                             size: 20,
                           ),
-                          SizedBox(width: 70),
+                          const SizedBox(width: 70),
                           Text(
                             'Tática',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontFamily: 'OUTFIT',
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: comp25Out(),
                           ),
                         ],
                       ),

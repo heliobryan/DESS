@@ -32,23 +32,15 @@ class _ImageManagePageState extends State<ImageManagePage> {
                     onPressed: () => Navigator.pop(context, 'managePage'),
                   ),
                   const SizedBox(width: 70),
-                  const Column(
+                  Column(
                     children: [
                       Text(
                         'Gestão de',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'STRETCH',
-                        ),
+                        style: comp20Str(),
                       ),
                       Text(
                         'Imagem',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'STRETCH',
-                        ),
+                        style: comp20Str(),
                       ),
                     ],
                   ),
@@ -67,127 +59,107 @@ class _ImageManagePageState extends State<ImageManagePage> {
                 ],
               ),
               const SizedBox(height: 5),
-              const Text(
+              Text(
                 'Melhores desempenhos',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontFamily: 'OUTFIT',
-                  fontWeight: FontWeight.bold,
-                ),
+                style: comp20Out(),
               ),
               const SizedBox(height: 130),
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.account_circle_outlined,
                         color: Colors.white,
                         size: 35,
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
                         'Artilheiro - Jogos Escolares de Minas Gerais',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp13Out(),
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Image(image: AssetImage('assets/images/gradientline.png')),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
+                  const Image(
+                      image: AssetImage('assets/images/gradientline.png')),
+                  const SizedBox(height: 10),
                 ],
               ),
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.account_circle_outlined,
                         color: Colors.white,
                         size: 35,
                       ),
-                      SizedBox(width: 6),
+                      const SizedBox(width: 6),
                       Text(
                         'Melhor Jogador da Final - Copa da Amizade',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp13Out(),
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Image(image: AssetImage('assets/images/gradientline.png')),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
+                  const Image(
+                      image: AssetImage('assets/images/gradientline.png')),
+                  const SizedBox(height: 10),
                 ],
               ),
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.account_circle_outlined,
                         color: Colors.white,
                         size: 35,
                       ),
-                      SizedBox(width: 13),
+                      const SizedBox(width: 13),
                       Text(
                         'Artilheiro - Copa Menino Maluquinho',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp13Out(),
                       ),
-                      SizedBox(width: 40),
+                      const SizedBox(width: 40),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Image(image: AssetImage('assets/images/gradientline.png')),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
+                  const Image(
+                    image: AssetImage('assets/images/gradientline.png'),
+                  ),
+                  const SizedBox(height: 10),
                 ],
               ),
-              const Column(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.account_circle_outlined,
                         color: Colors.white,
                         size: 35,
                       ),
-                      SizedBox(width: 6),
+                      const SizedBox(width: 6),
                       Text(
                         'Melhor Jogador da Final - Copa da Amizade',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp13Out(),
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Image(image: AssetImage('assets/images/gradientline.png')),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
+                  const Image(
+                      image: AssetImage('assets/images/gradientline.png')),
+                  const SizedBox(height: 10),
                 ],
               ),
             ],

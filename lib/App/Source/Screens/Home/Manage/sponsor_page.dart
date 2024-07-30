@@ -37,13 +37,9 @@ class _SponsorPageState extends State<SponsorPage> {
         ],
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        title: const Text(
+        title: Text(
           'Patrocínio',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontFamily: 'STRETCH',
-          ),
+          style: comp20Str(),
         ),
       ),
       body: Stack(
@@ -53,37 +49,27 @@ class _SponsorPageState extends State<SponsorPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
-              const Text(
+              Text(
                 'Propostas',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontFamily: 'OUTFIT',
-                  fontWeight: FontWeight.bold,
-                ),
+                style: comp20Out(),
               ),
               const SizedBox(height: 120),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(width: 50),
-                      Icon(
+                      const SizedBox(width: 50),
+                      const Icon(
                         Icons.account_circle_outlined,
                         color: Colors.white,
                         size: 35,
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
                         'Adidas',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp13Out(),
                       ),
                     ],
                   ),
@@ -92,24 +78,19 @@ class _SponsorPageState extends State<SponsorPage> {
                     image: AssetImage('assets/images/gradientline.png'),
                   ),
                   const SizedBox(height: 15),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(width: 50),
-                      Icon(
+                      const SizedBox(width: 50),
+                      const Icon(
                         Icons.account_circle_outlined,
                         color: Colors.white,
                         size: 35,
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
                         'Adidas',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp13Out(),
                       ),
                     ],
                   ),
@@ -117,24 +98,19 @@ class _SponsorPageState extends State<SponsorPage> {
                   const Image(
                       image: AssetImage('assets/images/gradientline.png')),
                   const SizedBox(height: 15),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(width: 50),
-                      Icon(
+                      const SizedBox(width: 50),
+                      const Icon(
                         Icons.account_circle_outlined,
                         color: Colors.white,
                         size: 35,
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
                         'Adidas',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp13Out(),
                       ),
                     ],
                   ),
@@ -143,24 +119,19 @@ class _SponsorPageState extends State<SponsorPage> {
                     image: AssetImage('assets/images/gradientline.png'),
                   ),
                   const SizedBox(height: 15),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(width: 50),
-                      Icon(
+                      const SizedBox(width: 50),
+                      const Icon(
                         Icons.account_circle_outlined,
                         color: Colors.white,
                         size: 35,
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Text(
                         'Adidas',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OUTFIT',
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp13Out(),
                       ),
                     ],
                   ),
@@ -169,16 +140,11 @@ class _SponsorPageState extends State<SponsorPage> {
                     child: Container(
                       height: 40,
                       width: 335,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
+                        gradient: gradientLk(),
                       ),
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
@@ -188,14 +154,9 @@ class _SponsorPageState extends State<SponsorPage> {
                             color: Colors.transparent,
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           'Salvar',
-                          style: TextStyle(
-                            fontFamily: 'OUTFIT',
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                          style: comp25Out(),
                         ),
                         onPressed: () {},
                       ),

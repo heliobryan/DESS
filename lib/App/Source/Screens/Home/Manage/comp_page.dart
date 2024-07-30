@@ -41,41 +41,32 @@ class _CompPageState extends State<CompPage> {
         ],
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        title: const Text(
+        title: Text(
           'Competições',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontFamily: 'STRETCH',
-          ),
+          style: comp20Str(),
         ),
       ),
       backgroundColor: const Color(0xFF1E1E1E),
-      body: const Stack(
+      body: Stack(
         children: [
-          GradientBack(),
+          const GradientBack(),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Jogadas',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp20Out(),
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              CompCard(),
-              SizedBox(height: 10),
-              Row(
+              const SizedBox(height: 20),
+              const CompCard(),
+              const SizedBox(height: 10),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
@@ -83,10 +74,10 @@ class _CompPageState extends State<CompPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              CompCard(),
-              SizedBox(height: 10),
-              Row(
+              const SizedBox(height: 20),
+              const CompCard(),
+              const SizedBox(height: 10),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
@@ -94,10 +85,10 @@ class _CompPageState extends State<CompPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              CompCard(),
-              SizedBox(height: 10),
-              Row(
+              const SizedBox(height: 20),
+              const CompCard(),
+              const SizedBox(height: 10),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
@@ -105,10 +96,10 @@ class _CompPageState extends State<CompPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              CompCard(),
-              SizedBox(height: 10),
-              Row(
+              const SizedBox(height: 20),
+              const CompCard(),
+              const SizedBox(height: 10),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
@@ -116,10 +107,10 @@ class _CompPageState extends State<CompPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              CompCard(),
-              SizedBox(height: 10),
-              Row(
+              const SizedBox(height: 20),
+              const CompCard(),
+              const SizedBox(height: 10),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
@@ -127,10 +118,10 @@ class _CompPageState extends State<CompPage> {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              CompCard(),
-              SizedBox(height: 10),
-              Row(
+              const SizedBox(height: 20),
+              const CompCard(),
+              const SizedBox(height: 10),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image(
@@ -185,17 +176,12 @@ class InfoPage extends StatelessWidget {
                 Container(
                   width: 296,
                   height: 54,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(38),
                     ),
                     border: GradientBoxBorder(
-                      gradient: LinearGradient(
-                        colors: <Color>[
-                          Color(0xFF981DB9),
-                          Color(0xFF0F76CE),
-                        ],
-                      ),
+                      gradient: gradientLk(),
                     ),
                   ),
                   child: Center(
@@ -213,36 +199,22 @@ class InfoPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Text(
+                Text(
                   'Local do Evento',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'STRETCH',
-                    fontSize: 25,
-                  ),
+                  style: comp20Str(),
                 ),
                 const SizedBox(height: 20),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 10),
-                    const Text(
+                    Text(
                       'Jogos escolares de',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: comp20Out(),
                     ),
-                    const Text(
+                    Text(
                       'Minas Gerais - Jemg',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: comp20Out(),
                     ),
                     const SizedBox(height: 30),
                     GradientText(
@@ -258,78 +230,39 @@ class InfoPage extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    const Text(
+                    Text(
                       'Rua do Lazer, 789',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: comp20Out(),
                     ),
-                    const Text(
+                    Text(
                       'Bairro Vila Alegre',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: comp20Out(),
                     ),
-                    const Text(
+                    Text(
                       'Cidade: Belo Horizonte',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: comp20Out(),
                     ),
-                    const Text(
+                    Text(
                       'Estado: MG',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: comp20Out(),
                     ),
-                    const Text(
+                    Text(
                       'CEP: 34567-890',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: comp20Out(),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
+                    Text(
                       'Data e Horário',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'STRETCH',
-                        fontSize: 25,
-                      ),
+                      style: comp20Str(),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
+                    Text(
                       '03/06/23',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: comp20Out(),
                     ),
-                    const Text(
+                    Text(
                       '18h',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: comp20Out(),
                     ),
                   ],
                 ),

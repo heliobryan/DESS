@@ -27,13 +27,9 @@ class _PassportPageState extends State<PassportPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(width: 90),
-                  const Text(
+                  Text(
                     'Passaporte B.',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'STRETCH',
-                    ),
+                    style: comp20Str(),
                   ),
                   const SizedBox(width: 40),
                   IconButton(
@@ -53,16 +49,11 @@ class _PassportPageState extends State<PassportPage> {
               Container(
                 width: 112,
                 height: 110,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: GradientBoxBorder(
                     width: 3,
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
                 ),
                 child: const Icon(
@@ -72,33 +63,19 @@ class _PassportPageState extends State<PassportPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              const Column(
+              Column(
                 children: [
                   Text(
                     'Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'STRETCH',
-                    ),
+                    style: comp20Str(),
                   ),
                   Text(
                     'Atacante - Sub 13 - Society',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp15Out(),
                   ),
                   Text(
                     'Escola Flamengo - Caratinga MG',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp15Out(),
                   ),
                 ],
               ),
@@ -109,81 +86,54 @@ class _PassportPageState extends State<PassportPage> {
                   Container(
                     width: 105,
                     height: 23,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
+                        gradient: gradientLk(),
                       ),
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         'Atual (Sub 13)',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold),
+                        style: comp15Out(),
                       ),
                     ),
                   ),
                   Container(
                     width: 105,
                     height: 23,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
+                        gradient: gradientLk(),
                       ),
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         'Sub 15',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold),
+                        style: comp15Out(),
                       ),
                     ),
                   ),
                   Container(
                     width: 105,
                     height: 23,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
+                        gradient: gradientLk(),
                       ),
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         'Sub 16',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontFamily: 'OUTFIT',
-                            fontWeight: FontWeight.bold),
+                        style: comp15Out(),
                       ),
                     ),
                   ),
@@ -193,16 +143,11 @@ class _PassportPageState extends State<PassportPage> {
               Container(
                 width: 149,
                 height: 23,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   border: GradientBoxBorder(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(12),
                   ),
                 ),
@@ -222,12 +167,7 @@ class _PassportPageState extends State<PassportPage> {
                       DateFormat.yMd().format(
                         DateTime.now(),
                       ),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: comp15Out(),
                     ),
                   ),
                 ),
@@ -237,73 +177,41 @@ class _PassportPageState extends State<PassportPage> {
               Container(
                 width: 315,
                 height: 243,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(12),
                   ),
                   border: GradientBoxBorder(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+                    gradient: gradientDD(),
                   ),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(8),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
                   child: Column(
                     children: [
                       Text(
                         'Dados Biológicos Atuais',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp25Out(),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Text(
                         'Peso:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp20Out(),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                         'Altura:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp20Out(),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                         'Idade:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp20Out(),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                         'IMC',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'OUTFIT',
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: comp20Out(),
                       ),
                     ],
                   ),

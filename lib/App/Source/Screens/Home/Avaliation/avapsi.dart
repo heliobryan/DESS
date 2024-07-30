@@ -26,13 +26,9 @@ class _AvapsiPageState extends State<AvapsiPage> {
           ),
           onPressed: () => Navigator.pop(context, 'avaliationPage'),
         ),
-        title: const Text(
+        title: Text(
           'Psicológica',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontFamily: 'STRETCH',
-          ),
+          style: comp20Str(),
         ),
         actions: [
           IconButton(
@@ -59,16 +55,11 @@ class _AvapsiPageState extends State<AvapsiPage> {
               Container(
                 width: 112,
                 height: 110,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: GradientBoxBorder(
                     width: 3,
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
                 ),
                 child: const Icon(
@@ -78,33 +69,19 @@ class _AvapsiPageState extends State<AvapsiPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              const Column(
+              Column(
                 children: [
                   Text(
                     'Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'STRETCH',
-                    ),
+                    style: comp20Str(),
                   ),
                   Text(
                     'Atacante - Sub 13 - Society',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp15Out(),
                   ),
                   Text(
                     'Escola Flamengo - Caratinga MG',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp15Out(),
                   ),
                 ],
               ),
@@ -118,16 +95,11 @@ class _AvapsiPageState extends State<AvapsiPage> {
                     Container(
                       width: 105,
                       height: 23,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
@@ -147,13 +119,9 @@ class _AvapsiPageState extends State<AvapsiPage> {
                                   color: Colors.transparent,
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Foco',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
+                                style: comp15Out(),
                               ),
                               onPressed: () {},
                             ),
@@ -165,16 +133,11 @@ class _AvapsiPageState extends State<AvapsiPage> {
                     Container(
                       width: 105,
                       height: 23,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
@@ -194,13 +157,9 @@ class _AvapsiPageState extends State<AvapsiPage> {
                                   color: Colors.transparent,
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Confiança',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
+                                style: comp12Out(),
                               ),
                               onPressed: () {},
                             ),
@@ -212,16 +171,11 @@ class _AvapsiPageState extends State<AvapsiPage> {
                     Container(
                       width: 105,
                       height: 23,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
@@ -241,13 +195,9 @@ class _AvapsiPageState extends State<AvapsiPage> {
                                   color: Colors.transparent,
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Resiliência',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 9,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
+                                style: comp9Out(),
                               ),
                               onPressed: () {},
                             ),
@@ -259,16 +209,11 @@ class _AvapsiPageState extends State<AvapsiPage> {
                     Container(
                       width: 105,
                       height: 23,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
@@ -288,13 +233,9 @@ class _AvapsiPageState extends State<AvapsiPage> {
                                   color: Colors.transparent,
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Respeito',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
+                                style: comp13Out(),
                               ),
                               onPressed: () {},
                             ),
@@ -306,16 +247,11 @@ class _AvapsiPageState extends State<AvapsiPage> {
                     Container(
                       width: 105,
                       height: 23,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
@@ -335,13 +271,9 @@ class _AvapsiPageState extends State<AvapsiPage> {
                                   color: Colors.transparent,
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Humildade',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
+                                style: comp12Out(),
                               ),
                               onPressed: () {},
                             ),
@@ -356,16 +288,11 @@ class _AvapsiPageState extends State<AvapsiPage> {
               Container(
                 width: 149,
                 height: 23,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   border: GradientBoxBorder(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(12),
                   ),
                 ),
@@ -385,12 +312,7 @@ class _AvapsiPageState extends State<AvapsiPage> {
                       DateFormat.yMd().format(
                         DateTime.now(),
                       ),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: comp15Out(),
                     ),
                   ),
                 ),

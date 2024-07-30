@@ -27,13 +27,9 @@ class _AvafisPageState extends State<AvafisPage> {
           ),
           onPressed: () => Navigator.pop(context, 'avaliationPage'),
         ),
-        title: const Text(
+        title: Text(
           'Física',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontFamily: 'STRETCH',
-          ),
+          style: comp20Str(),
         ),
         actions: [
           IconButton(
@@ -60,16 +56,11 @@ class _AvafisPageState extends State<AvafisPage> {
               Container(
                 width: 112,
                 height: 110,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: GradientBoxBorder(
                     width: 3,
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
                 ),
                 child: const Icon(
@@ -79,33 +70,19 @@ class _AvafisPageState extends State<AvafisPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              const Column(
+              Column(
                 children: [
                   Text(
                     'Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'STRETCH',
-                    ),
+                    style: comp25Str(),
                   ),
                   Text(
                     'Atacante - Sub 13 - Society',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp15Out(),
                   ),
                   Text(
                     'Escola Flamengo - Caratinga MG',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp15Out(),
                   ),
                 ],
               ),
@@ -119,16 +96,11 @@ class _AvafisPageState extends State<AvafisPage> {
                     Container(
                       width: 105,
                       height: 23,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
@@ -148,13 +120,9 @@ class _AvafisPageState extends State<AvafisPage> {
                                   color: Colors.transparent,
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Força',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
+                                style: comp15Out(),
                               ),
                               onPressed: () {},
                             ),
@@ -166,16 +134,11 @@ class _AvafisPageState extends State<AvafisPage> {
                     Container(
                       width: 105,
                       height: 23,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
@@ -195,13 +158,9 @@ class _AvafisPageState extends State<AvafisPage> {
                                   color: Colors.transparent,
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Velocidade',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
+                                style: comp12Out(),
                               ),
                               onPressed: () {},
                             ),
@@ -213,16 +172,11 @@ class _AvafisPageState extends State<AvafisPage> {
                     Container(
                       width: 105,
                       height: 23,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
@@ -242,13 +196,9 @@ class _AvafisPageState extends State<AvafisPage> {
                                   color: Colors.transparent,
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Flexibilidade',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 9,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
+                                style: comp9Out(),
                               ),
                               onPressed: () {},
                             ),
@@ -260,16 +210,11 @@ class _AvafisPageState extends State<AvafisPage> {
                     Container(
                       width: 105,
                       height: 23,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                          ),
+                          gradient: gradientLk(),
                         ),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
@@ -289,13 +234,9 @@ class _AvafisPageState extends State<AvafisPage> {
                                   color: Colors.transparent,
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Cabeceio',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 13,
-                                    fontFamily: 'OUTFIT',
-                                    fontWeight: FontWeight.bold),
+                                style: comp13Out(),
                               ),
                               onPressed: () {},
                             ),
@@ -310,16 +251,11 @@ class _AvafisPageState extends State<AvafisPage> {
               Container(
                 width: 149,
                 height: 23,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   border: GradientBoxBorder(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(12),
                   ),
                 ),
@@ -339,12 +275,7 @@ class _AvafisPageState extends State<AvafisPage> {
                       DateFormat.yMd().format(
                         DateTime.now(),
                       ),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: comp15Out(),
                     ),
                   ),
                 ),
@@ -353,17 +284,12 @@ class _AvafisPageState extends State<AvafisPage> {
               Container(
                 width: 361,
                 height: 92,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(12),
                   ),
                   border: GradientBoxBorder(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
                 ),
                 child: Center(
@@ -376,28 +302,18 @@ class _AvafisPageState extends State<AvafisPage> {
                         width: 50,
                       ),
                       const SizedBox(width: 50),
-                      const Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Text(
                             'Avaliação - Sprint 10M',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OUTFIT',
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: comp15Out(),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             'Sprint 10M',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OUTFIT',
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: comp15Out(),
                           ),
                         ],
                       ),
@@ -409,17 +325,12 @@ class _AvafisPageState extends State<AvafisPage> {
               Container(
                 width: 361,
                 height: 92,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(12),
                   ),
                   border: GradientBoxBorder(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
                 ),
                 child: Center(
@@ -432,28 +343,18 @@ class _AvafisPageState extends State<AvafisPage> {
                         width: 50,
                       ),
                       const SizedBox(width: 50),
-                      const Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Text(
                             'Avaliação - Teste Cooper',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OUTFIT',
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: comp15Out(),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             'Teste de Cooper',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OUTFIT',
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: comp15Out(),
                           ),
                         ],
                       ),
@@ -465,17 +366,12 @@ class _AvafisPageState extends State<AvafisPage> {
               Container(
                 width: 361,
                 height: 92,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(12),
                   ),
                   border: GradientBoxBorder(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
                 ),
                 child: Center(
@@ -488,28 +384,18 @@ class _AvafisPageState extends State<AvafisPage> {
                         width: 50,
                       ),
                       const SizedBox(width: 50),
-                      const Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Text(
                             'Avaliação - V02',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OUTFIT',
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: comp15Out(),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Text(
                             'V',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: 'OUTFIT',
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            style: comp15Out(),
                           ),
                         ],
                       ),

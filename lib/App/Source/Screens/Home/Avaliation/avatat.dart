@@ -26,13 +26,9 @@ class _AvatatPageState extends State<AvatatPage> {
           ),
           onPressed: () => Navigator.pop(context, 'avaliationPage'),
         ),
-        title: const Text(
+        title: Text(
           'Tática',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontFamily: 'STRETCH',
-          ),
+          style: comp20Str(),
         ),
         actions: [
           IconButton(
@@ -59,16 +55,11 @@ class _AvatatPageState extends State<AvatatPage> {
               Container(
                 width: 112,
                 height: 110,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: GradientBoxBorder(
                     width: 3,
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
                 ),
                 child: const Icon(
@@ -78,33 +69,19 @@ class _AvatatPageState extends State<AvatatPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              const Column(
+              Column(
                 children: [
                   Text(
                     'Name',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'STRETCH',
-                    ),
+                    style: comp20Str(),
                   ),
                   Text(
                     'Atacante - Sub 13 - Society',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp15Out(),
                   ),
                   Text(
                     'Escola Flamengo - Caratinga MG',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontFamily: 'OUTFIT',
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: comp15Out(),
                   ),
                 ],
               ),
@@ -115,16 +92,11 @@ class _AvatatPageState extends State<AvatatPage> {
                   Container(
                     width: 105,
                     height: 23,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
+                        gradient: gradientLk(),
                       ),
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                     ),
@@ -144,13 +116,9 @@ class _AvatatPageState extends State<AvatatPage> {
                                 color: Colors.transparent,
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'Estratégia',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 13,
-                                  fontFamily: 'OUTFIT',
-                                  fontWeight: FontWeight.bold),
+                              style: comp13Out(),
                             ),
                             onPressed: () {},
                           ),
@@ -161,16 +129,9 @@ class _AvatatPageState extends State<AvatatPage> {
                   Container(
                     width: 105,
                     height: 23,
-                    decoration: const BoxDecoration(
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
-                      ),
-                      borderRadius: BorderRadius.all(
+                    decoration: BoxDecoration(
+                      border: GradientBoxBorder(gradient: gradientLk()),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                     ),
@@ -190,13 +151,9 @@ class _AvatatPageState extends State<AvatatPage> {
                                 color: Colors.transparent,
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'Análise',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontFamily: 'OUTFIT',
-                                  fontWeight: FontWeight.bold),
+                              style: comp15Out(),
                             ),
                             onPressed: () {},
                           ),
@@ -207,16 +164,9 @@ class _AvatatPageState extends State<AvatatPage> {
                   Container(
                     width: 105,
                     height: 23,
-                    decoration: const BoxDecoration(
-                      border: GradientBoxBorder(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            Color(0xFF981DB9),
-                            Color(0xFF0F76CE),
-                          ],
-                        ),
-                      ),
-                      borderRadius: BorderRadius.all(
+                    decoration: BoxDecoration(
+                      border: GradientBoxBorder(gradient: gradientLk()),
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(12),
                       ),
                     ),
@@ -236,13 +186,9 @@ class _AvatatPageState extends State<AvatatPage> {
                                 color: Colors.transparent,
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'Comunicação',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 9,
-                                  fontFamily: 'OUTFIT',
-                                  fontWeight: FontWeight.bold),
+                              style: comp9Out(),
                             ),
                             onPressed: () {},
                           ),
@@ -256,16 +202,11 @@ class _AvatatPageState extends State<AvatatPage> {
               Container(
                 width: 149,
                 height: 23,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   border: GradientBoxBorder(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF981DB9),
-                        Color(0xFF0F76CE),
-                      ],
-                    ),
+                    gradient: gradientLk(),
                   ),
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(12),
                   ),
                 ),
@@ -285,12 +226,7 @@ class _AvatatPageState extends State<AvatatPage> {
                       DateFormat.yMd().format(
                         DateTime.now(),
                       ),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontFamily: 'OUTFIT',
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: comp15Out(),
                     ),
                   ),
                 ),
@@ -302,34 +238,23 @@ class _AvatatPageState extends State<AvatatPage> {
                     width: 361,
                     height: 100,
                     child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
+                          gradient: gradientCenter(),
                         ),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text(
                               'Avaliação - O atleta está concentrado?',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
+                              style: comp15Out(),
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [],
                             ),
@@ -343,34 +268,23 @@ class _AvatatPageState extends State<AvatatPage> {
                     width: 361,
                     height: 100,
                     child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
+                          gradient: gradientCenter(),
                         ),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text(
                               'Avaliação - O atleta está concentrado?',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
+                              style: comp15Out(),
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [],
                             ),
@@ -384,34 +298,23 @@ class _AvatatPageState extends State<AvatatPage> {
                     width: 361,
                     height: 100,
                     child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
                         border: GradientBoxBorder(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF981DB9),
-                              Color(0xFF0F76CE),
-                            ],
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                          ),
+                          gradient: gradientCenter(),
                         ),
                       ),
-                      child: const Center(
+                      child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text(
                               'Avaliação - O atleta está concentrado?',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'OUTFIT',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
+                              style: comp15Out(),
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [],
                             ),

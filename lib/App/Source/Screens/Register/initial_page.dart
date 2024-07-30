@@ -15,74 +15,41 @@ class InitialPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'Seja bem vindo ao ',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontFamily: 'STRETCH',
-                  ),
+                  style: comp20Str(),
                 ),
                 const SizedBox(height: 10),
                 const Image(
                   image: AssetImage('assets/images/desInitial.png'),
                 ),
                 const SizedBox(height: 10),
-                const Text(
+                Text(
                   'Aprimore seu desempenho',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontFamily: 'STRETCH',
-                  ),
+                  style: comp15Str(),
                 ),
                 const SizedBox(height: 100),
-                const Column(
+                Column(
                   children: [
                     Text(
                       'O nosso app (DES) visa desenvolver um aplicativo',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OUTFIT',
-                      ),
+                      style: comp15Out(),
                     ),
                     Text(
                       'mobile que auxilie escolas esportivas,',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OUTFIT',
-                      ),
+                      style: comp15Out(),
                     ),
                     Text(
                       'responsáveis, profissionais esporte, esportistas',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OUTFIT',
-                      ),
+                      style: comp15Out(),
                     ),
                     Text(
                       'de diversas modalidades no acompanhamento e',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OUTFIT',
-                      ),
+                      style: comp15Out(),
                     ),
                     Text(
                       'aprimoramento de seu desempenho.',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'OUTFIT',
-                      ),
+                      style: comp15Out(),
                     ),
                   ],
                 ),
@@ -96,13 +63,9 @@ class InitialPage extends StatelessWidget {
                     ),
                     backgroundColor: const Color(0xFF981DB9),
                   ),
-                  child: const Text(
+                  child: Text(
                     '  CADASTRE-SE AGORA  ',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontFamily: 'STRETCH',
-                      color: Colors.white,
-                    ),
+                    style: comp15Str(),
                   ),
                   onPressed: () => Navigator.pushNamed(context, 'registerPage'),
                 ),
@@ -110,14 +73,9 @@ class InitialPage extends StatelessWidget {
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.transparent,
                   ),
-                  child: const Text(
+                  child: Text(
                     'Já tem uma conta? Entrar',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'OUTFIT',
-                    ),
+                    style: comp16Out(),
                   ),
                   onPressed: () => Navigator.pushNamed(context, 'loginPage'),
                 ),
