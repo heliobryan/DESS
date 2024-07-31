@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:dess/App/Source/Services/exit.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -412,8 +413,17 @@ class _ExitButtonState extends State<ExitButton> {
                   ),
                   backgroundColor: const Color(0xFF981DB9),
                 ),
-                onPressed: () {
-                  signOut();
+                onPressed: () async {
+                  bool exit = await exitVerify();
+                  if (exit) {
+                    Navigator.pushReplacement(
+                      // ignore: use_build_context_synchronously
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const InitialPage(),
+                      ),
+                    );
+                  }
                 },
                 child: Text(
                   'Sim',

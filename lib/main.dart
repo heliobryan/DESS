@@ -16,6 +16,7 @@ import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:dess/App/Source/Screens/Register/login_page.dart';
 import 'package:dess/App/Source/Screens/Register/register_page.dart';
 import 'package:dess/App/Source/Screens/Register/splash_page.dart';
+import 'package:dess/App/Source/Services/token_verify.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

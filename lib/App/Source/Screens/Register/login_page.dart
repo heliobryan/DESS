@@ -1,8 +1,9 @@
+import 'dart:convert';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,10 +15,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
   bool showPass = true;
   final _formKey = GlobalKey<FormState>();
-  final _firebaseAuth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -181,8 +180,26 @@ class _LoginPageState extends State<LoginPage> {
                           'Entrar ',
                           style: comp16Out(),
                         ),
-                        onPressed: () {
-                          userLogin();
+                        onPressed: () async {
+                          FocusScopeNode currentFocus = FocusScope.of(context);
+                          if (_formKey.currentState!.validate()) {
+                            bool success = await userLogin();
+                            if (!currentFocus.hasPrimaryFocus) {
+                              currentFocus.unfocus();
+                            }
+                            if (success) {
+                              Navigator.pushReplacement(
+                                  // ignore: use_build_context_synchronously
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const HomePage()));
+                            } else {
+                              _passwordController.clear();
+                              // ignore: use_build_context_synchronously
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
+                          }
                         },
                       ),
                     ),
@@ -233,9 +250,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ),
                               ],
                             ),
-                            onPressed: () {
-                              signInWithGoogle();
-                            },
+                            onPressed: () {},
                           ),
                         ),
                         const SizedBox(height: 15),
@@ -251,31 +266,30 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  signInWithGoogle() async {
-    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-    AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
+  final snackBar = const SnackBar(
+    content: Text(
+      'Email ou senha são inválidos',
+      textAlign: TextAlign.center,
+    ),
+    backgroundColor: Colors.red,
+  );
+
+  Future<bool> userLogin() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var url = Uri.parse('https://a527-45-70-34-167.ngrok-free.app/api/login');
+    var restAwnser = await http.post(
+      url,
+      body: {
+        'email': _emailController.text,
+        'password': _passwordController.text,
+      },
     );
-
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-    // ignore: avoid_print
-    print(userCredential.user?.displayName);
-  }
-
-  userLogin() async {
-    _firebaseAuth
-        .signInWithEmailAndPassword(
-            email: _emailController.text, password: _passwordController.text)
-        .then((UserCredential userCredential) {
-      userCredential.user!.updateDisplayName(_nameController.text);
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-          (route) => false);
-      // ignore: argument_type_not_assignable_to_error_handler
-    }).catchError((FirebaseAuthException firebaseAuthException) {});
+    if (restAwnser.statusCode == 201) {
+      print('token' + jsonDecode(restAwnser.body)['token']);
+      return true;
+    } else {
+      print(jsonDecode(restAwnser.body));
+      return false;
+    }
   }
 }
