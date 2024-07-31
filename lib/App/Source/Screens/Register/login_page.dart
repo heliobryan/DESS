@@ -275,6 +275,7 @@ class _LoginPageState extends State<LoginPage> {
   );
 
   Future<bool> userLogin() async {
+    // ignore: unused_local_variable
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var url = Uri.parse('https://a527-45-70-34-167.ngrok-free.app/api/login');
     var restAwnser = await http.post(
@@ -284,10 +285,12 @@ class _LoginPageState extends State<LoginPage> {
         'password': _passwordController.text,
       },
     );
-    if (restAwnser.statusCode == 201) {
+    if (restAwnser.statusCode == 200) {
+      // ignore: prefer_interpolation_to_compose_strings, avoid_print
       print('token' + jsonDecode(restAwnser.body)['token']);
       return true;
     } else {
+      // ignore: avoid_print
       print(jsonDecode(restAwnser.body));
       return false;
     }

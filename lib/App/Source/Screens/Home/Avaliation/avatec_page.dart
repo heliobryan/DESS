@@ -11,6 +11,12 @@ class AvatecPage extends StatefulWidget {
 }
 
 class _AvatecPageState extends State<AvatecPage> {
+  bool passState = true;
+  bool finalState = true;
+  bool controlState = true;
+  bool headState = true;
+  bool driState = true;
+  bool interState = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,30 +110,27 @@ class _AvatecPageState extends State<AvatecPage> {
                             Radius.circular(12),
                           ),
                         ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: Colors.transparent,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(12),
-                                    ),
-                                  ),
-                                  side: const BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                child: Text(
-                                  'Passes',
-                                  style: comp15Out(),
-                                ),
-                                onPressed: () {},
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.transparent,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
                               ),
-                            ],
+                            ),
+                            side: const BorderSide(
+                              color: Colors.transparent,
+                            ),
                           ),
+                          child: Text(
+                            'Passes',
+                            style: comp15Out(),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              passState = !passState;
+                            });
+                          },
                         ),
                       ),
                       const SizedBox(width: 20),
@@ -140,30 +143,27 @@ class _AvatecPageState extends State<AvatecPage> {
                             Radius.circular(12),
                           ),
                         ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: Colors.transparent,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(12),
-                                    ),
-                                  ),
-                                  side: const BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                child: Text(
-                                  'Finalização',
-                                  style: comp12Out(),
-                                ),
-                                onPressed: () {},
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.transparent,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
                               ),
-                            ],
+                            ),
+                            side: const BorderSide(
+                              color: Colors.transparent,
+                            ),
                           ),
+                          child: Text(
+                            'Finalização',
+                            style: comp12Out(),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              finalState = !finalState;
+                            });
+                          },
                         ),
                       ),
                       const SizedBox(width: 20),
@@ -178,30 +178,27 @@ class _AvatecPageState extends State<AvatecPage> {
                             Radius.circular(12),
                           ),
                         ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: Colors.transparent,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(12),
-                                    ),
-                                  ),
-                                  side: const BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                child: Text(
-                                  'Contr. de bola',
-                                  style: comp9Out(),
-                                ),
-                                onPressed: () {},
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.transparent,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
                               ),
-                            ],
+                            ),
+                            side: const BorderSide(
+                              color: Colors.transparent,
+                            ),
                           ),
+                          child: Text(
+                            'Contr. de bola',
+                            style: comp9Out(),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              controlState = !controlState;
+                            });
+                          },
                         ),
                       ),
                       const SizedBox(width: 20),
@@ -216,30 +213,27 @@ class _AvatecPageState extends State<AvatecPage> {
                             Radius.circular(12),
                           ),
                         ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: Colors.transparent,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(12),
-                                    ),
-                                  ),
-                                  side: const BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                child: Text(
-                                  'Cabeceio',
-                                  style: comp13Out(),
-                                ),
-                                onPressed: () {},
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.transparent,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
                               ),
-                            ],
+                            ),
+                            side: const BorderSide(
+                              color: Colors.transparent,
+                            ),
                           ),
+                          child: Text(
+                            'Cabeceio',
+                            style: comp13Out(),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              headState = !headState;
+                            });
+                          },
                         ),
                       ),
                       const SizedBox(width: 20),
@@ -254,30 +248,27 @@ class _AvatecPageState extends State<AvatecPage> {
                             Radius.circular(12),
                           ),
                         ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: Colors.transparent,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(12),
-                                    ),
-                                  ),
-                                  side: const BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                child: Text(
-                                  'Dribles',
-                                  style: comp13Out(),
-                                ),
-                                onPressed: () {},
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.transparent,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
                               ),
-                            ],
+                            ),
+                            side: const BorderSide(
+                              color: Colors.transparent,
+                            ),
                           ),
+                          child: Text(
+                            'Dribles',
+                            style: comp13Out(),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              driState = !driState;
+                            });
+                          },
                         ),
                       ),
                       const SizedBox(width: 20),
@@ -292,30 +283,27 @@ class _AvatecPageState extends State<AvatecPage> {
                             Radius.circular(12),
                           ),
                         ),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: Colors.transparent,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(12),
-                                    ),
-                                  ),
-                                  side: const BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                child: Text(
-                                  'Intercepçẽos',
-                                  style: comp10Out(),
-                                ),
-                                onPressed: () {},
+                        child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.transparent,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
                               ),
-                            ],
+                            ),
+                            side: const BorderSide(
+                              color: Colors.transparent,
+                            ),
                           ),
+                          child: Text(
+                            'Intercepçẽos',
+                            style: comp10Out(),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              interState = !interState;
+                            });
+                          },
                         ),
                       ),
                     ],
@@ -357,6 +345,167 @@ class _AvatecPageState extends State<AvatecPage> {
                 const SizedBox(height: 20),
                 const SizedBox(height: 20),
                 Visibility(
+                  visible: !finalState,
+                  child: SizedBox(
+                    width: 361,
+                    height: 100,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        border: GradientBoxBorder(
+                          gradient: gradientCenter(),
+                        ),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 5),
+                            Text(
+                              'Avaliação - O atleta está concentrado?',
+                              style: comp15Out(),
+                            ),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Visibility(
+                  visible: !passState,
+                  child: SizedBox(
+                    width: 361,
+                    height: 100,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        border: GradientBoxBorder(
+                          gradient: gradientCenter(),
+                        ),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 5),
+                            Text(
+                              'Avaliação - O atleta está concentrado?',
+                              style: comp15Out(),
+                            ),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Visibility(
+                  visible: !driState,
+                  child: SizedBox(
+                    width: 361,
+                    height: 100,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        border: GradientBoxBorder(
+                          gradient: gradientCenter(),
+                        ),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 5),
+                            Text(
+                              'Avaliação - O atleta está concentrado?',
+                              style: comp15Out(),
+                            ),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Visibility(
+                  visible: !headState,
+                  child: SizedBox(
+                    width: 361,
+                    height: 100,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        border: GradientBoxBorder(
+                          gradient: gradientCenter(),
+                        ),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 5),
+                            Text(
+                              'Avaliação - O atleta está concentrado?',
+                              style: comp15Out(),
+                            ),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Visibility(
+                  visible: !controlState,
+                  child: SizedBox(
+                    width: 361,
+                    height: 100,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
+                        border: GradientBoxBorder(
+                          gradient: gradientCenter(),
+                        ),
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 5),
+                            Text(
+                              'Avaliação - O atleta está concentrado?',
+                              style: comp15Out(),
+                            ),
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Visibility(
+                  visible: !interState,
                   child: SizedBox(
                     width: 361,
                     height: 100,

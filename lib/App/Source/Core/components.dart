@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:dess/App/Source/Services/exit.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
@@ -373,8 +372,6 @@ class ExitButton extends StatefulWidget {
 }
 
 class _ExitButtonState extends State<ExitButton> {
-  final _firebaseAuth = FirebaseAuth.instance;
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -435,17 +432,6 @@ class _ExitButtonState extends State<ExitButton> {
         )
       ],
     );
-  }
-
-  signOut() async {
-    await _firebaseAuth.signOut().then(
-          (user) => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const InitialPage(),
-            ),
-          ),
-        );
   }
 }
 

@@ -16,17 +16,10 @@ import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:dess/App/Source/Screens/Register/login_page.dart';
 import 'package:dess/App/Source/Screens/Register/register_page.dart';
 import 'package:dess/App/Source/Screens/Register/splash_page.dart';
-import 'package:dess/App/Source/Services/token_verify.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:dess/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   runApp(
     const DesApp(),
   );
@@ -57,7 +50,6 @@ class DesApp extends StatelessWidget {
         'healthPage': (context) => const HealthPage(),
         'avatecPage': (context) => const AvatecPage(),
         'avapsiPage': (context) => const AvapsiPage(),
-        'screenPage': (context) => const ScreenRoute(),
         'cardPage': (context) => const HealthEditor(),
         'loginPage': (context) => const LoginPage(),
         'avafisPage': (context) => const AvafisPage(),
@@ -66,22 +58,5 @@ class DesApp extends StatelessWidget {
         'infoPage': (context) => const InfoPage(),
       },
     );
-  }
-}
-
-class ScreenRoute extends StatelessWidget {
-  const ScreenRoute({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.userChanges(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return const HomePage();
-          } else {
-            return const RegisterPage();
-          }
-        });
   }
 }

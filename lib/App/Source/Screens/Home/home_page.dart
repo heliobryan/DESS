@@ -115,6 +115,7 @@ class _Home1PageState extends State<Home1Page> {
       backgroundColor: const Color(0xFF1E1E1E),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: const Icon(

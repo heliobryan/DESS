@@ -1,8 +1,9 @@
+import 'dart:convert';
 import 'package:dess/App/Source/Core/components.dart';
-import 'package:dess/App/Source/Screens/Forms/form_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dess/App/Source/Screens/Home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -18,7 +19,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _confirmPass = TextEditingController();
   bool showPass = true;
   final _formKey = GlobalKey<FormState>();
-  final _firebaseAuth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -277,8 +277,26 @@ class _RegisterPageState extends State<RegisterPage> {
                           'Entrar ',
                           style: comp16Out(),
                         ),
-                        onPressed: () {
-                          userRegister();
+                        onPressed: () async {
+                          FocusScopeNode currentFocus = FocusScope.of(context);
+                          if (_formKey.currentState!.validate()) {
+                            bool success = await userRegister();
+                            if (!currentFocus.hasPrimaryFocus) {
+                              currentFocus.unfocus();
+                            }
+                            if (success) {
+                              Navigator.pushReplacement(
+                                  // ignore: use_build_context_synchronously
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const HomePage()));
+                            } else {
+                              _passwordController.clear();
+                              // ignore: use_build_context_synchronously
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }
+                          }
                         },
                       ),
                     ),
@@ -329,9 +347,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ],
                             ),
-                            onPressed: () {
-                              signInWithGoogle();
-                            },
+                            onPressed: () {},
                           ),
                         ),
                         const SizedBox(height: 15),
@@ -347,30 +363,34 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Future<UserCredential> signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-    // ignore: use_build_context_synchronously
-    Navigator.pushNamed(context, 'homePage');
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
+  final snackBar = const SnackBar(
+    content: Text(
+      'Email ou senha são inválidos',
+      textAlign: TextAlign.center,
+    ),
+    backgroundColor: Colors.red,
+  );
 
-  userRegister() async {
-    _firebaseAuth
-        .createUserWithEmailAndPassword(
-            email: _emailController.text, password: _passwordController.text)
-        .then((UserCredential userCredential) {
-      userCredential.user!.updateDisplayName(_nameController.text);
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const Form1Page()),
-          (route) => false);
-      // ignore: argument_type_not_assignable_to_error_handler
-    }).catchError((FirebaseAuthException firebaseAuthException) {});
+  Future<bool> userRegister() async {
+    // ignore: unused_local_variable
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var url = Uri.parse('https://a527-45-70-34-167.ngrok-free.app/api/user');
+    var restAwnser = await http.post(
+      url,
+      body: {
+        'email': _emailController.text,
+        'password': _passwordController.text,
+        'name': _nameController.text,
+      },
+    );
+    if (restAwnser.statusCode == 200) {
+      // ignore: prefer_interpolation_to_compose_strings, avoid_print
+      print('token' + jsonDecode(restAwnser.body)['token']);
+      return true;
+    } else {
+      // ignore: avoid_print
+      print(jsonDecode(restAwnser.body));
+      return false;
+    }
   }
 }
