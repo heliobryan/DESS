@@ -4,6 +4,7 @@ import 'package:dess/App/Source/Services/exit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:intl/intl.dart';
 
 InputDecoration nameAuthDecoration(String label) {
   return InputDecoration(
@@ -195,6 +196,26 @@ class GradientBack extends StatelessWidget {
 
 class BackgroudImage extends StatelessWidget {
   const BackgroudImage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned(
+          top: 10,
+          child: SvgPicture.asset(
+            'assets/images/background.svg',
+            height: 266,
+            width: 450,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class BackImageAll extends StatelessWidget {
+  const BackImageAll({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -697,4 +718,90 @@ LinearGradient gradientDD() {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+}
+
+class DateCard extends StatelessWidget {
+  const DateCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 105,
+      width: 105,
+      decoration: BoxDecoration(
+        border: GradientBoxBorder(
+          gradient: gradientLk(),
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          Text(
+            'Treino',
+            style: comp13Out(),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            'Data 07/05/2024',
+            style: comp11Out(),
+          ),
+          const SizedBox(height: 15),
+          const Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+          Text(
+            'Feito!',
+            style: comp11Out(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DateCardUncheck extends StatelessWidget {
+  const DateCardUncheck({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 105,
+      width: 105,
+      decoration: BoxDecoration(
+        border: GradientBoxBorder(
+          gradient: gradientLk(),
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          Text(
+            'Treino',
+            style: comp13Out(),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            DateFormat.yMd().format(
+              DateTime.now(),
+            ),
+            style: comp11Out(),
+          ),
+          const SizedBox(height: 15),
+          const Icon(
+            Icons.dangerous,
+            color: Colors.red,
+          ),
+          Text(
+            'Cancelado!',
+            style: comp11Out(),
+          ),
+        ],
+      ),
+    );
+  }
 }

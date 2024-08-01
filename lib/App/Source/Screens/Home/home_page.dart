@@ -130,7 +130,7 @@ class _Home1PageState extends State<Home1Page> {
           ),
         ],
         title: Text(
-          'BEM VINDO RICARDO',
+          'BEM VINDO',
           style: comp20Str(),
         ),
       ),

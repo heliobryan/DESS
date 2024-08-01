@@ -1,3 +1,4 @@
+import 'package:dess/App/Source/Core/AvatecComponents/pass_card.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
@@ -12,11 +13,11 @@ class AvatecPage extends StatefulWidget {
 
 class _AvatecPageState extends State<AvatecPage> {
   bool passState = true;
-  bool finalState = true;
-  bool controlState = true;
-  bool headState = true;
-  bool driState = true;
-  bool interState = true;
+  bool finalState = false;
+  bool controlState = false;
+  bool headState = false;
+  bool driState = false;
+  bool interState = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -331,7 +332,10 @@ class _AvatecPageState extends State<AvatecPage> {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CalendarPage())),
                     child: Center(
                       child: Text(
                         DateFormat.yMd().format(
@@ -343,198 +347,29 @@ class _AvatecPageState extends State<AvatecPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const SizedBox(height: 20),
                 Visibility(
-                  visible: !finalState,
-                  child: SizedBox(
-                    width: 361,
-                    height: 100,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        border: GradientBoxBorder(
-                          gradient: gradientCenter(),
-                        ),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 5),
-                            Text(
-                              'Avaliação - O atleta está concentrado?',
-                              style: comp15Out(),
-                            ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  visible: passState,
+                  child: const PassCard(),
                 ),
                 Visibility(
-                  visible: !passState,
-                  child: SizedBox(
-                    width: 361,
-                    height: 100,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        border: GradientBoxBorder(
-                          gradient: gradientCenter(),
-                        ),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 5),
-                            Text(
-                              'Avaliação - O atleta está concentrado?',
-                              style: comp15Out(),
-                            ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  visible: finalState,
+                  child: const PassCard(),
                 ),
                 Visibility(
-                  visible: !driState,
-                  child: SizedBox(
-                    width: 361,
-                    height: 100,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        border: GradientBoxBorder(
-                          gradient: gradientCenter(),
-                        ),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 5),
-                            Text(
-                              'Avaliação - O atleta está concentrado?',
-                              style: comp15Out(),
-                            ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  visible: controlState,
+                  child: const PassCard(),
                 ),
                 Visibility(
-                  visible: !headState,
-                  child: SizedBox(
-                    width: 361,
-                    height: 100,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        border: GradientBoxBorder(
-                          gradient: gradientCenter(),
-                        ),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 5),
-                            Text(
-                              'Avaliação - O atleta está concentrado?',
-                              style: comp15Out(),
-                            ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  visible: headState,
+                  child: const PassCard(),
                 ),
                 Visibility(
-                  visible: !controlState,
-                  child: SizedBox(
-                    width: 361,
-                    height: 100,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        border: GradientBoxBorder(
-                          gradient: gradientCenter(),
-                        ),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 5),
-                            Text(
-                              'Avaliação - O atleta está concentrado?',
-                              style: comp15Out(),
-                            ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  visible: driState,
+                  child: const PassCard(),
                 ),
                 Visibility(
-                  visible: !interState,
-                  child: SizedBox(
-                    width: 361,
-                    height: 100,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
-                        border: GradientBoxBorder(
-                          gradient: gradientCenter(),
-                        ),
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 5),
-                            Text(
-                              'Avaliação - O atleta está concentrado?',
-                              style: comp15Out(),
-                            ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  visible: interState,
+                  child: const PassCard(),
                 ),
               ],
             ),
@@ -545,29 +380,97 @@ class _AvatecPageState extends State<AvatecPage> {
   }
 }
 
-class PassPage extends StatelessWidget {
-  const PassPage({super.key});
+class CalendarPage extends StatelessWidget {
+  const CalendarPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
-
-class FinalPage extends StatelessWidget {
-  const FinalPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
-  }
-}
-
-class ControlPage extends StatelessWidget {
-  const ControlPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
+            size: 25,
+          ),
+          onPressed: () => Navigator.pop(context, 'avaliationPage'),
+        ),
+        title: Text(
+          'Técnica',
+          style: comp20Str(),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.exit_to_app,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) => const ExitButton(),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: const Color(0xFF1E1E1E),
+      body: Stack(
+        children: [
+          const GradientBack(),
+          const BackImageAll(),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                Text(
+                  'Datas',
+                  style: comp25Str(),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Maio',
+                  style: comp20Str(),
+                ),
+                const SizedBox(height: 20),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DateCard(),
+                    SizedBox(width: 20),
+                    DateCard(),
+                    SizedBox(width: 20),
+                    DateCardUncheck(),
+                    SizedBox(width: 20),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DateCard(),
+                    SizedBox(width: 20),
+                    DateCard(),
+                    SizedBox(width: 20),
+                    DateCard(),
+                    SizedBox(width: 20),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DateCard(),
+                    SizedBox(width: 18),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
