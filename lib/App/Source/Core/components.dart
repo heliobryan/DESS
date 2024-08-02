@@ -119,9 +119,7 @@ class GradientBack extends StatelessWidget {
                 ),
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 100, sigmaY: 100),
-                  child: Container(
-                    color: Colors.black.withOpacity(0),
-                  ),
+                  child: Container(),
                 ),
               ),
             ],
@@ -148,9 +146,7 @@ class GradientBack extends StatelessWidget {
                     ),
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
-                      child: Container(
-                        color: Colors.black.withOpacity(0),
-                      ),
+                      child: Container(),
                     ),
                   ),
                 ],
@@ -179,9 +175,7 @@ class GradientBack extends StatelessWidget {
                     ),
                     child: BackdropFilter(
                       filter: ImageFilter.blur(sigmaX: 150, sigmaY: 200),
-                      child: Container(
-                        color: Colors.black.withOpacity(0),
-                      ),
+                      child: Container(),
                     ),
                   ),
                 ],
