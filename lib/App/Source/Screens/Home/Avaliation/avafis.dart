@@ -1,4 +1,5 @@
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
@@ -269,7 +270,12 @@ class _AvafisPageState extends State<AvafisPage> {
                       ),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CalendarPage(),
+                    ),
+                  ),
                   child: Center(
                     child: Text(
                       DateFormat.yMd().format(

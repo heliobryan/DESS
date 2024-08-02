@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Home/home_page.dart';
 import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -17,13 +19,25 @@ class _SplashPageState extends State<SplashPage> {
 
     Timer(
       const Duration(seconds: 2),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const InitialPage(),
-        ),
-      ),
+      () => tokenVerify().then((value) {
+        if (value) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const HomePage()));
+        } else {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const InitialPage()));
+        }
+      }),
     );
+  }
+
+  Future<bool> tokenVerify() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getString('token') != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   @override

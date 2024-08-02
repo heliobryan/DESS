@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
@@ -7,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -109,6 +114,14 @@ class Home1Page extends StatefulWidget {
 }
 
 class _Home1PageState extends State<Home1Page> {
+  Map<String, dynamic> userDados = {};
+
+  @override
+  void initState() {
+    super.initState();
+    userInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +143,7 @@ class _Home1PageState extends State<Home1Page> {
           ),
         ],
         title: Text(
-          'BEM VINDO',
+          'BEM VINDO ${(userDados['name'] ?? '').toUpperCase()}',
           style: comp20Str(),
         ),
       ),
@@ -139,19 +152,13 @@ class _Home1PageState extends State<Home1Page> {
           const GradientBack(),
           ListView(
             children: [
-              Positioned(
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      DateFormat.MMMMEEEEd().format(
-                        DateTime.now(),
-                      ),
-                      style: comp15Str(),
-                    ),
-                  ],
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                child: Text(
+                  DateFormat.MMMMEEEEd().format(
+                    DateTime.now(),
+                  ),
+                  style: comp15Str(),
                 ),
               ),
               Center(
@@ -201,14 +208,6 @@ class _Home1PageState extends State<Home1Page> {
                     const CardPlayer(),
                     const SizedBox(height: 20),
                     const CardPlayer(),
-                    const SizedBox(height: 20),
-                    const CardPlayer(),
-                    const SizedBox(height: 20),
-                    const CardPlayer(),
-                    const SizedBox(height: 20),
-                    const CardPlayer(),
-                    const SizedBox(height: 20),
-                    const CardPlayer(),
                   ],
                 ),
               ),
@@ -217,5 +216,33 @@ class _Home1PageState extends State<Home1Page> {
         ],
       ),
     );
+  }
+
+  Future<void> userInfo() async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      var url = Uri.parse('https://a527-45-70-34-167.ngrok-free.app/api/user');
+      final token = sharedPreferences.getString('token');
+      log('token $token');
+      var restAwnser = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      // final decode = jsonDecode(restAwnser.body);
+      log('response ${restAwnser.body}');
+      if (restAwnser.statusCode == 200) {
+        final decode = jsonDecode(restAwnser.body);
+        setState(() {
+          userDados = decode['user'];
+        });
+
+        log('DADOS DO USUARIO FINAL $userDados');
+      }
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

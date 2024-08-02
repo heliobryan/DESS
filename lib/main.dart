@@ -3,7 +3,6 @@ import 'package:dess/App/Source/Screens/Home/Avaliation/avapsi.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatat.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/timer.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/comp_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/health_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/sponsor_page.dart';
@@ -54,7 +53,6 @@ class DesApp extends StatelessWidget {
         'loginPage': (context) => const LoginPage(),
         'avafisPage': (context) => const AvafisPage(),
         'avatatPage': (context) => const AvatatPage(),
-        'stopPage': (context) => const StopTimePage(),
         'infoPage': (context) => const InfoPage(),
       },
     );

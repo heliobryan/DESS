@@ -288,6 +288,12 @@ class _LoginPageState extends State<LoginPage> {
     if (restAwnser.statusCode == 200) {
       // ignore: prefer_interpolation_to_compose_strings, avoid_print
       print('token' + jsonDecode(restAwnser.body)['token']);
+      final decode = jsonDecode(restAwnser.body);
+
+      await sharedPreferences.setString(
+        'token',
+        decode['token'],
+      );
       return true;
     } else {
       // ignore: avoid_print
