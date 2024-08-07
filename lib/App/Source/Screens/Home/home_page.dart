@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
@@ -143,7 +143,7 @@ class _Home1PageState extends State<Home1Page> {
           ),
         ],
         title: Text(
-          'BEM VINDO ${(userDados['name'] ?? '').toUpperCase()}',
+          'BEM VINDO ${(userDados['name'] ?? '').toUpperCase() + '!'}',
           style: comp20Str(),
         ),
       ),
@@ -200,14 +200,6 @@ class _Home1PageState extends State<Home1Page> {
                     ),
                     const SizedBox(height: 20),
                     const CardPlayer(),
-                    const SizedBox(height: 20),
-                    const CardPlayer(),
-                    const SizedBox(height: 20),
-                    const CardPlayer(),
-                    const SizedBox(height: 20),
-                    const CardPlayer(),
-                    const SizedBox(height: 20),
-                    const CardPlayer(),
                   ],
                 ),
               ),
@@ -222,7 +214,7 @@ class _Home1PageState extends State<Home1Page> {
     try {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      var url = Uri.parse('https://a527-45-70-34-167.ngrok-free.app/api/user');
+      var url = Uri.parse('https://fd99-45-70-34-167.ngrok-free.app/api/user');
       final token = sharedPreferences.getString('token');
       log('token $token');
       var restAwnser = await http.get(
