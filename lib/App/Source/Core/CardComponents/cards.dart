@@ -101,7 +101,7 @@ class _CardPlayerState extends State<CardPlayer> {
       if (restAwnser.statusCode == 200) {
         final decode = jsonDecode(restAwnser.body);
         setState(() {
-          userData = decode['user'];
+          userData = decode[''];
         });
 
         log('DADOS DO USUARIO FINAL $userData');
