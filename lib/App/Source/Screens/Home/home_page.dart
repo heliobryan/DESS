@@ -115,6 +115,7 @@ class Home1Page extends StatefulWidget {
 
 class _Home1PageState extends State<Home1Page> {
   Map<String, dynamic> userDados = {};
+  List participantsList = [];
 
   @override
   void initState() {
@@ -150,60 +151,66 @@ class _Home1PageState extends State<Home1Page> {
       body: Stack(
         children: [
           const GradientBack(),
-          ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-                child: Text(
-                  DateFormat.MMMMEEEEd().format(
-                    DateTime.now(),
-                  ),
-                  style: comp15Str(),
-                ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+            child: Text(
+              DateFormat.MMMMEEEEd().format(
+                DateTime.now(),
               ),
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: 347,
-                      height: 27,
-                      child: TextField(
-                        style: comp20Out(),
-                        decoration: InputDecoration(
-                          prefix: const Text('   '),
-                          contentPadding: const EdgeInsets.all(1),
-                          suffixIcon: const Icon(
-                            Icons.search,
-                            color: Color(0xFF0F76CE),
-                          ),
-                          border: GradientOutlineInputBorder(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(9)),
-                            gradient: gradientLk(),
-                            width: 1,
-                          ),
-                          focusedBorder: GradientOutlineInputBorder(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(8)),
-                            gradient: gradientLk(),
-                            width: 1,
-                          ),
-                        ),
+              style: comp15Str(),
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: 347,
+                  height: 27,
+                  child: TextField(
+                    style: comp20Out(),
+                    decoration: InputDecoration(
+                      prefix: const Text('   '),
+                      contentPadding: const EdgeInsets.all(1),
+                      suffixIcon: const Icon(
+                        Icons.search,
+                        color: Color(0xFF0F76CE),
+                      ),
+                      border: GradientOutlineInputBorder(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(9)),
+                        gradient: gradientLk(),
+                        width: 1,
+                      ),
+                      focusedBorder: GradientOutlineInputBorder(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8)),
+                        gradient: gradientLk(),
+                        width: 1,
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    Text(
-                      'Alunos',
-                      style: comp20Str(),
-                    ),
-                    const SizedBox(height: 20),
-                    const CardPlayer(),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                Text(
+                  'Alunos',
+                  style: comp20Str(),
+                ),
+                const SizedBox(height: 20),
+                ListView.builder(
+                  itemBuilder: (context, index) {
+                    final participants = participantsList[index];
+
+                    log('cada participante: $participants');
+
+                    return const SizedBox.shrink();
+                    // return CardPlayer(participants: participants);
+                  },
+                  itemCount: participantsList.length,
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -232,6 +239,35 @@ class _Home1PageState extends State<Home1Page> {
         });
 
         log('DADOS DO USUARIO FINAL $userDados');
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future<void> getParticipants() async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      var url = Uri.parse(
+          'https://fd99-45-70-34-167.ngrok-free.app/api/participants');
+      final token = sharedPreferences.getString('token');
+      log('token $token');
+      var restAwnser = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      // final decode = jsonDecode(restAwnser.body);
+      if (restAwnser.statusCode == 200) {
+        log('response ${restAwnser.body}');
+        final decode = jsonDecode(restAwnser.body);
+        setState(() {
+          participantsList = decode;
+        });
+
+        // log('DADOS DO USUARIO FINAL $userData');
       }
     } catch (e) {
       log(e.toString());
