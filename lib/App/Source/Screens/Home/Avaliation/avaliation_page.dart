@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'package:http/http.dart' as http;
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AvaliationPage extends StatefulWidget {
   const AvaliationPage({super.key});
@@ -10,6 +15,8 @@ class AvaliationPage extends StatefulWidget {
 }
 
 class _AvaliationPageState extends State<AvaliationPage> {
+  Map<String, dynamic> criteriaData = {};
+  List criteriaList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,7 +173,7 @@ class _AvaliationPageState extends State<AvaliationPage> {
                         color: Colors.transparent,
                       ),
                     ),
-                    onPressed: () => Navigator.pushNamed(context, 'avafisPage'),
+                    onPressed: () => Navigator.pushNamed(context, 'bouzas'),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
@@ -240,5 +247,35 @@ class _AvaliationPageState extends State<AvaliationPage> {
         ],
       ),
     );
+  }
+
+  Future<void> getCriteria() async {
+    try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      var url = Uri.parse('${expenseListApi}api/criteria');
+      final token = sharedPreferences.getString('token');
+      log('token $token');
+      var restAwnser = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      // final decode = jsonDecode(restAwnser.body);
+      if (restAwnser.statusCode == 200) {
+        log('response ${restAwnser.body}');
+        final decode = jsonDecode(restAwnser.body);
+        setState(() {
+          criteriaList = decode;
+        });
+
+        // log('DADOS DO USUARIO FINAL $userData');
+      }
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

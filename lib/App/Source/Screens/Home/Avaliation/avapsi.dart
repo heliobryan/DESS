@@ -28,7 +28,7 @@ class _AvapsiPageState extends State<AvapsiPage> {
           onPressed: () => Navigator.pop(context, 'avaliationPage'),
         ),
         title: Text(
-          'Psicológica',
+          'Mental',
           style: comp20Str(),
         ),
         actions: [

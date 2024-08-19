@@ -4,6 +4,7 @@ import 'package:dess/App/Source/Screens/Home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -275,9 +276,10 @@ class _LoginPageState extends State<LoginPage> {
   );
 
   Future<bool> userLogin() async {
+    String expenseListApi = dotenv.get('API_HOST', fallback: '');
     // ignore: unused_local_variable
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var url = Uri.parse('https://fd99-45-70-34-167.ngrok-free.app/api/login');
+    var url = Uri.parse('${expenseListApi}api/login');
     var restAwnser = await http.post(
       url,
       body: {

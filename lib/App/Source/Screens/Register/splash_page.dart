@@ -21,9 +21,11 @@ class _SplashPageState extends State<SplashPage> {
       const Duration(seconds: 2),
       () => tokenVerify().then((value) {
         if (value) {
+          // ignore: use_build_context_synchronously
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const HomePage()));
         } else {
+          // ignore: use_build_context_synchronously
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => const InitialPage()));
         }

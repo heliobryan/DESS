@@ -7,6 +7,7 @@ import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Passport/passport_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 import 'package:intl/intl.dart';
@@ -121,6 +122,7 @@ class _Home1PageState extends State<Home1Page> {
   void initState() {
     super.initState();
     userInfo();
+    getParticipants();
   }
 
   @override
@@ -151,19 +153,23 @@ class _Home1PageState extends State<Home1Page> {
       body: Stack(
         children: [
           const GradientBack(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
-            child: Text(
-              DateFormat.MMMMEEEEd().format(
-                DateTime.now(),
-              ),
-              style: comp15Str(),
-            ),
-          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                      child: Text(
+                        DateFormat.MMMMEEEEd().format(
+                          DateTime.now(),
+                        ),
+                        style: comp15Str(),
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: 347,
@@ -198,17 +204,23 @@ class _Home1PageState extends State<Home1Page> {
                   style: comp20Str(),
                 ),
                 const SizedBox(height: 20),
-                ListView.builder(
-                  itemBuilder: (context, index) {
-                    final participants = participantsList[index];
+                Expanded(
+                  child: ListView.builder(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    itemBuilder: (context, index) {
+                      final participants = participantsList[index];
 
-                    log('cada participante: $participants');
+                      log('cada participante: $participants');
 
-                    return const SizedBox.shrink();
-                    // return CardPlayer(participants: participants);
-                  },
-                  itemCount: participantsList.length,
-                ),
+                      // return const SizedBox.shrink();
+                      return CardPlayer(
+                        participants: participants,
+                      );
+                    },
+                    itemCount: participantsList.length,
+                  ),
+                )
               ],
             ),
           ),
@@ -219,10 +231,14 @@ class _Home1PageState extends State<Home1Page> {
 
   Future<void> userInfo() async {
     try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      var url = Uri.parse('https://fd99-45-70-34-167.ngrok-free.app/api/user');
+
+      var url = Uri.parse('${expenseListApi}api/user');
       final token = sharedPreferences.getString('token');
+
       log('token $token');
       var restAwnser = await http.get(
         url,
@@ -247,10 +263,11 @@ class _Home1PageState extends State<Home1Page> {
 
   Future<void> getParticipants() async {
     try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      var url = Uri.parse(
-          'https://fd99-45-70-34-167.ngrok-free.app/api/participants');
+      var url = Uri.parse('${expenseListApi}api/participants');
       final token = sharedPreferences.getString('token');
       log('token $token');
       var restAwnser = await http.get(

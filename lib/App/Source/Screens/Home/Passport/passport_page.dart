@@ -3,6 +3,7 @@ import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:intl/intl.dart';
+import 'package:graphic/graphic.dart';
 
 class PassportPage extends StatefulWidget {
   const PassportPage({super.key});
@@ -97,7 +98,7 @@ class _PassportPageState extends State<PassportPage> {
                     ),
                     child: Center(
                       child: Text(
-                        'Atual (Sub 13)',
+                        'Gráfico',
                         style: comp15Out(),
                       ),
                     ),
@@ -115,7 +116,7 @@ class _PassportPageState extends State<PassportPage> {
                     ),
                     child: Center(
                       child: Text(
-                        'Sub 15',
+                        'Card',
                         style: comp15Out(),
                       ),
                     ),
@@ -133,7 +134,7 @@ class _PassportPageState extends State<PassportPage> {
                     ),
                     child: Center(
                       child: Text(
-                        'Sub 16',
+                        'Dados',
                         style: comp15Out(),
                       ),
                     ),
@@ -178,47 +179,28 @@ class _PassportPageState extends State<PassportPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              const SizedBox(height: 30),
-              Container(
-                width: 315,
-                height: 243,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(12),
-                  ),
-                  border: GradientBoxBorder(
-                    gradient: gradientDD(),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Dados Biológicos Atuais',
-                        style: comp25Out(),
+              Expanded(
+                child: SizedBox(
+                  child: Chart(
+                    data: const [
+                      {'genre': '', 'sold': 275},
+                      {'genre': 'a', 'sold': 115},
+                      {'genre': '', 'sold': 120},
+                      {'genre': 'b', 'sold': 350},
+                      {'genre': '', 'sold': 150},
+                    ],
+                    variables: {
+                      'genre': Variable(
+                        accessor: (Map map) => map['genre'] as String,
                       ),
-                      const SizedBox(height: 20),
-                      Text(
-                        'Peso:',
-                        style: comp20Out(),
+                      'sold': Variable(
+                        accessor: (Map map) => map['sold'] as num,
                       ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Altura:',
-                        style: comp20Out(),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'Idade:',
-                        style: comp20Out(),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        'IMC',
-                        style: comp20Out(),
-                      ),
+                    },
+                    marks: [IntervalMark()],
+                    axes: [
+                      Defaults.horizontalAxis,
+                      Defaults.verticalAxis,
                     ],
                   ),
                 ),

@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'package:http/http.dart' as http;
+import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class CompPage extends StatefulWidget {
@@ -11,6 +17,15 @@ class CompPage extends StatefulWidget {
 }
 
 class _CompPageState extends State<CompPage> {
+  Map<String, dynamic> eventData = {};
+  List eventList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    eventInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,71 +75,20 @@ class _CompPageState extends State<CompPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
-              const CompCard(),
-              const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('assets/images/gradientline.png'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const CompCard(),
-              const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('assets/images/gradientline.png'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const CompCard(),
-              const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('assets/images/gradientline.png'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const CompCard(),
-              const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('assets/images/gradientline.png'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const CompCard(),
-              const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('assets/images/gradientline.png'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              const CompCard(),
-              const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image(
-                    image: AssetImage('assets/images/gradientline.png'),
-                  ),
-                ],
+              const SizedBox(height: 50),
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    final event = eventList[index];
+
+                    log('cada evento: $event');
+
+                    return CompCard(
+                      event: event,
+                    );
+                  },
+                  itemCount: eventList.length,
+                ),
               ),
             ],
           ),
@@ -132,10 +96,53 @@ class _CompPageState extends State<CompPage> {
       ),
     );
   }
+
+  Future<void> eventInfo() async {
+    try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      var url = Uri.parse('${expenseListApi}api/events');
+      final token = sharedPreferences.getString('token');
+      log('token $token');
+      var restAwnser = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      // final decode = jsonDecode(restAwnser.body);
+      if (restAwnser.statusCode == 200) {
+        log('response ${restAwnser.body}');
+        final decode = jsonDecode(restAwnser.body);
+        setState(() {
+          eventList = decode;
+        });
+
+        // log('DADOS DO USUARIO FINAL $userData');
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
 
-class InfoPage extends StatelessWidget {
+class InfoPage extends StatefulWidget {
   const InfoPage({super.key});
+
+  @override
+  State<InfoPage> createState() => _InfoPageState();
+}
+
+class _InfoPageState extends State<InfoPage> {
+  Map<String, dynamic> localData = {};
+
+  @override
+  void initState() {
+    super.initState();
+    localInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,16 +202,12 @@ class InfoPage extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     Text(
-                      'Jogos escolares de',
-                      style: comp20Out(),
-                    ),
-                    Text(
-                      'Minas Gerais - Jemg',
+                      '${localData['event']['name'] ?? ''}',
                       style: comp20Out(),
                     ),
                     const SizedBox(height: 30),
                     GradientText(
-                      'Arena Comunitária',
+                      '${localData['']}',
                       style: const TextStyle(
                         fontFamily: 'OUTFIT',
                         fontWeight: FontWeight.bold,
@@ -258,5 +261,32 @@ class InfoPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> localInfo() async {
+    try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
+      var url = Uri.parse('${expenseListApi}api/days');
+      final token = sharedPreferences.getString('token');
+
+      log('token $token');
+      var restAwnser = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      // final decode = jsonDecode(restAwnser.body);
+      log('response ${restAwnser.body}');
+      if (restAwnser.statusCode == 200) {
+        log('DADOS DO USUARIO FINAL $localInfo()');
+      }
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

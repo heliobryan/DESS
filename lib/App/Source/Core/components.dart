@@ -228,92 +228,6 @@ class BackImageAll extends StatelessWidget {
   }
 }
 
-class CompCard extends StatelessWidget {
-  const CompCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 365,
-      height: 62,
-      child: Row(
-        children: [
-          const Icon(
-            Icons.account_circle_outlined,
-            color: Colors.white,
-            size: 40,
-          ),
-          const SizedBox(width: 10),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 10),
-              Text(
-                'Jogos escolares de',
-                style: comp13Out(),
-              ),
-              Text(
-                'Minas Gerais - Jemg',
-                style: comp13Out(),
-              ),
-            ],
-          ),
-          const SizedBox(width: 20),
-          Container(
-            width: 85,
-            height: 30,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
-              border: GradientBoxBorder(
-                gradient: LinearGradient(
-                  colors: <Color>[
-                    Color(0xFF981DB9),
-                    Color(0xFF0F76CE),
-                  ],
-                ),
-              ),
-            ),
-            child: TextButton(
-              child: Text(
-                'Programação',
-                style: comp10Out(),
-              ),
-              onPressed: () => Navigator.pushNamed(context, 'infoPage'),
-            ),
-          ),
-          const SizedBox(width: 10),
-          Container(
-            width: 85,
-            height: 30,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
-              border: GradientBoxBorder(
-                gradient: LinearGradient(
-                  colors: <Color>[
-                    Color(0xFF981DB9),
-                    Color(0xFF0F76CE),
-                  ],
-                ),
-              ),
-            ),
-            child: TextButton(
-              child: Text(
-                'Listas',
-                style: comp11Out(),
-              ),
-              onPressed: () {},
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class ExitButton extends StatefulWidget {
   const ExitButton({super.key});
 
@@ -531,7 +445,7 @@ TextStyle comp9Out() {
 TextStyle comp16Out() {
   return const TextStyle(
     color: Colors.white,
-    fontSize: 15,
+    fontSize: 16,
     fontFamily: 'OUTFIT',
     fontWeight: FontWeight.bold,
   );
@@ -730,6 +644,70 @@ class DateCardUncheck extends StatelessWidget {
             style: comp11Out(),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ProCard extends StatelessWidget {
+  const ProCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 85,
+      height: 30,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(12),
+        ),
+        border: GradientBoxBorder(
+          gradient: LinearGradient(
+            colors: <Color>[
+              Color(0xFF981DB9),
+              Color(0xFF0F76CE),
+            ],
+          ),
+        ),
+      ),
+      child: TextButton(
+        child: Text(
+          'Programação',
+          style: comp10Out(),
+        ),
+        onPressed: () => Navigator.pushNamed(context, 'infoPage'),
+      ),
+    );
+  }
+}
+
+class ProCard1 extends StatelessWidget {
+  const ProCard1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 85,
+      height: 30,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(12),
+        ),
+        border: GradientBoxBorder(
+          gradient: LinearGradient(
+            colors: <Color>[
+              Color(0xFF981DB9),
+              Color(0xFF0F76CE),
+            ],
+          ),
+        ),
+      ),
+      child: TextButton(
+        child: Text(
+          'Listas',
+          style: comp10Out(),
+        ),
+        onPressed: () => Navigator.pushNamed(context, 'infoPage'),
       ),
     );
   }
