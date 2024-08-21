@@ -3,7 +3,6 @@ import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:intl/intl.dart';
-import 'package:graphic/graphic.dart';
 
 class PassportPage extends StatefulWidget {
   const PassportPage({super.key});
@@ -176,32 +175,6 @@ class _PassportPageState extends State<PassportPage> {
                       ),
                       style: comp15Out(),
                     ),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: SizedBox(
-                  child: Chart(
-                    data: const [
-                      {'genre': '', 'sold': 275},
-                      {'genre': 'a', 'sold': 115},
-                      {'genre': '', 'sold': 120},
-                      {'genre': 'b', 'sold': 350},
-                      {'genre': '', 'sold': 150},
-                    ],
-                    variables: {
-                      'genre': Variable(
-                        accessor: (Map map) => map['genre'] as String,
-                      ),
-                      'sold': Variable(
-                        accessor: (Map map) => map['sold'] as num,
-                      ),
-                    },
-                    marks: [IntervalMark()],
-                    axes: [
-                      Defaults.horizontalAxis,
-                      Defaults.verticalAxis,
-                    ],
                   ),
                 ),
               ),

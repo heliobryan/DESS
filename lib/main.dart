@@ -54,6 +54,7 @@ class DesApp extends StatelessWidget {
         'avafisPage': (context) => const AvafisPage(),
         'avatatPage': (context) => const AvatatPage(),
         'infoPage': (context) => const InfoPage(),
+        'passAvaliation': (context) => const AvaliationForm(),
       },
     );
   }

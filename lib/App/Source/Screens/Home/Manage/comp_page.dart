@@ -129,15 +129,15 @@ class _CompPageState extends State<CompPage> {
 }
 
 class InfoPage extends StatefulWidget {
-  const InfoPage({super.key});
+  const InfoPage({
+    super.key,
+  });
 
   @override
   State<InfoPage> createState() => _InfoPageState();
 }
 
 class _InfoPageState extends State<InfoPage> {
-  Map<String, dynamic> localData = {};
-
   @override
   void initState() {
     super.initState();
@@ -202,12 +202,12 @@ class _InfoPageState extends State<InfoPage> {
                   children: [
                     const SizedBox(height: 10),
                     Text(
-                      '${localData['event']['name'] ?? ''}',
+                      '',
                       style: comp20Out(),
                     ),
                     const SizedBox(height: 30),
                     GradientText(
-                      '${localData['']}',
+                      '',
                       style: const TextStyle(
                         fontFamily: 'OUTFIT',
                         fontWeight: FontWeight.bold,

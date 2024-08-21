@@ -130,6 +130,21 @@ class _AvatecPageState extends State<AvatecPage> {
                           onPressed: () {
                             setState(() {
                               passState = !passState;
+                              if (finalState = true) {
+                                finalState = false;
+                              }
+                              if (controlState = true) {
+                                controlState = false;
+                              }
+                              if (driState = true) {
+                                driState = false;
+                              }
+                              if (interState = true) {
+                                interState = false;
+                              }
+                              if (headState = true) {
+                                headState = false;
+                              }
                             });
                           },
                         ),
@@ -163,6 +178,21 @@ class _AvatecPageState extends State<AvatecPage> {
                           onPressed: () {
                             setState(() {
                               finalState = !finalState;
+                              if (passState = true) {
+                                passState = false;
+                              }
+                              if (controlState = true) {
+                                controlState = false;
+                              }
+                              if (driState = true) {
+                                driState = false;
+                              }
+                              if (interState = true) {
+                                interState = false;
+                              }
+                              if (headState = true) {
+                                headState = false;
+                              }
                             });
                           },
                         ),
@@ -198,6 +228,21 @@ class _AvatecPageState extends State<AvatecPage> {
                           onPressed: () {
                             setState(() {
                               controlState = !controlState;
+                              if (finalState = true) {
+                                finalState = false;
+                              }
+                              if (passState = true) {
+                                controlState = false;
+                              }
+                              if (driState = true) {
+                                driState = false;
+                              }
+                              if (interState = true) {
+                                interState = false;
+                              }
+                              if (headState = true) {
+                                headState = false;
+                              }
                             });
                           },
                         ),
@@ -233,6 +278,21 @@ class _AvatecPageState extends State<AvatecPage> {
                           onPressed: () {
                             setState(() {
                               headState = !headState;
+                              if (passState = true) {
+                                passState = false;
+                              }
+                              if (controlState = true) {
+                                controlState = false;
+                              }
+                              if (driState = true) {
+                                driState = false;
+                              }
+                              if (interState = true) {
+                                interState = false;
+                              }
+                              if (finalState = true) {
+                                finalState = false;
+                              }
                             });
                           },
                         ),
@@ -268,6 +328,21 @@ class _AvatecPageState extends State<AvatecPage> {
                           onPressed: () {
                             setState(() {
                               driState = !driState;
+                              if (finalState = true) {
+                                finalState = false;
+                              }
+                              if (controlState = true) {
+                                controlState = false;
+                              }
+                              if (passState = true) {
+                                passState = false;
+                              }
+                              if (interState = true) {
+                                interState = false;
+                              }
+                              if (headState = true) {
+                                headState = false;
+                              }
                             });
                           },
                         ),
@@ -303,6 +378,21 @@ class _AvatecPageState extends State<AvatecPage> {
                           onPressed: () {
                             setState(() {
                               interState = !interState;
+                              if (finalState = true) {
+                                finalState = false;
+                              }
+                              if (controlState = true) {
+                                controlState = false;
+                              }
+                              if (driState = true) {
+                                driState = false;
+                              }
+                              if (passState = true) {
+                                passState = false;
+                              }
+                              if (headState = true) {
+                                headState = false;
+                              }
                             });
                           },
                         ),
@@ -349,27 +439,379 @@ class _AvatecPageState extends State<AvatecPage> {
                 const SizedBox(height: 20),
                 Visibility(
                   visible: passState,
-                  child: const PassCard(),
+                  child: Expanded(
+                    child: ListView(
+                      children: const [
+                        PassCard(),
+                      ],
+                    ),
+                  ),
                 ),
                 Visibility(
                   visible: finalState,
-                  child: const PassCard(),
+                  child: Expanded(
+                    child: ListView(
+                      children: const [
+                        PassCard(),
+                      ],
+                    ),
+                  ),
                 ),
                 Visibility(
                   visible: controlState,
-                  child: const PassCard(),
+                  child: Expanded(
+                    child: ListView(
+                      children: const [
+                        PassCard(),
+                      ],
+                    ),
+                  ),
                 ),
                 Visibility(
                   visible: headState,
-                  child: const PassCard(),
+                  child: Expanded(
+                    child: ListView(
+                      children: const [
+                        PassCard(),
+                      ],
+                    ),
+                  ),
                 ),
                 Visibility(
                   visible: driState,
-                  child: const PassCard(),
+                  child: Expanded(
+                    child: ListView(
+                      children: const [
+                        PassCard(),
+                      ],
+                    ),
+                  ),
                 ),
                 Visibility(
                   visible: interState,
-                  child: const PassCard(),
+                  child: Expanded(
+                    child: ListView(
+                      children: const [
+                        PassCard(),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class AvaliationForm extends StatefulWidget {
+  const AvaliationForm({super.key});
+
+  @override
+  State<AvaliationForm> createState() => _AvaliationFormState();
+}
+
+class _AvaliationFormState extends State<AvaliationForm> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF121212),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
+            size: 25,
+          ),
+          onPressed: () => Navigator.pop(context, 'avaliationPage'),
+        ),
+        title: Text(
+          'Técnica',
+          style: comp20Str(),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.exit_to_app,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () => showDialog(
+              context: context,
+              builder: (BuildContext context) => const ExitButton(),
+            ),
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          const GradientBack(),
+          const BackgroudImage(),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(height: 20),
+                Container(
+                  width: 112,
+                  height: 110,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: GradientBoxBorder(
+                      width: 3,
+                      gradient: gradientLk(),
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.account_circle_outlined,
+                    color: Colors.white,
+                    size: 105,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Column(
+                  children: [
+                    Text(
+                      'Name',
+                      style: comp20Str(),
+                    ),
+                    Text(
+                      'Atacante - Sub 13 - Society',
+                      style: comp15Out(),
+                    ),
+                    Text(
+                      'Escola Flamengo - Caratinga MG',
+                      style: comp15Out(),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.all(18),
+                    children: [
+                      Column(
+                        children: [
+                          const SizedBox(height: 20),
+                          Container(
+                            width: 317,
+                            height: 117,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(12)),
+                              border: GradientBoxBorder(
+                                gradient: gradientLk(),
+                              ),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.check,
+                                    size: 30,
+                                    color: Colors.green,
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    'Passes certos',
+                                    style: comp15Out(),
+                                  ),
+                                  const SizedBox(height: 15),
+                                  Container(
+                                    width: 280,
+                                    height: 28,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(12)),
+                                      border: GradientBoxBorder(
+                                        gradient: gradientLk(),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            Icons.horizontal_rule_outlined,
+                                            size: 10,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Text(
+                                          '111',
+                                          style: comp15Out(),
+                                        ),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            Icons.add,
+                                            size: 10,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            width: 317,
+                            height: 117,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(12)),
+                              border: GradientBoxBorder(
+                                gradient: gradientLk(),
+                              ),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.close,
+                                    size: 30,
+                                    color: Colors.red,
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    'Passes errados',
+                                    style: comp15Out(),
+                                  ),
+                                  const SizedBox(height: 15),
+                                  Container(
+                                    width: 280,
+                                    height: 28,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(12)),
+                                      border: GradientBoxBorder(
+                                        gradient: gradientLk(),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            Icons.horizontal_rule_outlined,
+                                            size: 10,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Text(
+                                          '111',
+                                          style: comp15Out(),
+                                        ),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            Icons.add,
+                                            size: 10,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Container(
+                            width: 317,
+                            height: 217,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(12)),
+                              border: GradientBoxBorder(
+                                gradient: gradientLk(),
+                              ),
+                            ),
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.account_circle_outlined,
+                                    size: 40,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    'Nota Final',
+                                    style: comp15Out(),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Container(
+                                    width: 100,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(12),
+                                      ),
+                                      border: GradientBoxBorder(
+                                        gradient: gradientLk(),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '10',
+                                        style: comp16Out(),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Container(
+                                    width: 120,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(12),
+                                      ),
+                                      border: GradientBoxBorder(
+                                        gradient: gradientLk(),
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: OutlinedButton(
+                                        onPressed: () {},
+                                        style: OutlinedButton.styleFrom(
+                                          side: const BorderSide(
+                                              color: Colors.transparent),
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(12),
+                                            ),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Salvar',
+                                          style: comp15Str(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

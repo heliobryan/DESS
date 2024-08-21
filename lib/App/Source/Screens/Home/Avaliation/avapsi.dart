@@ -12,6 +12,11 @@ class AvapsiPage extends StatefulWidget {
 }
 
 class _AvapsiPageState extends State<AvapsiPage> {
+  bool focState = true;
+  bool conState = false;
+  bool resState = false;
+  bool respState = false;
+  bool humState = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -325,14 +330,7 @@ class _AvapsiPageState extends State<AvapsiPage> {
               ),
               const SizedBox(height: 20),
               const Column(
-                children: [
-                  PsiCard(),
-                  SizedBox(height: 20),
-                  PsiCard(),
-                  SizedBox(height: 20),
-                  PsiCard(),
-                  SizedBox(height: 20),
-                ],
+                children: [],
               ),
             ],
           ),

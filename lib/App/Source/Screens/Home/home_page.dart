@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                     height: 21,
                     width: 21,
                   ),
-                  label: 'Avaliações',
+                  label: 'Critérios',
                 ),
                 NavigationDestination(
                   icon: SvgPicture.asset(
@@ -220,7 +220,7 @@ class _Home1PageState extends State<Home1Page> {
                     },
                     itemCount: participantsList.length,
                   ),
-                )
+                ),
               ],
             ),
           ),

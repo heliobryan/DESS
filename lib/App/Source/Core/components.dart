@@ -712,3 +712,22 @@ class ProCard1 extends StatelessWidget {
     );
   }
 }
+
+class LocalEvent extends StatefulWidget {
+  final Map<String, dynamic> localData;
+
+  const LocalEvent({super.key, required this.localData});
+
+  @override
+  State<LocalEvent> createState() => _LocalEventState();
+}
+
+class _LocalEventState extends State<LocalEvent> {
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      widget.localData['event']['name'],
+      style: comp20Out(),
+    );
+  }
+}
