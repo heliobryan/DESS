@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:math';
+import 'dart:developer';
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:http/http.dart' as http;
 import 'package:dess/App/Source/Core/components.dart';
@@ -11,14 +11,21 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AvafisPage extends StatefulWidget {
-  const AvafisPage({super.key});
+  const AvafisPage({
+    super.key,
+    required List<String> subCriterias,
+  });
 
   @override
   State<AvafisPage> createState() => _AvafisPageState();
 }
 
 class _AvafisPageState extends State<AvafisPage> {
+  Map<String, dynamic> subData = {};
+
   List subCriteriaList = [];
+
+  final criterion = String;
 
   @override
   void initState() {
@@ -104,18 +111,11 @@ class _AvafisPageState extends State<AvafisPage> {
                 const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
                     itemBuilder: (context, index) {
-                      final subCriterias = subCriteriaList[index];
-
-                      log('cada subcriterio: $subCriterias' as num);
-
-                      // return const SizedBox.shrink();
-                      return SubCriteriaCard(
-                        subCriterias: subCriterias,
-                      );
+                      final subCriteria = subCriteriaList[index];
+                      return SubCriteriaCard(subCriterias: subCriteria);
                     },
                     itemCount: subCriteriaList.length,
                   ),
@@ -173,9 +173,9 @@ class _AvafisPageState extends State<AvafisPage> {
 
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/criteria');
+      var url = Uri.parse('${expenseListApi}api/subcriteria?search=$criterion');
       final token = sharedPreferences.getString('token');
-      log('token $token' as num);
+      log('token $token');
       var restAwnser = await http.get(
         url,
         headers: {
@@ -184,7 +184,7 @@ class _AvafisPageState extends State<AvafisPage> {
       );
       // final decode = jsonDecode(restAwnser.body);
       if (restAwnser.statusCode == 200) {
-        log('response ${restAwnser.body}' as num);
+        log('response ${restAwnser.body}');
         final decode = jsonDecode(restAwnser.body);
         setState(() {
           subCriteriaList = decode;
@@ -193,7 +193,7 @@ class _AvafisPageState extends State<AvafisPage> {
         // log('DADOS DO USUARIO FINAL $userData');
       }
     } catch (e) {
-      log(e.toString() as num);
+      log(e.toString());
     }
   }
 }

@@ -116,6 +116,7 @@ class Home1Page extends StatefulWidget {
 
 class _Home1PageState extends State<Home1Page> {
   Map<String, dynamic> userDados = {};
+
   List participantsList = [];
 
   @override
@@ -251,7 +252,7 @@ class _Home1PageState extends State<Home1Page> {
       if (restAwnser.statusCode == 200) {
         final decode = jsonDecode(restAwnser.body);
         setState(() {
-          userDados = decode['user'];
+          userDados = decode;
         });
 
         log('DADOS DO USUARIO FINAL $userDados');
@@ -281,7 +282,7 @@ class _Home1PageState extends State<Home1Page> {
         log('response ${restAwnser.body}');
         final decode = jsonDecode(restAwnser.body);
         setState(() {
-          participantsList = decode;
+          participantsList = decode['Sub-19'];
         });
 
         // log('DADOS DO USUARIO FINAL $userData');

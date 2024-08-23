@@ -1,4 +1,5 @@
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
@@ -66,7 +67,7 @@ class _CardPlayerState extends State<CardPlayer> {
                         Text(
                           widget.participants['position'] +
                               ' - ' +
-                              widget.participants['user']['birthday'] +
+                              widget.participants['category'] +
                               ' - ' +
                               widget.participants['modality']['name'],
                           style: comp16Out(),
@@ -140,23 +141,6 @@ class _CompCardState extends State<CompCard> {
   }
 }
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 317,
-      height: 117,
-      decoration: BoxDecoration(
-        border: GradientBoxBorder(
-          gradient: gradientLk(),
-        ),
-      ),
-    );
-  }
-}
-
 class CriteriaCard extends StatefulWidget {
   final Map<String, dynamic> criterias;
 
@@ -170,6 +154,7 @@ class CriteriaCard extends StatefulWidget {
 }
 
 class _CriteriaCardState extends State<CriteriaCard> {
+  var criterion = String;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -199,6 +184,7 @@ class _CriteriaCardState extends State<CriteriaCard> {
               {Navigator.pushNamed(context, 'avatecPage')}
             else
               null,
+            if (widget.criterias['name'] == 'Física') {}
           },
           child: Padding(
             padding: const EdgeInsets.all(12),
@@ -219,7 +205,7 @@ class _CriteriaCardState extends State<CriteriaCard> {
 }
 
 class SubCriteriaCard extends StatefulWidget {
-  final Map<String?, dynamic> subCriterias;
+  final Map<String, dynamic> subCriterias;
 
   const SubCriteriaCard({
     super.key,
@@ -247,12 +233,17 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
           ),
         ),
         child: OutlinedButton(
+          style: OutlinedButton.styleFrom(
+              side: const BorderSide(color: Colors.transparent)),
           onPressed: () {},
-          child: Center(
-            child: Text(
-              widget.subCriterias['subcriteria']['name'],
-              style: comp10Out(),
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                widget.subCriterias['name'],
+                style: comp10Out(),
+              ),
+            ],
           ),
         ),
       ),
