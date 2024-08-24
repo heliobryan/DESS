@@ -1,5 +1,6 @@
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
@@ -20,67 +21,72 @@ class _CardPlayerState extends State<CardPlayer> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(12),
-          ),
-          border: GradientBoxBorder(
-            gradient: LinearGradient(
-              colors: <Color>[
-                Color(0xFF981DB9),
-                Color(0xFF0F76CE),
-              ],
-            ),
-          ),
-        ),
-        child: OutlinedButton(
-          style: OutlinedButton.styleFrom(
-            foregroundColor: const Color(0xFF981DB9),
-            shape: const RoundedRectangleBorder(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Container(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
                 Radius.circular(12),
               ),
-            ),
-            side: const BorderSide(color: Colors.transparent),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: Stack(
-              children: [
-                const Icon(
-                  Icons.account_circle_outlined,
-                  color: Colors.white,
-                  size: 40,
+              border: GradientBoxBorder(
+                gradient: LinearGradient(
+                  colors: <Color>[
+                    Color(0xFF981DB9),
+                    Color(0xFF0F76CE),
+                  ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              ),
+            ),
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                foregroundColor: const Color(0xFF981DB9),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                ),
+                side: const BorderSide(color: Colors.transparent),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Column(
-                      children: [
-                        Text(
-                          widget.participants['user']['name'] +
-                              ' ' +
-                              widget.participants['user']['last_name'],
-                          style: comp16Out(),
-                        ),
-                        Text(
-                          widget.participants['position'] +
-                              ' - ' +
-                              widget.participants['category'] +
-                              ' - ' +
-                              widget.participants['modality']['name'],
-                          style: comp16Out(),
-                        ),
-                      ],
+                    const Icon(
+                      Icons.account_circle_outlined,
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                    const SizedBox(width: 12), // Espaço entre o ícone e o texto
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              '${widget.participants['user']['name']} ${widget.participants['user']['last_name']}',
+                              style: comp16Out(),
+                            ),
+                          ),
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              '${widget.participants['position']} - ${widget.participants['category']} - ${widget.participants['modality']['name']}',
+                              style: comp16Out(),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ],
+              ),
+              onPressed: () => Navigator.pushNamed(context, 'avaliationPage'),
             ),
-          ),
-          onPressed: () => Navigator.pushNamed(context, 'avaliationPage'),
-        ),
+          );
+        },
       ),
     );
   }
@@ -175,16 +181,28 @@ class _CriteriaCardState extends State<CriteriaCard> {
               ),
             ),
           ),
-          onPressed: () => {
-            if (widget.criterias['name'] == 'Física')
-              {Navigator.pushNamed(context, 'avafisPage')}
-            else
-              null,
-            if (widget.criterias['name'] == 'Técnica')
-              {Navigator.pushNamed(context, 'avatecPage')}
-            else
-              null,
-            if (widget.criterias['name'] == 'Física') {}
+          onPressed: () {
+            if (widget.criterias['name'] == 'Física') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AvafisPage(
+                    subCriterias: widget
+                        .criterias['subcriteria'], // Passando subcritérios
+                  ),
+                ),
+              );
+            } else if (widget.criterias['name'] == 'Técnica') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AvatecPage(
+                    subCriterias: widget
+                        .criterias['subcriteria'], // Passando subcritérios
+                  ),
+                ),
+              );
+            }
           },
           child: Padding(
             padding: const EdgeInsets.all(12),
@@ -246,6 +264,56 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class AgeCard extends StatefulWidget {
+  const AgeCard({super.key});
+
+  @override
+  State<AgeCard> createState() => _AgeCardState();
+}
+
+class _AgeCardState extends State<AgeCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 341,
+      height: 62,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(12),
+        ),
+        border: GradientBoxBorder(
+          gradient: LinearGradient(
+            colors: <Color>[
+              Color(0xFF981DB9),
+              Color(0xFF0F76CE),
+            ],
+          ),
+        ),
+      ),
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: const Color(0xFF981DB9),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+          ),
+          side: const BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        child: Center(
+          child: Text(
+            '',
+            style: comp40Out(),
+          ),
+        ),
+        onPressed: () {},
       ),
     );
   }

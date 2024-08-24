@@ -1,23 +1,28 @@
-import 'package:dess/App/Source/Core/AvatecComponents/pass_card.dart';
+import 'dart:convert';
+import 'dart:developer';
+import 'package:dess/App/Source/Core/CardComponents/cards.dart';
+import 'package:http/http.dart' as http;
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AvatecPage extends StatefulWidget {
-  const AvatecPage({super.key});
+  final List<dynamic> subCriterias;
+  const AvatecPage({
+    super.key,
+    required this.subCriterias,
+  });
 
   @override
   State<AvatecPage> createState() => _AvatecPageState();
 }
 
 class _AvatecPageState extends State<AvatecPage> {
-  bool passState = true;
-  bool finalState = false;
-  bool controlState = false;
-  bool headState = false;
-  bool driState = false;
-  bool interState = false;
+  List subCriteriaList = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,310 +99,18 @@ class _AvatecPageState extends State<AvatecPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const SizedBox(width: 20),
-                      Container(
-                        width: 105,
-                        height: 23,
-                        decoration: BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: gradientLk(),
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.transparent,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            side: const BorderSide(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                          child: Text(
-                            'Passes',
-                            style: comp15Out(),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              passState = !passState;
-                              if (finalState = true) {
-                                finalState = false;
-                              }
-                              if (controlState = true) {
-                                controlState = false;
-                              }
-                              if (driState = true) {
-                                driState = false;
-                              }
-                              if (interState = true) {
-                                interState = false;
-                              }
-                              if (headState = true) {
-                                headState = false;
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Container(
-                        width: 105,
-                        height: 23,
-                        decoration: BoxDecoration(
-                          border: GradientBoxBorder(gradient: gradientLk()),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.transparent,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            side: const BorderSide(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                          child: Text(
-                            'Finalização',
-                            style: comp12Out(),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              finalState = !finalState;
-                              if (passState = true) {
-                                passState = false;
-                              }
-                              if (controlState = true) {
-                                controlState = false;
-                              }
-                              if (driState = true) {
-                                driState = false;
-                              }
-                              if (interState = true) {
-                                interState = false;
-                              }
-                              if (headState = true) {
-                                headState = false;
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Container(
-                        width: 105,
-                        height: 23,
-                        decoration: BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: gradientLk(),
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.transparent,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            side: const BorderSide(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                          child: Text(
-                            'Contr. de bola',
-                            style: comp9Out(),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              controlState = !controlState;
-                              if (finalState = true) {
-                                finalState = false;
-                              }
-                              if (passState = true) {
-                                controlState = false;
-                              }
-                              if (driState = true) {
-                                driState = false;
-                              }
-                              if (interState = true) {
-                                interState = false;
-                              }
-                              if (headState = true) {
-                                headState = false;
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Container(
-                        width: 105,
-                        height: 23,
-                        decoration: BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: gradientLk(),
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.transparent,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            side: const BorderSide(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                          child: Text(
-                            'Cabeceio',
-                            style: comp13Out(),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              headState = !headState;
-                              if (passState = true) {
-                                passState = false;
-                              }
-                              if (controlState = true) {
-                                controlState = false;
-                              }
-                              if (driState = true) {
-                                driState = false;
-                              }
-                              if (interState = true) {
-                                interState = false;
-                              }
-                              if (finalState = true) {
-                                finalState = false;
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Container(
-                        width: 105,
-                        height: 23,
-                        decoration: BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: gradientLk(),
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.transparent,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            side: const BorderSide(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                          child: Text(
-                            'Dribles',
-                            style: comp13Out(),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              driState = !driState;
-                              if (finalState = true) {
-                                finalState = false;
-                              }
-                              if (controlState = true) {
-                                controlState = false;
-                              }
-                              if (passState = true) {
-                                passState = false;
-                              }
-                              if (interState = true) {
-                                interState = false;
-                              }
-                              if (headState = true) {
-                                headState = false;
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Container(
-                        width: 105,
-                        height: 23,
-                        decoration: BoxDecoration(
-                          border: GradientBoxBorder(
-                            gradient: gradientLk(),
-                          ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            foregroundColor: Colors.transparent,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            side: const BorderSide(
-                              color: Colors.transparent,
-                            ),
-                          ),
-                          child: Text(
-                            'Intercepçẽos',
-                            style: comp10Out(),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              interState = !interState;
-                              if (finalState = true) {
-                                finalState = false;
-                              }
-                              if (controlState = true) {
-                                controlState = false;
-                              }
-                              if (driState = true) {
-                                driState = false;
-                              }
-                              if (passState = true) {
-                                passState = false;
-                              }
-                              if (headState = true) {
-                                headState = false;
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                    ],
+                Expanded(
+                  child: ListView.builder(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    itemBuilder: (context, index) {
+                      final subCriteria = widget.subCriterias[index];
+
+                      return SubCriteriaCard(
+                        subCriterias: subCriteria,
+                      );
+                    },
+                    itemCount: widget.subCriterias.length,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -437,72 +150,42 @@ class _AvatecPageState extends State<AvatecPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Visibility(
-                  visible: passState,
-                  child: Expanded(
-                    child: ListView(
-                      children: const [
-                        PassCard(),
-                      ],
-                    ),
-                  ),
-                ),
-                Visibility(
-                  visible: finalState,
-                  child: Expanded(
-                    child: ListView(
-                      children: const [
-                        PassCard(),
-                      ],
-                    ),
-                  ),
-                ),
-                Visibility(
-                  visible: controlState,
-                  child: Expanded(
-                    child: ListView(
-                      children: const [
-                        PassCard(),
-                      ],
-                    ),
-                  ),
-                ),
-                Visibility(
-                  visible: headState,
-                  child: Expanded(
-                    child: ListView(
-                      children: const [
-                        PassCard(),
-                      ],
-                    ),
-                  ),
-                ),
-                Visibility(
-                  visible: driState,
-                  child: Expanded(
-                    child: ListView(
-                      children: const [
-                        PassCard(),
-                      ],
-                    ),
-                  ),
-                ),
-                Visibility(
-                  visible: interState,
-                  child: Expanded(
-                    child: ListView(
-                      children: const [
-                        PassCard(),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> getSubcriteria() async {
+    try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      var url = Uri.parse('${expenseListApi}api/subcriteria');
+      final token = sharedPreferences.getString('token');
+      log('token $token');
+      var restAwnser = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      // final decode = jsonDecode(restAwnser.body);
+      if (restAwnser.statusCode == 200) {
+        log('response ${restAwnser.body}');
+        final decode = jsonDecode(restAwnser.body);
+        setState(() {
+          subCriteriaList = decode;
+        });
+
+        // log('DADOS DO USUARIO FINAL $userData');
+      }
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }
 

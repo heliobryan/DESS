@@ -11,9 +11,10 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AvafisPage extends StatefulWidget {
+  final List<dynamic> subCriterias;
   const AvafisPage({
     super.key,
-    required List<String> subCriterias,
+    required this.subCriterias,
   });
 
   @override
@@ -21,11 +22,7 @@ class AvafisPage extends StatefulWidget {
 }
 
 class _AvafisPageState extends State<AvafisPage> {
-  Map<String, dynamic> subData = {};
-
   List subCriteriaList = [];
-
-  final criterion = String;
 
   @override
   void initState() {
@@ -111,13 +108,16 @@ class _AvafisPageState extends State<AvafisPage> {
                 const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
-                      final subCriteria = subCriteriaList[index];
-                      return SubCriteriaCard(subCriterias: subCriteria);
+                      final subCriteria = widget.subCriterias[index];
+
+                      return SubCriteriaCard(
+                        subCriterias: subCriteria,
+                      );
                     },
-                    itemCount: subCriteriaList.length,
+                    itemCount: widget.subCriterias.length,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -173,7 +173,7 @@ class _AvafisPageState extends State<AvafisPage> {
 
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/subcriteria?search=$criterion');
+      var url = Uri.parse('${expenseListApi}api/subcriteria');
       final token = sharedPreferences.getString('token');
       log('token $token');
       var restAwnser = await http.get(
