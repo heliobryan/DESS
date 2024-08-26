@@ -1,7 +1,7 @@
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -196,9 +196,21 @@ class Form3Page extends StatefulWidget {
 }
 
 class _Form3PageState extends State<Form3Page> {
-  final controller = PageController(
-    initialPage: 0,
-  );
+  final controller = PageController(initialPage: 0);
+
+  void _onCategorySelected(String category) {
+    // Navegar para a HomePage passando a categoria selecionada
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(
+          initialCategory: category,
+          selectedcategory: '',
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -211,18 +223,25 @@ class _Form3PageState extends State<Form3Page> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(height: 90),
-                Text(
-                  'QUAL FAIXA',
-                  style: comp20Str(),
-                ),
-                Text(
-                  'ÉTARIA?',
-                  style: comp20Str(),
-                ),
+                Text('QUAL FAIXA', style: comp20Str()),
+                Text('ÉTARIA?', style: comp20Str()),
                 const SizedBox(height: 90),
-                const Column(
+                Column(
                   children: [
-                    AgeCard(),
+                    AgeCard(
+                      category: 'Sub-17',
+                      onCategorySelected: _onCategorySelected,
+                    ),
+                    const SizedBox(height: 20),
+                    AgeCard(
+                      category: 'Sub-19',
+                      onCategorySelected: _onCategorySelected,
+                    ),
+                    const SizedBox(height: 20),
+                    AgeCard(
+                      category: 'Sub-21',
+                      onCategorySelected: _onCategorySelected,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),

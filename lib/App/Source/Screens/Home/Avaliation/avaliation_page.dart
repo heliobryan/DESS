@@ -8,7 +8,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AvaliationPage extends StatefulWidget {
-  const AvaliationPage({super.key});
+  final Map<String, dynamic> participantData;
+
+  const AvaliationPage({
+    super.key,
+    required this.participantData,
+  });
 
   @override
   State<AvaliationPage> createState() => _AvaliationPageState();
@@ -71,11 +76,9 @@ class _AvaliationPageState extends State<AvaliationPage> {
                     itemBuilder: (context, index) {
                       final criterias = criteriaList[index];
 
-                      log('cada criterio: $criterias');
-
-                      // return const SizedBox.shrink();
                       return CriteriaCard(
                         criterias: criterias,
+                        participantData: widget.participantData,
                       );
                     },
                     itemCount: criteriaList.length,
@@ -97,22 +100,17 @@ class _AvaliationPageState extends State<AvaliationPage> {
           await SharedPreferences.getInstance();
       var url = Uri.parse('${expenseListApi}api/criteria');
       final token = sharedPreferences.getString('token');
-      log('token $token');
       var restAwnser = await http.get(
         url,
         headers: {
           'Authorization': 'Bearer $token',
         },
       );
-      // final decode = jsonDecode(restAwnser.body);
       if (restAwnser.statusCode == 200) {
-        log('response ${restAwnser.body}');
         final decode = jsonDecode(restAwnser.body);
         setState(() {
           criteriaList = decode;
         });
-
-        // log('DADOS DO USUARIO FINAL $userData');
       }
     } catch (e) {
       log(e.toString());

@@ -178,6 +178,9 @@ class _PassportPageState extends State<PassportPage> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ],

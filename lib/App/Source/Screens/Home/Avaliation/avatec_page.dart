@@ -1,19 +1,17 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
-import 'package:http/http.dart' as http;
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AvatecPage extends StatefulWidget {
   final List<dynamic> subCriterias;
+  final Map<String, dynamic> participantData;
+
   const AvatecPage({
     super.key,
     required this.subCriterias,
+    required this.participantData,
   });
 
   @override
@@ -21,8 +19,6 @@ class AvatecPage extends StatefulWidget {
 }
 
 class _AvatecPageState extends State<AvatecPage> {
-  List subCriteriaList = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +32,7 @@ class _AvatecPageState extends State<AvatecPage> {
             color: Colors.white,
             size: 25,
           ),
-          onPressed: () => Navigator.pop(context, 'avaliationPage'),
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Técnica',
@@ -85,29 +81,31 @@ class _AvatecPageState extends State<AvatecPage> {
                 Column(
                   children: [
                     Text(
-                      'Name',
-                      style: comp20Str(),
+                      '${widget.participantData['user']['name']}',
+                      style: comp25Str(),
                     ),
                     Text(
-                      'Atacante - Sub 13 - Society',
+                      '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
                       style: comp15Out(),
                     ),
                     Text(
-                      'Escola Flamengo - Caratinga MG',
+                      '${widget.participantData['team']['name']}',
                       style: comp15Out(),
                     ),
+                    // Adicione mais informações do participante se necessário
                   ],
                 ),
                 const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
                     padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
                     itemBuilder: (context, index) {
                       final subCriteria = widget.subCriterias[index];
 
                       return SubCriteriaCard(
                         subCriterias: subCriteria,
+                        subCriteria: null,
                       );
                     },
                     itemCount: widget.subCriterias.length,
@@ -136,14 +134,14 @@ class _AvatecPageState extends State<AvatecPage> {
                       ),
                     ),
                     onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CalendarPage())),
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CalendarPage(),
+                      ),
+                    ),
                     child: Center(
                       child: Text(
-                        DateFormat.yMd().format(
-                          DateTime.now(),
-                        ),
+                        DateFormat.yMd().format(DateTime.now()),
                         style: comp15Out(),
                       ),
                     ),
@@ -156,36 +154,6 @@ class _AvatecPageState extends State<AvatecPage> {
         ],
       ),
     );
-  }
-
-  Future<void> getSubcriteria() async {
-    try {
-      String expenseListApi = dotenv.get('API_HOST', fallback: '');
-
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/subcriteria');
-      final token = sharedPreferences.getString('token');
-      log('token $token');
-      var restAwnser = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-      // final decode = jsonDecode(restAwnser.body);
-      if (restAwnser.statusCode == 200) {
-        log('response ${restAwnser.body}');
-        final decode = jsonDecode(restAwnser.body);
-        setState(() {
-          subCriteriaList = decode;
-        });
-
-        // log('DADOS DO USUARIO FINAL $userData');
-      }
-    } catch (e) {
-      log(e.toString());
-    }
   }
 }
 

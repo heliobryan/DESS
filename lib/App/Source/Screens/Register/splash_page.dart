@@ -22,8 +22,14 @@ class _SplashPageState extends State<SplashPage> {
       () => tokenVerify().then((value) {
         if (value) {
           // ignore: use_build_context_synchronously
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => const HomePage()));
+          Navigator.pushReplacement(
+              // ignore: use_build_context_synchronously
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const HomePage(
+                        selectedcategory: '',
+                        initialCategory: '',
+                      )));
         } else {
           // ignore: use_build_context_synchronously
           Navigator.pushReplacement(context,

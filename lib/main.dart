@@ -30,7 +30,10 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomePage(),
+      home: const HomePage(
+        selectedcategory: '',
+        initialCategory: '',
+      ),
       debugShowCheckedModeBanner: false,
       routes: {
         'initialPage': (context) => const InitialPage(),
@@ -39,8 +42,13 @@ class DesApp extends StatelessWidget {
         'form1Page': (context) => const Form1Page(),
         'form2Page': (context) => const Form2Page(),
         'form3Page': (context) => const Form3Page(),
-        'homePage': (context) => const HomePage(),
-        'avaliationPage': (context) => const AvaliationPage(),
+        'homePage': (context) => const HomePage(
+              selectedcategory: '',
+              initialCategory: '',
+            ),
+        'avaliationPage': (context) => const AvaliationPage(
+              participantData: {},
+            ),
         'managePage': (context) => const ManagePage(),
         'passportPage': (context) => const PassportPage(),
         'imageManagePage': (context) => const ImageManagePage(),
@@ -52,6 +60,11 @@ class DesApp extends StatelessWidget {
         'loginPage': (context) => const LoginPage(),
         'avafisPage': (context) => const AvafisPage(
               subCriterias: [],
+              participantData: {},
+            ),
+        'avaTec': (context) => const AvatecPage(
+              subCriterias: [],
+              participantData: {},
             ),
         'avatatPage': (context) => const AvatatPage(),
         'infoPage': (context) => const InfoPage(),

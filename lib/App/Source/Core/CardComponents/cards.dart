@@ -1,5 +1,6 @@
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
@@ -57,7 +58,7 @@ class _CardPlayerState extends State<CardPlayer> {
                       color: Colors.white,
                       size: 40,
                     ),
-                    const SizedBox(width: 12), // Espaço entre o ícone e o texto
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,7 +84,14 @@ class _CardPlayerState extends State<CardPlayer> {
                   ],
                 ),
               ),
-              onPressed: () => Navigator.pushNamed(context, 'avaliationPage'),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AvaliationPage(
+                    participantData: widget.participants,
+                  ),
+                ),
+              ),
             ),
           );
         },
@@ -149,10 +157,12 @@ class _CompCardState extends State<CompCard> {
 
 class CriteriaCard extends StatefulWidget {
   final Map<String, dynamic> criterias;
+  final Map<String, dynamic> participantData;
 
   const CriteriaCard({
     super.key,
     required this.criterias,
+    required this.participantData,
   });
 
   @override
@@ -160,7 +170,6 @@ class CriteriaCard extends StatefulWidget {
 }
 
 class _CriteriaCardState extends State<CriteriaCard> {
-  var criterion = String;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -187,8 +196,8 @@ class _CriteriaCardState extends State<CriteriaCard> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => AvafisPage(
-                    subCriterias: widget
-                        .criterias['subcriteria'], // Passando subcritérios
+                    subCriterias: widget.criterias['subcriteria'],
+                    participantData: widget.participantData,
                   ),
                 ),
               );
@@ -197,8 +206,8 @@ class _CriteriaCardState extends State<CriteriaCard> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => AvatecPage(
-                    subCriterias: widget
-                        .criterias['subcriteria'], // Passando subcritérios
+                    subCriterias: widget.criterias['subcriteria'],
+                    participantData: widget.participantData,
                   ),
                 ),
               );
@@ -228,6 +237,7 @@ class SubCriteriaCard extends StatefulWidget {
   const SubCriteriaCard({
     super.key,
     required this.subCriterias,
+    required subCriteria,
   });
 
   @override
@@ -270,7 +280,14 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
 }
 
 class AgeCard extends StatefulWidget {
-  const AgeCard({super.key});
+  final String category;
+  final Function(String) onCategorySelected;
+
+  const AgeCard({
+    super.key,
+    required this.category,
+    required this.onCategorySelected,
+  });
 
   @override
   State<AgeCard> createState() => _AgeCardState();
@@ -283,9 +300,7 @@ class _AgeCardState extends State<AgeCard> {
       width: 341,
       height: 62,
       decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(12),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(12)),
         border: GradientBoxBorder(
           gradient: LinearGradient(
             colors: <Color>[
@@ -299,21 +314,19 @@ class _AgeCardState extends State<AgeCard> {
         style: OutlinedButton.styleFrom(
           foregroundColor: const Color(0xFF981DB9),
           shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(12),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
-          side: const BorderSide(
-            color: Colors.transparent,
-          ),
+          side: const BorderSide(color: Colors.transparent),
         ),
         child: Center(
           child: Text(
-            '',
+            widget.category,
             style: comp40Out(),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          widget.onCategorySelected(widget.category);
+        },
       ),
     );
   }

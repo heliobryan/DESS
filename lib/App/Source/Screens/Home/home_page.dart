@@ -13,9 +13,15 @@ import 'package:gradient_borders/input_borders/gradient_outline_input_border.dar
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String initialCategory;
+
+  const HomePage(
+      {super.key,
+      required String selectedcategory,
+      required this.initialCategory});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -23,93 +29,112 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentPageIndex = 0;
-  final List<Widget> _screens = [
-    const Home1Page(),
-    const AvaliationPage(),
-    const PassportPage(),
-    const ManagePage(),
-    const ImageManagePage(),
-  ];
+
+  late final List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      Home1Page(
+        selectedCategory: widget.initialCategory,
+      ),
+      const AvaliationPage(
+        participantData: {},
+      ),
+      const PassportPage(),
+      const ManagePage(),
+      const ImageManagePage(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[currentPageIndex],
-      bottomNavigationBar: Container(
-          height: 56,
-          decoration: BoxDecoration(
-            gradient: gradientLk(),
-          ),
-          child: NavigationBarTheme(
-            data: const NavigationBarThemeData(
-              indicatorColor: Colors.transparent,
-              overlayColor: WidgetStatePropertyAll(Colors.transparent),
-              labelTextStyle: WidgetStatePropertyAll(
-                TextStyle(
-                  fontSize: 10,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'OUTFIT',
-                  color: Colors.white,
-                ),
-              ),
-              iconTheme: WidgetStatePropertyAll(
-                IconThemeData(
-                  color: Colors.white,
-                  size: 24,
-                ),
-              ),
-            ),
-            child: NavigationBar(
-              backgroundColor: Colors.transparent,
-              onDestinationSelected: (int index) {
-                setState(() {
-                  currentPageIndex = index;
-                });
-              },
-              destinations: [
-                NavigationDestination(
-                  icon: SvgPicture.asset(
-                    'assets/images/homevetor.svg',
-                    height: 21,
-                    width: 21,
-                  ),
-                  label: 'Home',
-                ),
-                NavigationDestination(
-                  icon: SvgPicture.asset(
-                    'assets/images/sportvetor.svg',
-                    height: 21,
-                    width: 21,
-                  ),
-                  label: 'Critérios',
-                ),
-                NavigationDestination(
-                  icon: SvgPicture.asset(
-                    'assets/images/passvetor.svg',
-                    height: 21,
-                    width: 21,
-                  ),
-                  label: 'Passaporte B.',
-                ),
-                NavigationDestination(
-                  icon: SvgPicture.asset(
-                    'assets/images/managevetor.svg',
-                    height: 21,
-                    width: 21,
-                  ),
-                  label: 'Gestão',
-                ),
-              ],
-            ),
-          )),
+      bottomNavigationBar: _buildBottomNavigationBar(),
       backgroundColor: const Color(0xFF1E1E1E),
+    );
+  }
+
+  Widget _buildBottomNavigationBar() {
+    return Container(
+      height: 56,
+      decoration: BoxDecoration(
+        gradient: gradientLk(),
+      ),
+      child: NavigationBarTheme(
+        data: const NavigationBarThemeData(
+          indicatorColor: Colors.transparent,
+          overlayColor: WidgetStatePropertyAll(Colors.transparent),
+          labelTextStyle: WidgetStatePropertyAll(
+            TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'OUTFIT',
+              color: Colors.white,
+            ),
+          ),
+          iconTheme: WidgetStatePropertyAll(
+            IconThemeData(
+              color: Colors.white,
+              size: 24,
+            ),
+          ),
+        ),
+        child: NavigationBar(
+          backgroundColor: Colors.transparent,
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          destinations: [
+            NavigationDestination(
+              icon: SvgPicture.asset(
+                'assets/images/homevetor.svg',
+                height: 21,
+                width: 21,
+              ),
+              label: 'Home',
+            ),
+            NavigationDestination(
+              icon: SvgPicture.asset(
+                'assets/images/sportvetor.svg',
+                height: 21,
+                width: 21,
+              ),
+              label: 'Critérios',
+            ),
+            NavigationDestination(
+              icon: SvgPicture.asset(
+                'assets/images/passvetor.svg',
+                height: 21,
+                width: 21,
+              ),
+              label: 'Passaporte B.',
+            ),
+            NavigationDestination(
+              icon: SvgPicture.asset(
+                'assets/images/managevetor.svg',
+                height: 21,
+                width: 21,
+              ),
+              label: 'Gestão',
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
 class Home1Page extends StatefulWidget {
+  final String selectedCategory;
+
   const Home1Page({
     super.key,
+    required this.selectedCategory,
   });
 
   @override
@@ -120,12 +145,32 @@ class _Home1PageState extends State<Home1Page> {
   Map<String, dynamic> userDados = {};
 
   List participantsList = [];
+  List filteredParticipantsList = []; // Lista para os resultados filtrados
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     userInfo();
-    getParticipants();
+    getParticipants(widget.selectedCategory);
+    initializeDateFormatting();
+    searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    setState(() {
+      filteredParticipantsList = participantsList.where((participant) {
+        String participantName = participant['user']['name'].toLowerCase();
+        String searchQuery = searchController.text.toLowerCase();
+        return participantName.contains(searchQuery);
+      }).toList();
+    });
   }
 
   @override
@@ -165,7 +210,7 @@ class _Home1PageState extends State<Home1Page> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(16, 0, 0, 0),
                       child: Text(
-                        DateFormat.MMMMEEEEd().format(
+                        DateFormat.MMMMEEEEd('pt_BR').format(
                           DateTime.now(),
                         ),
                         style: comp15Str(),
@@ -174,31 +219,37 @@ class _Home1PageState extends State<Home1Page> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                SizedBox(
-                  width: 347,
-                  height: 27,
-                  child: TextField(
-                    style: comp20Out(),
-                    decoration: InputDecoration(
-                      prefix: const Text('   '),
-                      contentPadding: const EdgeInsets.all(1),
-                      suffixIcon: const Icon(
-                        Icons.search,
-                        color: Color(0xFF0F76CE),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: searchController,
+                          style: comp20Out(),
+                          decoration: InputDecoration(
+                            prefix: const Text('   '),
+                            contentPadding: const EdgeInsets.all(1),
+                            suffixIcon: const Icon(
+                              Icons.search,
+                              color: Color(0xFF0F76CE),
+                            ),
+                            border: GradientOutlineInputBorder(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(9)),
+                              gradient: gradientLk(),
+                              width: 1,
+                            ),
+                            focusedBorder: GradientOutlineInputBorder(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              gradient: gradientLk(),
+                              width: 1,
+                            ),
+                          ),
+                        ),
                       ),
-                      border: GradientOutlineInputBorder(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(9)),
-                        gradient: gradientLk(),
-                        width: 1,
-                      ),
-                      focusedBorder: GradientOutlineInputBorder(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(8)),
-                        gradient: gradientLk(),
-                        width: 1,
-                      ),
-                    ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -212,16 +263,12 @@ class _Home1PageState extends State<Home1Page> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
-                      final participants = participantsList[index];
-
-                      log('cada participante: $participants');
-
-                      // return const SizedBox.shrink();
+                      final participants = filteredParticipantsList[index];
                       return CardPlayer(
                         participants: participants,
                       );
                     },
-                    itemCount: participantsList.length,
+                    itemCount: filteredParticipantsList.length,
                   ),
                 ),
               ],
@@ -249,7 +296,6 @@ class _Home1PageState extends State<Home1Page> {
           'Authorization': 'Bearer $token',
         },
       );
-      // final decode = jsonDecode(restAwnser.body);
       log('response ${restAwnser.body}');
       if (restAwnser.statusCode == 200) {
         final decode = jsonDecode(restAwnser.body);
@@ -264,7 +310,7 @@ class _Home1PageState extends State<Home1Page> {
     }
   }
 
-  Future<void> getParticipants() async {
+  Future<void> getParticipants(String category) async {
     try {
       String expenseListApi = dotenv.get('API_HOST', fallback: '');
 
@@ -272,22 +318,21 @@ class _Home1PageState extends State<Home1Page> {
           await SharedPreferences.getInstance();
       var url = Uri.parse('${expenseListApi}api/participants');
       final token = sharedPreferences.getString('token');
-      log('token $token');
+
       var restAwnser = await http.get(
         url,
         headers: {
           'Authorization': 'Bearer $token',
         },
       );
-      // final decode = jsonDecode(restAwnser.body);
+
       if (restAwnser.statusCode == 200) {
-        log('response ${restAwnser.body}');
         final decode = jsonDecode(restAwnser.body);
         setState(() {
-          participantsList = decode['Sub-19'];
+          participantsList = decode[category] ?? [];
+          filteredParticipantsList =
+              participantsList; // Inicializar lista filtrada
         });
-
-        // log('DADOS DO USUARIO FINAL $userData');
       }
     } catch (e) {
       log(e.toString());

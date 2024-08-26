@@ -12,9 +12,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AvafisPage extends StatefulWidget {
   final List<dynamic> subCriterias;
+  final Map<String, dynamic> participantData;
+
   const AvafisPage({
     super.key,
     required this.subCriterias,
+    required this.participantData,
   });
 
   @override
@@ -92,15 +95,15 @@ class _AvafisPageState extends State<AvafisPage> {
                 Column(
                   children: [
                     Text(
-                      'Name',
+                      widget.participantData['user']['name'],
                       style: comp25Str(),
                     ),
                     Text(
-                      'Atacante - Sub 13 - Society',
+                      '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
                       style: comp15Out(),
                     ),
                     Text(
-                      'Escola Flamengo - Caratinga MG',
+                      '${widget.participantData['team']['name']}',
                       style: comp15Out(),
                     ),
                   ],
@@ -115,6 +118,7 @@ class _AvafisPageState extends State<AvafisPage> {
 
                       return SubCriteriaCard(
                         subCriterias: subCriteria,
+                        subCriteria: null,
                       );
                     },
                     itemCount: widget.subCriterias.length,
