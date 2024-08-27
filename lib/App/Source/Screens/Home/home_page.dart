@@ -145,7 +145,7 @@ class _Home1PageState extends State<Home1Page> {
   Map<String, dynamic> userDados = {};
 
   List participantsList = [];
-  List filteredParticipantsList = []; // Lista para os resultados filtrados
+  List filteredParticipantsList = [];
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -220,7 +220,7 @@ class _Home1PageState extends State<Home1Page> {
                 ),
                 const SizedBox(height: 20),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Row(
                     children: [
                       Expanded(
@@ -330,8 +330,7 @@ class _Home1PageState extends State<Home1Page> {
         final decode = jsonDecode(restAwnser.body);
         setState(() {
           participantsList = decode[category] ?? [];
-          filteredParticipantsList =
-              participantsList; // Inicializar lista filtrada
+          filteredParticipantsList = participantsList;
         });
       }
     } catch (e) {

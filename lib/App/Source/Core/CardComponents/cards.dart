@@ -1,3 +1,4 @@
+import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
@@ -238,6 +239,8 @@ class SubCriteriaCard extends StatefulWidget {
     super.key,
     required this.subCriterias,
     required subCriteria,
+    required Null Function() onTap,
+    required Null Function(List items) onSubCriteriaPressed,
   });
 
   @override
@@ -245,35 +248,77 @@ class SubCriteriaCard extends StatefulWidget {
 }
 
 class _SubCriteriaCardState extends State<SubCriteriaCard> {
+  bool _isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(12),
-      child: Container(
-        width: 125,
-        height: 23,
-        decoration: BoxDecoration(
-          border: GradientBoxBorder(
-            gradient: gradientLk(),
-          ),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(12),
-          ),
-        ),
-        child: OutlinedButton(
-          style: OutlinedButton.styleFrom(
-              side: const BorderSide(color: Colors.transparent)),
-          onPressed: () {},
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                widget.subCriterias['name'],
-                style: comp10Out(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: 125,
+            height: 23,
+            decoration: BoxDecoration(
+              border: GradientBoxBorder(
+                gradient: gradientLk(),
               ),
-            ],
+              borderRadius: const BorderRadius.all(
+                Radius.circular(12),
+              ),
+            ),
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  side: const BorderSide(color: Colors.transparent)),
+              onPressed: () {
+                setState(() {
+                  _isExpanded = !_isExpanded;
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.subCriterias['name'],
+                    style: comp12Out(),
+                  ),
+                ],
+              ),
+            ),
           ),
-        ),
+          const SizedBox(height: 10),
+          Visibility(
+            visible: _isExpanded,
+            child: Center(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: (widget.subCriterias['items'] as List)
+                    .where((item) => item['aspect'] == 'quantitative')
+                    .map<Widget>((item) {
+                  // Obtendo valores com um fallback para valores padrão
+                  int passesFeitos = item['passesFeitos'] ?? 0;
+                  int passesCertos = item['passesCertos'] ?? 0;
+                  int passesErrados = item['passesErrados'] ?? 0;
+                  double notaFinal = item['notaFinal']?.toDouble() ?? 0.0;
+
+                  return Column(
+                    children: [
+                      QuantitativeCard(
+                        title: item['name'],
+                        passesFeitos: passesFeitos,
+                        passesCertos: passesCertos,
+                        passesErrados: passesErrados,
+                        notaFinal: notaFinal,
+                      ),
+                      const SizedBox(height: 10),
+                    ],
+                  );
+                }).toList(),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

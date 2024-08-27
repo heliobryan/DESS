@@ -1,14 +1,9 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
-import 'package:http/http.dart' as http;
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AvafisPage extends StatefulWidget {
   final List<dynamic> subCriterias;
@@ -25,12 +20,12 @@ class AvafisPage extends StatefulWidget {
 }
 
 class _AvafisPageState extends State<AvafisPage> {
-  List subCriteriaList = [];
+  List<dynamic> selectedQuantitativeItems = [];
 
-  @override
-  void initState() {
-    super.initState();
-    getSubcriteria();
+  void showQuantitativeItems(List<dynamic> items) {
+    setState(() {
+      selectedQuantitativeItems = items;
+    });
   }
 
   @override
@@ -108,23 +103,7 @@ class _AvafisPageState extends State<AvafisPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    itemBuilder: (context, index) {
-                      final subCriteria = widget.subCriterias[index];
-
-                      return SubCriteriaCard(
-                        subCriterias: subCriteria,
-                        subCriteria: null,
-                      );
-                    },
-                    itemCount: widget.subCriterias.length,
-                  ),
-                ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 Container(
                   width: 149,
                   height: 23,
@@ -154,12 +133,30 @@ class _AvafisPageState extends State<AvafisPage> {
                     ),
                     child: Center(
                       child: Text(
-                        DateFormat.yMd().format(
+                        DateFormat.yMd('pt_BR').format(
                           DateTime.now(),
                         ),
                         style: comp15Out(),
                       ),
                     ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView.builder(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    itemBuilder: (context, index) {
+                      final subCriteria = widget.subCriterias[index];
+
+                      return SubCriteriaCard(
+                        subCriterias: subCriteria,
+                        subCriteria: null,
+                        onTap: () {},
+                        onSubCriteriaPressed: (List<dynamic> items) {},
+                      );
+                    },
+                    itemCount: widget.subCriterias.length,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -169,35 +166,5 @@ class _AvafisPageState extends State<AvafisPage> {
         ],
       ),
     );
-  }
-
-  Future<void> getSubcriteria() async {
-    try {
-      String expenseListApi = dotenv.get('API_HOST', fallback: '');
-
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/subcriteria');
-      final token = sharedPreferences.getString('token');
-      log('token $token');
-      var restAwnser = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-      // final decode = jsonDecode(restAwnser.body);
-      if (restAwnser.statusCode == 200) {
-        log('response ${restAwnser.body}');
-        final decode = jsonDecode(restAwnser.body);
-        setState(() {
-          subCriteriaList = decode;
-        });
-
-        // log('DADOS DO USUARIO FINAL $userData');
-      }
-    } catch (e) {
-      log(e.toString());
-    }
   }
 }

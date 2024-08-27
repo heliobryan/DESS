@@ -30,10 +30,7 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomePage(
-        selectedcategory: '',
-        initialCategory: '',
-      ),
+      home: const Form3Page(),
       debugShowCheckedModeBanner: false,
       routes: {
         'initialPage': (context) => const InitialPage(),

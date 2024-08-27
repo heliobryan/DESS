@@ -95,23 +95,6 @@ class _AvatecPageState extends State<AvatecPage> {
                     // Adicione mais informações do participante se necessário
                   ],
                 ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-                    itemBuilder: (context, index) {
-                      final subCriteria = widget.subCriterias[index];
-
-                      return SubCriteriaCard(
-                        subCriterias: subCriteria,
-                        subCriteria: null,
-                      );
-                    },
-                    itemCount: widget.subCriterias.length,
-                  ),
-                ),
-                const SizedBox(height: 20),
                 Container(
                   width: 149,
                   height: 23,
@@ -141,10 +124,30 @@ class _AvatecPageState extends State<AvatecPage> {
                     ),
                     child: Center(
                       child: Text(
-                        DateFormat.yMd().format(DateTime.now()),
+                        DateFormat.yMd('pt_BR').format(
+                          DateTime.now(),
+                        ),
                         style: comp15Out(),
                       ),
                     ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView.builder(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                    itemBuilder: (context, index) {
+                      final subCriteria = widget.subCriterias[index];
+
+                      return SubCriteriaCard(
+                        subCriterias: subCriteria,
+                        subCriteria: null,
+                        onTap: () {},
+                        onSubCriteriaPressed: (List<dynamic> items) {},
+                      );
+                    },
+                    itemCount: widget.subCriterias.length,
                   ),
                 ),
                 const SizedBox(height: 20),
