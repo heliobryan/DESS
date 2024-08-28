@@ -55,18 +55,39 @@ class QuantitativeCard extends StatefulWidget {
 }
 
 class _QuantitativeCardState extends State<QuantitativeCard> {
-  late int passesFeitos;
-  late int passesCertos;
-  late int passesErrados;
-  late double notaFinal;
+  int passesFeitos = 0; // Inicializado com valor padrão
+  int passesCertos = 0; // Inicializado com valor padrão
+  int passesErrados = 0; // Inicializado com valor padrão
+  double notaFinal = 0.0; // Inicializado com valor padrão
 
   @override
   void initState() {
     super.initState();
-    passesFeitos = widget.passesFeitos;
-    passesCertos = widget.passesCertos;
-    passesErrados = widget.passesErrados;
-    notaFinal = widget.notaFinal;
+    _loadData();
+  }
+
+  // Carregar dados do SharedPreferences
+  Future<void> _loadData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      passesFeitos =
+          prefs.getInt('${widget.title}_passesFeitos') ?? widget.passesFeitos;
+      passesCertos =
+          prefs.getInt('${widget.title}_passesCertos') ?? widget.passesCertos;
+      passesErrados =
+          prefs.getInt('${widget.title}_passesErrados') ?? widget.passesErrados;
+      notaFinal =
+          prefs.getDouble('${widget.title}_notaFinal') ?? widget.notaFinal;
+    });
+  }
+
+  // Salvar dados no SharedPreferences
+  Future<void> _saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('${widget.title}_passesFeitos', passesFeitos);
+    await prefs.setInt('${widget.title}_passesCertos', passesCertos);
+    await prefs.setInt('${widget.title}_passesErrados', passesErrados);
+    await prefs.setDouble('${widget.title}_notaFinal', notaFinal);
   }
 
   @override
@@ -113,11 +134,15 @@ class _QuantitativeCardState extends State<QuantitativeCard> {
                 );
 
                 if (result != null) {
+                  // Atualizar o estado do card com os dados recebidos
                   setState(() {
-                    passesCertos = result['passesCertos'];
-                    passesErrados = result['passesErrados'];
-                    notaFinal = result['notaFinal'];
+                    passesCertos = result['passesCertos'] ?? passesCertos;
+                    passesErrados = result['passesErrados'] ?? passesErrados;
+                    notaFinal = result['notaFinal']?.toDouble() ?? notaFinal;
                     passesFeitos = passesCertos + passesErrados;
+
+                    // Salvar dados atualizados
+                    _saveData();
                   });
                 }
               },
@@ -257,32 +282,14 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
   late int _passesCertos;
   late int _passesErrados;
   late double _notaFinal;
-  late Future<void> _loadDataFuture;
 
   @override
   void initState() {
     super.initState();
-    _loadDataFuture = _loadData();
-  }
-
-  Future<void> _loadData() async {
-    try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      setState(() {
-        _passesCertos = prefs.getInt('passesCertos') ?? widget.passesCertos;
-        _passesErrados = prefs.getInt('passesErrados') ?? widget.passesErrados;
-        _passesFeitos = _passesCertos + _passesErrados;
-        _notaFinal = prefs.getDouble('notaFinal') ?? widget.notaFinal;
-      });
-    } catch (e) {
-      // Trate erros de forma adequada (por exemplo, logando o erro).
-      setState(() {
-        _passesCertos = widget.passesCertos;
-        _passesErrados = widget.passesErrados;
-        _passesFeitos = _passesCertos + _passesErrados;
-        _notaFinal = widget.notaFinal;
-      });
-    }
+    _passesFeitos = widget.passesFeitos;
+    _passesCertos = widget.passesCertos;
+    _passesErrados = widget.passesErrados;
+    _notaFinal = widget.notaFinal;
   }
 
   void _updateNotaFinal() {
@@ -293,277 +300,252 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
     });
   }
 
-  Future<void> _saveData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('passesCertos', _passesCertos);
-
-    await prefs.setInt('passesErrados', _passesErrados);
-    await prefs.setDouble('notaFinal', _notaFinal);
-  }
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
-      future: _loadDataFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return const Center(child: Text('Erro ao carregar os dados.'));
-        } else {
-          return Padding(
-            padding: const EdgeInsets.all(18),
-            child: Column(
-              children: [
-                Text(
-                  widget.title,
-                  style: comp15Out(),
-                ),
-                const SizedBox(height: 20),
-                // Layout dos passes certos
-                Container(
-                  width: 317,
-                  height: 117,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(12)),
-                    border: GradientBoxBorder(
-                      gradient: gradientCenter(),
-                    ),
-                    color: Colors.grey[800], // Cor de fundo mais escura
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.check,
-                          size: 30,
-                          color: Colors.green,
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'Passes certos',
-                          style: comp15Out(),
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          width: 280,
-                          height: 28,
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(12)),
-                            border: GradientBoxBorder(
-                              gradient: gradientCenter(),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    if (_passesCertos > 0) _passesCertos--;
-                                    _updateNotaFinal();
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.horizontal_rule_outlined,
-                                  size: 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                '$_passesCertos',
-                                style: comp15Out(),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _passesCertos++;
-                                    _updateNotaFinal();
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.add,
-                                  size: 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                // Layout dos passes errados
-                Container(
-                  width: 317,
-                  height: 117,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(12)),
-                    border: GradientBoxBorder(
-                      gradient: gradientCenter(),
-                    ),
-                    color: Colors.grey[800], // Cor de fundo mais escura
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.close,
-                          size: 30,
-                          color: Colors.red,
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'Passes errados',
-                          style: comp15Out(),
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          width: 280,
-                          height: 28,
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(12)),
-                            border: GradientBoxBorder(
-                              gradient: gradientCenter(),
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    if (_passesErrados > 0) _passesErrados--;
-                                    _updateNotaFinal();
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.horizontal_rule_outlined,
-                                  size: 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                '$_passesErrados',
-                                style: comp15Out(),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _passesErrados++;
-                                    _updateNotaFinal();
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.add,
-                                  size: 20,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                // Layout da nota final
-                Container(
-                  width: 317,
-                  height: 217,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(12)),
-                    border: GradientBoxBorder(
-                      gradient: gradientCenter(),
-                    ),
-                    color: Colors.grey[800], // Cor de fundo mais escura
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.account_circle_outlined,
-                          size: 40,
-                          color: Colors.white,
-                        ),
-                        Text(
-                          'Nota Final',
-                          style: comp15Out(),
-                        ),
-                        const SizedBox(height: 10),
-                        Container(
-                          width: 100,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(12)),
-                            border: GradientBoxBorder(
-                              gradient: gradientCenter(),
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              _notaFinal.toStringAsFixed(1),
-                              style: comp16Out(),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        // Botão de salvar
-                        Container(
-                          width: 120,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(12)),
-                            border: GradientBoxBorder(
-                              gradient: gradientCenter(),
-                            ),
-                          ),
-                          child: Center(
-                            child: OutlinedButton(
-                              onPressed: () async {
-                                await _saveData();
-                                Navigator.of(context).pop({
-                                  'passesCertos': _passesCertos,
-                                  'passesErrados': _passesErrados,
-                                  'notaFinal': _notaFinal,
-                                });
-                              },
-                              style: OutlinedButton.styleFrom(
-                                side:
-                                    const BorderSide(color: Colors.transparent),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(12),
-                                  ),
-                                ),
-                              ),
-                              child: Text(
-                                'Salvar',
-                                style: comp15Out(),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+    return Padding(
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        children: [
+          Text(
+            widget.title,
+            style: comp15Out(),
+          ),
+          const SizedBox(height: 20),
+          // Layout dos passes certos
+          Container(
+            width: 317,
+            height: 117,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: GradientBoxBorder(
+                gradient: gradientCenter(),
+              ),
+              color: Colors.grey[800],
             ),
-          );
-        }
-      },
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.check,
+                    size: 30,
+                    color: Colors.green,
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    'Passes certos',
+                    style: comp15Out(),
+                  ),
+                  const SizedBox(height: 15),
+                  Container(
+                    width: 280,
+                    height: 28,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      border: GradientBoxBorder(
+                        gradient: gradientCenter(),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              if (_passesCertos > 0) _passesCertos--;
+                              _updateNotaFinal();
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.horizontal_rule_outlined,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          '$_passesCertos',
+                          style: comp15Out(),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _passesCertos++;
+                              _updateNotaFinal();
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.add,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          // Layout dos passes errados
+          Container(
+            width: 317,
+            height: 117,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: GradientBoxBorder(
+                gradient: gradientCenter(),
+              ),
+              color: Colors.grey[800],
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.close,
+                    size: 30,
+                    color: Colors.red,
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    'Passes errados',
+                    style: comp15Out(),
+                  ),
+                  const SizedBox(height: 15),
+                  Container(
+                    width: 280,
+                    height: 28,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      border: GradientBoxBorder(
+                        gradient: gradientCenter(),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              if (_passesErrados > 0) _passesErrados--;
+                              _updateNotaFinal();
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.horizontal_rule_outlined,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                        Text(
+                          '$_passesErrados',
+                          style: comp15Out(),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _passesErrados++;
+                              _updateNotaFinal();
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.add,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          // Layout da nota final
+          Container(
+            width: 317,
+            height: 217,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
+              border: GradientBoxBorder(
+                gradient: gradientCenter(),
+              ),
+              color: Colors.grey[800],
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.account_circle_outlined,
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    'Nota Final',
+                    style: comp15Out(),
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    width: 100,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      border: GradientBoxBorder(
+                        gradient: gradientCenter(),
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        _notaFinal.toStringAsFixed(1),
+                        style: comp16Out(),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  // Botão de salvar
+                  Container(
+                    width: 120,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                      border: GradientBoxBorder(
+                        gradient: gradientCenter(),
+                      ),
+                    ),
+                    child: Center(
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.of(context).pop({
+                            'passesCertos': _passesCertos,
+                            'passesErrados': _passesErrados,
+                            'notaFinal': _notaFinal,
+                          });
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.transparent),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(12),
+                            ),
+                          ),
+                        ),
+                        child: Text(
+                          'Salvar',
+                          style: comp15Out(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
