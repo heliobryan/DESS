@@ -1,9 +1,10 @@
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 LinearGradient gradientCenter() {
-  return LinearGradient(
+  return const LinearGradient(
     colors: [Colors.blue, Colors.purple],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
@@ -12,7 +13,7 @@ LinearGradient gradientCenter() {
 
 // Função de estilo exemplo (substitua com o seu próprio estilo de texto)
 TextStyle comp15Out() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.bold,
     color: Colors.white,
@@ -20,20 +21,20 @@ TextStyle comp15Out() {
 }
 
 TextStyle comp10Out() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 10,
     color: Colors.white,
   );
 }
 
 TextStyle comp9Out() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 9,
     color: Colors.white,
   );
 }
 
-class QuantitativeCard extends StatelessWidget {
+class QuantitativeCard extends StatefulWidget {
   final String title;
   final int passesFeitos;
   final int passesCertos;
@@ -48,6 +49,25 @@ class QuantitativeCard extends StatelessWidget {
     required this.passesErrados,
     required this.notaFinal,
   });
+
+  @override
+  _QuantitativeCardState createState() => _QuantitativeCardState();
+}
+
+class _QuantitativeCardState extends State<QuantitativeCard> {
+  late int passesFeitos;
+  late int passesCertos;
+  late int passesErrados;
+  late double notaFinal;
+
+  @override
+  void initState() {
+    super.initState();
+    passesFeitos = widget.passesFeitos;
+    passesCertos = widget.passesCertos;
+    passesErrados = widget.passesErrados;
+    notaFinal = widget.notaFinal;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,14 +97,13 @@ class QuantitativeCard extends StatelessWidget {
                   color: Colors.transparent,
                 ),
               ),
-              onPressed: () {
-                showDialog(
+              onPressed: () async {
+                final result = await showDialog<Map<String, dynamic>>(
                   context: context,
                   builder: (context) => Dialog(
-                    backgroundColor:
-                        Colors.grey[900], // Cor de fundo mais escura
+                    backgroundColor: Colors.grey[900],
                     child: EditQuantitativeCard(
-                      title: title,
+                      title: widget.title,
                       passesFeitos: passesFeitos,
                       passesCertos: passesCertos,
                       passesErrados: passesErrados,
@@ -92,6 +111,15 @@ class QuantitativeCard extends StatelessWidget {
                     ),
                   ),
                 );
+
+                if (result != null) {
+                  setState(() {
+                    passesCertos = result['passesCertos'];
+                    passesErrados = result['passesErrados'];
+                    notaFinal = result['notaFinal'];
+                    passesFeitos = passesCertos + passesErrados;
+                  });
+                }
               },
               child: Center(
                 child: Padding(
@@ -102,7 +130,7 @@ class QuantitativeCard extends StatelessWidget {
                     children: [
                       const SizedBox(height: 5),
                       Text(
-                        title,
+                        widget.title,
                         style: comp15Out(),
                       ),
                       Expanded(
@@ -214,9 +242,9 @@ class EditQuantitativeCard extends StatefulWidget {
   const EditQuantitativeCard({
     super.key,
     required this.title,
-    this.passesFeitos = 0, // Valor padrão de 0 se for nulo
-    this.passesCertos = 0, // Valor padrão de 0 se for nulo
-    this.passesErrados = 0, // Valor padrão de 0 se for nulo
+    this.passesFeitos = 0,
+    this.passesCertos = 0,
+    this.passesErrados = 0,
     this.notaFinal = 0.0,
   });
 
@@ -229,14 +257,32 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
   late int _passesCertos;
   late int _passesErrados;
   late double _notaFinal;
+  late Future<void> _loadDataFuture;
 
   @override
   void initState() {
     super.initState();
-    _passesFeitos = widget.passesFeitos;
-    _passesCertos = widget.passesCertos;
-    _passesErrados = widget.passesErrados;
-    _notaFinal = widget.notaFinal;
+    _loadDataFuture = _loadData();
+  }
+
+  Future<void> _loadData() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(() {
+        _passesCertos = prefs.getInt('passesCertos') ?? widget.passesCertos;
+        _passesErrados = prefs.getInt('passesErrados') ?? widget.passesErrados;
+        _passesFeitos = _passesCertos + _passesErrados;
+        _notaFinal = prefs.getDouble('notaFinal') ?? widget.notaFinal;
+      });
+    } catch (e) {
+      // Trate erros de forma adequada (por exemplo, logando o erro).
+      setState(() {
+        _passesCertos = widget.passesCertos;
+        _passesErrados = widget.passesErrados;
+        _passesFeitos = _passesCertos + _passesErrados;
+        _notaFinal = widget.notaFinal;
+      });
+    }
   }
 
   void _updateNotaFinal() {
@@ -247,244 +293,277 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
     });
   }
 
+  Future<void> _saveData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('passesCertos', _passesCertos);
+
+    await prefs.setInt('passesErrados', _passesErrados);
+    await prefs.setDouble('notaFinal', _notaFinal);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(18),
-      child: Column(
-        children: [
-          Text(
-            widget.title,
-            style: comp15Out(),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            width: 317,
-            height: 117,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: GradientBoxBorder(
-                gradient: gradientCenter(),
-              ),
-              color: Colors.grey[800], // Cor de fundo mais escura
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.check,
-                    size: 30,
-                    color: Colors.green,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    'Passes certos',
-                    style: comp15Out(),
-                  ),
-                  const SizedBox(height: 15),
-                  Container(
-                    width: 280,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: gradientCenter(),
-                      ),
+    return FutureBuilder<void>(
+      future: _loadDataFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return const Center(child: Text('Erro ao carregar os dados.'));
+        } else {
+          return Padding(
+            padding: const EdgeInsets.all(18),
+            child: Column(
+              children: [
+                Text(
+                  widget.title,
+                  style: comp15Out(),
+                ),
+                const SizedBox(height: 20),
+                // Layout dos passes certos
+                Container(
+                  width: 317,
+                  height: 117,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    border: GradientBoxBorder(
+                      gradient: gradientCenter(),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    color: Colors.grey[800], // Cor de fundo mais escura
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              if (_passesCertos > 0) _passesCertos--;
-                              _updateNotaFinal();
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.horizontal_rule_outlined,
-                            size: 20,
-                            color: Colors.white,
-                          ),
+                        const Icon(
+                          Icons.check,
+                          size: 30,
+                          color: Colors.green,
                         ),
+                        const SizedBox(height: 5),
                         Text(
-                          '$_passesCertos',
+                          'Passes certos',
                           style: comp15Out(),
                         ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _passesCertos++;
-                              _updateNotaFinal();
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.add,
-                            size: 20,
-                            color: Colors.white,
+                        const SizedBox(height: 15),
+                        Container(
+                          width: 280,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(12)),
+                            border: GradientBoxBorder(
+                              gradient: gradientCenter(),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    if (_passesCertos > 0) _passesCertos--;
+                                    _updateNotaFinal();
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.horizontal_rule_outlined,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                '$_passesCertos',
+                                style: comp15Out(),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _passesCertos++;
+                                    _updateNotaFinal();
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.add,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            width: 317,
-            height: 117,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: GradientBoxBorder(
-                gradient: gradientCenter(),
-              ),
-              color: Colors.grey[800], // Cor de fundo mais escura
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.close,
-                    size: 30,
-                    color: Colors.red,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    'Passes errados',
-                    style: comp15Out(),
-                  ),
-                  const SizedBox(height: 15),
-                  Container(
-                    width: 280,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: gradientCenter(),
-                      ),
+                ),
+                const SizedBox(height: 20),
+                // Layout dos passes errados
+                Container(
+                  width: 317,
+                  height: 117,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    border: GradientBoxBorder(
+                      gradient: gradientCenter(),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    color: Colors.grey[800], // Cor de fundo mais escura
+                  ),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              if (_passesErrados > 0) _passesErrados--;
-                              _updateNotaFinal();
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.horizontal_rule_outlined,
-                            size: 20,
-                            color: Colors.white,
-                          ),
+                        const Icon(
+                          Icons.close,
+                          size: 30,
+                          color: Colors.red,
                         ),
+                        const SizedBox(height: 5),
                         Text(
-                          '$_passesErrados',
+                          'Passes errados',
                           style: comp15Out(),
                         ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _passesErrados++;
-                              _updateNotaFinal();
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.add,
-                            size: 20,
-                            color: Colors.white,
+                        const SizedBox(height: 15),
+                        Container(
+                          width: 280,
+                          height: 28,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(12)),
+                            border: GradientBoxBorder(
+                              gradient: gradientCenter(),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    if (_passesErrados > 0) _passesErrados--;
+                                    _updateNotaFinal();
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.horizontal_rule_outlined,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                '$_passesErrados',
+                                style: comp15Out(),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _passesErrados++;
+                                    _updateNotaFinal();
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.add,
+                                  size: 20,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            width: 317,
-            height: 217,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: GradientBoxBorder(
-                gradient: gradientCenter(),
-              ),
-              color: Colors.grey[800], // Cor de fundo mais escura
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.account_circle_outlined,
-                    size: 40,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    'Nota Final',
-                    style: comp15Out(),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: 100,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: gradientCenter(),
-                      ),
+                ),
+                const SizedBox(height: 20),
+                // Layout da nota final
+                Container(
+                  width: 317,
+                  height: 217,
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    border: GradientBoxBorder(
+                      gradient: gradientCenter(),
                     ),
-                    child: Center(
-                      child: Text(
-                        _notaFinal.toStringAsFixed(1),
-                        style: comp16Out(),
-                      ),
-                    ),
+                    color: Colors.grey[800], // Cor de fundo mais escura
                   ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: 120,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: gradientCenter(),
-                      ),
-                    ),
-                    child: Center(
-                      child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.transparent),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.account_circle_outlined,
+                          size: 40,
+                          color: Colors.white,
+                        ),
+                        Text(
+                          'Nota Final',
+                          style: comp15Out(),
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          width: 100,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(12)),
+                            border: GradientBoxBorder(
+                              gradient: gradientCenter(),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              _notaFinal.toStringAsFixed(1),
+                              style: comp16Out(),
                             ),
                           ),
                         ),
-                        child: Text(
-                          'Salvar',
-                          style: comp15Out(),
+                        const SizedBox(height: 10),
+                        // Botão de salvar
+                        Container(
+                          width: 120,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(12)),
+                            border: GradientBoxBorder(
+                              gradient: gradientCenter(),
+                            ),
+                          ),
+                          child: Center(
+                            child: OutlinedButton(
+                              onPressed: () async {
+                                await _saveData();
+                                Navigator.of(context).pop({
+                                  'passesCertos': _passesCertos,
+                                  'passesErrados': _passesErrados,
+                                  'notaFinal': _notaFinal,
+                                });
+                              },
+                              style: OutlinedButton.styleFrom(
+                                side:
+                                    const BorderSide(color: Colors.transparent),
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                'Salvar',
+                                style: comp15Out(),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        const SizedBox(height: 20),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 20),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 }

@@ -234,13 +234,15 @@ class _CriteriaCardState extends State<CriteriaCard> {
 
 class SubCriteriaCard extends StatefulWidget {
   final Map<String, dynamic> subCriterias;
+  final VoidCallback onTap;
+  final Function(List items) onSubCriteriaPressed;
 
   const SubCriteriaCard({
     super.key,
     required this.subCriterias,
+    required this.onTap,
+    required this.onSubCriteriaPressed,
     required subCriteria,
-    required Null Function() onTap,
-    required Null Function(List items) onSubCriteriaPressed,
   });
 
   @override
@@ -270,7 +272,8 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
             ),
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: Colors.transparent)),
+                side: const BorderSide(color: Colors.transparent),
+              ),
               onPressed: () {
                 setState(() {
                   _isExpanded = !_isExpanded;
@@ -280,7 +283,7 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    widget.subCriterias['name'],
+                    widget.subCriterias['name'] ?? 'Sem Nome',
                     style: comp12Out(),
                   ),
                 ],
@@ -293,31 +296,32 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: (widget.subCriterias['items'] as List)
-                    .where((item) => item['aspect'] == 'quantitative')
-                    .map<Widget>((item) {
-                  // Obtendo valores com um fallback para valores padrão
-                  int passesFeitos = item['passesFeitos'] ?? 0;
-                  int passesCertos = item['passesCertos'] ?? 0;
-                  int passesErrados = item['passesErrados'] ?? 0;
-                  double notaFinal = item['notaFinal']?.toDouble() ?? 0.0;
+                children: (widget.subCriterias['items'] as List<dynamic>?)
+                        ?.where((item) => item['aspect'] == 'quantitative')
+                        .map<Widget>((item) {
+                      // Verifica se os valores são válidos e usa valores padrão se necessário
+                      int passesFeitos = item['passesFeitos'] ?? 0;
+                      int passesCertos = item['passesCertos'] ?? 0;
+                      int passesErrados = item['passesErrados'] ?? 0;
+                      double notaFinal = (item['notaFinal'] as double?) ?? 0.0;
 
-                  return Column(
-                    children: [
-                      QuantitativeCard(
-                        title: item['name'],
-                        passesFeitos: passesFeitos,
-                        passesCertos: passesCertos,
-                        passesErrados: passesErrados,
-                        notaFinal: notaFinal,
-                      ),
-                      const SizedBox(height: 10),
-                    ],
-                  );
-                }).toList(),
+                      return Column(
+                        children: [
+                          QuantitativeCard(
+                            title: item['name'] ?? 'Sem Título',
+                            passesFeitos: passesFeitos,
+                            passesCertos: passesCertos,
+                            passesErrados: passesErrados,
+                            notaFinal: notaFinal,
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      );
+                    }).toList() ??
+                    [],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
