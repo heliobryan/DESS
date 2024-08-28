@@ -1,3 +1,4 @@
+import 'package:dess/App/Source/Core/AvaliationComponents/measurablecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
@@ -178,6 +179,7 @@ class _PassportPageState extends State<PassportPage> {
                   ),
                 ),
               ),
+              Measurablecard(),
               const SizedBox(
                 height: 20,
               ),
