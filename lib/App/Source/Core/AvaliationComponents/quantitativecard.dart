@@ -11,7 +11,6 @@ LinearGradient gradientCenter() {
   );
 }
 
-// Função de estilo exemplo (substitua com o seu próprio estilo de texto)
 TextStyle comp15Out() {
   return const TextStyle(
     fontSize: 15,
@@ -51,6 +50,7 @@ class QuantitativeCard extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _QuantitativeCardState createState() => _QuantitativeCardState();
 }
 
@@ -134,14 +134,12 @@ class _QuantitativeCardState extends State<QuantitativeCard> {
                 );
 
                 if (result != null) {
-                  // Atualizar o estado do card com os dados recebidos
                   setState(() {
                     passesCertos = result['passesCertos'] ?? passesCertos;
                     passesErrados = result['passesErrados'] ?? passesErrados;
                     notaFinal = result['notaFinal']?.toDouble() ?? notaFinal;
                     passesFeitos = passesCertos + passesErrados;
 
-                    // Salvar dados atualizados
                     _saveData();
                   });
                 }
@@ -279,7 +277,6 @@ class EditQuantitativeCard extends StatefulWidget {
 }
 
 class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
-  late int _passesFeitos;
   late int _passesCertos;
   late int _passesErrados;
   late double _notaFinal;
@@ -287,7 +284,6 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
   @override
   void initState() {
     super.initState();
-    _passesFeitos = widget.passesFeitos;
     _passesCertos = widget.passesCertos;
     _passesErrados = widget.passesErrados;
     _notaFinal = widget.notaFinal;
@@ -312,7 +308,6 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
             style: comp15Out(),
           ),
           const SizedBox(height: 20),
-          // Layout dos passes certos
           Container(
             width: 317,
             height: 117,

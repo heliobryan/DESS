@@ -45,7 +45,7 @@ class Measurablecard extends StatelessWidget {
                         'Titulo do item',
                         style: comp15Out(),
                       ),
-                      SizedBox(height: 20)
+                      const SizedBox(height: 20),
                       SingleChildScrollView(
                         child: Expanded(
                             child: Row(
@@ -70,6 +70,79 @@ class Measurablecard extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class EditMeasurableCard extends StatefulWidget {
+  const EditMeasurableCard({super.key});
+
+  @override
+  State<EditMeasurableCard> createState() => _EditMeasurableCardState();
+}
+
+class _EditMeasurableCardState extends State<EditMeasurableCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+          child: Column(
+        children: [
+          Container(
+            height: 117,
+            width: 317,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: GradientBoxBorder(
+                gradient: gradientDD(),
+              ),
+            ),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 50,
+                    width: 130,
+                    child: TextField(
+                      style: comp20Out(),
+                      decoration: InputDecoration(
+                        prefix: const Text('   '),
+                        contentPadding: const EdgeInsets.all(1),
+                        border: GradientOutlineInputBorder(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(9)),
+                          gradient: gradientLk(),
+                          width: 1,
+                        ),
+                        focusedBorder: GradientOutlineInputBorder(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
+                          gradient: gradientLk(),
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Container(
+            height: 117,
+            width: 317,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: GradientBoxBorder(
+                gradient: gradientDD(),
+              ),
+            ),
+            child: const Center(),
+          ),
+        ],
+      )),
     );
   }
 }

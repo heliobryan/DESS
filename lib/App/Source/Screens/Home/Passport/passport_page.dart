@@ -179,7 +179,7 @@ class _PassportPageState extends State<PassportPage> {
                   ),
                 ),
               ),
-              Measurablecard(),
+              const EditMeasurableCard(),
               const SizedBox(
                 height: 20,
               ),
