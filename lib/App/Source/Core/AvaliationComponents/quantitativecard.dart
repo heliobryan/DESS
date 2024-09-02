@@ -316,7 +316,6 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
               border: GradientBoxBorder(
                 gradient: gradientCenter(),
               ),
-              color: Colors.grey[800],
             ),
             child: Center(
               child: Column(
@@ -392,7 +391,6 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
               border: GradientBoxBorder(
                 gradient: gradientCenter(),
               ),
-              color: Colors.grey[800],
             ),
             child: Center(
               child: Column(
@@ -468,7 +466,6 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
               border: GradientBoxBorder(
                 gradient: gradientCenter(),
               ),
-              color: Colors.grey[800],
             ),
             child: Center(
               child: Column(
