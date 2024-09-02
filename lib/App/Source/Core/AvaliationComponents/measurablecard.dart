@@ -117,9 +117,15 @@ class _MeasurableCardState extends State<MeasurableCard> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(measurement, style: comp15Str()),
+                          Text(
+                            measurement,
+                            style: comp20Str(),
+                          ),
                           const SizedBox(width: 10),
-                          Text(unit, style: comp15Str()),
+                          Text(
+                            unit,
+                            style: comp20Str(),
+                          ),
                         ],
                       ),
                     ],
@@ -157,7 +163,7 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
     'Quilômetros',
     'Segundos',
     'Minutos',
-    'Quilogramas',
+    'KG',
     'Horas',
     ' ',
   ];
@@ -246,6 +252,7 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
                         height: 50,
                         width: 180,
                         child: TextField(
+                          keyboardType: const TextInputType.numberWithOptions(),
                           controller: _measurementController,
                           style: comp20Out(),
                           decoration: InputDecoration(
@@ -287,7 +294,7 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
                           child: Text(
                             _selectedUnit
                                 .toUpperCase(), // Exibe a unidade selecionada
-                            style: comp10Str(),
+                            style: comp15Out(),
                           ),
                         ),
                       ),

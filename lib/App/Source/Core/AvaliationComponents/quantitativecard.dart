@@ -36,16 +36,16 @@ TextStyle comp9Out() {
 class QuantitativeCard extends StatefulWidget {
   final String title;
   final int passesFeitos;
-  final int passesCertos;
-  final int passesErrados;
+  final int correctPass;
+  final int incorrectPass;
   final double notaFinal;
 
   const QuantitativeCard({
     super.key,
     required this.title,
     required this.passesFeitos,
-    required this.passesCertos,
-    required this.passesErrados,
+    required this.correctPass,
+    required this.incorrectPass,
     required this.notaFinal,
   });
 
@@ -55,10 +55,10 @@ class QuantitativeCard extends StatefulWidget {
 }
 
 class _QuantitativeCardState extends State<QuantitativeCard> {
-  int passesFeitos = 0; // Inicializado com valor padrão
-  int passesCertos = 0; // Inicializado com valor padrão
-  int passesErrados = 0; // Inicializado com valor padrão
-  double notaFinal = 0.0; // Inicializado com valor padrão
+  int passesFeitos = 0;
+  int passesCertos = 0;
+  int passesErrados = 0;
+  double notaFinal = 0.0;
 
   @override
   void initState() {
@@ -73,9 +73,9 @@ class _QuantitativeCardState extends State<QuantitativeCard> {
       passesFeitos =
           prefs.getInt('${widget.title}_passesFeitos') ?? widget.passesFeitos;
       passesCertos =
-          prefs.getInt('${widget.title}_passesCertos') ?? widget.passesCertos;
+          prefs.getInt('${widget.title}_passesCertos') ?? widget.correctPass;
       passesErrados =
-          prefs.getInt('${widget.title}_passesErrados') ?? widget.passesErrados;
+          prefs.getInt('${widget.title}_passesErrados') ?? widget.incorrectPass;
       notaFinal =
           prefs.getDouble('${widget.title}_notaFinal') ?? widget.notaFinal;
     });

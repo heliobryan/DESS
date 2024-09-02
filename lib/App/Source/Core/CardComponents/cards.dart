@@ -1,4 +1,3 @@
-import 'package:dess/App/Source/Core/AvaliationComponents/measurablecard.dart';
 import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
@@ -6,6 +5,7 @@ import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:dess/App/Source/Core/AvaliationComponents/measurablecard.dart';
 
 class CardPlayer extends StatefulWidget {
   final Map<String, dynamic> participants;
@@ -300,7 +300,6 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                 children: (widget.subCriterias['items'] as List<dynamic>?)
                         ?.map<Widget>((item) {
                       if (item['aspect'] == 'quantitative') {
-                        // Verifica se os valores são válidos e usa valores padrão se necessário
                         int passesFeitos = item['passesFeitos'] ?? 0;
                         int passesCertos = item['passesCertos'] ?? 0;
                         int passesErrados = item['passesErrados'] ?? 0;
@@ -312,8 +311,8 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                             QuantitativeCard(
                               title: item['name'] ?? 'Sem Título',
                               passesFeitos: passesFeitos,
-                              passesCertos: passesCertos,
-                              passesErrados: passesErrados,
+                              correctPass: passesCertos,
+                              incorrectPass: passesErrados,
                               notaFinal: notaFinal,
                             ),
                             const SizedBox(height: 10),
@@ -326,8 +325,8 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                             MeasurableCard(
                               title: item['name'] ?? 'Sem Título',
                               measurableValue: item['measurableValue'] ?? 0,
-                              measurement: '', unit: '',
-                              // Adicione aqui outros parâmetros relevantes para MeasurableCard
+                              measurement: '',
+                              unit: '',
                             ),
                             const SizedBox(height: 10),
                           ],
