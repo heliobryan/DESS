@@ -106,7 +106,7 @@ class _ManagePageState extends State<ManagePage> {
                                   ),
                                   child: Text(
                                     'Melhores desempenhos',
-                                    style: comp15Out(),
+                                    style: comp10Out(),
                                   ),
                                 ),
                               ),

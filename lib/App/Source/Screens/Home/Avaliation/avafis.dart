@@ -143,20 +143,25 @@ class _AvafisPageState extends State<AvafisPage> {
                 ),
                 const SizedBox(height: 20),
                 Expanded(
-                  child: ListView.builder(
+                  child: SingleChildScrollView(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    itemBuilder: (context, index) {
-                      final subCriteria = widget.subCriterias[index];
+                    child: Wrap(
+                      spacing: 10, // Espaçamento horizontal entre os cards
+                      runSpacing:
+                          10, // Espaçamento vertical entre as linhas de cards
+                      children:
+                          List.generate(widget.subCriterias.length, (index) {
+                        final subCriteria = widget.subCriterias[index];
 
-                      return SubCriteriaCard(
-                        subCriterias: subCriteria,
-                        subCriteria: null,
-                        onTap: () {},
-                        onSubCriteriaPressed: (List<dynamic> items) {},
-                      );
-                    },
-                    itemCount: widget.subCriterias.length,
+                        return SubCriteriaCard(
+                          subCriterias: subCriteria,
+                          subCriteria: null,
+                          onTap: () {},
+                          onSubCriteriaPressed: (List<dynamic> items) {},
+                        );
+                      }),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 20),

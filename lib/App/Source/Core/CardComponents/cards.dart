@@ -1,3 +1,4 @@
+import 'package:dess/App/Source/Core/AvaliationComponents/measurablecard.dart';
 import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
@@ -297,26 +298,42 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: (widget.subCriterias['items'] as List<dynamic>?)
-                        ?.where((item) => item['aspect'] == 'quantitative')
-                        .map<Widget>((item) {
-                      // Verifica se os valores são válidos e usa valores padrão se necessário
-                      int passesFeitos = item['passesFeitos'] ?? 0;
-                      int passesCertos = item['passesCertos'] ?? 0;
-                      int passesErrados = item['passesErrados'] ?? 0;
-                      double notaFinal = (item['notaFinal'] as double?) ?? 0.0;
+                        ?.map<Widget>((item) {
+                      if (item['aspect'] == 'quantitative') {
+                        // Verifica se os valores são válidos e usa valores padrão se necessário
+                        int passesFeitos = item['passesFeitos'] ?? 0;
+                        int passesCertos = item['passesCertos'] ?? 0;
+                        int passesErrados = item['passesErrados'] ?? 0;
+                        double notaFinal =
+                            (item['notaFinal'] as double?) ?? 0.0;
 
-                      return Column(
-                        children: [
-                          QuantitativeCard(
-                            title: item['name'] ?? 'Sem Título',
-                            passesFeitos: passesFeitos,
-                            passesCertos: passesCertos,
-                            passesErrados: passesErrados,
-                            notaFinal: notaFinal,
-                          ),
-                          const SizedBox(height: 10),
-                        ],
-                      );
+                        return Column(
+                          children: [
+                            QuantitativeCard(
+                              title: item['name'] ?? 'Sem Título',
+                              passesFeitos: passesFeitos,
+                              passesCertos: passesCertos,
+                              passesErrados: passesErrados,
+                              notaFinal: notaFinal,
+                            ),
+                            const SizedBox(height: 10),
+                          ],
+                        );
+                      } else if (item['aspect'] == 'measurable') {
+                        // Lógica para exibir o MeasurableCard
+                        return Column(
+                          children: [
+                            MeasurableCard(
+                              title: item['name'] ?? 'Sem Título',
+                              measurableValue: item['measurableValue'] ?? 0,
+                              measurement: '', unit: '',
+                              // Adicione aqui outros parâmetros relevantes para MeasurableCard
+                            ),
+                            const SizedBox(height: 10),
+                          ],
+                        );
+                      }
+                      return const SizedBox.shrink();
                     }).toList() ??
                     [],
               ),

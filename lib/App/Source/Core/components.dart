@@ -425,6 +425,14 @@ TextStyle comp25Str() {
   );
 }
 
+TextStyle comp10Str() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 10,
+    fontFamily: 'STRETCH',
+  );
+}
+
 TextStyle comp15Str() {
   return const TextStyle(
     color: Colors.white,
