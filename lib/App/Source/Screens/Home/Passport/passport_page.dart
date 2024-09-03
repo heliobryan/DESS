@@ -1,3 +1,4 @@
+import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
@@ -181,6 +182,7 @@ class _PassportPageState extends State<PassportPage> {
               const SizedBox(
                 height: 20,
               ),
+              const PlayerCard(),
             ],
           ),
         ],

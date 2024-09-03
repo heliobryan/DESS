@@ -4,6 +4,7 @@ import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:dess/App/Source/Core/AvaliationComponents/measurablecard.dart';
 
@@ -144,12 +145,9 @@ class _CompCardState extends State<CompCard> {
                 const ProCard1(),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/images/gradientline.png'),
-              ],
-            ),
+            const SizedBox(
+              height: 10,
+            )
           ],
         ),
       ),
@@ -392,6 +390,21 @@ class _AgeCardState extends State<AgeCard> {
         onPressed: () {
           widget.onCategorySelected(widget.category);
         },
+      ),
+    );
+  }
+}
+
+class PlayerCard extends StatelessWidget {
+  const PlayerCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Stack(
+        children: [
+          SvgPicture.asset('assets/images/cardvetor.svg'),
+        ],
       ),
     );
   }

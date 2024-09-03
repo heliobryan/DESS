@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Passport/passport_page.dart';
@@ -38,9 +37,6 @@ class _HomePageState extends State<HomePage> {
     _screens = [
       Home1Page(
         selectedCategory: widget.initialCategory,
-      ),
-      const AvaliationPage(
-        participantData: {},
       ),
       const PassportPage(),
       const ManagePage(),
@@ -97,14 +93,6 @@ class _HomePageState extends State<HomePage> {
                 width: 21,
               ),
               label: 'Home',
-            ),
-            NavigationDestination(
-              icon: SvgPicture.asset(
-                'assets/images/sportvetor.svg',
-                height: 21,
-                width: 21,
-              ),
-              label: 'Critérios',
             ),
             NavigationDestination(
               icon: SvgPicture.asset(

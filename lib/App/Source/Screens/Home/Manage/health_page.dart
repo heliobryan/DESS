@@ -94,7 +94,8 @@ class _HealthPageState extends State<HealthPage> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     border: Border.all(
-                                      color: const Color(0xFFE70000),
+                                      color:
+                                          const Color.fromARGB(255, 0, 255, 13),
                                       width: 5.0,
                                     ),
                                     color: Colors.transparent,
@@ -102,90 +103,12 @@ class _HealthPageState extends State<HealthPage> {
                                 ),
                                 const SizedBox(height: 5),
                                 Text(
-                                  'Em recuperação',
+                                  'Recuperado',
                                   style: comp10Out(),
                                 ),
                               ],
                             ),
-                            const SizedBox(width: 50),
-                            Column(
-                              children: [
-                                const SizedBox(height: 10),
-                                Text(
-                                  'Lesão',
-                                  style: comp20Out(),
-                                ),
-                                const SizedBox(height: 5),
-                                Text(
-                                  'Entorse de Tornozelo',
-                                  style: comp15Out(),
-                                ),
-                                Text(
-                                  '31/03/23',
-                                  style: comp15Out(),
-                                ),
-                                Text(
-                                  'a 07/04/23 (7 dias)',
-                                  style: comp15Out(),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 30),
-                    Container(
-                      width: 330,
-                      height: 129,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(12),
-                        ),
-                        border: GradientBoxBorder(
-                          gradient: gradientLk(),
-                        ),
-                      ),
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.transparent),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(width: 20),
-                            Column(
-                              children: [
-                                const SizedBox(height: 10),
-                                Text(
-                                  'Status',
-                                  style: comp13Out(),
-                                ),
-                                const SizedBox(height: 5),
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: const Color(0xFFE70000),
-                                      width: 5.0,
-                                    ),
-                                    color: Colors.transparent,
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Text(
-                                  'Em recuperação',
-                                  style: comp10Out(),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(width: 50),
+                            const SizedBox(width: 40),
                             Column(
                               children: [
                                 const SizedBox(height: 10),
@@ -263,7 +186,7 @@ class _HealthPageState extends State<HealthPage> {
                                 ),
                               ],
                             ),
-                            const SizedBox(width: 50),
+                            const SizedBox(width: 20),
                             Column(
                               children: [
                                 const SizedBox(height: 10),
@@ -341,11 +264,92 @@ class _HealthPageState extends State<HealthPage> {
                                 ),
                               ],
                             ),
-                            const SizedBox(width: 50),
+                            const SizedBox(width: 20),
                             Column(
                               children: [
                                 const SizedBox(height: 10),
-                                Text('Lesão', style: comp20Str()),
+                                Text(
+                                  'Lesão',
+                                  style: comp20Str(),
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  'Entorse de Tornozelo',
+                                  style: comp15Out(),
+                                ),
+                                Text(
+                                  '31/03/23',
+                                  style: comp15Out(),
+                                ),
+                                Text(
+                                  'a 07/04/23 (7 dias)',
+                                  style: comp15Out(),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    Container(
+                      width: 330,
+                      height: 129,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        border: GradientBoxBorder(
+                          gradient: gradientLk(),
+                        ),
+                      ),
+                      child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.transparent),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(width: 20),
+                            Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                Text(
+                                  'Status',
+                                  style: comp13Out(),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  width: 60,
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: const Color(0xFFE70000),
+                                      width: 5.0,
+                                    ),
+                                    color: Colors.transparent,
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  'Em recuperação',
+                                  style: comp10Out(),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(width: 20),
+                            Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                Text(
+                                  'Lesão',
+                                  style: comp20Str(),
+                                ),
                                 const SizedBox(height: 5),
                                 Text(
                                   'Entorse de Tornozelo',
