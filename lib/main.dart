@@ -1,4 +1,5 @@
 import 'package:dess/App/Source/Screens/Forms/form_page.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avapsi.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatat.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
@@ -17,8 +18,10 @@ import 'package:dess/App/Source/Screens/Register/register_page.dart';
 import 'package:dess/App/Source/Screens/Register/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
+  await initializeDateFormatting('pt_BR', null);
   await dotenv.load(fileName: '.env');
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const DesApp());
@@ -30,7 +33,7 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const PassportPage(),
+      home: const AgendaPage(),
       debugShowCheckedModeBanner: false,
       routes: {
         'initialPage': (context) => const InitialPage(),

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:dess/App/Source/Core/AvaliationComponents/measurablecard.dart';
+import 'package:intl/intl.dart';
 
 class CardPlayer extends StatefulWidget {
   final Map<String, dynamic> participants;
@@ -405,6 +406,52 @@ class PlayerCard extends StatelessWidget {
         children: [
           SvgPicture.asset('assets/images/cardvetor.svg'),
         ],
+      ),
+    );
+  }
+}
+
+class AgendaCard extends StatelessWidget {
+  const AgendaCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 301,
+      height: 62,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        border: GradientBoxBorder(
+          gradient: gradientLk(),
+        ),
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(width: 20),
+            const Icon(
+              Icons.assignment_outlined,
+              size: 40,
+              color: Colors.white,
+            ),
+            const SizedBox(width: 60),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Avaliação modelo',
+                  style: comp11Out(),
+                ),
+                Text(
+                  'Dia ${DateFormat.yMd('pt_BR').format(DateTime.now())}',
+                  style: comp11Out(),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
