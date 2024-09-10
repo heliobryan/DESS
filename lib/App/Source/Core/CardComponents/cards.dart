@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
@@ -404,7 +406,40 @@ class PlayerCard extends StatelessWidget {
     return Center(
       child: Stack(
         children: [
-          SvgPicture.asset('assets/images/cardvetor.svg'),
+          Center(
+            child: SvgPicture.asset(
+              'assets/images/bordervetor.svg',
+              width: 150,
+              height: 400,
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 40),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        '70',
+                        style: comp28Out(),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'ATA',
+                        style: comp20Out(),
+                      ),
+                      const SizedBox(height: 10),
+                      SvgPicture.asset('assets/images/clube.svg'),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     );

@@ -540,6 +540,15 @@ TextStyle comp40Out() {
   );
 }
 
+TextStyle comp28Out() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 28,
+    fontFamily: 'OUTFIT',
+    fontWeight: FontWeight.bold,
+  );
+}
+
 LinearGradient gradientLk() {
   return const LinearGradient(
     colors: <Color>[

@@ -115,6 +115,8 @@ flutter:
       - assets/images/mood_bad.svg
       - assets/images/cardvetor.svg
       - assets/images/bordervetor.svg
+      - assets/images/clube.svg
+
   
 
   #   - images/a_dot_burr.jpeg

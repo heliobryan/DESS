@@ -133,7 +133,7 @@ class _AgendaPageState extends State<AgendaPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AgendaCard(),
+                PlayerCard(),
               ],
             ),
           ),
