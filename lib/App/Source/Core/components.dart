@@ -531,6 +531,14 @@ TextStyle comp20() {
   );
 }
 
+TextStyle comp20nor() {
+  return const TextStyle(
+    color: Colors.white,
+    fontSize: 20,
+    fontFamily: 'OUTFIT',
+  );
+}
+
 TextStyle comp40Out() {
   return const TextStyle(
     color: Colors.white,

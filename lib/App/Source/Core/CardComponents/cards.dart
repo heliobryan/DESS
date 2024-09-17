@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
@@ -427,16 +425,91 @@ class PlayerCard extends StatelessWidget {
                         '70',
                         style: comp28Out(),
                       ),
-                      const SizedBox(height: 10),
                       Text(
                         'ATA',
                         style: comp20Out(),
                       ),
-                      const SizedBox(height: 10),
-                      SvgPicture.asset('assets/images/clube.svg'),
+                      const SizedBox(height: 5),
+                      SvgPicture.asset('assets/images/gleydon.svg'),
+                      const SizedBox(height: 5),
+                      const Icon(
+                        Icons.shield_outlined,
+                        size: 40,
+                        color: Colors.white,
+                      ),
                     ],
                   ),
+                  const SizedBox(width: 25),
+                  Container(
+                    width: 112,
+                    height: 110,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: GradientBoxBorder(
+                        width: 3,
+                        gradient: gradientLk(),
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.account_circle_outlined,
+                      color: Colors.white,
+                      size: 105,
+                    ),
+                  ),
                 ],
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                'Aluno'.toUpperCase(),
+                style: comp20Out(),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              SvgPicture.asset('assets/images/dias.svg'),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        Text(
+                          '80 RIT',
+                          style: comp20Out(),
+                        ),
+                        Text(
+                          '80 FIN',
+                          style: comp20Out(),
+                        ),
+                        Text(
+                          '80 PAS',
+                          style: comp20Out(),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 20),
+                    Column(
+                      children: [
+                        const SizedBox(height: 10),
+                        Text(
+                          '80 DRI',
+                          style: comp20Out(),
+                        ),
+                        Text(
+                          '80 DEF',
+                          style: comp20Out(),
+                        ),
+                        Text(
+                          '80 FÍS',
+                          style: comp20Out(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -482,6 +555,95 @@ class AgendaCard extends StatelessWidget {
                 Text(
                   'Dia ${DateFormat.yMd('pt_BR').format(DateTime.now())}',
                   style: comp11Out(),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class DataCard extends StatefulWidget {
+  const DataCard({super.key});
+
+  @override
+  State<DataCard> createState() => _DataCardState();
+}
+
+class _DataCardState extends State<DataCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 315,
+      height: 243,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        border: GradientBoxBorder(
+          gradient: gradientLk(),
+        ),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Dados Biológicos Atuais',
+              style: comp25Out(),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Peso:',
+                  style: comp20Out(),
+                ),
+                Text(
+                  ' 45 KG',
+                  style: comp20nor(),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Altura:',
+                  style: comp20Out(),
+                ),
+                Text(
+                  ' 150 cm',
+                  style: comp20nor(),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Idade:',
+                  style: comp20Out(),
+                ),
+                Text(
+                  ' 13',
+                  style: comp20nor(),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'IMC:',
+                  style: comp20Out(),
+                ),
+                Text(
+                  ' 20',
+                  style: comp20nor(),
                 ),
               ],
             ),

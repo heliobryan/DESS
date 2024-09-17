@@ -1,5 +1,4 @@
 import 'package:dess/App/Source/Screens/Forms/form_page.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avapsi.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatat.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
@@ -33,7 +32,10 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const AgendaPage(),
+      home: const PassportPage(
+        participantData: {},
+        subCriterias: [],
+      ),
       debugShowCheckedModeBanner: false,
       routes: {
         'initialPage': (context) => const InitialPage(),
@@ -50,7 +52,10 @@ class DesApp extends StatelessWidget {
               participantData: {},
             ),
         'managePage': (context) => const ManagePage(),
-        'passportPage': (context) => const PassportPage(),
+        'passportPage': (context) => const PassportPage(
+              participantData: {},
+              subCriterias: [],
+            ),
         'imageManagePage': (context) => const ImageManagePage(),
         'compPage': (context) => const CompPage(),
         'sponsorPage': (context) => const SponsorPage(),

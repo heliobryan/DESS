@@ -1,16 +1,29 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class AgendaPage extends StatefulWidget {
-  const AgendaPage({super.key});
+  final Map<String, dynamic> eventData;
+
+  const AgendaPage({
+    super.key,
+    required this.eventData,
+  });
 
   @override
   State<AgendaPage> createState() => _AgendaPageState();
 }
 
 class _AgendaPageState extends State<AgendaPage> {
+  List eventList = [];
+
   final List<String> _units = [
     'Janeiro',
     'Fevereiro',
@@ -129,16 +142,53 @@ class _AgendaPageState extends State<AgendaPage> {
               ],
             ),
           ),
-          const Center(
+          Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PlayerCard(),
+                Expanded(
+                  child: ListView.builder(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    itemBuilder: (context, index) {
+                      // ignore: unused_local_variable
+                      final event = eventList[index];
+
+                      return const AgendaCard();
+                    },
+                    itemCount: eventList.length,
+                  ),
+                ),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> getEvents() async {
+    try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      var url = Uri.parse('${expenseListApi}api/criteria');
+      final token = sharedPreferences.getString('token');
+      var restAwnser = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      if (restAwnser.statusCode == 200) {
+        final decode = jsonDecode(restAwnser.body);
+        setState(() {
+          eventList = decode;
+        });
+      }
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

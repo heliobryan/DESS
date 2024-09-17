@@ -6,13 +6,21 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:intl/intl.dart';
 
 class PassportPage extends StatefulWidget {
-  const PassportPage({super.key});
+  final List<dynamic> subCriterias;
+  final Map<String, dynamic> participantData;
+  const PassportPage({
+    super.key,
+    required this.participantData,
+    required this.subCriterias,
+  });
 
   @override
   State<PassportPage> createState() => _PassportPageState();
 }
 
 class _PassportPageState extends State<PassportPage> {
+  bool fifaCard = false;
+  bool dataCard = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +28,7 @@ class _PassportPageState extends State<PassportPage> {
       body: Stack(
         children: [
           const GradientBack(),
-          const BackgroudImage(),
+          const Center(child: BackgroudImage()),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -68,15 +76,15 @@ class _PassportPageState extends State<PassportPage> {
               Column(
                 children: [
                   Text(
-                    'Name',
-                    style: comp20Str(),
+                    widget.participantData['user']['name'] ?? '',
+                    style: comp25Str(),
                   ),
                   Text(
-                    'Atacante - Sub 13 - Society',
+                    '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name'] ?? ''}',
                     style: comp15Out(),
                   ),
                   Text(
-                    'Escola Flamengo - Caratinga MG',
+                    '${widget.participantData['team']['name'] ?? ''}',
                     style: comp15Out(),
                   ),
                 ],
@@ -114,10 +122,27 @@ class _PassportPageState extends State<PassportPage> {
                         Radius.circular(12),
                       ),
                     ),
-                    child: Center(
-                      child: Text(
-                        'Card',
-                        style: comp15Out(),
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Colors.transparent),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)))),
+                      onPressed: () {
+                        setState(() {
+                          fifaCard = !fifaCard;
+                          if (dataCard == true) {
+                            return setState(() {
+                              dataCard = !dataCard;
+                            });
+                          }
+                        });
+                      },
+                      child: Center(
+                        child: Text(
+                          'Card',
+                          style: comp15Out(),
+                        ),
                       ),
                     ),
                   ),
@@ -132,10 +157,25 @@ class _PassportPageState extends State<PassportPage> {
                         Radius.circular(12),
                       ),
                     ),
-                    child: Center(
-                      child: Text(
-                        'Dados',
-                        style: comp15Out(),
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.transparent),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          dataCard = !dataCard;
+                          if (dataCard == true) {
+                            return setState(() {
+                              fifaCard = !fifaCard;
+                            });
+                          }
+                        });
+                      },
+                      child: Center(
+                        child: Text(
+                          'Dados',
+                          style: comp15Out(),
+                        ),
                       ),
                     ),
                   ),
@@ -182,7 +222,14 @@ class _PassportPageState extends State<PassportPage> {
               const SizedBox(
                 height: 20,
               ),
-              const PlayerCard(),
+              Visibility(
+                visible: fifaCard,
+                child: const PlayerCard(),
+              ),
+              Visibility(
+                visible: dataCard,
+                child: const DataCard(),
+              ),
             ],
           ),
         ],

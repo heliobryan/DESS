@@ -115,7 +115,10 @@ flutter:
       - assets/images/mood_bad.svg
       - assets/images/cardvetor.svg
       - assets/images/bordervetor.svg
-      - assets/images/clube.svg
+      - assets/images/flamengo.svg
+      - assets/images/gleydon.svg
+      - assets/images/dias.svg
+      - assets/images/humilha.svg
 
   
 
