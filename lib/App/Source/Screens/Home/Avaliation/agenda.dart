@@ -153,7 +153,6 @@ class _AgendaPageState extends State<AgendaPage> {
                     itemBuilder: (context, index) {
                       // ignore: unused_local_variable
                       final event = eventList[index];
-
                       return const AgendaCard();
                     },
                     itemCount: eventList.length,
