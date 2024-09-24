@@ -1,6 +1,4 @@
 import 'package:dess/App/Source/Screens/Forms/form_page.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/avapsi.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/avatat.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/comp_page.dart';
@@ -32,10 +30,7 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const PassportPage(
-        participantData: {},
-        subCriterias: [],
-      ),
+      home: const SplashPage(),
       debugShowCheckedModeBanner: false,
       routes: {
         'initialPage': (context) => const InitialPage(),
@@ -60,7 +55,6 @@ class DesApp extends StatelessWidget {
         'compPage': (context) => const CompPage(),
         'sponsorPage': (context) => const SponsorPage(),
         'healthPage': (context) => const HealthPage(),
-        'avapsiPage': (context) => const AvapsiPage(),
         'cardPage': (context) => const HealthEditor(),
         'loginPage': (context) => const LoginPage(),
         'avafisPage': (context) => const AvafisPage(
@@ -71,7 +65,6 @@ class DesApp extends StatelessWidget {
               subCriterias: [],
               participantData: {},
             ),
-        'avatatPage': (context) => const AvatatPage(),
         'infoPage': (context) => const InfoPage(),
         'passAvaliation': (context) => const AvaliationForm(),
       },

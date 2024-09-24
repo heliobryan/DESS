@@ -76,15 +76,15 @@ class _PassportPageState extends State<PassportPage> {
               Column(
                 children: [
                   Text(
-                    widget.participantData['user']['name'] ?? '',
+                    widget.participantData['user']['name'],
                     style: comp25Str(),
                   ),
                   Text(
-                    '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name'] ?? ''}',
+                    '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
                     style: comp15Out(),
                   ),
                   Text(
-                    '${widget.participantData['team']['name'] ?? ''}',
+                    '${widget.participantData['team']['name']}',
                     style: comp15Out(),
                   ),
                 ],
