@@ -143,7 +143,7 @@ class _Home1PageState extends State<Home1Page> {
   void initState() {
     super.initState();
     userInfo();
-    getParticipants(widget.selectedCategory);
+    getParticipants('categoryName');
     initializeDateFormatting();
     searchController.addListener(_onSearchChanged);
   }
@@ -254,12 +254,14 @@ class _Home1PageState extends State<Home1Page> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
+                      // Certifique-se de que a lista está sendo populada corretamente
                       final participants = filteredParticipantsList[index];
                       return CardPlayer(
                         participants: participants,
                       );
                     },
-                    itemCount: filteredParticipantsList.length,
+                    itemCount: filteredParticipantsList
+                        .length, // Atualize com o tamanho correto da lista
                   ),
                 ),
               ],
@@ -307,25 +309,38 @@ class _Home1PageState extends State<Home1Page> {
 
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/participants');
+      var url = Uri.parse(
+          '${expenseListApi}api/participants?page=0&perPage=0&getAll=1');
       final token = sharedPreferences.getString('token');
 
-      var restAwnser = await http.get(
+      var restAnswer = await http.get(
         url,
         headers: {
           'Authorization': 'Bearer $token',
         },
       );
 
-      if (restAwnser.statusCode == 200) {
-        final decode = jsonDecode(restAwnser.body);
+      if (restAnswer.statusCode == 200) {
+        final decode = jsonDecode(restAnswer.body);
+
+        // Exibe a resposta completa da API no console para depuração
+        ('Resposta da API: $decode');
+
         setState(() {
-          participantsList = decode[category] ?? [];
+          // Certifique-se de que a chave "category" existe na resposta
+          participantsList =
+              decode[category] ?? []; // Verifique a chave correta aqui
           filteredParticipantsList = participantsList;
+
+          // Verifique se a lista foi populada corretamente
+          print('Lista de participantes: ${filteredParticipantsList.length}');
         });
+      } else {
+        // Log para status de resposta diferente de 200
+        log('Falha ao buscar participantes: ${restAnswer.statusCode}');
       }
     } catch (e) {
-      log(e.toString());
+      log('Erro ao buscar participantes: $e');
     }
   }
 }

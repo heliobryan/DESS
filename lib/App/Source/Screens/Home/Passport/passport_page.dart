@@ -74,20 +74,7 @@ class _PassportPageState extends State<PassportPage> {
               ),
               const SizedBox(height: 10),
               Column(
-                children: [
-                  Text(
-                    widget.participantData['user']['name'],
-                    style: comp25Str(),
-                  ),
-                  Text(
-                    '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
-                    style: comp15Out(),
-                  ),
-                  Text(
-                    '${widget.participantData['team']['name']}',
-                    style: comp15Out(),
-                  ),
-                ],
+                children: [],
               ),
               const SizedBox(height: 20),
               Row(

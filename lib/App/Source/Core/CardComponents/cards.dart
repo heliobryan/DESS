@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
@@ -409,6 +411,13 @@ class PlayerCard extends StatelessWidget {
               'assets/images/bordervetor.svg',
               width: 150,
               height: 400,
+            ),
+          ),
+          Center(
+            child: SvgPicture.asset(
+              'assets/images/manel2.svg',
+              width: 150,
+              height: 350,
             ),
           ),
           Column(

@@ -234,12 +234,17 @@ class _Form3PageState extends State<Form3Page> {
                     ),
                     const SizedBox(height: 20),
                     AgeCard(
-                      category: 'Sub-19',
+                      category: 'Sub-11',
                       onCategorySelected: _onCategorySelected,
                     ),
                     const SizedBox(height: 20),
                     AgeCard(
-                      category: 'Sub-21',
+                      category: 'Sub-12',
+                      onCategorySelected: _onCategorySelected,
+                    ),
+                    const SizedBox(height: 20),
+                    AgeCard(
+                      category: 'Sub-13',
                       onCategorySelected: _onCategorySelected,
                     ),
                   ],
