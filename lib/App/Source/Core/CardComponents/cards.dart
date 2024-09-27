@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
@@ -16,7 +14,7 @@ class CardPlayer extends StatefulWidget {
 
   const CardPlayer({
     super.key,
-    required this.participants,
+    required this.participants, required participant,
   });
 
   @override

@@ -20,12 +20,12 @@ class AvaliationPage extends StatefulWidget {
 }
 
 class _AvaliationPageState extends State<AvaliationPage> {
-  List criteriaList = [];
+  late Future<List> criteriaList;
 
   @override
   void initState() {
     super.initState();
-    getCriteria();
+    criteriaList = getCriteria(); // Usando Future ao invés de fazer setState manualmente
   }
 
   @override
@@ -70,18 +70,41 @@ class _AvaliationPageState extends State<AvaliationPage> {
               children: [
                 const SizedBox(height: 170),
                 Expanded(
-                  child: ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    itemBuilder: (context, index) {
-                      final criterias = criteriaList[index];
+                  child: FutureBuilder<List>(
+                    future: criteriaList,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            'Erro ao carregar os critérios',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        );
+                      } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                        return ListView.builder(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 10),
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            final criterias = snapshot.data![index];
 
-                      return CriteriaCard(
-                        criterias: criterias,
-                        participantData: widget.participantData,
-                      );
+                            return CriteriaCard(
+                              criterias: criterias,
+                              participantData: widget.participantData,
+                            );
+                          },
+                        );
+                      } else {
+                        return Center(
+                          child: Text(
+                            'Nenhum critério encontrado',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        );
+                      }
                     },
-                    itemCount: criteriaList.length,
                   ),
                 ),
               ],
@@ -92,13 +115,13 @@ class _AvaliationPageState extends State<AvaliationPage> {
     );
   }
 
-  Future<void> getCriteria() async {
+  Future<List> getCriteria() async {
     try {
       String expenseListApi = dotenv.get('API_HOST', fallback: '');
 
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/criteria');
+      var url = Uri.parse('${expenseListApi}api/criteria?page=1&perPage=10&getAll=1');
       final token = sharedPreferences.getString('token');
       var restAwnser = await http.get(
         url,
@@ -108,12 +131,13 @@ class _AvaliationPageState extends State<AvaliationPage> {
       );
       if (restAwnser.statusCode == 200) {
         final decode = jsonDecode(restAwnser.body);
-        setState(() {
-          criteriaList = decode;
-        });
+        return decode;
+      } else {
+        throw Exception('Erro ao buscar critérios');
       }
     } catch (e) {
       log(e.toString());
+      throw Exception('Erro ao buscar critérios');
     }
   }
 }

@@ -73,7 +73,7 @@ class _PassportPageState extends State<PassportPage> {
                 ),
               ),
               const SizedBox(height: 10),
-              Column(
+              const Column(
                 children: [],
               ),
               const SizedBox(height: 20),

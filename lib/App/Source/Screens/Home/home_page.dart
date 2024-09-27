@@ -1,3 +1,4 @@
+import 'dart:async'; // Import necessário para debounce
 import 'dart:convert';
 import 'dart:developer';
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
@@ -65,8 +66,8 @@ class _HomePageState extends State<HomePage> {
       child: NavigationBarTheme(
         data: const NavigationBarThemeData(
           indicatorColor: Colors.transparent,
-          overlayColor: WidgetStatePropertyAll(Colors.transparent),
-          labelTextStyle: WidgetStatePropertyAll(
+          overlayColor: MaterialStatePropertyAll(Colors.transparent),
+          labelTextStyle: MaterialStatePropertyAll(
             TextStyle(
               fontSize: 10,
               fontWeight: FontWeight.bold,
@@ -74,7 +75,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
             ),
           ),
-          iconTheme: WidgetStatePropertyAll(
+          iconTheme: MaterialStatePropertyAll(
             IconThemeData(
               color: Colors.white,
               size: 24,
@@ -138,29 +139,34 @@ class _Home1PageState extends State<Home1Page> {
   List participantsList = [];
   List filteredParticipantsList = [];
   TextEditingController searchController = TextEditingController();
+  Timer? _debounce; // Timer para debounce
+  String? token;
 
   @override
   void initState() {
     super.initState();
-    userInfo();
-    getParticipants('categoryName');
+    loadToken(); // Carrega o token ao iniciar
     initializeDateFormatting();
     searchController.addListener(_onSearchChanged);
   }
 
   @override
   void dispose() {
+    _debounce?.cancel();
     searchController.dispose();
     super.dispose();
   }
 
   void _onSearchChanged() {
-    setState(() {
-      filteredParticipantsList = participantsList.where((participant) {
-        String participantName = participant['user']['name'].toLowerCase();
-        String searchQuery = searchController.text.toLowerCase();
-        return participantName.contains(searchQuery);
-      }).toList();
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 300), () {
+      setState(() {
+        filteredParticipantsList = participantsList.where((participant) {
+          String participantName = participant['user']['name'].toLowerCase();
+          String searchQuery = searchController.text.toLowerCase();
+          return participantName.contains(searchQuery);
+        }).toList();
+      });
     });
   }
 
@@ -254,14 +260,14 @@ class _Home1PageState extends State<Home1Page> {
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
-                      // Certifique-se de que a lista está sendo populada corretamente
                       final participants = filteredParticipantsList[index];
                       return CardPlayer(
+                        key: ValueKey(participants['id']),
                         participants: participants,
+                        participant: null,
                       );
                     },
-                    itemCount: filteredParticipantsList
-                        .length, // Atualize com o tamanho correto da lista
+                    itemCount: filteredParticipantsList.length,
                   ),
                 ),
               ],
@@ -272,75 +278,74 @@ class _Home1PageState extends State<Home1Page> {
     );
   }
 
-  Future<void> userInfo() async {
-    try {
-      String expenseListApi = dotenv.get('API_HOST', fallback: '');
-
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-
-      var url = Uri.parse('${expenseListApi}api/user');
-      final token = sharedPreferences.getString('token');
-
-      log('token $token');
-      var restAwnser = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-      log('response ${restAwnser.body}');
-      if (restAwnser.statusCode == 200) {
-        final decode = jsonDecode(restAwnser.body);
-        setState(() {
-          userDados = decode;
-        });
-
-        log('DADOS DO USUARIO FINAL $userDados');
-      }
-    } catch (e) {
-      log(e.toString());
-    }
+  Future<void> loadToken() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      token = sharedPreferences.getString('token');
+    });
+    userInfo();
+    getParticipants(widget.selectedCategory);
   }
 
-  Future<void> getParticipants(String category) async {
+  Future<void> userInfo() async {
+    if (token == null) return;
+
     try {
       String expenseListApi = dotenv.get('API_HOST', fallback: '');
 
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      var url = Uri.parse(
-          '${expenseListApi}api/participants?page=0&perPage=0&getAll=1');
-      final token = sharedPreferences.getString('token');
-
+      var url = Uri.parse('${expenseListApi}api/user');
       var restAnswer = await http.get(
         url,
         headers: {
           'Authorization': 'Bearer $token',
         },
       );
-
+      log('DADOS DO USUARIO ${restAnswer.body}');
       if (restAnswer.statusCode == 200) {
         final decode = jsonDecode(restAnswer.body);
-
-        // Exibe a resposta completa da API no console para depuração
-        ('Resposta da API: $decode');
-
         setState(() {
-          // Certifique-se de que a chave "category" existe na resposta
-          participantsList =
-              decode[category] ?? []; // Verifique a chave correta aqui
-          filteredParticipantsList = participantsList;
-
-          // Verifique se a lista foi populada corretamente
-          print('Lista de participantes: ${filteredParticipantsList.length}');
+          userDados = decode;
         });
       } else {
-        // Log para status de resposta diferente de 200
-        log('Falha ao buscar participantes: ${restAnswer.statusCode}');
+        log('Erro ao buscar dados do usuário: ${restAnswer.statusCode}');
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      log('Erro ao buscar dados do usuário: $e');
+      log('Stack trace: $stackTrace');
+    }
+  }
+
+  Future<void> getParticipants(String category) async {
+    if (token == null) return;
+
+    try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+      var url =
+          Uri.parse('${expenseListApi}api/participants?page=1&perPage=30&groupBySub=1&getAll=1');
+      var restAnswer = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      log('DADOS DOS PARTICIPANTES ${restAnswer.body}');
+      if (restAnswer.statusCode == 200) {
+        final decode = jsonDecode(restAnswer.body);
+        setState(() {
+          participantsList = decode;
+          filteredParticipantsList = participantsList;
+        });
+      } else if (restAnswer.statusCode == 401) {
+        log('Token inválido, redirecionar para o login.');
+        // Lógica de redirecionamento ou renovação do token
+      } else if (restAnswer.statusCode >= 500) {
+        log('Erro no servidor: ${restAnswer.statusCode}');
+      } else {
+        log('Erro inesperado: ${restAnswer.statusCode}');
+      }
+    } catch (e, stackTrace) {
       log('Erro ao buscar participantes: $e');
+      log('Stack trace: $stackTrace');
     }
   }
 }
