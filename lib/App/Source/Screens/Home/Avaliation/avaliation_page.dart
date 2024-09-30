@@ -76,7 +76,7 @@ class _AvaliationPageState extends State<AvaliationPage> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError) {
-                        return Center(
+                        return const Center(
                           child: Text(
                             'Erro ao carregar os critérios',
                             style: TextStyle(color: Colors.red),
@@ -97,7 +97,7 @@ class _AvaliationPageState extends State<AvaliationPage> {
                           },
                         );
                       } else {
-                        return Center(
+                        return const Center(
                           child: Text(
                             'Nenhum critério encontrado',
                             style: TextStyle(color: Colors.white),
@@ -121,7 +121,7 @@ class _AvaliationPageState extends State<AvaliationPage> {
 
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/criteria?page=1&perPage=10&getAll=1');
+      var url = Uri.parse('${expenseListApi}api/criteria?page=1&perPage=20&getAll=1');
       final token = sharedPreferences.getString('token');
       var restAwnser = await http.get(
         url,

@@ -1,7 +1,7 @@
 import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -91,9 +91,7 @@ class _CardPlayerState extends State<CardPlayer> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AvaliationPage(
-                    participantData: widget.participants,
-                  ),
+                  builder: (context) => const AgendaPage(),
                 ),
               ),
             ),
@@ -527,45 +525,60 @@ class PlayerCard extends StatelessWidget {
 }
 
 class AgendaCard extends StatelessWidget {
-  const AgendaCard({super.key});
+  final dynamic event;  // Recebe os dados do evento
+
+  const AgendaCard({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 301,
-      height: 62,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        border: GradientBoxBorder(
-          gradient: gradientLk(),
+    String evaluationName = event['eventday']['event']['name']; // Nome da avaliação
+    String evaluationDate = event['eventday']['date']; // Data da avaliação no formato yyyy-MM-dd
+
+    // Converte a string da data para DateTime
+    DateTime parsedDate = DateTime.parse(evaluationDate);
+
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Container(
+        width: 301,
+        height: 62,
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          border: GradientBoxBorder(
+            gradient: gradientLk(),
+          ),
         ),
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const SizedBox(width: 20),
-            const Icon(
-              Icons.assignment_outlined,
-              size: 40,
-              color: Colors.white,
-            ),
-            const SizedBox(width: 60),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Avaliação modelo',
-                  style: comp11Out(),
-                ),
-                Text(
-                  'Dia ${DateFormat.yMd('pt_BR').format(DateTime.now())}',
-                  style: comp11Out(),
-                ),
-              ],
-            ),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            children: [
+              // Ícone no início
+              const Icon(
+                Icons.assignment_outlined,
+                size: 40,
+                color: Colors.white,
+              ),
+             
+              const Spacer(),
+              
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,  
+                crossAxisAlignment: CrossAxisAlignment.center,  
+                children: [
+                  Text(
+                    evaluationName, 
+                    style: comp11Out(),
+                  ),
+                  Text(
+                    'Dia ${DateFormat.yMd('pt_BR').format(parsedDate)}', 
+                    style: comp11Out(),
+                  ),
+                ],
+              ),
+             
+              const Spacer(),
+            ],
+          ),
         ),
       ),
     );
@@ -653,6 +666,99 @@ class _DataCardState extends State<DataCard> {
                   style: comp20nor(),
                 ),
               ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AgendaData extends StatefulWidget {
+  final Function(int) onMonthChanged; // Função para mudar o mês
+
+  const AgendaData({super.key, required this.onMonthChanged}); // Aceita a função como parâmetro
+
+  @override
+  State<AgendaData> createState() => _AgendaDataState();
+}
+
+class _AgendaDataState extends State<AgendaData> {
+  final List<String> _units = [
+    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
+    'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
+  ];
+
+  late int _selectedUnitIndex; // Armazena o índice do mês selecionado
+
+  @override
+  void initState() {
+    super.initState();
+    // Obtém o mês atual e define _selectedUnitIndex
+    DateTime now = DateTime.now();
+    _selectedUnitIndex = now.month - 1; // O mês começa em 0 (Janeiro) até 11 (Dezembro)
+  }
+
+  void _updateMonth(int month) {
+    widget.onMonthChanged(month);
+  }
+
+  void _toggleUnit() {
+    setState(() {
+      _selectedUnitIndex = (_selectedUnitIndex + 1) % _units.length; // Incrementa o índice do mês
+      Future.delayed(Duration.zero, () {
+        _updateMonth(_selectedUnitIndex + 1); // Passa o mês (1-12) para a função de filtro
+      });
+    });
+  }
+
+  void _unToggleUnit() {
+    setState(() {
+      _selectedUnitIndex = (_selectedUnitIndex - 1 + _units.length) % _units.length; // Decrementa o índice do mês
+      Future.delayed(Duration.zero, () {
+        _updateMonth(_selectedUnitIndex + 1); // Passa o mês (1-12) para a função de filtro
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: 250,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        border: GradientBoxBorder(
+          gradient: gradientLk(),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              onPressed: _unToggleUnit, // Navegação entre os meses
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(width: 10),
+            SizedBox(
+              child: Text(
+                _units[_selectedUnitIndex], // Mostra o nome do mês selecionado
+                style: comp16Out(),
+              ),
+            ),
+            const SizedBox(width: 10),
+            IconButton(
+              onPressed: _toggleUnit, // Navegação entre os meses
+              icon: const Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ],
         ),

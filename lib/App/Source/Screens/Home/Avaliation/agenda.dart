@@ -1,21 +1,15 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class AgendaPage extends StatefulWidget {
-  final Map<String, dynamic> eventData;
-
-  const AgendaPage({
-    super.key,
-    required this.eventData,
-  });
+  const AgendaPage({super.key});
 
   @override
   State<AgendaPage> createState() => _AgendaPageState();
@@ -23,36 +17,49 @@ class AgendaPage extends StatefulWidget {
 
 class _AgendaPageState extends State<AgendaPage> {
   List eventList = [];
+  List filteredEventList = []; // Lista filtrada para exibição
 
-  final List<String> _units = [
-    'Janeiro',
-    'Fevereiro',
-    'Março',
-    'Abril',
-    'Maio',
-    'Junho',
-    'Julho',
-    'Agosto',
-    'Setembro',
-    'Outubro',
-    'Novembro',
-    'Dezembro',
-  ];
+  @override
+  void initState() {
+    super.initState();
+    getEvaluations();  // Obtém os dados da API ao iniciar a página
+  }
 
-  String _selectedUnit = 'Janeiro';
-
-  void _toggleUnit() {
+  void filterEventsByMonth(int selectedMonth) {
     setState(() {
-      int currentIndex = _units.indexOf(_selectedUnit);
-      _selectedUnit = _units[(currentIndex + 1) % _units.length];
+      filteredEventList = eventList.where((event) {
+        String evaluationDate = event['eventday']['date']; // Data no formato yyyy-MM-dd
+        DateTime parsedDate = DateTime.parse(evaluationDate);
+        int eventMonth = parsedDate.month; // Obtém o mês do evento
+
+        return eventMonth == selectedMonth; // Filtra pelo mês selecionado
+      }).toList();
     });
   }
 
-  void _unToggleUnit() {
-    setState(() {
-      int currentIndex = _units.indexOf(_selectedUnit);
-      _selectedUnit = _units[(currentIndex - 1) % _units.length];
-    });
+  Future<void> getEvaluations() async {
+    try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      var url = Uri.parse('${expenseListApi}api/evaluations?page=1');
+      final token = sharedPreferences.getString('token');
+      var restAnswer = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      if (restAnswer.statusCode == 200) {
+        final decode = jsonDecode(restAnswer.body);
+        setState(() {
+          eventList = decode['data']; // Popula a lista com os dados da API
+          filteredEventList = eventList; // Inicialmente, a lista filtrada é igual à lista completa
+        });
+      }
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   @override
@@ -95,67 +102,17 @@ class _AgendaPageState extends State<AgendaPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(height: 70),
-                Container(
-                  height: 50,
-                  width: 250,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(12),
-                    ),
-                    border: GradientBoxBorder(
-                      gradient: gradientLk(),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        IconButton(
-                          onPressed: _toggleUnit,
-                          icon: const Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        SizedBox(
-                          child: Text(
-                            _selectedUnit,
-                            style: comp15Out(),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        IconButton(
-                          onPressed: _unToggleUnit,
-                          icon: const Icon(
-                            Icons.arrow_forward_ios_rounded,
-                            color: Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+                const SizedBox(height: 20),
+                AgendaData(onMonthChanged: filterEventsByMonth), // Passa a função de filtro
+                const SizedBox(height: 50),
                 Expanded(
                   child: ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
-                      // ignore: unused_local_variable
-                      final event = eventList[index];
-                      return const AgendaCard();
+                      final event = filteredEventList[index]; // Usar a lista filtrada
+                      return AgendaCard(event: event); // Passando os dados dinâmicos para o card
                     },
-                    itemCount: eventList.length,
+                    itemCount: filteredEventList.length,
                   ),
                 ),
               ],
@@ -164,30 +121,5 @@ class _AgendaPageState extends State<AgendaPage> {
         ],
       ),
     );
-  }
-
-  Future<void> getEvents() async {
-    try {
-      String expenseListApi = dotenv.get('API_HOST', fallback: '');
-
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/criteria');
-      final token = sharedPreferences.getString('token');
-      var restAwnser = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-      if (restAwnser.statusCode == 200) {
-        final decode = jsonDecode(restAwnser.body);
-        setState(() {
-          eventList = decode;
-        });
-      }
-    } catch (e) {
-      log(e.toString());
-    }
   }
 }
