@@ -4,7 +4,6 @@ import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,22 +16,22 @@ class AgendaPage extends StatefulWidget {
 
 class _AgendaPageState extends State<AgendaPage> {
   List eventList = [];
-  List filteredEventList = []; // Lista filtrada para exibição
+  List filteredEventList = []; 
 
   @override
   void initState() {
     super.initState();
-    getEvaluations();  // Obtém os dados da API ao iniciar a página
+    getEvaluations(); 
   }
 
   void filterEventsByMonth(int selectedMonth) {
     setState(() {
       filteredEventList = eventList.where((event) {
-        String evaluationDate = event['eventday']['date']; // Data no formato yyyy-MM-dd
+        String evaluationDate = event['eventday']['date']; 
         DateTime parsedDate = DateTime.parse(evaluationDate);
-        int eventMonth = parsedDate.month; // Obtém o mês do evento
+        int eventMonth = parsedDate.month; 
 
-        return eventMonth == selectedMonth; // Filtra pelo mês selecionado
+        return eventMonth == selectedMonth;
       }).toList();
     });
   }
@@ -53,8 +52,8 @@ class _AgendaPageState extends State<AgendaPage> {
       if (restAnswer.statusCode == 200) {
         final decode = jsonDecode(restAnswer.body);
         setState(() {
-          eventList = decode['data']; // Popula a lista com os dados da API
-          filteredEventList = eventList; // Inicialmente, a lista filtrada é igual à lista completa
+          eventList = decode['data']; 
+          filteredEventList = eventList; 
         });
       }
     } catch (e) {
@@ -103,14 +102,13 @@ class _AgendaPageState extends State<AgendaPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                AgendaData(onMonthChanged: filterEventsByMonth), // Passa a função de filtro
+                AgendaData(onMonthChanged: filterEventsByMonth), 
                 const SizedBox(height: 50),
                 Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
-                      final event = filteredEventList[index]; // Usar a lista filtrada
-                      return AgendaCard(event: event); // Passando os dados dinâmicos para o card
+                      final event = filteredEventList[index]; 
                     },
                     itemCount: filteredEventList.length,
                   ),

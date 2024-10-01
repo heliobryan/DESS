@@ -689,14 +689,14 @@ class _AgendaDataState extends State<AgendaData> {
     'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
   ];
 
-  late int _selectedUnitIndex; // Armazena o índice do mês selecionado
+  late int _selectedUnitIndex; 
 
   @override
   void initState() {
     super.initState();
-    // Obtém o mês atual e define _selectedUnitIndex
+   
     DateTime now = DateTime.now();
-    _selectedUnitIndex = now.month - 1; // O mês começa em 0 (Janeiro) até 11 (Dezembro)
+    _selectedUnitIndex = now.month - 1; 
   }
 
   void _updateMonth(int month) {
@@ -705,18 +705,18 @@ class _AgendaDataState extends State<AgendaData> {
 
   void _toggleUnit() {
     setState(() {
-      _selectedUnitIndex = (_selectedUnitIndex + 1) % _units.length; // Incrementa o índice do mês
+      _selectedUnitIndex = (_selectedUnitIndex + 1) % _units.length;
       Future.delayed(Duration.zero, () {
-        _updateMonth(_selectedUnitIndex + 1); // Passa o mês (1-12) para a função de filtro
+        _updateMonth(_selectedUnitIndex + 1); 
       });
     });
   }
 
   void _unToggleUnit() {
     setState(() {
-      _selectedUnitIndex = (_selectedUnitIndex - 1 + _units.length) % _units.length; // Decrementa o índice do mês
+      _selectedUnitIndex = (_selectedUnitIndex - 1 + _units.length) % _units.length; 
       Future.delayed(Duration.zero, () {
-        _updateMonth(_selectedUnitIndex + 1); // Passa o mês (1-12) para a função de filtro
+        _updateMonth(_selectedUnitIndex + 1);
       });
     });
   }
