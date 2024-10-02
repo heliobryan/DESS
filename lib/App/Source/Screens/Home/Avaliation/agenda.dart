@@ -16,7 +16,7 @@ class AgendaPage extends StatefulWidget {
 
 class _AgendaPageState extends State<AgendaPage> {
   List eventList = [];
-  List filteredEventList = []; 
+  List filteredEventList = [];
 
   @override
   void initState() {
@@ -27,9 +27,9 @@ class _AgendaPageState extends State<AgendaPage> {
   void filterEventsByMonth(int selectedMonth) {
     setState(() {
       filteredEventList = eventList.where((event) {
-        String evaluationDate = event['eventday']['date']; 
+        String evaluationDate = event['eventday']['date'];
         DateTime parsedDate = DateTime.parse(evaluationDate);
-        int eventMonth = parsedDate.month; 
+        int eventMonth = parsedDate.month;
 
         return eventMonth == selectedMonth;
       }).toList();
@@ -52,8 +52,8 @@ class _AgendaPageState extends State<AgendaPage> {
       if (restAnswer.statusCode == 200) {
         final decode = jsonDecode(restAnswer.body);
         setState(() {
-          eventList = decode['data']; 
-          filteredEventList = eventList; 
+          eventList = decode['data']; // Aqui você define a lista de eventos
+          filteredEventList = eventList; // Inicialmente exibe todos os eventos
         });
       }
     } catch (e) {
@@ -102,13 +102,16 @@ class _AgendaPageState extends State<AgendaPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                AgendaData(onMonthChanged: filterEventsByMonth), 
+                AgendaData(onMonthChanged: filterEventsByMonth),
                 const SizedBox(height: 50),
                 Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
-                      final event = filteredEventList[index]; 
+                      final event = filteredEventList[index]; // Pegue o evento
+
+                      // Retorna um card com os dados do evento
+                      return AgendaCard(event: event); 
                     },
                     itemCount: filteredEventList.length,
                   ),

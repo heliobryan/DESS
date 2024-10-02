@@ -66,7 +66,9 @@ class _HomePageState extends State<HomePage> {
       child: NavigationBarTheme(
         data: const NavigationBarThemeData(
           indicatorColor: Colors.transparent,
+          // ignore: deprecated_member_use
           overlayColor: MaterialStatePropertyAll(Colors.transparent),
+          // ignore: deprecated_member_use
           labelTextStyle: MaterialStatePropertyAll(
             TextStyle(
               fontSize: 10,
@@ -75,6 +77,7 @@ class _HomePageState extends State<HomePage> {
               color: Colors.white,
             ),
           ),
+          // ignore: deprecated_member_use
           iconTheme: MaterialStatePropertyAll(
             IconThemeData(
               color: Colors.white,

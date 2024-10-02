@@ -2,6 +2,7 @@ import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart'
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -525,65 +526,82 @@ class PlayerCard extends StatelessWidget {
 }
 
 class AgendaCard extends StatelessWidget {
-  final dynamic event;  // Recebe os dados do evento
+  final dynamic event; // Recebe os dados do evento
 
   const AgendaCard({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
-    String evaluationName = event['eventday']['event']['name']; // Nome da avaliação
-    String evaluationDate = event['eventday']['date']; // Data da avaliação no formato yyyy-MM-dd
-
-    // Converte a string da data para DateTime
+    String evaluationName = event['eventday']['event']['name'];
+    String evaluationDate = event['eventday']['date'];
     DateTime parsedDate = DateTime.parse(evaluationDate);
 
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Container(
-        width: 301,
-        height: 62,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           border: GradientBoxBorder(
             gradient: gradientLk(),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(12),
-          child: Row(
-            children: [
-              // Ícone no início
-              const Icon(
-                Icons.assignment_outlined,
-                size: 40,
-                color: Colors.white,
+        child: TextButton(
+          onPressed: () {
+     
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AvaliationPage(
+                  participantData: event['eventday'], 
+                ),
               ),
-             
-              const Spacer(),
-              
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,  
-                crossAxisAlignment: CrossAxisAlignment.center,  
-                children: [
-                  Text(
-                    evaluationName, 
-                    style: comp11Out(),
-                  ),
-                  Text(
-                    'Dia ${DateFormat.yMd('pt_BR').format(parsedDate)}', 
-                    style: comp11Out(),
-                  ),
-                ],
-              ),
-             
-              const Spacer(),
-            ],
+            );
+          },
+          style: ButtonStyle(
+            padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
+          ),
+          child: Container(
+            width: 301,
+            height: 62,
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              children: [
+                // Ícone no início
+                const Icon(
+                  Icons.assignment_outlined,
+                  size: 40,
+                  color: Colors.white,
+                ),
+                const Spacer(),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      evaluationName,
+                      style: comp11Out(),
+                    ),
+                    Text(
+                      'Dia ${DateFormat.yMd('pt_BR').format(parsedDate)}',
+                      style: comp11Out(),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
+
+
+
 
 class DataCard extends StatefulWidget {
   const DataCard({super.key});
@@ -675,9 +693,9 @@ class _DataCardState extends State<DataCard> {
 }
 
 class AgendaData extends StatefulWidget {
-  final Function(int) onMonthChanged; // Função para mudar o mês
+  final Function(int) onMonthChanged; 
 
-  const AgendaData({super.key, required this.onMonthChanged}); // Aceita a função como parâmetro
+  const AgendaData({super.key, required this.onMonthChanged}); 
 
   @override
   State<AgendaData> createState() => _AgendaDataState();
@@ -738,7 +756,7 @@ class _AgendaDataState extends State<AgendaData> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              onPressed: _unToggleUnit, // Navegação entre os meses
+              onPressed: _unToggleUnit, 
               icon: const Icon(
                 Icons.arrow_back_ios,
                 color: Colors.white,
@@ -747,13 +765,13 @@ class _AgendaDataState extends State<AgendaData> {
             const SizedBox(width: 10),
             SizedBox(
               child: Text(
-                _units[_selectedUnitIndex], // Mostra o nome do mês selecionado
+                _units[_selectedUnitIndex], 
                 style: comp16Out(),
               ),
             ),
             const SizedBox(width: 10),
             IconButton(
-              onPressed: _toggleUnit, // Navegação entre os meses
+              onPressed: _toggleUnit,
               icon: const Icon(
                 Icons.arrow_forward_ios_rounded,
                 color: Colors.white,
