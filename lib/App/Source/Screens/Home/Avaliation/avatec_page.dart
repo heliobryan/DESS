@@ -81,62 +81,24 @@ class _AvatecPageState extends State<AvatecPage> {
                 Column(
                   children: [
                     Text(
-                      '${widget.participantData['user']['name']}',
+                      widget.participantData['user']?['name'] ?? 'Nome Desconhecido',
                       style: comp25Str(),
                     ),
                     Text(
-                      '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
+                      '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'}',
                       style: comp15Out(),
                     ),
                     Text(
-                      '${widget.participantData['team']['name']}',
+                      '${widget.participantData['institution']?['name'] ?? 'Instituição Desconhecida'}',
                       style: comp15Out(),
                     ),
-                    // Adicione mais informações do participante se necessário
                   ],
-                ),
-                Container(
-                  width: 149,
-                  height: 23,
-                  decoration: BoxDecoration(
-                    border: GradientBoxBorder(
-                      gradient: gradientLk(),
-                    ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(12),
-                    ),
-                  ),
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.transparent,
-                      side: const BorderSide(color: Colors.transparent),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
-                        ),
-                      ),
-                    ),
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CalendarPage(),
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        DateFormat.yMd('pt_BR').format(
-                          DateTime.now(),
-                        ),
-                        style: comp15Out(),
-                      ),
-                    ),
-                  ),
                 ),
                 const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                    itemCount: widget.subCriterias.length,
                     itemBuilder: (context, index) {
                       final subCriteria = widget.subCriterias[index];
 
@@ -144,10 +106,11 @@ class _AvatecPageState extends State<AvatecPage> {
                         subCriterias: subCriteria,
                         subCriteria: null,
                         onTap: () {},
-                        onSubCriteriaPressed: (List<dynamic> items) {},
+                        onSubCriteriaPressed: (List<dynamic> items) {
+                          // Implementar lógica se necessário
+                        },
                       );
                     },
-                    itemCount: widget.subCriterias.length,
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -159,6 +122,8 @@ class _AvatecPageState extends State<AvatecPage> {
     );
   }
 }
+
+
 
 class AvaliationForm extends StatefulWidget {
   const AvaliationForm({super.key});

@@ -1,9 +1,8 @@
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:intl/intl.dart';
+
 
 class AvafisPage extends StatefulWidget {
   final List<dynamic> subCriterias;
@@ -20,14 +19,6 @@ class AvafisPage extends StatefulWidget {
 }
 
 class _AvafisPageState extends State<AvafisPage> {
-  List<dynamic> selectedQuantitativeItems = [];
-
-  void showQuantitativeItems(List<dynamic> items) {
-    setState(() {
-      selectedQuantitativeItems = items;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +32,7 @@ class _AvafisPageState extends State<AvafisPage> {
             color: Colors.white,
             size: 25,
           ),
-          onPressed: () => Navigator.pop(context, 'avaliationPage'),
+          onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Física',
@@ -90,78 +81,36 @@ class _AvafisPageState extends State<AvafisPage> {
                 Column(
                   children: [
                     Text(
-                      widget.participantData['user']['name'],
+                      widget.participantData['user']?['name'] ?? 'Nome Desconhecido',
                       style: comp25Str(),
                     ),
                     Text(
-                      '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
+                      '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'}',
                       style: comp15Out(),
                     ),
                     Text(
-                      '${widget.participantData['team']['name']}',
+                      '${widget.participantData['institution']?['name'] ?? 'Instituição Desconhecida'}',
                       style: comp15Out(),
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
-                Container(
-                  width: 149,
-                  height: 23,
-                  decoration: BoxDecoration(
-                    border: GradientBoxBorder(
-                      gradient: gradientLk(),
-                    ),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(12),
-                    ),
-                  ),
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.transparent,
-                      side: const BorderSide(color: Colors.transparent),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
-                        ),
-                      ),
-                    ),
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CalendarPage(),
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        DateFormat.yMd('pt_BR').format(
-                          DateTime.now(),
-                        ),
-                        style: comp15Out(),
-                      ),
-                    ),
-                  ),
-                ),
                 const SizedBox(height: 20),
                 Expanded(
-                  child: SingleChildScrollView(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    child: Wrap(
-                      spacing: 10, // Espaçamento horizontal entre os cards
-                      runSpacing:
-                          10, // Espaçamento vertical entre as linhas de cards
-                      children:
-                          List.generate(widget.subCriterias.length, (index) {
-                        final subCriteria = widget.subCriterias[index];
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                    itemCount: widget.subCriterias.length,
+                    itemBuilder: (context, index) {
+                      final subCriteria = widget.subCriterias[index];
 
-                        return SubCriteriaCard(
-                          subCriterias: subCriteria,
-                          subCriteria: null,
-                          onTap: () {},
-                          onSubCriteriaPressed: (List<dynamic> items) {},
-                        );
-                      }),
-                    ),
+                      return SubCriteriaCard(
+                        subCriterias: subCriteria,
+                        subCriteria: null,
+                        onTap: () {},
+                        onSubCriteriaPressed: (List<dynamic> items) {
+                          // Implementar lógica se necessário
+                        },
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: 20),

@@ -8,7 +8,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class AgendaPage extends StatefulWidget {
-  const AgendaPage({super.key});
+  final Map<String, dynamic>? participantData; // Parâmetro opcional
+
+  const AgendaPage({super.key, this.participantData}); // Atualize o construtor
 
   @override
   State<AgendaPage> createState() => _AgendaPageState();
@@ -21,7 +23,7 @@ class _AgendaPageState extends State<AgendaPage> {
   @override
   void initState() {
     super.initState();
-    getEvaluations(); 
+    getEvaluations();
   }
 
   void filterEventsByMonth(int selectedMonth) {
@@ -29,9 +31,7 @@ class _AgendaPageState extends State<AgendaPage> {
       filteredEventList = eventList.where((event) {
         String evaluationDate = event['eventday']['date'];
         DateTime parsedDate = DateTime.parse(evaluationDate);
-        int eventMonth = parsedDate.month;
-
-        return eventMonth == selectedMonth;
+        return parsedDate.month == selectedMonth;
       }).toList();
     });
   }
@@ -52,8 +52,8 @@ class _AgendaPageState extends State<AgendaPage> {
       if (restAnswer.statusCode == 200) {
         final decode = jsonDecode(restAnswer.body);
         setState(() {
-          eventList = decode['data']; // Aqui você define a lista de eventos
-          filteredEventList = eventList; // Inicialmente exibe todos os eventos
+          eventList = decode['data'];
+          filteredEventList = eventList;
         });
       }
     } catch (e) {
@@ -108,9 +108,7 @@ class _AgendaPageState extends State<AgendaPage> {
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
-                      final event = filteredEventList[index]; // Pegue o evento
-
-                      // Retorna um card com os dados do evento
+                      final event = filteredEventList[index];
                       return AgendaCard(event: event); 
                     },
                     itemCount: filteredEventList.length,

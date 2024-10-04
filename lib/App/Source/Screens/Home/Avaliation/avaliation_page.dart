@@ -25,7 +25,7 @@ class _AvaliationPageState extends State<AvaliationPage> {
   @override
   void initState() {
     super.initState();
-    criteriaList = getCriteria(); // Usando Future ao invés de fazer setState manualmente
+    criteriaList = getCriteria();
   }
 
   @override
@@ -84,12 +84,10 @@ class _AvaliationPageState extends State<AvaliationPage> {
                         );
                       } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
                         return ListView.builder(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 0, horizontal: 10),
+                          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
                             final criterias = snapshot.data![index];
-
                             return CriteriaCard(
                               criterias: criterias,
                               participantData: widget.participantData,
@@ -118,9 +116,7 @@ class _AvaliationPageState extends State<AvaliationPage> {
   Future<List> getCriteria() async {
     try {
       String expenseListApi = dotenv.get('API_HOST', fallback: '');
-
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
       var url = Uri.parse('${expenseListApi}api/criteria?page=1&perPage=20&getAll=1');
       final token = sharedPreferences.getString('token');
       var restAwnser = await http.get(

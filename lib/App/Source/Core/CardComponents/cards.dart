@@ -11,11 +11,13 @@ import 'package:dess/App/Source/Core/AvaliationComponents/measurablecard.dart';
 import 'package:intl/intl.dart';
 
 class CardPlayer extends StatefulWidget {
-  final Map<String, dynamic> participants;
+  final Map<String, dynamic> participantData;
+  final Function(Map<String, dynamic>) onTap;
 
   const CardPlayer({
     super.key,
-    required this.participants, required participant,
+    required this.participantData,
+    required this.onTap,
   });
 
   @override
@@ -66,21 +68,23 @@ class _CardPlayerState extends State<CardPlayer> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              '${widget.participants['user']['name']} ${widget.participants['user']['last_name']}',
+                              '${widget.participantData['user']?['name'] ?? 'Nome Desconhecido'} ${widget.participantData['user']?['last_name'] ?? ''}',
                               style: comp16Out(),
+                              textAlign: TextAlign.center, // Centraliza o texto
                             ),
                           ),
                           FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              '${widget.participants['position']} - ${widget.participants['category']} - ${widget.participants['modality']['name']}',
+                              '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'} - ${widget.participantData['category'] ?? 'Categoria Desconhecida'}',
                               style: comp16Out(),
+                              textAlign: TextAlign.center, // Centraliza o texto
                             ),
                           ),
                         ],
@@ -89,12 +93,7 @@ class _CardPlayerState extends State<CardPlayer> {
                   ],
                 ),
               ),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AgendaPage(),
-                ),
-              ),
+              onPressed: () => widget.onTap(widget.participantData),
             ),
           );
         },
@@ -102,6 +101,7 @@ class _CardPlayerState extends State<CardPlayer> {
     );
   }
 }
+
 
 class CompCard extends StatefulWidget {
   final Map<String, dynamic> event;
@@ -191,7 +191,7 @@ class _CriteriaCardState extends State<CriteriaCard> {
             ),
           ),
           onPressed: () {
-            if (widget.criterias['name'] == 'Física') {
+            if (widget.criterias['name'] == 'Físico') {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -201,7 +201,7 @@ class _CriteriaCardState extends State<CriteriaCard> {
                   ),
                 ),
               );
-            } else if (widget.criterias['name'] == 'Técnica') {
+            } else if (widget.criterias['name'] == 'Técnico') {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -230,6 +230,7 @@ class _CriteriaCardState extends State<CriteriaCard> {
     );
   }
 }
+
 
 class SubCriteriaCard extends StatefulWidget {
   final Map<String, dynamic> subCriterias;
@@ -558,7 +559,9 @@ class AgendaCard extends StatelessWidget {
             );
           },
           style: ButtonStyle(
+            // ignore: deprecated_member_use
             padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
+            // ignore: deprecated_member_use
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),

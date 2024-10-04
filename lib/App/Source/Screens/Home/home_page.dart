@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Passport/passport_page.dart';
@@ -138,18 +139,16 @@ class Home1Page extends StatefulWidget {
 
 class _Home1PageState extends State<Home1Page> {
   Map<String, dynamic> userDados = {};
-
   List participantsList = [];
   List filteredParticipantsList = [];
   TextEditingController searchController = TextEditingController();
-  Timer? _debounce; // Timer para debounce
+  Timer? _debounce; 
   String? token;
 
   @override
   void initState() {
     super.initState();
-    loadToken(); // Carrega o token ao iniciar
-    initializeDateFormatting();
+    loadToken();
     searchController.addListener(_onSearchChanged);
   }
 
@@ -235,14 +234,12 @@ class _Home1PageState extends State<Home1Page> {
                               color: Color(0xFF0F76CE),
                             ),
                             border: GradientOutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(9)),
+                              borderRadius: const BorderRadius.all(Radius.circular(9)),
                               gradient: gradientLk(),
                               width: 1,
                             ),
                             focusedBorder: GradientOutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
+                              borderRadius: const BorderRadius.all(Radius.circular(8)),
                               gradient: gradientLk(),
                               width: 1,
                             ),
@@ -260,14 +257,20 @@ class _Home1PageState extends State<Home1Page> {
                 const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
-                      final participants = filteredParticipantsList[index];
+                      final participantData = filteredParticipantsList[index];
                       return CardPlayer(
-                        key: ValueKey(participants['id']),
-                        participants: participants,
-                        participant: null,
+                        key: ValueKey(participantData['id']),
+                        participantData: participantData,
+                        onTap: (Map<String, dynamic> data) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AgendaPage(participantData: data), // Passando os dados se necessário
+                            ),
+                          );
+                        },
                       );
                     },
                     itemCount: filteredParticipantsList.length,
@@ -295,7 +298,6 @@ class _Home1PageState extends State<Home1Page> {
 
     try {
       String expenseListApi = dotenv.get('API_HOST', fallback: '');
-
       var url = Uri.parse('${expenseListApi}api/user');
       var restAnswer = await http.get(
         url,
@@ -303,18 +305,14 @@ class _Home1PageState extends State<Home1Page> {
           'Authorization': 'Bearer $token',
         },
       );
-      log('DADOS DO USUARIO ${restAnswer.body}');
       if (restAnswer.statusCode == 200) {
         final decode = jsonDecode(restAnswer.body);
         setState(() {
           userDados = decode;
         });
-      } else {
-        log('Erro ao buscar dados do usuário: ${restAnswer.statusCode}');
       }
-    } catch (e, stackTrace) {
-      log('Erro ao buscar dados do usuário: $e');
-      log('Stack trace: $stackTrace');
+    } catch (e) {
+      // Lidar com erro
     }
   }
 
@@ -323,32 +321,22 @@ class _Home1PageState extends State<Home1Page> {
 
     try {
       String expenseListApi = dotenv.get('API_HOST', fallback: '');
-      var url =
-          Uri.parse('${expenseListApi}api/participants?page=1&perPage=30&groupBySub=1&getAll=1');
+      var url = Uri.parse('${expenseListApi}api/participants?page=1&perPage=30&groupBySub=1&getAll=1');
       var restAnswer = await http.get(
         url,
         headers: {
           'Authorization': 'Bearer $token',
         },
       );
-      log('DADOS DOS PARTICIPANTES ${restAnswer.body}');
       if (restAnswer.statusCode == 200) {
         final decode = jsonDecode(restAnswer.body);
         setState(() {
           participantsList = decode;
           filteredParticipantsList = participantsList;
         });
-      } else if (restAnswer.statusCode == 401) {
-        log('Token inválido, redirecionar para o login.');
-        // Lógica de redirecionamento ou renovação do token
-      } else if (restAnswer.statusCode >= 500) {
-        log('Erro no servidor: ${restAnswer.statusCode}');
-      } else {
-        log('Erro inesperado: ${restAnswer.statusCode}');
       }
-    } catch (e, stackTrace) {
-      log('Erro ao buscar participantes: $e');
-      log('Stack trace: $stackTrace');
+    } catch (e) {
+      // Lidar com erro
     }
   }
 }
