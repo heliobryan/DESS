@@ -2,7 +2,6 @@ import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:intl/intl.dart';
 
 class AvatecPage extends StatefulWidget {
   final List<dynamic> subCriterias;

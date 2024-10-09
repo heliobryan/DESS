@@ -1,6 +1,5 @@
 import 'dart:async'; // Import necessário para debounce
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dess/App/Source/Core/CardComponents/cards.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
@@ -14,7 +13,6 @@ import 'package:gradient_borders/input_borders/gradient_outline_input_border.dar
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class HomePage extends StatefulWidget {
   final String initialCategory;
@@ -267,7 +265,7 @@ class _Home1PageState extends State<Home1Page> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AgendaPage(participantData: data), // Passando os dados se necessário
+                              builder: (context) => AgendaPage(participantData: data), 
                             ),
                           );
                         },

@@ -1,8 +1,8 @@
 import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avapsi.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -101,7 +101,6 @@ class _CardPlayerState extends State<CardPlayer> {
     );
   }
 }
-
 
 class CompCard extends StatefulWidget {
   final Map<String, dynamic> event;
@@ -211,6 +210,16 @@ class _CriteriaCardState extends State<CriteriaCard> {
                   ),
                 ),
               );
+            } else if (widget.criterias['name'] == 'Mental') {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AvapsiPage(
+                    subCriterias: widget.criterias['subcriteria'],
+                    participantData: widget.participantData,
+                  ),
+                ),
+              );
             }
           },
           child: Padding(
@@ -230,7 +239,6 @@ class _CriteriaCardState extends State<CriteriaCard> {
     );
   }
 }
-
 
 class SubCriteriaCard extends StatefulWidget {
   final Map<String, dynamic> subCriterias;
@@ -279,14 +287,12 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                   _isExpanded = !_isExpanded;
                 });
               },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    widget.subCriterias['name'] ?? 'Sem Nome',
-                    style: comp12Out(),
-                  ),
-                ],
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  widget.subCriterias['name'] ?? 'Sem Nome',
+                  style: comp12Out(),
+                ),
               ),
             ),
           ),
@@ -548,12 +554,11 @@ class AgendaCard extends StatelessWidget {
         ),
         child: TextButton(
           onPressed: () {
-     
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => AvaliationPage(
-                  participantData: event['eventday'], 
+                  participantData: event['eventday'],
                 ),
               ),
             );
@@ -602,9 +607,6 @@ class AgendaCard extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class DataCard extends StatefulWidget {
   const DataCard({super.key});
@@ -696,9 +698,9 @@ class _DataCardState extends State<DataCard> {
 }
 
 class AgendaData extends StatefulWidget {
-  final Function(int) onMonthChanged; 
+  final Function(int) onMonthChanged;
 
-  const AgendaData({super.key, required this.onMonthChanged}); 
+  const AgendaData({super.key, required this.onMonthChanged});
 
   @override
   State<AgendaData> createState() => _AgendaDataState();
@@ -706,18 +708,28 @@ class AgendaData extends StatefulWidget {
 
 class _AgendaDataState extends State<AgendaData> {
   final List<String> _units = [
-    'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
-    'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
+    'Janeiro',
+    'Fevereiro',
+    'Março',
+    'Abril',
+    'Maio',
+    'Junho',
+    'Julho',
+    'Agosto',
+    'Setembro',
+    'Outubro',
+    'Novembro',
+    'Dezembro',
   ];
 
-  late int _selectedUnitIndex; 
+  late int _selectedUnitIndex;
 
   @override
   void initState() {
     super.initState();
-   
+
     DateTime now = DateTime.now();
-    _selectedUnitIndex = now.month - 1; 
+    _selectedUnitIndex = now.month - 1;
   }
 
   void _updateMonth(int month) {
@@ -728,14 +740,15 @@ class _AgendaDataState extends State<AgendaData> {
     setState(() {
       _selectedUnitIndex = (_selectedUnitIndex + 1) % _units.length;
       Future.delayed(Duration.zero, () {
-        _updateMonth(_selectedUnitIndex + 1); 
+        _updateMonth(_selectedUnitIndex + 1);
       });
     });
   }
 
   void _unToggleUnit() {
     setState(() {
-      _selectedUnitIndex = (_selectedUnitIndex - 1 + _units.length) % _units.length; 
+      _selectedUnitIndex =
+          (_selectedUnitIndex - 1 + _units.length) % _units.length;
       Future.delayed(Duration.zero, () {
         _updateMonth(_selectedUnitIndex + 1);
       });
@@ -759,7 +772,7 @@ class _AgendaDataState extends State<AgendaData> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              onPressed: _unToggleUnit, 
+              onPressed: _unToggleUnit,
               icon: const Icon(
                 Icons.arrow_back_ios,
                 color: Colors.white,
@@ -768,7 +781,7 @@ class _AgendaDataState extends State<AgendaData> {
             const SizedBox(width: 10),
             SizedBox(
               child: Text(
-                _units[_selectedUnitIndex], 
+                _units[_selectedUnitIndex],
                 style: comp16Out(),
               ),
             ),
@@ -782,6 +795,116 @@ class _AgendaDataState extends State<AgendaData> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class PsiCard extends StatefulWidget {
+  const PsiCard({super.key});
+
+  @override
+  State<PsiCard> createState() => _PsiCardState();
+}
+
+class _PsiCardState extends State<PsiCard> {
+  bool showStar1 = true;
+  bool showStar2 = true;
+  bool showStar3 = true;
+  bool showStar4 = true;
+  bool showStar5 = true;
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 361,
+      height: 100,
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          border: GradientBoxBorder(
+            gradient: LinearGradient(
+              colors: <Color>[
+                Color(0xFF981DB9),
+                Color(0xFF0F76CE),
+              ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const SizedBox(height: 5),
+              const Text(
+                'Avaliação - O atleta está concentrado?',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'OUTFIT',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: SvgPicture.asset('assets/images/staron.svg'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showStar1 = !showStar1;
+                      });
+                    },
+                    icon: (showStar1)
+                        ? SvgPicture.asset('assets/images/staroff.svg')
+                        : SvgPicture.asset('assets/images/staron.svg'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showStar2 = !showStar2;
+                        showStar1 = !showStar1;
+                      });
+                    },
+                    icon: (showStar2)
+                        ? SvgPicture.asset('assets/images/staroff.svg')
+                        : SvgPicture.asset('assets/images/staron.svg'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showStar3 = !showStar3;
+                        showStar2 = !showStar2;
+                        showStar1 = !showStar1;
+                      });
+                    },
+                    icon: (showStar3)
+                        ? SvgPicture.asset('assets/images/staroff.svg')
+                        : SvgPicture.asset('assets/images/staron.svg'),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showStar4 = !showStar4;
+                        showStar3 = !showStar3;
+                        showStar2 = !showStar2;
+                        showStar1 = !showStar1;
+                      });
+                    },
+                    icon: (showStar4)
+                        ? SvgPicture.asset('assets/images/staroff.svg')
+                        : SvgPicture.asset('assets/images/staron.svg'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

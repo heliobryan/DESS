@@ -3,22 +3,20 @@ import 'package:dess/App/Source/Core/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-
-class AvafisPage extends StatefulWidget {
+class AvapsiPage extends StatefulWidget {
   final List<dynamic> subCriterias;
   final Map<String, dynamic> participantData;
-
-  const AvafisPage({
+  const AvapsiPage({
     super.key,
     required this.subCriterias,
     required this.participantData,
   });
 
   @override
-  State<AvafisPage> createState() => _AvafisPageState();
+  State<AvapsiPage> createState() => _AvapsiPageState();
 }
 
-class _AvafisPageState extends State<AvafisPage> {
+class _AvapsiPageState extends State<AvapsiPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +79,8 @@ class _AvafisPageState extends State<AvafisPage> {
                 Column(
                   children: [
                     Text(
-                      widget.participantData['user']?['name'] ?? 'Nome Desconhecido',
+                      widget.participantData['user']?['name'] ??
+                          'Nome Desconhecido',
                       style: comp25Str(),
                     ),
                     Text(
@@ -95,26 +94,27 @@ class _AvafisPageState extends State<AvafisPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-              Expanded(
-               child: ListView.builder(
-                scrollDirection: Axis.horizontal, 
-                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-                itemCount: widget.subCriterias.length,
-                itemBuilder: (context, index) {
-                  final subCriteria = widget.subCriterias[index];
+                Expanded(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                    itemCount: widget.subCriterias.length,
+                    itemBuilder: (context, index) {
+                      final subCriteria = widget.subCriterias[index];
 
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5.0), 
-                      child: SubCriteriaCard(
-                        subCriterias: subCriteria,
-                        subCriteria: null,
-                        onTap: () {},
-                        onSubCriteriaPressed: (List<dynamic> items) {},
-                         ),
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: SubCriteriaCard(
+                          subCriterias: subCriteria,
+                          subCriteria: null,
+                          onTap: () {},
+                          onSubCriteriaPressed: (List<dynamic> items) {},
+                        ),
                       );
                     },
-                   ),
-                 ),
+                  ),
+                ),
                 const SizedBox(height: 20),
               ],
             ),
