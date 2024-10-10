@@ -13,6 +13,7 @@ import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:dess/App/Source/Screens/Register/login_page.dart';
 import 'package:dess/App/Source/Screens/Register/register_page.dart';
 import 'package:dess/App/Source/Screens/Register/splash_page.dart';
+import 'package:dess/App/Source/Screens/Test/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -30,7 +31,7 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SplashPage(),
+      home: const TestScreen(),
       debugShowCheckedModeBanner: false,
       routes: {
         'initialPage': (context) => const InitialPage(),

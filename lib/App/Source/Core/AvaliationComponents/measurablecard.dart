@@ -168,7 +168,7 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
     ' ',
   ];
 
-  String _selectedUnit = 'Metros'; // Unidade inicial
+  String _selectedUnit = 'Metros';
 
   @override
   void initState() {

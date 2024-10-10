@@ -66,7 +66,6 @@ class _QuantitativeCardState extends State<QuantitativeCard> {
     _loadData();
   }
 
-  // Carregar dados do SharedPreferences
   Future<void> _loadData() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -81,7 +80,6 @@ class _QuantitativeCardState extends State<QuantitativeCard> {
     });
   }
 
-  // Salvar dados no SharedPreferences
   Future<void> _saveData() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('${widget.title}_passesFeitos', passesFeitos);
@@ -174,7 +172,7 @@ class _QuantitativeCardState extends State<QuantitativeCard> {
                                     style: comp15Out(),
                                   ),
                                   Text(
-                                    'Passes feitos',
+                                    'Tentativas',
                                     style: comp10Out(),
                                   ),
                                 ],
@@ -194,7 +192,7 @@ class _QuantitativeCardState extends State<QuantitativeCard> {
                                     style: comp15Out(),
                                   ),
                                   Text(
-                                    'Passes certos',
+                                    'Tentativas certas',
                                     style: comp10Out(),
                                   ),
                                 ],
@@ -214,7 +212,7 @@ class _QuantitativeCardState extends State<QuantitativeCard> {
                                     style: comp15Out(),
                                   ),
                                   Text(
-                                    'Passes errados',
+                                    'Tentativas erradas',
                                     style: comp9Out(),
                                   ),
                                 ],
@@ -277,23 +275,24 @@ class EditQuantitativeCard extends StatefulWidget {
 }
 
 class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
-  late int _passesCertos;
-  late int _passesErrados;
-  late double _notaFinal;
+  late int _correctAttempts;
+  late int _incorrectAttempts;
+  late double _finalNotice;
 
   @override
   void initState() {
     super.initState();
-    _passesCertos = widget.passesCertos;
-    _passesErrados = widget.passesErrados;
-    _notaFinal = widget.notaFinal;
+    _correctAttempts = widget.passesCertos;
+    _incorrectAttempts = widget.passesErrados;
+    _finalNotice = widget.notaFinal;
   }
 
   void _updateNotaFinal() {
     setState(() {
-      int totalPasses = _passesCertos + _passesErrados;
-      _notaFinal =
-          totalPasses > 0 ? (_passesCertos / totalPasses).clamp(0, 1) * 10 : 0;
+      int totalPasses = _correctAttempts + _incorrectAttempts;
+      _finalNotice = totalPasses > 0
+          ? (_correctAttempts / totalPasses).clamp(0, 1) * 10
+          : 0;
     });
   }
 
@@ -328,7 +327,7 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    'Passes certos',
+                    'Tentativas certas',
                     style: comp15Out(),
                   ),
                   const SizedBox(height: 15),
@@ -347,7 +346,7 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
                         IconButton(
                           onPressed: () {
                             setState(() {
-                              if (_passesCertos > 0) _passesCertos--;
+                              if (_correctAttempts > 0) _incorrectAttempts--;
                               _updateNotaFinal();
                             });
                           },
@@ -358,13 +357,13 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
                           ),
                         ),
                         Text(
-                          '$_passesCertos',
+                          '$_correctAttempts',
                           style: comp15Out(),
                         ),
                         IconButton(
                           onPressed: () {
                             setState(() {
-                              _passesCertos++;
+                              _correctAttempts++;
                               _updateNotaFinal();
                             });
                           },
@@ -382,7 +381,6 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
             ),
           ),
           const SizedBox(height: 20),
-          // Layout dos passes errados
           Container(
             width: 317,
             height: 117,
@@ -403,7 +401,7 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    'Passes errados',
+                    'Tentativas erradas',
                     style: comp15Out(),
                   ),
                   const SizedBox(height: 15),
@@ -422,7 +420,7 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
                         IconButton(
                           onPressed: () {
                             setState(() {
-                              if (_passesErrados > 0) _passesErrados--;
+                              if (_incorrectAttempts > 0) _incorrectAttempts--;
                               _updateNotaFinal();
                             });
                           },
@@ -433,13 +431,13 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
                           ),
                         ),
                         Text(
-                          '$_passesErrados',
+                          '$_incorrectAttempts',
                           style: comp15Out(),
                         ),
                         IconButton(
                           onPressed: () {
                             setState(() {
-                              _passesErrados++;
+                              _incorrectAttempts++;
                               _updateNotaFinal();
                             });
                           },
@@ -457,7 +455,6 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
             ),
           ),
           const SizedBox(height: 20),
-          // Layout da nota final
           Container(
             width: 317,
             height: 217,
@@ -492,7 +489,7 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
                     ),
                     child: Center(
                       child: Text(
-                        _notaFinal.toStringAsFixed(1),
+                        _finalNotice.toStringAsFixed(1),
                         style: comp16Out(),
                       ),
                     ),
@@ -512,9 +509,9 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
                       child: OutlinedButton(
                         onPressed: () {
                           Navigator.of(context).pop({
-                            'passesCertos': _passesCertos,
-                            'passesErrados': _passesErrados,
-                            'notaFinal': _notaFinal,
+                            'passesCertos': _correctAttempts,
+                            'passesErrados': _incorrectAttempts,
+                            'notaFinal': _finalNotice,
                           });
                         },
                         style: OutlinedButton.styleFrom(
