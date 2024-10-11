@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 class SubjetiveCard extends StatefulWidget {
-  const SubjetiveCard({super.key});
+  const SubjetiveCard({super.key, required Null Function(double nota) onSave});
 
   @override
   State<SubjetiveCard> createState() => _SubjetiveCardState();
