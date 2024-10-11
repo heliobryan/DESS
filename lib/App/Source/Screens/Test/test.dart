@@ -11,13 +11,15 @@ class TestScreen extends StatefulWidget {
 class _TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SubjetiveCard(),
+            SubjetiveCard(
+              onSave: (double nota) {},
+            ),
           ],
         ),
       ),

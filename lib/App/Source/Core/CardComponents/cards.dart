@@ -1,4 +1,5 @@
 import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
+import 'package:dess/App/Source/Core/AvaliationComponents/subjetivecard.dart';
 import 'package:dess/App/Source/Core/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
@@ -332,6 +333,16 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                               measurableValue: item['measurableValue'] ?? 0,
                               measurement: '',
                               unit: '',
+                            ),
+                            const SizedBox(height: 10),
+                          ],
+                        );
+                      } else if (item['aspect'] == 'subjective') {
+                        // Lógica para exibir o SubjetiveCard
+                        return Column(
+                          children: [
+                            SubjetiveCard(
+                              onSave: (double nota) {},
                             ),
                             const SizedBox(height: 10),
                           ],

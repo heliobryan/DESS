@@ -140,7 +140,7 @@ class _Home1PageState extends State<Home1Page> {
   List participantsList = [];
   List filteredParticipantsList = [];
   TextEditingController searchController = TextEditingController();
-  Timer? _debounce; 
+  Timer? _debounce;
   String? token;
 
   @override
@@ -232,12 +232,14 @@ class _Home1PageState extends State<Home1Page> {
                               color: Color(0xFF0F76CE),
                             ),
                             border: GradientOutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(9)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(9)),
                               gradient: gradientLk(),
                               width: 1,
                             ),
                             focusedBorder: GradientOutlineInputBorder(
-                              borderRadius: const BorderRadius.all(Radius.circular(8)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
                               gradient: gradientLk(),
                               width: 1,
                             ),
@@ -255,7 +257,8 @@ class _Home1PageState extends State<Home1Page> {
                 const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
                       final participantData = filteredParticipantsList[index];
                       return CardPlayer(
@@ -265,7 +268,8 @@ class _Home1PageState extends State<Home1Page> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AgendaPage(participantData: data), 
+                              builder: (context) =>
+                                  AgendaPage(participantData: data),
                             ),
                           );
                         },
@@ -319,7 +323,8 @@ class _Home1PageState extends State<Home1Page> {
 
     try {
       String expenseListApi = dotenv.get('API_HOST', fallback: '');
-      var url = Uri.parse('${expenseListApi}api/participants?page=1&perPage=30&groupBySub=1&getAll=1');
+      var url = Uri.parse(
+          '${expenseListApi}api/participants?page=1&perPage=30&groupBySub=1&getAll=1');
       var restAnswer = await http.get(
         url,
         headers: {
@@ -333,8 +338,6 @@ class _Home1PageState extends State<Home1Page> {
           filteredParticipantsList = participantsList;
         });
       }
-    } catch (e) {
-      // Lidar com erro
-    }
+    } catch (e) {}
   }
 }
