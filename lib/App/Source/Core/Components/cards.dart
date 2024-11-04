@@ -1,6 +1,6 @@
-import 'package:dess/App/Source/Core/AvaliationComponents/quantitativecard.dart';
-import 'package:dess/App/Source/Core/AvaliationComponents/subjetivecard.dart';
-import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Core/Components/AvaliationComponents/quantitativecard.dart';
+import 'package:dess/App/Source/Core/Components/AvaliationComponents/subjetivecard.dart';
+import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avapsi.dart';
@@ -8,7 +8,7 @@ import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:dess/App/Source/Core/AvaliationComponents/measurablecard.dart';
+import 'package:dess/App/Source/Core/Components/AvaliationComponents/measurablecard.dart';
 import 'package:intl/intl.dart';
 
 class CardPlayer extends StatefulWidget {
@@ -77,7 +77,7 @@ class _CardPlayerState extends State<CardPlayer> {
                             child: Text(
                               '${widget.participantData['user']?['name'] ?? 'Nome Desconhecido'} ${widget.participantData['user']?['last_name'] ?? ''}',
                               style: comp16Out(),
-                              textAlign: TextAlign.center, // Centraliza o texto
+                              textAlign: TextAlign.center,
                             ),
                           ),
                           FittedBox(
@@ -85,7 +85,7 @@ class _CardPlayerState extends State<CardPlayer> {
                             child: Text(
                               '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'} - ${widget.participantData['category'] ?? 'Categoria Desconhecida'}',
                               style: comp16Out(),
-                              textAlign: TextAlign.center, // Centraliza o texto
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ],
@@ -163,6 +163,7 @@ class CriteriaCard extends StatefulWidget {
     super.key,
     required this.criterias,
     required this.participantData,
+    required Null Function() onTap,
   });
 
   @override
@@ -185,9 +186,7 @@ class _CriteriaCardState extends State<CriteriaCard> {
           style: OutlinedButton.styleFrom(
             side: const BorderSide(color: Colors.transparent),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
+              borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
           ),
           onPressed: () {
@@ -544,9 +543,13 @@ class PlayerCard extends StatelessWidget {
 }
 
 class AgendaCard extends StatelessWidget {
-  final dynamic event; // Recebe os dados do evento
+  final dynamic event; // Dados do evento
 
-  const AgendaCard({super.key, required this.event});
+  const AgendaCard({
+    super.key,
+    required this.event,
+    required Null Function() onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -569,15 +572,13 @@ class AgendaCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => AvaliationPage(
-                  participantData: event['eventday'],
+                  participantData: event['eventday'], // Passando os dados
                 ),
               ),
             );
           },
           style: ButtonStyle(
-            // ignore: deprecated_member_use
             padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
-            // ignore: deprecated_member_use
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
@@ -588,7 +589,6 @@ class AgendaCard extends StatelessWidget {
             padding: const EdgeInsets.all(12),
             child: Row(
               children: [
-                // Ícone no início
                 const Icon(
                   Icons.assignment_outlined,
                   size: 40,
@@ -919,5 +919,19 @@ class _PsiCardState extends State<PsiCard> {
         ),
       ),
     );
+  }
+}
+
+class SportsCard extends StatefulWidget {
+  const SportsCard({super.key});
+
+  @override
+  State<SportsCard> createState() => _SportsCardState();
+}
+
+class _SportsCardState extends State<SportsCard> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

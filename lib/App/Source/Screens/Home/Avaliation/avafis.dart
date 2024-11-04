@@ -1,7 +1,12 @@
-import 'package:dess/App/Source/Core/CardComponents/cards.dart';
-import 'package:dess/App/Source/Core/components.dart';
+import 'dart:convert';
+
+import 'package:dess/App/Source/Core/Components/cards.dart';
+import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class AvafisPage extends StatefulWidget {
   final List<dynamic> subCriterias;
@@ -18,6 +23,58 @@ class AvafisPage extends StatefulWidget {
 }
 
 class _AvafisPageState extends State<AvafisPage> {
+  Map<String, dynamic> userDados = {};
+  String? token;
+
+  @override
+  void initState() {
+    super.initState();
+    loadToken();
+  }
+
+  Future<void> loadToken() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      token = sharedPreferences.getString('token');
+    });
+    if (token != null) {
+      await userInfo();
+    } else {
+      print('Token não encontrada');
+    }
+  }
+
+  Future<void> userInfo() async {
+    if (token == null) return;
+
+    try {
+      String apiHost = dotenv.get('API_HOST', fallback: '');
+      var url = Uri.parse('${apiHost}api/user');
+      var restAnswer = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      if (restAnswer.statusCode == 200) {
+        final decode = jsonDecode(restAnswer.body);
+        print('Resposta da API /api/user: $decode');
+
+        if (decode.containsKey('name')) {
+          setState(() {
+            userDados = decode;
+          });
+        } else {
+          print('Campo "name" não encontrado na resposta da API');
+        }
+      } else {
+        print('Erro ao obter dados do usuário: ${restAnswer.statusCode}');
+      }
+    } catch (e) {
+      print('Erro ao obter dados do usuário: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +138,7 @@ class _AvafisPageState extends State<AvafisPage> {
                   children: [
                     Text(
                       widget.participantData['user']?['name'] ??
+                          userDados['name'] ??
                           'Nome Desconhecido',
                       style: comp25Str(),
                     ),

@@ -1,4 +1,5 @@
-import 'package:dess/App/Source/Core/AvaliationComponents/subjetivecard.dart';
+import 'package:dess/App/Source/Core/Components/AvaliationComponents/subjetivecard.dart';
+import 'package:dess/App/Source/Core/Components/cards.dart';
 import 'package:flutter/material.dart';
 
 class TestScreen extends StatefulWidget {
@@ -16,11 +17,7 @@ class _TestScreenState extends State<TestScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SubjetiveCard(
-              onSave: (double nota) {},
-            ),
-          ],
+          children: [],
         ),
       ),
     );

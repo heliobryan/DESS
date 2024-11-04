@@ -1,11 +1,13 @@
-import 'package:dess/App/Source/Screens/Forms/form_page.dart';
+import 'package:dess/App/Source/Screens/Filter/club_page.dart';
+import 'package:dess/App/Source/Screens/Filter/sports_page.dart';
+import 'package:dess/App/Source/Screens/Filter/sub_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/comp_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/health_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/sponsor_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
-import 'package:dess/App/Source/Screens/Home/home_page.dart';
+import 'package:dess/App/Source/Screens/Home/Home/home_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Passport/passport_page.dart';

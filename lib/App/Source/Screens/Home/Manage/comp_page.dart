@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
-import 'package:dess/App/Source/Core/CardComponents/cards.dart';
-import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Core/Components/cards.dart';
+import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';

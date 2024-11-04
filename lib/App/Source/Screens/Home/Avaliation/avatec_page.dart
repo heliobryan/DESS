@@ -1,5 +1,5 @@
-import 'package:dess/App/Source/Core/CardComponents/cards.dart';
-import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Core/Components/cards.dart';
+import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
@@ -80,7 +80,8 @@ class _AvatecPageState extends State<AvatecPage> {
                 Column(
                   children: [
                     Text(
-                      widget.participantData['user']?['name'] ?? 'Nome Desconhecido',
+                      widget.participantData['user']?['name'] ??
+                          'Nome Desconhecido',
                       style: comp25Str(),
                     ),
                     Text(
@@ -96,7 +97,8 @@ class _AvatecPageState extends State<AvatecPage> {
                 const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
                     itemCount: widget.subCriterias.length,
                     itemBuilder: (context, index) {
                       final subCriteria = widget.subCriterias[index];
@@ -121,8 +123,6 @@ class _AvatecPageState extends State<AvatecPage> {
     );
   }
 }
-
-
 
 class AvaliationForm extends StatefulWidget {
   const AvaliationForm({super.key});

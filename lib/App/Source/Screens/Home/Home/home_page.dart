@@ -1,7 +1,7 @@
-import 'dart:async'; // Import necessário para debounce
+import 'dart:async';
 import 'dart:convert';
-import 'package:dess/App/Source/Core/CardComponents/cards.dart';
-import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Core/Components/cards.dart';
+import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
@@ -338,6 +338,7 @@ class _Home1PageState extends State<Home1Page> {
           filteredParticipantsList = participantsList;
         });
       }
+      // ignore: empty_catches
     } catch (e) {}
   }
 }

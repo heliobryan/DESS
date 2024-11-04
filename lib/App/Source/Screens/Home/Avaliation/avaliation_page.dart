@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:dess/App/Source/Core/CardComponents/cards.dart';
+import 'package:dess/App/Source/Core/Components/cards.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:http/http.dart' as http;
-import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -82,15 +83,28 @@ class _AvaliationPageState extends State<AvaliationPage> {
                             style: TextStyle(color: Colors.red),
                           ),
                         );
-                      } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                      } else if (snapshot.hasData &&
+                          snapshot.data!.isNotEmpty) {
                         return ListView.builder(
-                          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 10),
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
                             final criterias = snapshot.data![index];
                             return CriteriaCard(
                               criterias: criterias,
                               participantData: widget.participantData,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AvafisPage(
+                                      subCriterias: criterias['subCriterias'],
+                                      participantData: widget.participantData,
+                                    ),
+                                  ),
+                                );
+                              },
                             );
                           },
                         );
@@ -116,8 +130,10 @@ class _AvaliationPageState extends State<AvaliationPage> {
   Future<List> getCriteria() async {
     try {
       String expenseListApi = dotenv.get('API_HOST', fallback: '');
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/criteria?page=1&perPage=20&getAll=1');
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      var url =
+          Uri.parse('${expenseListApi}api/criteria?page=1&perPage=20&getAll=1');
       final token = sharedPreferences.getString('token');
       var restAwnser = await http.get(
         url,

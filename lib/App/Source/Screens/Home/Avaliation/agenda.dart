@@ -1,16 +1,17 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:dess/App/Source/Core/CardComponents/cards.dart';
-import 'package:dess/App/Source/Core/components.dart';
+import 'package:dess/App/Source/Core/Components/cards.dart';
+import 'package:dess/App/Source/Core/Components/components.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class AgendaPage extends StatefulWidget {
-  final Map<String, dynamic>? participantData; // Parâmetro opcional
+  final Map<String, dynamic>? participantData;
 
-  const AgendaPage({super.key, this.participantData}); // Atualize o construtor
+  const AgendaPage({super.key, this.participantData});
 
   @override
   State<AgendaPage> createState() => _AgendaPageState();
@@ -34,31 +35,6 @@ class _AgendaPageState extends State<AgendaPage> {
         return parsedDate.month == selectedMonth;
       }).toList();
     });
-  }
-
-  Future<void> getEvaluations() async {
-    try {
-      String expenseListApi = dotenv.get('API_HOST', fallback: '');
-
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/evaluations?page=1');
-      final token = sharedPreferences.getString('token');
-      var restAnswer = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-      if (restAnswer.statusCode == 200) {
-        final decode = jsonDecode(restAnswer.body);
-        setState(() {
-          eventList = decode['data'];
-          filteredEventList = eventList;
-        });
-      }
-    } catch (e) {
-      log(e.toString());
-    }
   }
 
   @override
@@ -106,10 +82,23 @@ class _AgendaPageState extends State<AgendaPage> {
                 const SizedBox(height: 50),
                 Expanded(
                   child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                     itemBuilder: (context, index) {
                       final event = filteredEventList[index];
-                      return AgendaCard(event: event); 
+                      return AgendaCard(
+                        event: event,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AvaliationPage(
+                                participantData: widget.participantData!,
+                              ),
+                            ),
+                          );
+                        },
+                      );
                     },
                     itemCount: filteredEventList.length,
                   ),
@@ -120,5 +109,31 @@ class _AgendaPageState extends State<AgendaPage> {
         ],
       ),
     );
+  }
+
+  Future<void> getEvaluations() async {
+    try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      var url = Uri.parse('${expenseListApi}api/evaluations?page=1');
+      final token = sharedPreferences.getString('token');
+      var restAnswer = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      if (restAnswer.statusCode == 200) {
+        final decode = jsonDecode(restAnswer.body);
+        setState(() {
+          eventList = decode['data'];
+          filteredEventList = eventList;
+        });
+      }
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }
