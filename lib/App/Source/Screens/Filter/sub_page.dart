@@ -44,22 +44,27 @@ class _Form3PageState extends State<Form3Page> {
                 Column(
                   children: [
                     AgeCard(
-                      category: 'Sub-17',
-                      onCategorySelected: _onCategorySelected,
-                    ),
-                    const SizedBox(height: 20),
-                    AgeCard(
-                      category: 'Sub-11',
-                      onCategorySelected: _onCategorySelected,
-                    ),
-                    const SizedBox(height: 20),
-                    AgeCard(
                       category: 'Sub-12',
                       onCategorySelected: _onCategorySelected,
                     ),
                     const SizedBox(height: 20),
                     AgeCard(
                       category: 'Sub-13',
+                      onCategorySelected: _onCategorySelected,
+                    ),
+                    const SizedBox(height: 20),
+                    AgeCard(
+                      category: 'Sub-14',
+                      onCategorySelected: _onCategorySelected,
+                    ),
+                    const SizedBox(height: 20),
+                    AgeCard(
+                      category: 'Sub-15',
+                      onCategorySelected: _onCategorySelected,
+                    ),
+                    const SizedBox(height: 20),
+                    AgeCard(
+                      category: 'Sub-16',
                       onCategorySelected: _onCategorySelected,
                     ),
                   ],

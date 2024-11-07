@@ -137,17 +137,15 @@ class _AvafisPageState extends State<AvafisPage> {
                 Column(
                   children: [
                     Text(
-                      widget.participantData['user']?['name'] ??
-                          userDados['name'] ??
-                          'Nome Desconhecido',
+                      widget.participantData['user']['name'],
                       style: comp25Str(),
                     ),
                     Text(
-                      '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'}',
+                      '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
                       style: comp15Out(),
                     ),
                     Text(
-                      '${widget.participantData['institution']?['name'] ?? 'Instituição Desconhecida'}',
+                      '${widget.participantData['team']['name']}',
                       style: comp15Out(),
                     ),
                   ],

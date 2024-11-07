@@ -12,13 +12,12 @@ import 'package:dess/App/Source/Core/Components/AvaliationComponents/measurablec
 import 'package:intl/intl.dart';
 
 class CardPlayer extends StatefulWidget {
-  final Map<String, dynamic> participantData;
-  final Function(Map<String, dynamic>) onTap;
+  final Map<String, dynamic> participants;
 
   const CardPlayer({
     super.key,
-    required this.participantData,
-    required this.onTap,
+    required this.participants,
+    required Null Function(Map<String, dynamic> data) onTap,
   });
 
   @override
@@ -69,23 +68,21 @@ class _CardPlayerState extends State<CardPlayer> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              '${widget.participantData['user']?['name'] ?? 'Nome Desconhecido'} ${widget.participantData['user']?['last_name'] ?? ''}',
+                              '${widget.participants['user']['name']} ${widget.participants['user']['last_name']}',
                               style: comp16Out(),
-                              textAlign: TextAlign.center,
                             ),
                           ),
                           FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
-                              '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'} - ${widget.participantData['category'] ?? 'Categoria Desconhecida'}',
+                              '${widget.participants['position']} - ${widget.participants['category']} - ${widget.participants['modality']['name']}',
                               style: comp16Out(),
-                              textAlign: TextAlign.center,
                             ),
                           ),
                         ],
@@ -94,7 +91,14 @@ class _CardPlayerState extends State<CardPlayer> {
                   ],
                 ),
               ),
-              onPressed: () => widget.onTap(widget.participantData),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AvaliationPage(
+                    participantData: widget.participants,
+                  ),
+                ),
+              ),
             ),
           );
         },
