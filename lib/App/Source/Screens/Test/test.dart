@@ -1,5 +1,3 @@
-import 'package:dess/App/Source/Core/Components/AvaliationComponents/subjetivecard.dart';
-import 'package:dess/App/Source/Core/Components/cards.dart';
 import 'package:flutter/material.dart';
 
 class TestScreen extends StatefulWidget {

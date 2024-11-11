@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:dess/App/Source/Core/Components/cards.dart';
 import 'package:dess/App/Source/Core/Components/components.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
@@ -152,6 +151,7 @@ class _Home1PageState extends State<Home1Page> {
   List participantsList = [];
   List filteredParticipantsList = [];
   TextEditingController searchController = TextEditingController();
+  String? token;
 
   @override
   void initState() {
@@ -160,6 +160,7 @@ class _Home1PageState extends State<Home1Page> {
     getParticipants(widget.selectedCategory);
     initializeDateFormatting();
     searchController.addListener(_onSearchChanged);
+    loadToken();
   }
 
   @override
@@ -285,62 +286,59 @@ class _Home1PageState extends State<Home1Page> {
     );
   }
 
+  Future<void> loadToken() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      token = sharedPreferences.getString('token');
+    });
+    userInfo();
+    getParticipants(widget.selectedCategory);
+  }
+
   Future<void> userInfo() async {
+    if (token == null) return;
+
     try {
       String expenseListApi = dotenv.get('API_HOST', fallback: '');
-
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-
       var url = Uri.parse('${expenseListApi}api/user');
-      final token = sharedPreferences.getString('token');
-
-      log('token $token');
-      var restAwnser = await http.get(
+      var restAnswer = await http.get(
         url,
         headers: {
           'Authorization': 'Bearer $token',
         },
       );
-      log('response ${restAwnser.body}');
-      if (restAwnser.statusCode == 200) {
-        final decode = jsonDecode(restAwnser.body);
+      if (restAnswer.statusCode == 200) {
+        final decode = jsonDecode(restAnswer.body);
         setState(() {
           userDados = decode;
         });
-
-        log('DADOS DO USUARIO FINAL $userDados');
       }
     } catch (e) {
-      log(e.toString());
+      // Lidar com erro
     }
   }
 
   Future<void> getParticipants(String category) async {
+    if (token == null) return;
+
     try {
       String expenseListApi = dotenv.get('API_HOST', fallback: '');
-
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/participants');
-      final token = sharedPreferences.getString('token');
-
-      var restAwnser = await http.get(
+      var url = Uri.parse(
+          '${expenseListApi}api/participants?page=1&perPage=30&groupBySub=1&getAll=1');
+      var restAnswer = await http.get(
         url,
         headers: {
           'Authorization': 'Bearer $token',
         },
       );
-
-      if (restAwnser.statusCode == 200) {
-        final decode = jsonDecode(restAwnser.body);
+      if (restAnswer.statusCode == 200) {
+        final decode = jsonDecode(restAnswer.body);
         setState(() {
-          participantsList = decode[category] ?? [];
+          participantsList = decode;
           filteredParticipantsList = participantsList;
         });
       }
-    } catch (e) {
-      log(e.toString());
-    }
+      // ignore: empty_catches
+    } catch (e) {}
   }
 }

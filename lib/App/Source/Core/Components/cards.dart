@@ -582,7 +582,9 @@ class AgendaCard extends StatelessWidget {
             );
           },
           style: ButtonStyle(
+            // ignore: deprecated_member_use
             padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
+            // ignore: deprecated_member_use
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),

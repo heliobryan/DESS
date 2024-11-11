@@ -40,6 +40,7 @@ class _AvafisPageState extends State<AvafisPage> {
     if (token != null) {
       await userInfo();
     } else {
+      // ignore: avoid_print
       print('Token não encontrada');
     }
   }
@@ -58,6 +59,7 @@ class _AvafisPageState extends State<AvafisPage> {
       );
       if (restAnswer.statusCode == 200) {
         final decode = jsonDecode(restAnswer.body);
+        // ignore: avoid_print
         print('Resposta da API /api/user: $decode');
 
         if (decode.containsKey('name')) {
@@ -65,12 +67,15 @@ class _AvafisPageState extends State<AvafisPage> {
             userDados = decode;
           });
         } else {
+          // ignore: avoid_print
           print('Campo "name" não encontrado na resposta da API');
         }
       } else {
+        // ignore: avoid_print
         print('Erro ao obter dados do usuário: ${restAnswer.statusCode}');
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Erro ao obter dados do usuário: $e');
     }
   }
