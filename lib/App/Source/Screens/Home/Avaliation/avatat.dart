@@ -3,21 +3,20 @@ import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-class AvatecPage extends StatefulWidget {
+class AvatatPage extends StatefulWidget {
   final List<dynamic> subCriterias;
   final Map<String, dynamic> participantData;
-
-  const AvatecPage({
+  const AvatatPage({
     super.key,
-    required this.subCriterias,
     required this.participantData,
+    required this.subCriterias,
   });
 
   @override
-  State<AvatecPage> createState() => _AvatecPageState();
+  State<AvatatPage> createState() => _AvatatPageState();
 }
 
-class _AvatecPageState extends State<AvatecPage> {
+class _AvatatPageState extends State<AvatatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +33,7 @@ class _AvatecPageState extends State<AvatecPage> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Tática',
+          'Técnica',
           style: comp20Str(),
         ),
         actions: [
@@ -86,11 +85,11 @@ class _AvatecPageState extends State<AvatecPage> {
                     ),
                     Text(
                       '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'}',
-                      style: comp15Out(),
+                      style: comp16Out(),
                     ),
                     Text(
                       '${widget.participantData['institution']?['name'] ?? 'Instituição Desconhecida'}',
-                      style: comp15Out(),
+                      style: comp16Out(),
                     ),
                   ],
                 ),
@@ -102,111 +101,19 @@ class _AvatecPageState extends State<AvatecPage> {
                     itemCount: widget.subCriterias.length,
                     itemBuilder: (context, index) {
                       final subCriteria = widget.subCriterias[index];
+
                       return SubCriteriaCard(
                         subCriterias: subCriteria,
                         subCriteria: null,
                         onTap: () {},
-                        onSubCriteriaPressed: (List<dynamic> items) {},
+                        onSubCriteriaPressed: (List<dynamic> items) {
+                          // Implementar lógica se necessário
+                        },
                       );
                     },
                   ),
                 ),
                 const SizedBox(height: 20),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CalendarPage extends StatelessWidget {
-  const CalendarPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.white,
-            size: 25,
-          ),
-          onPressed: () => Navigator.pop(context, 'avaliationPage'),
-        ),
-        title: Text(
-          'Técnica',
-          style: comp20Str(),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.exit_to_app,
-              color: Colors.white,
-              size: 30,
-            ),
-            onPressed: () => showDialog(
-              context: context,
-              builder: (BuildContext context) => const ExitButton(),
-            ),
-          ),
-        ],
-      ),
-      backgroundColor: const Color(0xFF1E1E1E),
-      body: Stack(
-        children: [
-          const GradientBack(),
-          const BackImageAll(),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-                Text(
-                  'Datas',
-                  style: comp25Str(),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  'Maio',
-                  style: comp20Str(),
-                ),
-                const SizedBox(height: 20),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    DateCard(),
-                    SizedBox(width: 20),
-                    DateCard(),
-                    SizedBox(width: 20),
-                    DateCardUncheck(),
-                    SizedBox(width: 20),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    DateCard(),
-                    SizedBox(width: 20),
-                    DateCard(),
-                    SizedBox(width: 20),
-                    DateCard(),
-                    SizedBox(width: 20),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    DateCard(),
-                    SizedBox(width: 18),
-                  ],
-                ),
               ],
             ),
           ),

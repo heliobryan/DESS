@@ -4,16 +4,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 class SubjetiveCard extends StatefulWidget {
-  const SubjetiveCard({super.key, required Null Function(double nota) onSave});
+  final Function(double nota) onSave;
+
+  const SubjetiveCard({super.key, required this.onSave});
 
   @override
   State<SubjetiveCard> createState() => _SubjetiveCardState();
 }
 
 class _SubjetiveCardState extends State<SubjetiveCard> {
-  bool showStar1 = false;
-  bool showStar2 = false;
-  bool showStar3 = false;
+  int rating = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -54,46 +54,20 @@ class _SubjetiveCardState extends State<SubjetiveCard> {
                 width: 156,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
+                  children: List.generate(3, (index) {
+                    return IconButton(
                       onPressed: () {
                         setState(() {
-                          showStar1 = true;
-                          showStar2 = false;
-                          showStar3 = false;
+                          rating = index + 1;
                         });
                       },
-                      icon: (showStar1)
-                          ? SvgPicture.asset('assets/images/staron.svg')
-                          : SvgPicture.asset('assets/images/staroff.svg'),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          showStar2 = true;
-                          showStar1 = true;
-                          if (showStar3) {
-                            showStar3 = false;
-                          }
-                        });
-                      },
-                      icon: (showStar2)
-                          ? SvgPicture.asset('assets/images/staron.svg')
-                          : SvgPicture.asset('assets/images/staroff.svg'),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          showStar3 = true;
-                          showStar1 = true;
-                          showStar2 = true;
-                        });
-                      },
-                      icon: (showStar3)
-                          ? SvgPicture.asset('assets/images/staron.svg')
-                          : SvgPicture.asset('assets/images/staroff.svg'),
-                    ),
-                  ],
+                      icon: SvgPicture.asset(
+                        rating > index
+                            ? 'assets/images/staron.svg'
+                            : 'assets/images/staroff.svg',
+                      ),
+                    );
+                  }),
                 ),
               ),
               const SizedBox(height: 20),
@@ -102,9 +76,7 @@ class _SubjetiveCardState extends State<SubjetiveCard> {
                   height: 40,
                   width: 150,
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(12),
-                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
                     border: GradientBoxBorder(
                       gradient: gradientLk(),
                     ),
@@ -113,12 +85,13 @@ class _SubjetiveCardState extends State<SubjetiveCard> {
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Colors.transparent),
                       shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
-                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.onSave(rating.toDouble());
+                      // Exibir algum feedback ou animação se desejado
+                    },
                     child: Center(
                       child: Text(
                         'SALVAR',

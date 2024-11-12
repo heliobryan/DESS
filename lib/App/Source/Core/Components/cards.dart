@@ -272,8 +272,8 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 125,
-            height: 23,
+            width: 325,
+            height: 53,
             decoration: BoxDecoration(
               border: GradientBoxBorder(
                 gradient: gradientLk(),
