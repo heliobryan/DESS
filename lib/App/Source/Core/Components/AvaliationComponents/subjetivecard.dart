@@ -90,7 +90,6 @@ class _SubjetiveCardState extends State<SubjetiveCard> {
                     ),
                     onPressed: () {
                       widget.onSave(rating.toDouble());
-                      // Exibir algum feedback ou animação se desejado
                     },
                     child: Center(
                       child: Text(
