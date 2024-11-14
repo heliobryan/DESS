@@ -39,9 +39,6 @@ class _HomePageState extends State<HomePage> {
       Home1Page(
         selectedCategory: widget.initialCategory,
       ),
-      const AvaliationPage(
-        participantData: {},
-      ),
       const PassportPage(
         participantData: {},
         subCriterias: [],
@@ -100,14 +97,6 @@ class _HomePageState extends State<HomePage> {
                 width: 21,
               ),
               label: 'Home',
-            ),
-            NavigationDestination(
-              icon: SvgPicture.asset(
-                'assets/images/sportvetor.svg',
-                height: 21,
-                width: 21,
-              ),
-              label: 'Critérios',
             ),
             NavigationDestination(
               icon: SvgPicture.asset(

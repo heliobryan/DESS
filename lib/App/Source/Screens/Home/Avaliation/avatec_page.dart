@@ -34,7 +34,7 @@ class _AvatecPageState extends State<AvatecPage> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Tática',
+          'Técnico',
           style: comp20Str(),
         ),
         actions: [
@@ -80,16 +80,15 @@ class _AvatecPageState extends State<AvatecPage> {
                 Column(
                   children: [
                     Text(
-                      widget.participantData['user']?['name'] ??
-                          'Nome Desconhecido',
+                      widget.participantData['user']['name'],
                       style: comp25Str(),
                     ),
                     Text(
-                      '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'}',
+                      '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
                       style: comp15Out(),
                     ),
                     Text(
-                      '${widget.participantData['institution']?['name'] ?? 'Instituição Desconhecida'}',
+                      '${widget.participantData['team']['name']}',
                       style: comp15Out(),
                     ),
                   ],

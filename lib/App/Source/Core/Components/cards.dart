@@ -5,6 +5,7 @@ import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avapsi.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avatat.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -195,37 +196,46 @@ class _CriteriaCardState extends State<CriteriaCard> {
             ),
           ),
           onPressed: () {
-            if (widget.criterias['name'] == 'Físico') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AvafisPage(
-                    subCriterias: widget.criterias['subcriteria'],
-                    participantData: widget.participantData,
+            final routes = {
+              'Físico': () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AvafisPage(
+                        subCriterias: widget.criterias['subcriteria'],
+                        participantData: widget.participantData,
+                      ),
+                    ),
                   ),
-                ),
-              );
-            } else if (widget.criterias['name'] == 'Técnico') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AvatecPage(
-                    subCriterias: widget.criterias['subcriteria'],
-                    participantData: widget.participantData,
+              'Técnico': () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AvatecPage(
+                        subCriterias: widget.criterias['subcriteria'],
+                        participantData: widget.participantData,
+                      ),
+                    ),
                   ),
-                ),
-              );
-            } else if (widget.criterias['name'] == 'Mental') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AvapsiPage(
-                    subCriterias: widget.criterias['subcriteria'],
-                    participantData: widget.participantData,
+              'Mental': () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AvapsiPage(
+                        subCriterias: widget.criterias['subcriteria'],
+                        participantData: widget.participantData,
+                      ),
+                    ),
                   ),
-                ),
-              );
-            }
+              'Tático': () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AvatatPage(
+                        subCriterias: widget.criterias['subcriteria'],
+                        participantData: widget.participantData,
+                      ),
+                    ),
+                  ),
+            };
+
+            routes[widget.criterias['name']]?.call();
           },
           child: Padding(
             padding: const EdgeInsets.all(12),
@@ -291,6 +301,12 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                 setState(() {
                   _isExpanded = !_isExpanded;
                 });
+
+                // Aciona a função ao expandir e passa os itens filtrados
+                widget.onSubCriteriaPressed(
+                  widget.subCriterias['items'] ??
+                      [], // Passa apenas os itens deste subcriterio
+                );
               },
               child: FittedBox(
                 fit: BoxFit.scaleDown,
@@ -329,7 +345,6 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                           ],
                         );
                       } else if (item['aspect'] == 'measurable') {
-                        // Lógica para exibir o MeasurableCard
                         return Column(
                           children: [
                             MeasurableCard(
@@ -342,22 +357,22 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                           ],
                         );
                       } else if (item['aspect'] == 'subjective') {
-                        // Lógica para exibir o SubjetiveCard
                         return Column(
                           children: [
                             SubjetiveCard(
                               onSave: (double nota) {},
+                              name: item['name'] ?? 'Sem Título',
                             ),
                             const SizedBox(height: 10),
                           ],
                         );
                       } else if (item['aspect'] == 'questionnaire') {
-                        // Lógica para exibir o MeasurableCard
                         return Column(
                           children: [
                             QuestCard(
                               onSave: (double nota) {},
-                              question: '',
+                              question: item['question'] ?? '',
+                              options: item['options'] ?? [],
                             ),
                             const SizedBox(height: 10),
                           ],

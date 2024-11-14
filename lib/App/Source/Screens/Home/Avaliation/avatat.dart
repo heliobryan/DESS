@@ -33,7 +33,7 @@ class _AvatatPageState extends State<AvatatPage> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Técnica',
+          'Tático',
           style: comp20Str(),
         ),
         actions: [
@@ -79,17 +79,16 @@ class _AvatatPageState extends State<AvatatPage> {
                 Column(
                   children: [
                     Text(
-                      widget.participantData['user']?['name'] ??
-                          'Nome Desconhecido',
+                      widget.participantData['user']['name'],
                       style: comp25Str(),
                     ),
                     Text(
-                      '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'}',
-                      style: comp16Out(),
+                      '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
+                      style: comp15Out(),
                     ),
                     Text(
-                      '${widget.participantData['institution']?['name'] ?? 'Instituição Desconhecida'}',
-                      style: comp16Out(),
+                      '${widget.participantData['team']['name']}',
+                      style: comp15Out(),
                     ),
                   ],
                 ),

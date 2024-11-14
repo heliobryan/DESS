@@ -19,6 +19,8 @@ class _TestScreenState extends State<TestScreen> {
           children: [
             QuestCard(
               onSave: (double nota) {},
+              question: '',
+              options: [],
             ),
           ],
         ),

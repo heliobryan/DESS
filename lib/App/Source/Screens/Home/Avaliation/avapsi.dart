@@ -33,7 +33,7 @@ class _AvapsiPageState extends State<AvapsiPage> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Física',
+          'Mental',
           style: comp20Str(),
         ),
         actions: [
@@ -76,23 +76,22 @@ class _AvapsiPageState extends State<AvapsiPage> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                // Column(
-                //   children: [
-                //     Text(
-                //       widget.participantData['user']?['name'] ??
-                //           'Nome Desconhecido',
-                //       style: comp25Str(),
-                //     ),
-                //     Text(
-                //       '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'}',
-                //       style: comp15Out(),
-                //     ),
-                //     Text(
-                //       '${widget.participantData['institution']?['name'] ?? 'Instituição Desconhecida'}',
-                //       style: comp15Out(),
-                //     ),
-                //   ],
-                // ),
+                Column(
+                  children: [
+                    Text(
+                      widget.participantData['user']['name'],
+                      style: comp25Str(),
+                    ),
+                    Text(
+                      '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
+                      style: comp15Out(),
+                    ),
+                    Text(
+                      '${widget.participantData['team']['name']}',
+                      style: comp15Out(),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(

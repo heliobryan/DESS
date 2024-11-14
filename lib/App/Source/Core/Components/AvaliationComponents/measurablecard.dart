@@ -2,7 +2,6 @@ import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MeasurableCard extends StatefulWidget {
   final String title;
@@ -18,7 +17,6 @@ class MeasurableCard extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _MeasurableCardState createState() => _MeasurableCardState();
 }
 
@@ -33,24 +31,6 @@ class _MeasurableCardState extends State<MeasurableCard> {
     title = widget.title;
     measurement = widget.measurement;
     unit = widget.unit;
-    _loadData();
-  }
-
-  Future<void> _loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      title = prefs.getString('${widget.title}_title') ?? widget.title;
-      measurement =
-          prefs.getString('${widget.title}_measurement') ?? widget.measurement;
-      unit = prefs.getString('${widget.title}_unit') ?? widget.unit;
-    });
-  }
-
-  Future<void> _saveData() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('${widget.title}_title', title);
-    await prefs.setString('${widget.title}_measurement', measurement);
-    await prefs.setString('${widget.title}_unit', unit);
   }
 
   @override
@@ -97,9 +77,6 @@ class _MeasurableCardState extends State<MeasurableCard> {
                   setState(() {
                     title = result['title'] ?? title;
                     measurement = result['measurement'] ?? measurement;
-                    unit = result['unit'] ?? unit;
-
-                    _saveData();
                   });
                 }
               },
@@ -123,7 +100,7 @@ class _MeasurableCardState extends State<MeasurableCard> {
                           ),
                           const SizedBox(width: 10),
                           Text(
-                            unit,
+                            unit, // Mostra a unidade da API sem edição
                             style: comp20Str(),
                           ),
                         ],
@@ -158,18 +135,6 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
   late TextEditingController _titleController;
   late TextEditingController _measurementController;
 
-  final List<String> _units = [
-    'Metros',
-    'Quilômetros',
-    'Segundos',
-    'Minutos',
-    'KG',
-    'Horas',
-    ' ',
-  ];
-
-  String _selectedUnit = 'Metros';
-
   @override
   void initState() {
     super.initState();
@@ -182,13 +147,6 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
     _titleController.dispose();
     _measurementController.dispose();
     super.dispose();
-  }
-
-  void _toggleUnit() {
-    setState(() {
-      int currentIndex = _units.indexOf(_selectedUnit);
-      _selectedUnit = _units[(currentIndex + 1) % _units.length];
-    });
   }
 
   @override
@@ -273,31 +231,6 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Container(
-                        height: 50,
-                        width: 180,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                          border: GradientBoxBorder(
-                            gradient: gradientLk(),
-                          ),
-                        ),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Colors.transparent),
-                          ),
-                          onPressed:
-                              _toggleUnit, // Alterna a unidade ao pressionar o botão
-                          child: Text(
-                            _selectedUnit
-                                .toUpperCase(), // Exibe a unidade selecionada
-                            style: comp15Out(),
-                          ),
-                        ),
-                      ),
                       const SizedBox(height: 30),
                       Container(
                         height: 50,
@@ -318,7 +251,6 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
                             Navigator.of(context).pop({
                               'title': _titleController.text,
                               'measurement': _measurementController.text,
-                              'unit': _selectedUnit,
                             });
                           },
                           child: Text(
