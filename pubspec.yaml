@@ -1,11 +1,11 @@
 name: dess
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.3 <4.0.0'
+  sdk: ">=3.4.3 <4.0.0"
 
 dependencies:
   flutter:
@@ -23,7 +23,6 @@ dependencies:
   shared_preferences: ^2.3.0
   flutter_dotenv: ^5.1.0
   provider: ^6.1.2
-  flutter_launcher_icons: ^0.14.1
 
 dev_dependencies:
   flutter_test:
@@ -35,7 +34,6 @@ flutter:
 
   assets:
     - .env
-    - assets/images/logodes.png
     - assets/images/deslogo.png
     - assets/images/desname.png
     - assets/images/desInitial.png
@@ -93,8 +91,3 @@ flutter:
     - family: OUTFIT
       fonts:
         - asset: fonts/outfit.ttf
-
-flutter_icons:
-  android: true
-  ios: true
-  image_path: "assets/images/logodes.png" 

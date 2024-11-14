@@ -370,9 +370,8 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                         return Column(
                           children: [
                             QuestCard(
-                              onSave: (double nota) {},
                               question: item['question'] ?? '',
-                              options: item['options'] ?? [],
+                              onSave: (double nota) {},
                             ),
                             const SizedBox(height: 10),
                           ],

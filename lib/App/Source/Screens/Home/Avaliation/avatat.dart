@@ -1,3 +1,4 @@
+import 'package:dess/App/Source/Core/Components/AvaliationComponents/questionnaire.dart';
 import 'package:dess/App/Source/Core/Components/cards.dart';
 import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ class AvatatPage extends StatefulWidget {
 }
 
 class _AvatatPageState extends State<AvatatPage> {
+  bool quest = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,23 +96,59 @@ class _AvatatPageState extends State<AvatatPage> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                Expanded(
-                  child: ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
-                    itemCount: widget.subCriterias.length,
-                    itemBuilder: (context, index) {
-                      final subCriteria = widget.subCriterias[index];
+                // Expanded(
+                //   child: ListView.builder(
+                //     padding:
+                //         const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                //     itemCount: widget.subCriterias.length,
+                //     itemBuilder: (context, index) {
+                //       final subCriteria = widget.subCriterias[index];
 
-                      return SubCriteriaCard(
-                        subCriterias: subCriteria,
-                        subCriteria: null,
-                        onTap: () {},
-                        onSubCriteriaPressed: (List<dynamic> items) {
-                          // Implementar lógica se necessário
-                        },
-                      );
-                    },
+                //       return SubCriteriaCard(
+                //         subCriterias: subCriteria,
+                //         subCriteria: null,
+                //         onTap: () {},
+                //         onSubCriteriaPressed: (List<dynamic> items) {},
+                //       );
+                //     },
+                //   ),
+                // ),
+                SizedBox(
+                  width: 325,
+                  height: 53,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                      border: GradientBoxBorder(gradient: gradientLk()),
+                    ),
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(
+                          color: Colors.transparent,
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          quest = !quest;
+                        });
+                      },
+                      child: Text(
+                        'Posicionamento',
+                        style: comp15Out(),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Visibility(
+                  visible: quest,
+                  child: QuestCard(
+                    question: '',
+                    onSave: (double nota) {},
                   ),
                 ),
                 const SizedBox(height: 20),

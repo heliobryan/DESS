@@ -16,13 +16,7 @@ class _TestScreenState extends State<TestScreen> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            QuestCard(
-              onSave: (double nota) {},
-              question: '',
-              options: [],
-            ),
-          ],
+          children: [],
         ),
       ),
     );
