@@ -34,7 +34,7 @@ class _AvatecPageState extends State<AvatecPage> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Técnica',
+          'Técnico',
           style: comp20Str(),
         ),
         actions: [
@@ -80,16 +80,15 @@ class _AvatecPageState extends State<AvatecPage> {
                 Column(
                   children: [
                     Text(
-                      widget.participantData['user']?['name'] ??
-                          'Nome Desconhecido',
+                      widget.participantData['user']['name'],
                       style: comp25Str(),
                     ),
                     Text(
-                      '${widget.participantData['position'] ?? 'Posição Desconhecida'} - ${widget.participantData['modality']?['name'] ?? 'Modalidade Desconhecida'}',
+                      '${widget.participantData['position']} - ${widget.participantData['category']} - ${widget.participantData['modality']['name']}',
                       style: comp15Out(),
                     ),
                     Text(
-                      '${widget.participantData['institution']?['name'] ?? 'Instituição Desconhecida'}',
+                      '${widget.participantData['team']['name']}',
                       style: comp15Out(),
                     ),
                   ],
@@ -102,14 +101,11 @@ class _AvatecPageState extends State<AvatecPage> {
                     itemCount: widget.subCriterias.length,
                     itemBuilder: (context, index) {
                       final subCriteria = widget.subCriterias[index];
-
                       return SubCriteriaCard(
                         subCriterias: subCriteria,
                         subCriteria: null,
                         onTap: () {},
-                        onSubCriteriaPressed: (List<dynamic> items) {
-                          // Implementar lógica se necessário
-                        },
+                        onSubCriteriaPressed: (List<dynamic> items) {},
                       );
                     },
                   ),

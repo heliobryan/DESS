@@ -4,7 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 class SubjetiveCard extends StatefulWidget {
-  const SubjetiveCard({super.key, required Null Function(double nota) onSave});
+  final String title;
+  const SubjetiveCard({
+    super.key,
+    required Null Function(double nota) onSave,
+    required name,
+    required this.title,
+  });
 
   @override
   State<SubjetiveCard> createState() => _SubjetiveCardState();
@@ -39,8 +45,8 @@ class _SubjetiveCardState extends State<SubjetiveCard> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(height: 5),
-              const Text(
-                'Avaliação - O atleta está concentrado?',
+              Text(
+                widget.title,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'OUTFIT',

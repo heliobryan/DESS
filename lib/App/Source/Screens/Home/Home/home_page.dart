@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:dess/App/Source/Core/Components/cards.dart';
 import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
@@ -101,22 +100,6 @@ class _HomePageState extends State<HomePage> {
                 width: 21,
               ),
               label: 'Home',
-            ),
-            NavigationDestination(
-              icon: SvgPicture.asset(
-                'assets/images/sportvetor.svg',
-                height: 21,
-                width: 21,
-              ),
-              label: 'Critérios',
-            ),
-            NavigationDestination(
-              icon: SvgPicture.asset(
-                'assets/images/passvetor.svg',
-                height: 21,
-                width: 21,
-              ),
-              label: 'Passaporte B.',
             ),
             NavigationDestination(
               icon: SvgPicture.asset(

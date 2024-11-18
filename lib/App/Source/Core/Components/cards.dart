@@ -1,9 +1,12 @@
 import 'package:dess/App/Source/Core/Components/AvaliationComponents/quantitativecard.dart';
+import 'package:dess/App/Source/Core/Components/AvaliationComponents/questionnaire.dart';
 import 'package:dess/App/Source/Core/Components/AvaliationComponents/subjetivecard.dart';
 import 'package:dess/App/Source/Core/Components/components.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avapsi.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/avatat.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -68,14 +71,15 @@ class _CardPlayerState extends State<CardPlayer> {
                     const SizedBox(width: 12),
                     Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           FittedBox(
                             fit: BoxFit.scaleDown,
                             child: Text(
                               '${widget.participants['user']['name']} ${widget.participants['user']['last_name']}',
                               style: comp16Out(),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                           FittedBox(
@@ -83,6 +87,7 @@ class _CardPlayerState extends State<CardPlayer> {
                             child: Text(
                               '${widget.participants['position']} - ${widget.participants['category']} - ${widget.participants['modality']['name']}',
                               style: comp16Out(),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ],
@@ -94,7 +99,7 @@ class _CardPlayerState extends State<CardPlayer> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AvaliationPage(
+                  builder: (context) => AgendaPage(
                     participantData: widget.participants,
                   ),
                 ),
@@ -194,37 +199,46 @@ class _CriteriaCardState extends State<CriteriaCard> {
             ),
           ),
           onPressed: () {
-            if (widget.criterias['name'] == 'Físico') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AvafisPage(
-                    subCriterias: widget.criterias['subcriteria'],
-                    participantData: widget.participantData,
+            final routes = {
+              'Físico': () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AvafisPage(
+                        subCriterias: widget.criterias['subcriteria'],
+                        participantData: widget.participantData,
+                      ),
+                    ),
                   ),
-                ),
-              );
-            } else if (widget.criterias['name'] == 'Técnico') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AvatecPage(
-                    subCriterias: widget.criterias['subcriteria'],
-                    participantData: widget.participantData,
+              'Técnico': () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AvatecPage(
+                        subCriterias: widget.criterias['subcriteria'],
+                        participantData: widget.participantData,
+                      ),
+                    ),
                   ),
-                ),
-              );
-            } else if (widget.criterias['name'] == 'Mental') {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AvapsiPage(
-                    subCriterias: widget.criterias['subcriteria'],
-                    participantData: widget.participantData,
+              'Mental': () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AvapsiPage(
+                        subCriterias: widget.criterias['subcriteria'],
+                        participantData: widget.participantData,
+                      ),
+                    ),
                   ),
-                ),
-              );
-            }
+              'Tático': () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AvatatPage(
+                        subCriterias: widget.criterias['subcriteria'],
+                        participantData: widget.participantData,
+                      ),
+                    ),
+                  ),
+            };
+
+            routes[widget.criterias['name']]?.call();
           },
           child: Padding(
             padding: const EdgeInsets.all(12),
@@ -272,8 +286,8 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            width: 125,
-            height: 23,
+            width: 325,
+            height: 53,
             decoration: BoxDecoration(
               border: GradientBoxBorder(
                 gradient: gradientLk(),
@@ -290,6 +304,10 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                 setState(() {
                   _isExpanded = !_isExpanded;
                 });
+
+                widget.onSubCriteriaPressed(
+                  widget.subCriterias['items'] ?? [],
+                );
               },
               child: FittedBox(
                 fit: BoxFit.scaleDown,
@@ -314,7 +332,6 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                         int passesErrados = item['passesErrados'] ?? 0;
                         double notaFinal =
                             (item['notaFinal'] as double?) ?? 0.0;
-
                         return Column(
                           children: [
                             QuantitativeCard(
@@ -328,24 +345,31 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                           ],
                         );
                       } else if (item['aspect'] == 'measurable') {
-                        // Lógica para exibir o MeasurableCard
                         return Column(
                           children: [
                             MeasurableCard(
                               title: item['name'] ?? 'Sem Título',
-                              measurableValue: item['measurableValue'] ?? 0,
                               measurement: '',
-                              unit: '',
+                              unit: item['measurement_unit'] ?? "",
                             ),
-                            const SizedBox(height: 10),
+                            SizedBox(height: 20),
                           ],
                         );
                       } else if (item['aspect'] == 'subjective') {
-                        // Lógica para exibir o SubjetiveCard
                         return Column(
                           children: [
                             SubjetiveCard(
                               onSave: (double nota) {},
+                              name: item['name'] ?? 'Sem Título',
+                            ),
+                            const SizedBox(height: 10),
+                          ],
+                        );
+                      } else if (item['aspect'] == 'questionnaire') {
+                        return Column(
+                          children: [
+                            QuestCard(
+                              title: '',
                             ),
                             const SizedBox(height: 10),
                           ],
@@ -547,12 +571,14 @@ class PlayerCard extends StatelessWidget {
 }
 
 class AgendaCard extends StatelessWidget {
-  final dynamic event; // Dados do evento
+  final Map<String, dynamic> participantData;
+  final dynamic event;
 
   const AgendaCard({
     super.key,
     required this.event,
     required Null Function() onTap,
+    required this.participantData,
   });
 
   @override
@@ -576,7 +602,7 @@ class AgendaCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => AvaliationPage(
-                  participantData: event['eventday'], // Passando os dados
+                  participantData: participantData, // Passando os dados
                 ),
               ),
             );

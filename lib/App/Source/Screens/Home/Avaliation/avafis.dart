@@ -158,7 +158,7 @@ class _AvafisPageState extends State<AvafisPage> {
                 const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.vertical,
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
                     itemCount: widget.subCriterias.length,

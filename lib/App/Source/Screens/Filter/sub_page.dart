@@ -14,7 +14,6 @@ class _Form3PageState extends State<Form3Page> {
   final controller = PageController(initialPage: 0);
 
   void _onCategorySelected(String category) {
-    // Navegar para a HomePage passando a categoria selecionada
     Navigator.push(
       context,
       MaterialPageRoute(

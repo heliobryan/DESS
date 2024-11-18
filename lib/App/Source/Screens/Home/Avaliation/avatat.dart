@@ -3,20 +3,22 @@ import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
-class AvapsiPage extends StatefulWidget {
+class AvatatPage extends StatefulWidget {
   final List<dynamic> subCriterias;
   final Map<String, dynamic> participantData;
-  const AvapsiPage({
+  const AvatatPage({
     super.key,
-    required this.subCriterias,
     required this.participantData,
+    required this.subCriterias,
   });
 
   @override
-  State<AvapsiPage> createState() => _AvapsiPageState();
+  State<AvatatPage> createState() => _AvatatPageState();
 }
 
-class _AvapsiPageState extends State<AvapsiPage> {
+class _AvatatPageState extends State<AvatatPage> {
+  bool quest = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +35,7 @@ class _AvapsiPageState extends State<AvapsiPage> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Mental',
+          'Tático',
           style: comp20Str(),
         ),
         actions: [
@@ -95,21 +97,17 @@ class _AvapsiPageState extends State<AvapsiPage> {
                 const SizedBox(height: 20),
                 Expanded(
                   child: ListView.builder(
-                    scrollDirection: Axis.vertical,
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 5),
                     itemCount: widget.subCriterias.length,
                     itemBuilder: (context, index) {
                       final subCriteria = widget.subCriterias[index];
 
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: SubCriteriaCard(
-                          subCriterias: subCriteria,
-                          subCriteria: null,
-                          onTap: () {},
-                          onSubCriteriaPressed: (List<dynamic> items) {},
-                        ),
+                      return SubCriteriaCard(
+                        subCriterias: subCriteria,
+                        subCriteria: null,
+                        onTap: () {},
+                        onSubCriteriaPressed: (List<dynamic> items) {},
                       );
                     },
                   ),

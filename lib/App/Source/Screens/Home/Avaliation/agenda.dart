@@ -9,9 +9,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 class AgendaPage extends StatefulWidget {
-  final Map<String, dynamic>? participantData;
+  final Map<String, dynamic> participantData;
 
-  const AgendaPage({super.key, this.participantData});
+  const AgendaPage({
+    super.key,
+    required this.participantData,
+  });
 
   @override
   State<AgendaPage> createState() => _AgendaPageState();
@@ -88,12 +91,13 @@ class _AgendaPageState extends State<AgendaPage> {
                       final event = filteredEventList[index];
                       return AgendaCard(
                         event: event,
+                        participantData: widget.participantData,
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => AvaliationPage(
-                                participantData: widget.participantData!,
+                                participantData: widget.participantData,
                               ),
                             ),
                           );
