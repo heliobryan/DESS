@@ -39,15 +39,7 @@ class _HomePageState extends State<HomePage> {
       Home1Page(
         selectedCategory: widget.initialCategory,
       ),
-      const AvaliationPage(
-        participantData: {},
-      ),
-      const PassportPage(
-        participantData: {},
-        subCriterias: [],
-      ),
       const ManagePage(),
-      const ImageManagePage(),
     ];
   }
 

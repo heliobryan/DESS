@@ -361,6 +361,7 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                             SubjetiveCard(
                               onSave: (double nota) {},
                               name: item['name'] ?? 'Sem Título',
+                              title: item['name'] ?? 'Sem Título',
                             ),
                             const SizedBox(height: 10),
                           ],
@@ -369,7 +370,7 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                         return Column(
                           children: [
                             QuestCard(
-                              title: '',
+                              title: item['name'] ?? 'Sem Título',
                             ),
                             const SizedBox(height: 10),
                           ],

@@ -55,7 +55,6 @@ class _AvatatPageState extends State<AvatatPage> {
       body: Stack(
         children: [
           const GradientBack(),
-          const BackgroudImage(),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

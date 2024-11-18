@@ -377,7 +377,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Future<bool> userRegister() async {
     // ignore: unused_local_variable
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var url = Uri.parse('https://a527-45-70-34-167.ngrok-free.app/api/user');
+    var url = Uri.parse('https://a527-45-70-3app/api/user');
     var restAwnser = await http.post(
       url,
       body: {

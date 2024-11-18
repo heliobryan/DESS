@@ -18,8 +18,8 @@ class _QuestCardState extends State<QuestCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 325,
-      height: 390,
+      width: 395,
+      height: 400,
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -37,9 +37,11 @@ class _QuestCardState extends State<QuestCard> {
         child: Column(
           children: [
             SizedBox(height: 10),
-            Text(
-              widget.title,
-              style: comp15Str(),
+            Center(
+              child: Text(
+                widget.title,
+                style: comp20Out(),
+              ),
             ),
             SizedBox(height: 15),
             SizedBox(height: 25),

@@ -4,12 +4,14 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 class SubjetiveCard extends StatefulWidget {
-  final String title;
+  final Function(double nota) onSave;
+  final String name;
+
   const SubjetiveCard({
     super.key,
-    required Null Function(double nota) onSave,
-    required name,
-    required this.title,
+    required this.onSave,
+    required this.name,
+    required title,
   });
 
   @override
@@ -17,15 +19,24 @@ class SubjetiveCard extends StatefulWidget {
 }
 
 class _SubjetiveCardState extends State<SubjetiveCard> {
-  bool showStar1 = false;
-  bool showStar2 = false;
-  bool showStar3 = false;
+  int rating = 0;
 
   @override
   Widget build(BuildContext context) {
+    final maxLength = 30;
+    String topText = widget.name;
+    String bottomText = '';
+
+    if (widget.name.length > maxLength) {
+      int breakPoint = widget.name.lastIndexOf(' ', maxLength);
+      if (breakPoint == -1) breakPoint = maxLength;
+      topText = widget.name.substring(0, breakPoint);
+      bottomText = widget.name.substring(breakPoint).trim();
+    }
+
     return SizedBox(
-      width: 361,
-      height: 180,
+      width: MediaQuery.of(context).size.width * 0.9,
+      height: 250,
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -46,60 +57,48 @@ class _SubjetiveCardState extends State<SubjetiveCard> {
             children: [
               const SizedBox(height: 5),
               Text(
-                widget.title,
-                style: TextStyle(
+                topText,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
                   color: Colors.white,
                   fontFamily: 'OUTFIT',
                   fontWeight: FontWeight.bold,
-                  fontSize: 15,
+                  fontSize: 18,
                 ),
               ),
+              if (bottomText.isNotEmpty) ...[
+                const SizedBox(height: 5),
+                Text(
+                  bottomText,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'OUTFIT',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ],
               const SizedBox(height: 10),
               SizedBox(
                 height: 60,
                 width: 156,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(
+                  children: List.generate(3, (index) {
+                    return IconButton(
                       onPressed: () {
                         setState(() {
-                          showStar1 = true;
-                          showStar2 = false;
-                          showStar3 = false;
+                          rating = index + 1;
                         });
                       },
-                      icon: (showStar1)
-                          ? SvgPicture.asset('assets/images/staron.svg')
-                          : SvgPicture.asset('assets/images/staroff.svg'),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          showStar2 = true;
-                          showStar1 = true;
-                          if (showStar3) {
-                            showStar3 = false;
-                          }
-                        });
-                      },
-                      icon: (showStar2)
-                          ? SvgPicture.asset('assets/images/staron.svg')
-                          : SvgPicture.asset('assets/images/staroff.svg'),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          showStar3 = true;
-                          showStar1 = true;
-                          showStar2 = true;
-                        });
-                      },
-                      icon: (showStar3)
-                          ? SvgPicture.asset('assets/images/staron.svg')
-                          : SvgPicture.asset('assets/images/staroff.svg'),
-                    ),
-                  ],
+                      icon: SvgPicture.asset(
+                        rating > index
+                            ? 'assets/images/staron.svg'
+                            : 'assets/images/staroff.svg',
+                      ),
+                    );
+                  }),
                 ),
               ),
               const SizedBox(height: 20),
@@ -108,9 +107,7 @@ class _SubjetiveCardState extends State<SubjetiveCard> {
                   height: 40,
                   width: 150,
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(12),
-                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
                     border: GradientBoxBorder(
                       gradient: gradientLk(),
                     ),
@@ -119,12 +116,12 @@ class _SubjetiveCardState extends State<SubjetiveCard> {
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: Colors.transparent),
                       shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
-                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      widget.onSave(rating.toDouble());
+                    },
                     child: Center(
                       child: Text(
                         'SALVAR',
