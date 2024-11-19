@@ -47,6 +47,8 @@ class QuantitativeCard extends StatefulWidget {
     required this.correctPass,
     required this.incorrectPass,
     required this.notaFinal,
+    required String participantId,
+    required String itemId,
   });
 
   @override

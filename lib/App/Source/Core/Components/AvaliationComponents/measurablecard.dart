@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:developer';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
@@ -5,11 +9,12 @@ import 'package:gradient_borders/input_borders/gradient_outline_input_border.dar
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MeasurableCard extends StatefulWidget {
-  final String title; // Título do card
-  final String measurement; // Valor padrão da medida
-  final String unit; // Unidade fixa (da API)
-  final String participantId; // Identificador único do participante
-  final String itemId; // Identificador único do item (para separação)
+  final String title;
+  final String measurement;
+  final String unit;
+  final String participantId;
+  final String itemId;
+  final String evaluationId;
 
   const MeasurableCard({
     super.key,
@@ -17,7 +22,8 @@ class MeasurableCard extends StatefulWidget {
     required this.measurement,
     required this.unit,
     required this.participantId,
-    required this.itemId, // Novo parâmetro
+    required this.itemId,
+    required this.evaluationId,
   });
 
   @override
@@ -25,39 +31,78 @@ class MeasurableCard extends StatefulWidget {
 }
 
 class _MeasurableCardState extends State<MeasurableCard> {
-  late String measurement; // Valor editável
+  String measurement;
+  String unit;
+
+  _MeasurableCardState()
+      : measurement = "",
+        unit = "";
 
   @override
   void initState() {
     super.initState();
-    _loadData(); // Carrega os dados do participante ao iniciar
+    measurement = widget.measurement;
+    unit = widget.unit;
+    _loadData();
   }
 
-  // Carrega os dados específicos para o participante e item
   Future<void> _loadData() async {
-    Map<String, dynamic> participantData =
-        await _loadParticipantData(widget.participantId, widget.itemId);
+    final prefs = await SharedPreferences.getInstance();
     setState(() {
-      measurement = participantData['measurement'] ??
-          widget.measurement; // Usa valor salvo ou o padrão
+      measurement =
+          prefs.getString('${widget.title}_measurement') ?? widget.measurement;
+      unit = prefs.getString('${widget.title}_unit') ?? widget.unit;
     });
   }
 
-  // Função para salvar os dados do participante
-  Future<void> _saveData(String newMeasurement) async {
-    setState(() {
-      measurement = newMeasurement; // Atualiza o valor local
-    });
+  Future<void> _saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('${widget.title}_measurement', measurement);
+    await prefs.setString('${widget.title}_unit', unit);
+  }
 
-    // Salva os dados específicos do participante e item
-    Map<String, dynamic> data = {
-      'measurement': newMeasurement,
-      'unit': widget.unit,
-      'title': widget.title,
-    };
+  Future<void> _updateJudgment(String newScore) async {
+    try {
+      // Obtenha a URL base da API do dotenv
+      final apiHost = dotenv.get('API_HOST', fallback: '');
+      final url = Uri.parse("$apiHost/api/judgments/${widget.itemId}");
 
-    await _saveParticipantData(widget.participantId, widget.itemId,
-        data); // Salva os dados do participante
+      // Obtenha o token de autenticação
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      final token = sharedPreferences.getString('token');
+
+      if (token == null || token.isEmpty) {
+        log("Token de autenticação não encontrado.");
+        return;
+      }
+
+      // Crie o corpo da requisição
+      final body = {
+        "evaluation_id": widget.evaluationId,
+        "item_id": widget.itemId,
+        "score": newScore,
+      };
+
+      // Faça a requisição PUT
+      final response = await http.put(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(body),
+      );
+
+      // Verifique a resposta
+      if (response.statusCode == 200) {
+        log("Score atualizado com sucesso!");
+      } else {
+        log("Erro ao atualizar o score: ${response.statusCode} - ${response.body}");
+      }
+    } catch (e) {
+      log("Erro na requisição PUT: $e");
+    }
   }
 
   @override
@@ -80,16 +125,12 @@ class _MeasurableCardState extends State<MeasurableCard> {
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
-                side: const BorderSide(
-                  color: Colors.transparent,
-                ),
+                side: const BorderSide(color: Colors.transparent),
               ),
               onPressed: () async {
-                final result = await showDialog<String>(
+                final result = await showDialog<Map<String, dynamic>>(
                   context: context,
                   builder: (context) => Dialog(
                     backgroundColor: Colors.grey[900],
@@ -101,7 +142,14 @@ class _MeasurableCardState extends State<MeasurableCard> {
                 );
 
                 if (result != null) {
-                  _saveData(result); // Salva o novo valor localmente
+                  setState(() {
+                    measurement = result['measurement'] ?? measurement;
+                    unit = result['unit'] ?? unit;
+                    _saveData();
+
+                    // Atualize o julgamento na API
+                    _updateJudgment(measurement);
+                  });
                 }
               },
               child: Center(
@@ -110,16 +158,13 @@ class _MeasurableCardState extends State<MeasurableCard> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        widget.title,
-                        style: comp15Out(),
-                      ),
+                      Text(widget.title, style: comp15Out()),
                       const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '$measurement ${widget.unit}',
+                            '$measurement ${widget.unit.isNotEmpty ? widget.unit : ''}',
                             style: comp20Str(),
                           ),
                         ],
@@ -137,8 +182,8 @@ class _MeasurableCardState extends State<MeasurableCard> {
 }
 
 class EditMeasurableCard extends StatefulWidget {
-  final String measurement; // Valor atual da medida
-  final String title; // Título do card
+  final String measurement;
+  final String title;
 
   const EditMeasurableCard({
     super.key,
@@ -187,12 +232,16 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Text(
                         widget.title,
                         style: comp20Out(),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 20,
+                      ),
                       SizedBox(
                         height: 50,
                         width: 180,
@@ -200,19 +249,46 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
                           keyboardType: const TextInputType.numberWithOptions(),
                           controller: _measurementController,
                           style: comp20Out(),
-                          decoration: const InputDecoration(
-                            labelText: "Valor",
+                          decoration: InputDecoration(
+                            prefix: const Text('   '),
+                            contentPadding: const EdgeInsets.all(1),
+                            border: GradientOutlineInputBorder(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(9)),
+                              gradient: gradientLk(),
+                              width: 1,
+                            ),
+                            focusedBorder: GradientOutlineInputBorder(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(8)),
+                              gradient: gradientLk(),
+                              width: 1,
+                            ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(
+                        height: 30,
+                      ),
                       Container(
                         height: 50,
                         width: 180,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                          border: GradientBoxBorder(
+                            gradient: gradientLk(),
+                          ),
+                        ),
                         child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(color: Colors.transparent),
+                          ),
                           onPressed: () {
-                            Navigator.of(context)
-                                .pop(_measurementController.text);
+                            Navigator.of(context).pop({
+                              'measurement': _measurementController.text,
+                            });
                           },
                           child: Text(
                             'SALVAR',

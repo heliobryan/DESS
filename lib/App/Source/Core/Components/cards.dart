@@ -270,7 +270,7 @@ class SubCriteriaCard extends StatefulWidget {
     required this.onTap,
     required this.onSubCriteriaPressed,
     required this.participantId,
-    required subCriteria, // Recebe o participantId
+    required subCriteria,
   });
 
   @override
@@ -330,11 +330,8 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: (widget.subCriterias['items'] as List<dynamic>? ?? [])
                     .map<Widget>((item) {
-                  String itemId =
-                      item['id'].toString(); // Identificador único para o item
-
+                  String itemId = item['id'].toString();
                   if (item['aspect'] == 'quantitative') {
-                    // QuantitativeCard com separação por participante e item
                     return Column(
                       children: [
                         QuantitativeCard(
@@ -343,32 +340,26 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                           correctPass: item['passesCertos'] ?? 0,
                           incorrectPass: item['passesErrados'] ?? 0,
                           notaFinal: item['notaFinal'] ?? 0.0,
-                          participantId:
-                              widget.participantId, // Passa o participantId
-                          itemId:
-                              itemId, // Passa o itemId para garantir dados separados
+                          participantId: widget.participantId,
+                          itemId: itemId,
                         ),
                         const SizedBox(height: 10),
                       ],
                     );
                   } else if (item['aspect'] == 'measurable') {
-                    // MeasurableCard com separação por participante e item
                     return Column(
                       children: [
                         MeasurableCard(
                           title: item['name'] ?? 'Sem Título',
                           measurement: '', // Valor padrão
                           unit: item['measurement_unit'] ?? "",
-                          participantId:
-                              widget.participantId, // Passa o participantId
-                          itemId:
-                              itemId, // Passa o itemId para garantir dados separados
+                          participantId: widget.participantId,
+                          itemId: itemId, evaluationId: '',
                         ),
                         const SizedBox(height: 20),
                       ],
                     );
                   } else if (item['aspect'] == 'subjective') {
-                    // SubjetiveCard para avaliações subjetivas
                     return Column(
                       children: [
                         SubjetiveCard(
@@ -380,21 +371,24 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                       ],
                     );
                   } else if (item['aspect'] == 'questionnaire') {
-                    // QuestCard para perguntas e opções
                     final options =
                         List<String>.from(item['questions']['options'] ?? []);
+                    final correctAnswer =
+                        item['questions']['correct_answer'] ?? '';
+
                     return Column(
                       children: [
                         QuestCard(
                           title: item['name'] ?? 'Sem Título',
                           options: options,
+                          correctAnswer:
+                              correctAnswer, // Passa a resposta correta
                         ),
                         const SizedBox(height: 10),
                       ],
                     );
                   }
-                  return const SizedBox
-                      .shrink(); // Retorna um tamanho nulo caso não corresponda a nenhum tipo
+                  return const SizedBox.shrink();
                 }).toList(),
               ),
             ),
