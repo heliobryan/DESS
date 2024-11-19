@@ -107,6 +107,7 @@ class _AvatatPageState extends State<AvatatPage> {
                         subCriteria: null,
                         onTap: () {},
                         onSubCriteriaPressed: (List<dynamic> items) {},
+                        participantId: '',
                       );
                     },
                   ),

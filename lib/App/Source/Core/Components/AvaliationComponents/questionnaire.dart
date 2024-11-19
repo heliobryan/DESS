@@ -4,10 +4,12 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 class QuestCard extends StatefulWidget {
   final String title;
+  final List<String> options;
 
   const QuestCard({
     super.key,
     required this.title,
+    required this.options,
   });
 
   @override
@@ -17,10 +19,13 @@ class QuestCard extends StatefulWidget {
 class _QuestCardState extends State<QuestCard> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 395,
-      height: 400,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
       child: Container(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.9,
+          maxHeight: MediaQuery.of(context).size.height * 0.8,
+        ),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
           border: GradientBoxBorder(
@@ -36,15 +41,28 @@ class _QuestCardState extends State<QuestCard> {
         ),
         child: Column(
           children: [
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Center(
               child: Text(
                 widget.title,
                 style: comp20Out(),
+                textAlign: TextAlign.center,
               ),
             ),
-            SizedBox(height: 15),
-            SizedBox(height: 25),
+            const SizedBox(height: 15),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: widget.options
+                      .map((option) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: SubQuestCard(options: option),
+                          ))
+                      .toList(),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20), // Espaço entre as opções e o botão
             Center(
               child: Container(
                 height: 40,
@@ -72,6 +90,7 @@ class _QuestCardState extends State<QuestCard> {
                 ),
               ),
             ),
+            const SizedBox(height: 50),
           ],
         ),
       ),
@@ -93,10 +112,14 @@ class SubQuestCard extends StatefulWidget {
 class _SubQuestCardState extends State<SubQuestCard> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      height: 40,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
       child: Container(
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width *
+              0.9, // Responsivo com limite de largura
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(12)),
           border: GradientBoxBorder(
@@ -113,14 +136,21 @@ class _SubQuestCardState extends State<SubQuestCard> {
         child: OutlinedButton(
           style: OutlinedButton.styleFrom(
             side: BorderSide(color: Colors.transparent),
+            padding: EdgeInsets.zero,
           ),
           onPressed: () {},
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                widget.options,
-                style: comp15Out(),
+              Flexible(
+                child: Text(
+                  widget.options,
+                  style: comp15Out(),
+                  overflow:
+                      TextOverflow.ellipsis, // Encaminha o texto que não cabe
+                  maxLines: 2, // Permite duas linhas para evitar sobreposição
+                  textAlign: TextAlign.center,
+                ),
               ),
             ],
           ),

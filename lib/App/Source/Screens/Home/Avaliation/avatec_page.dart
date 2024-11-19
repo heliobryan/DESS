@@ -106,6 +106,7 @@ class _AvatecPageState extends State<AvatecPage> {
                         subCriteria: null,
                         onTap: () {},
                         onSubCriteriaPressed: (List<dynamic> items) {},
+                        participantId: '',
                       );
                     },
                   ),

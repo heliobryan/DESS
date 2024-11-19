@@ -98,6 +98,7 @@ class _AgendaPageState extends State<AgendaPage> {
                             MaterialPageRoute(
                               builder: (context) => AvaliationPage(
                                 participantData: widget.participantData,
+                                evaluationData: null,
                               ),
                             ),
                           );
@@ -132,7 +133,11 @@ class _AgendaPageState extends State<AgendaPage> {
       if (restAnswer.statusCode == 200) {
         final decode = jsonDecode(restAnswer.body);
         setState(() {
-          eventList = decode['data'];
+          // Filtrar avaliações pelo participant_id
+          int participantId = widget.participantData['id'];
+          eventList = decode['data'].where((evaluation) {
+            return evaluation['participant_id'] == participantId;
+          }).toList();
           filteredEventList = eventList;
         });
       }

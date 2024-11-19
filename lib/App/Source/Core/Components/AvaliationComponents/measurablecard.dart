@@ -5,53 +5,59 @@ import 'package:gradient_borders/input_borders/gradient_outline_input_border.dar
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MeasurableCard extends StatefulWidget {
-  final String title;
-  final String measurement;
-  final String unit;
+  final String title; // Título do card
+  final String measurement; // Valor padrão da medida
+  final String unit; // Unidade fixa (da API)
+  final String participantId; // Identificador único do participante
+  final String itemId; // Identificador único do item (para separação)
 
   const MeasurableCard({
     super.key,
     required this.title,
     required this.measurement,
     required this.unit,
+    required this.participantId,
+    required this.itemId, // Novo parâmetro
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _MeasurableCardState createState() => _MeasurableCardState();
 }
 
 class _MeasurableCardState extends State<MeasurableCard> {
-  String measurement;
-  String unit;
-
-  _MeasurableCardState()
-      : measurement = "",
-        unit = "";
+  late String measurement; // Valor editável
 
   @override
   void initState() {
     super.initState();
-    measurement = widget.measurement;
-    unit = widget.unit;
-    _loadData();
+    _loadData(); // Carrega os dados do participante ao iniciar
   }
 
+  // Carrega os dados específicos para o participante e item
   Future<void> _loadData() async {
-    final prefs = await SharedPreferences.getInstance();
+    Map<String, dynamic> participantData =
+        await _loadParticipantData(widget.participantId, widget.itemId);
     setState(() {
-      measurement =
-          prefs.getString('${widget.title}_measurement') ?? widget.measurement;
-      unit = prefs.getString('${widget.title}_unit') ??
-          widget.unit; // Carrega a unidade específica
+      measurement = participantData['measurement'] ??
+          widget.measurement; // Usa valor salvo ou o padrão
     });
   }
 
-  Future<void> _saveData() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('${widget.title}_measurement', measurement);
-    await prefs.setString(
-        '${widget.title}_unit', unit); // Salva a unidade específica
+  // Função para salvar os dados do participante
+  Future<void> _saveData(String newMeasurement) async {
+    setState(() {
+      measurement = newMeasurement; // Atualiza o valor local
+    });
+
+    // Salva os dados específicos do participante e item
+    Map<String, dynamic> data = {
+      'measurement': newMeasurement,
+      'unit': widget.unit,
+      'title': widget.title,
+    };
+
+    await _saveParticipantData(widget.participantId, widget.itemId,
+        data); // Salva os dados do participante
   }
 
   @override
@@ -83,7 +89,7 @@ class _MeasurableCardState extends State<MeasurableCard> {
                 ),
               ),
               onPressed: () async {
-                final result = await showDialog<Map<String, dynamic>>(
+                final result = await showDialog<String>(
                   context: context,
                   builder: (context) => Dialog(
                     backgroundColor: Colors.grey[900],
@@ -95,11 +101,7 @@ class _MeasurableCardState extends State<MeasurableCard> {
                 );
 
                 if (result != null) {
-                  setState(() {
-                    measurement = result['measurement'] ?? measurement;
-                    unit = result['unit'] ?? unit;
-                    _saveData();
-                  });
+                  _saveData(result); // Salva o novo valor localmente
                 }
               },
               child: Center(
@@ -117,7 +119,7 @@ class _MeasurableCardState extends State<MeasurableCard> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '$measurement ${widget.unit.isNotEmpty ? widget.unit : ''}',
+                            '$measurement ${widget.unit}',
                             style: comp20Str(),
                           ),
                         ],
@@ -135,8 +137,8 @@ class _MeasurableCardState extends State<MeasurableCard> {
 }
 
 class EditMeasurableCard extends StatefulWidget {
-  final String measurement;
-  final String title;
+  final String measurement; // Valor atual da medida
+  final String title; // Título do card
 
   const EditMeasurableCard({
     super.key,
@@ -185,16 +187,12 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 20,
-                      ),
+                      const SizedBox(height: 20),
                       Text(
                         widget.title,
                         style: comp20Out(),
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      const SizedBox(height: 20),
                       SizedBox(
                         height: 50,
                         width: 180,
@@ -202,46 +200,19 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
                           keyboardType: const TextInputType.numberWithOptions(),
                           controller: _measurementController,
                           style: comp20Out(),
-                          decoration: InputDecoration(
-                            prefix: const Text('   '),
-                            contentPadding: const EdgeInsets.all(1),
-                            border: GradientOutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(9)),
-                              gradient: gradientLk(),
-                              width: 1,
-                            ),
-                            focusedBorder: GradientOutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
-                              gradient: gradientLk(),
-                              width: 1,
-                            ),
+                          decoration: const InputDecoration(
+                            labelText: "Valor",
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
+                      const SizedBox(height: 30),
                       Container(
                         height: 50,
                         width: 180,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                          border: GradientBoxBorder(
-                            gradient: gradientLk(),
-                          ),
-                        ),
                         child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Colors.transparent),
-                          ),
                           onPressed: () {
-                            Navigator.of(context).pop({
-                              'measurement': _measurementController.text,
-                            });
+                            Navigator.of(context)
+                                .pop(_measurementController.text);
                           },
                           child: Text(
                             'SALVAR',

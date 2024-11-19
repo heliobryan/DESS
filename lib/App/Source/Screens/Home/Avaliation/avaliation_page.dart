@@ -14,6 +14,7 @@ class AvaliationPage extends StatefulWidget {
   const AvaliationPage({
     super.key,
     required this.participantData,
+    required evaluationData,
   });
 
   @override

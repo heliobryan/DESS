@@ -47,6 +47,7 @@ class DesApp extends StatelessWidget {
             ),
         'avaliationPage': (context) => const AvaliationPage(
               participantData: {},
+              evaluationData: null,
             ),
         'managePage': (context) => const ManagePage(),
         'passportPage': (context) => const PassportPage(

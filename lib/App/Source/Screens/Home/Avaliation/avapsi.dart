@@ -109,6 +109,7 @@ class _AvapsiPageState extends State<AvapsiPage> {
                           subCriteria: null,
                           onTap: () {},
                           onSubCriteriaPressed: (List<dynamic> items) {},
+                          participantId: '',
                         ),
                       );
                     },

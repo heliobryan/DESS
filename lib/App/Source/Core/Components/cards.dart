@@ -262,13 +262,15 @@ class SubCriteriaCard extends StatefulWidget {
   final Map<String, dynamic> subCriterias;
   final VoidCallback onTap;
   final Function(List items) onSubCriteriaPressed;
+  final String participantId; // Identificador do participante
 
   const SubCriteriaCard({
     super.key,
     required this.subCriterias,
     required this.onTap,
     required this.onSubCriteriaPressed,
-    required subCriteria,
+    required this.participantId,
+    required subCriteria, // Recebe o participantId
   });
 
   @override
@@ -285,6 +287,7 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // Container para o botão de expansão
           Container(
             width: 325,
             height: 53,
@@ -302,7 +305,8 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
               ),
               onPressed: () {
                 setState(() {
-                  _isExpanded = !_isExpanded;
+                  _isExpanded =
+                      !_isExpanded; // Controla a visibilidade da expansão
                 });
 
                 widget.onSubCriteriaPressed(
@@ -324,61 +328,74 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
             child: Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: (widget.subCriterias['items'] as List<dynamic>?)
-                        ?.map<Widget>((item) {
-                      if (item['aspect'] == 'quantitative') {
-                        int passesFeitos = item['passesFeitos'] ?? 0;
-                        int passesCertos = item['passesCertos'] ?? 0;
-                        int passesErrados = item['passesErrados'] ?? 0;
-                        double notaFinal =
-                            (item['notaFinal'] as double?) ?? 0.0;
-                        return Column(
-                          children: [
-                            QuantitativeCard(
-                              title: item['name'] ?? 'Sem Título',
-                              passesFeitos: passesFeitos,
-                              correctPass: passesCertos,
-                              incorrectPass: passesErrados,
-                              notaFinal: notaFinal,
-                            ),
-                            const SizedBox(height: 10),
-                          ],
-                        );
-                      } else if (item['aspect'] == 'measurable') {
-                        return Column(
-                          children: [
-                            MeasurableCard(
-                              title: item['name'] ?? 'Sem Título',
-                              measurement: '',
-                              unit: item['measurement_unit'] ?? "",
-                            ),
-                            SizedBox(height: 20),
-                          ],
-                        );
-                      } else if (item['aspect'] == 'subjective') {
-                        return Column(
-                          children: [
-                            SubjetiveCard(
-                              onSave: (double nota) {},
-                              name: item['name'] ?? 'Sem Título',
-                              title: item['name'] ?? 'Sem Título',
-                            ),
-                            const SizedBox(height: 10),
-                          ],
-                        );
-                      } else if (item['aspect'] == 'questionnaire') {
-                        return Column(
-                          children: [
-                            QuestCard(
-                              title: item['name'] ?? 'Sem Título',
-                            ),
-                            const SizedBox(height: 10),
-                          ],
-                        );
-                      }
-                      return const SizedBox.shrink();
-                    }).toList() ??
-                    [],
+                children: (widget.subCriterias['items'] as List<dynamic>? ?? [])
+                    .map<Widget>((item) {
+                  String itemId =
+                      item['id'].toString(); // Identificador único para o item
+
+                  if (item['aspect'] == 'quantitative') {
+                    // QuantitativeCard com separação por participante e item
+                    return Column(
+                      children: [
+                        QuantitativeCard(
+                          title: item['name'] ?? 'Sem Título',
+                          passesFeitos: item['passesFeitos'] ?? 0,
+                          correctPass: item['passesCertos'] ?? 0,
+                          incorrectPass: item['passesErrados'] ?? 0,
+                          notaFinal: item['notaFinal'] ?? 0.0,
+                          participantId:
+                              widget.participantId, // Passa o participantId
+                          itemId:
+                              itemId, // Passa o itemId para garantir dados separados
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    );
+                  } else if (item['aspect'] == 'measurable') {
+                    // MeasurableCard com separação por participante e item
+                    return Column(
+                      children: [
+                        MeasurableCard(
+                          title: item['name'] ?? 'Sem Título',
+                          measurement: '', // Valor padrão
+                          unit: item['measurement_unit'] ?? "",
+                          participantId:
+                              widget.participantId, // Passa o participantId
+                          itemId:
+                              itemId, // Passa o itemId para garantir dados separados
+                        ),
+                        const SizedBox(height: 20),
+                      ],
+                    );
+                  } else if (item['aspect'] == 'subjective') {
+                    // SubjetiveCard para avaliações subjetivas
+                    return Column(
+                      children: [
+                        SubjetiveCard(
+                          onSave: (double nota) {},
+                          name: item['name'] ?? 'Sem Título',
+                          title: item['name'] ?? 'Sem Título',
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    );
+                  } else if (item['aspect'] == 'questionnaire') {
+                    // QuestCard para perguntas e opções
+                    final options =
+                        List<String>.from(item['questions']['options'] ?? []);
+                    return Column(
+                      children: [
+                        QuestCard(
+                          title: item['name'] ?? 'Sem Título',
+                          options: options,
+                        ),
+                        const SizedBox(height: 10),
+                      ],
+                    );
+                  }
+                  return const SizedBox
+                      .shrink(); // Retorna um tamanho nulo caso não corresponda a nenhum tipo
+                }).toList(),
               ),
             ),
           ),
@@ -603,7 +620,8 @@ class AgendaCard extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => AvaliationPage(
-                  participantData: participantData, // Passando os dados
+                  participantData: participantData,
+                  evaluationData: event, // Passando os dados do evento
                 ),
               ),
             );
