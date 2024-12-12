@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dess/App/Source/Core/Components/cards.dart';
 import 'package:dess/App/Source/Core/Components/components.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
+import 'package:dess/App/Source/Screens/Home/Passport/passport_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';

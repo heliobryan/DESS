@@ -33,8 +33,9 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Image(
-                      image: AssetImage('assets/images/ENNTRE.png'),
+                    Text(
+                      'ENTRE',
+                      style: comp25Str(),
                     ),
                     Column(
                       children: [

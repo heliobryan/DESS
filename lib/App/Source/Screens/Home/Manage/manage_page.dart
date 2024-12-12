@@ -1,4 +1,5 @@
 import 'package:dess/App/Source/Core/Components/components.dart';
+import 'package:dess/App/Source/Screens/Home/Manage/Rank/rank_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
@@ -192,7 +193,7 @@ class _ManagePageState extends State<ManagePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SvgPicture.asset(
-                            'assets/images/cash.svg',
+                            'assets/images/crown.svg',
                           ),
                           const SizedBox(width: 20),
                           Column(
@@ -200,7 +201,7 @@ class _ManagePageState extends State<ManagePage> {
                             children: [
                               const SizedBox(height: 20),
                               Text(
-                                'Patrocinío',
+                                'Ranking',
                                 style: comp20Out(),
                               ),
                               const SizedBox(height: 10),
@@ -220,10 +221,10 @@ class _ManagePageState extends State<ManagePage> {
                                     side: const BorderSide(
                                         color: Colors.transparent),
                                   ),
-                                  onPressed: () => Navigator.pushNamed(
-                                      context, 'sponsorPage'),
+                                  onPressed: () =>
+                                      Navigator.pushNamed(context, 'rankPage'),
                                   child: Text(
-                                    'Propostas',
+                                    'Ranqueamento',
                                     style: comp15Out(),
                                   ),
                                 ),

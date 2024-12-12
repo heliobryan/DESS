@@ -5,7 +5,7 @@ import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/comp_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/health_page.dart';
-import 'package:dess/App/Source/Screens/Home/Manage/sponsor_page.dart';
+import 'package:dess/App/Source/Screens/Home/Manage/Rank/rank_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Home/home_page.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/image_manage_page.dart';
@@ -15,6 +15,7 @@ import 'package:dess/App/Source/Screens/Register/initial_page.dart';
 import 'package:dess/App/Source/Screens/Register/login_page.dart';
 import 'package:dess/App/Source/Screens/Register/register_page.dart';
 import 'package:dess/App/Source/Screens/Register/splash_page.dart';
+import 'package:dess/App/Source/Screens/Test/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -32,7 +33,7 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const SplashPage(),
+      home: SplashPage(),
       debugShowCheckedModeBanner: false,
       routes: {
         'initialPage': (context) => const InitialPage(),
@@ -52,11 +53,10 @@ class DesApp extends StatelessWidget {
         'managePage': (context) => const ManagePage(),
         'passportPage': (context) => const PassportPage(
               participantData: {},
-              subCriterias: [],
             ),
         'imageManagePage': (context) => const ImageManagePage(),
         'compPage': (context) => const CompPage(),
-        'sponsorPage': (context) => const SponsorPage(),
+        'rankPage': (context) => const RankPage(),
         'healthPage': (context) => const HealthPage(),
         'cardPage': (context) => const HealthEditor(),
         'loginPage': (context) => const LoginPage(),

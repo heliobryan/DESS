@@ -59,22 +59,21 @@ class _AvapsiPageState extends State<AvapsiPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-                Container(
-                  width: 112,
-                  height: 110,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: GradientBoxBorder(
-                      width: 3,
-                      gradient: gradientLk(),
-                    ),
-                  ),
-                  child: const Icon(
-                    Icons.account_circle_outlined,
-                    color: Colors.white,
-                    size: 105,
-                  ),
-                ),
+                // Container(
+                //   width: 112,
+                //   height: 110,
+                //   decoration: BoxDecoration(
+                //     shape: BoxShape.circle,
+                //     border: GradientBoxBorder(
+                //       width: 3,
+                //       gradient: gradientLk(),
+                //     ),
+                //   ),
+                //   child: Icon(
+                //     widget.participantData['user']['photo'],
+                //     size: 105,
+                //   ),
+                // ),
                 const SizedBox(height: 10),
                 Column(
                   children: [

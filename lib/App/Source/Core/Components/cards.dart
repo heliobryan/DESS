@@ -8,6 +8,7 @@ import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avapsi.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatat.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
+import 'package:dess/App/Source/Screens/Home/Passport/passport_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
@@ -452,136 +453,6 @@ class _AgeCardState extends State<AgeCard> {
   }
 }
 
-class PlayerCard extends StatelessWidget {
-  const PlayerCard({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Stack(
-        children: [
-          Center(
-            child: SvgPicture.asset(
-              'assets/images/bordervetor.svg',
-              width: 150,
-              height: 400,
-            ),
-          ),
-          Center(
-            child: SvgPicture.asset(
-              'assets/images/manel2.svg',
-              width: 150,
-              height: 350,
-            ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const SizedBox(height: 40),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        '70',
-                        style: comp28Out(),
-                      ),
-                      Text(
-                        'ATA',
-                        style: comp20Out(),
-                      ),
-                      const SizedBox(height: 5),
-                      SvgPicture.asset('assets/images/gleydon.svg'),
-                      const SizedBox(height: 5),
-                      const Icon(
-                        Icons.shield_outlined,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 25),
-                  Container(
-                    width: 112,
-                    height: 110,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: GradientBoxBorder(
-                        width: 3,
-                        gradient: gradientLk(),
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.account_circle_outlined,
-                      color: Colors.white,
-                      size: 105,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                'Aluno'.toUpperCase(),
-                style: comp20Out(),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              SvgPicture.asset('assets/images/dias.svg'),
-              Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        const SizedBox(height: 10),
-                        Text(
-                          '80 RIT',
-                          style: comp20Out(),
-                        ),
-                        Text(
-                          '80 FIN',
-                          style: comp20Out(),
-                        ),
-                        Text(
-                          '80 PAS',
-                          style: comp20Out(),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(width: 20),
-                    Column(
-                      children: [
-                        const SizedBox(height: 10),
-                        Text(
-                          '80 DRI',
-                          style: comp20Out(),
-                        ),
-                        Text(
-                          '80 DEF',
-                          style: comp20Out(),
-                        ),
-                        Text(
-                          '80 FÍS',
-                          style: comp20Out(),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class AgendaCard extends StatelessWidget {
   final Map<String, dynamic> participantData;
   final dynamic event;
@@ -967,16 +838,61 @@ class _PsiCardState extends State<PsiCard> {
   }
 }
 
-class SportsCard extends StatefulWidget {
-  const SportsCard({super.key});
+class PassPortCard extends StatefulWidget {
+  final Map<String, dynamic> participantData;
+
+  const PassPortCard({
+    super.key,
+    required this.participantData,
+  });
 
   @override
-  State<SportsCard> createState() => _SportsCardState();
+  State<PassPortCard> createState() => _PassPortCardState();
 }
 
-class _SportsCardState extends State<SportsCard> {
+class _PassPortCardState extends State<PassPortCard> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          border: GradientBoxBorder(
+            gradient: gradientLk(),
+          ),
+        ),
+        child: OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            side: const BorderSide(color: Colors.transparent),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PassportPage(
+                  participantData: widget.participantData,
+                ),
+              ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Passaporte Biológico',
+                  style: comp25Out(),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

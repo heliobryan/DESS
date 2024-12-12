@@ -120,6 +120,9 @@ class _AvaliationPageState extends State<AvaliationPage> {
                     },
                   ),
                 ),
+                PassPortCard(
+                  participantData: widget.participantData,
+                ),
               ],
             ),
           ),
