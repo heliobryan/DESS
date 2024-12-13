@@ -24,18 +24,18 @@ class _PassportPageState extends State<PassportPage> {
   // Método para obter o nome da imagem com base no id do participante
   String getParticipantImage() {
     switch (widget.participantData['user']['id']) {
-      case 67: // ID do participante "Arthur"
+      case 67:
         return 'assets/images/arthur.jpeg';
-      case 69: // ID do participante "Bernardo"
+      case 69:
         return 'assets/images/bernardo.jpeg';
-      case 71: // ID do participante "João"
+      case 71:
         return 'assets/images/joao.jpeg';
-      case 70: // ID do participante "Marcos"
+      case 70:
         return 'assets/images/marcos.jpeg';
-      case 68: // ID do participante "Riquelme"
+      case 68:
         return 'assets/images/riquelme.jpeg';
       default:
-        return 'assets/images/default.jpeg'; // Caso o ID não seja encontrado
+        return 'assets/images/default.jpeg';
     }
   }
 
@@ -91,7 +91,6 @@ class _PassportPageState extends State<PassportPage> {
                     gradient: gradientLk(),
                   ),
                 ),
-                // Exibindo a imagem baseada no id do participante
                 child: ClipOval(
                   child: Image.asset(
                     getParticipantImage(),
