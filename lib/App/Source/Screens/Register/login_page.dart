@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:dess/App/Source/Core/Components/components.dart';
-import 'package:dess/App/Source/Screens/Filter/sub_page.dart';
+import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
+import 'package:dess/App/Source/Screens/Filter/Idade/sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;

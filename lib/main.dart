@@ -1,6 +1,6 @@
 import 'package:dess/App/Source/Screens/Filter/club_page.dart';
 import 'package:dess/App/Source/Screens/Filter/sports_page.dart';
-import 'package:dess/App/Source/Screens/Filter/sub_page.dart';
+import 'package:dess/App/Source/Screens/Filter/Idade/sub_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/comp_page.dart';
@@ -33,7 +33,7 @@ class DesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: RankPage(),
+      home: SplashPage(),
       debugShowCheckedModeBanner: false,
       routes: {
         'initialPage': (context) => const InitialPage(),

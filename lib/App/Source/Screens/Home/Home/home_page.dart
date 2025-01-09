@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:dess/App/Source/Core/Components/cards.dart';
-import 'package:dess/App/Source/Core/Components/components.dart';
+import 'package:dess/App/Source/Core/Components/Cards/cards.dart';
+import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/manage_page.dart';
 import 'package:dess/App/Source/Screens/Home/Passport/passport_page.dart';
 import 'package:flutter/material.dart';

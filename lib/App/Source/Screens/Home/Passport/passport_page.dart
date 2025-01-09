@@ -1,13 +1,15 @@
-import 'package:dess/App/Source/Core/Components/cards.dart';
-import 'package:dess/App/Source/Core/Components/components.dart';
+import 'package:dess/App/Source/Core/Components/Cards/cards.dart';
+import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:intl/intl.dart';
 
 class PassportPage extends StatefulWidget {
   final Map<String, dynamic> participantData;
+
   const PassportPage({
     super.key,
     required this.participantData,
@@ -20,6 +22,7 @@ class PassportPage extends StatefulWidget {
 class _PassportPageState extends State<PassportPage> {
   bool fifaCard = false;
   bool dataCard = true;
+  bool radarGraphVisible = false;
 
   // Método para obter o nome da imagem com base no id do participante
   String getParticipantImage() {
@@ -38,6 +41,15 @@ class _PassportPageState extends State<PassportPage> {
         return 'assets/images/default.jpeg';
     }
   }
+
+  final playerStats = {
+    'Físico': 85,
+    'Ritmo': 90,
+    'Finalização': 80,
+    'Passe': 75,
+    'Agilidade': 95,
+    'Drible': 88,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -116,32 +128,11 @@ class _PassportPageState extends State<PassportPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
-              const Column(
-                children: [],
-              ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    width: 105,
-                    height: 23,
-                    decoration: BoxDecoration(
-                      border: GradientBoxBorder(
-                        gradient: gradientLk(),
-                      ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Gráfico',
-                        style: comp15Out(),
-                      ),
-                    ),
-                  ),
+                  // Botão para exibir o gráfico
                   Container(
                     width: 105,
                     height: 23,
@@ -162,10 +153,43 @@ class _PassportPageState extends State<PassportPage> {
                       ),
                       onPressed: () {
                         setState(() {
-                          fifaCard = !fifaCard;
-                          if (dataCard == true) {
-                            dataCard = !dataCard;
-                          }
+                          radarGraphVisible = true;
+                          fifaCard = false;
+                          dataCard = false;
+                        });
+                      },
+                      child: Center(
+                        child: Text(
+                          'Gráfico',
+                          style: comp15Out(),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Botão para exibir o PlayerCard
+                  Container(
+                    width: 105,
+                    height: 23,
+                    decoration: BoxDecoration(
+                      border: GradientBoxBorder(
+                        gradient: gradientLk(),
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.transparent),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          fifaCard = true;
+                          radarGraphVisible = false;
+                          dataCard = false;
                         });
                       },
                       child: Center(
@@ -176,6 +200,7 @@ class _PassportPageState extends State<PassportPage> {
                       ),
                     ),
                   ),
+                  // Botão para exibir o DataCard
                   Container(
                     width: 105,
                     height: 23,
@@ -193,10 +218,9 @@ class _PassportPageState extends State<PassportPage> {
                       ),
                       onPressed: () {
                         setState(() {
-                          dataCard = !dataCard;
-                          if (dataCard == true) {
-                            fifaCard = !fifaCard;
-                          }
+                          dataCard = true;
+                          fifaCard = false;
+                          radarGraphVisible = false;
                         });
                       },
                       child: Center(
@@ -210,49 +234,22 @@ class _PassportPageState extends State<PassportPage> {
                 ],
               ),
               const SizedBox(height: 20),
-              Container(
-                width: 149,
-                height: 23,
-                decoration: BoxDecoration(
-                  border: GradientBoxBorder(
-                    gradient: gradientLk(),
-                  ),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(12),
-                  ),
-                ),
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: Colors.transparent,
-                    side: const BorderSide(color: Colors.transparent),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                    ),
-                  ),
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CalendarPage(),
-                    ),
-                  ),
-                  child: Center(
-                    child: Text(
-                      DateFormat.yMd().format(
-                        DateTime.now(),
-                      ),
-                      style: comp15Out(),
-                    ),
-                  ),
-                ),
+              // Exibe o RadarGraph se radarGraphVisible for true
+              Visibility(
+                visible: radarGraphVisible,
+                child: RadarGraph(playerStats: playerStats),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              // Exibe o PlayerCard se fifaCard for true
               Visibility(
                 visible: fifaCard,
                 child: PlayerCard(
+                  participantData: widget.participantData,
+                ),
+              ),
+              // Exibe o DataCard se dataCard for true
+              Visibility(
+                visible: dataCard,
+                child: DataCard(
                   participantData: widget.participantData,
                 ),
               ),
@@ -264,6 +261,42 @@ class _PassportPageState extends State<PassportPage> {
   }
 }
 
+class RadarGraph extends StatelessWidget {
+  final Map<String, int> playerStats;
+
+  const RadarGraph({super.key, required this.playerStats});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        height: 300,
+        width: 300,
+        child: RadarChart(
+          ticks: const [20, 40, 60, 80, 100],
+          features: [
+            'Físico',
+            'Ritmo',
+            'Finalização',
+            'Passe',
+            'Agilidade',
+            'Drible',
+          ],
+          data: [playerStats.values.map((e) => e.toDouble()).toList()],
+          graphColors: const [Color(0xFF981DB9)],
+          outlineColor: Colors.white,
+          axisColor: Colors.white,
+          featuresTextStyle: const TextStyle(
+            color: Colors.white,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
+          sides: playerStats.length,
+        ),
+      ),
+    );
+  }
+}
 class PlayerCard extends StatelessWidget {
   final Map<String, dynamic> participantData;
 

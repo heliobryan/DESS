@@ -1,4 +1,4 @@
-import 'package:dess/App/Source/Core/Components/components.dart';
+import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:flutter/material.dart';
 
 class InitialPage extends StatelessWidget {

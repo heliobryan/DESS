@@ -1,4 +1,4 @@
-import 'package:dess/App/Source/Core/Components/components.dart';
+import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:dess/App/Source/Screens/Home/Manage/Rank/rank_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

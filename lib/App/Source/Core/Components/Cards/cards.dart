@@ -1,7 +1,7 @@
 import 'package:dess/App/Source/Core/Components/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/Components/AvaliationComponents/questionnaire.dart';
 import 'package:dess/App/Source/Core/Components/AvaliationComponents/subjetivecard.dart';
-import 'package:dess/App/Source/Core/Components/components.dart';
+import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/agenda.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avaliation_page.dart';
@@ -400,58 +400,7 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
   }
 }
 
-class AgeCard extends StatefulWidget {
-  final String category;
-  final Function(String) onCategorySelected;
 
-  const AgeCard({
-    super.key,
-    required this.category,
-    required this.onCategorySelected,
-  });
-
-  @override
-  State<AgeCard> createState() => _AgeCardState();
-}
-
-class _AgeCardState extends State<AgeCard> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 341,
-      height: 62,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        border: GradientBoxBorder(
-          gradient: LinearGradient(
-            colors: <Color>[
-              Color(0xFF981DB9),
-              Color(0xFF0F76CE),
-            ],
-          ),
-        ),
-      ),
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          foregroundColor: const Color(0xFF981DB9),
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12)),
-          ),
-          side: const BorderSide(color: Colors.transparent),
-        ),
-        child: Center(
-          child: Text(
-            widget.category,
-            style: comp40Out(),
-          ),
-        ),
-        onPressed: () {
-          widget.onCategorySelected(widget.category);
-        },
-      ),
-    );
-  }
-}
 
 class AgendaCard extends StatelessWidget {
   final Map<String, dynamic> participantData;
@@ -536,7 +485,7 @@ class AgendaCard extends StatelessWidget {
 }
 
 class DataCard extends StatefulWidget {
-  const DataCard({super.key});
+  const DataCard({super.key, required Map<String, dynamic> participantData});
 
   @override
   State<DataCard> createState() => _DataCardState();

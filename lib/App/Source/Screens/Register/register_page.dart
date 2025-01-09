@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:dess/App/Source/Core/Components/components.dart';
+import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:dess/App/Source/Screens/Home/Home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
