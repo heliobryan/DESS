@@ -116,7 +116,6 @@ class _AvafisPageState extends State<AvafisPage> {
       body: Stack(
         children: [
           const GradientBack(),
-          const BackgroudImage(),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

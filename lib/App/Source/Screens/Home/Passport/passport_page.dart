@@ -1,11 +1,9 @@
 import 'package:dess/App/Source/Core/Components/Cards/cards.dart';
 import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/avatec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:intl/intl.dart';
 
 class PassportPage extends StatefulWidget {
   final Map<String, dynamic> participantData;
@@ -297,6 +295,7 @@ class RadarGraph extends StatelessWidget {
     );
   }
 }
+
 class PlayerCard extends StatelessWidget {
   final Map<String, dynamic> participantData;
 

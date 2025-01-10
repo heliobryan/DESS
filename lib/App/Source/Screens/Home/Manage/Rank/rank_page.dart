@@ -176,6 +176,7 @@ class PodiumCard1 extends StatelessWidget {
           'assets/images/coroa.svg',
           height: 40,
           width: 40,
+          // ignore: deprecated_member_use
           color: Colors.yellowAccent,
         ),
         ClipOval(

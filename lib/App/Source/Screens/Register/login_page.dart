@@ -1,6 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
-import 'package:dess/App/Source/Screens/Filter/Idade/sub_page.dart';
+import 'package:dess/App/Source/Screens/Home/Home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -41,21 +43,8 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         const SizedBox(height: 15),
                         Text(
-                          'Não possui uma conta?',
-                          style: comp16Out(),
-                        ),
-                        TextButton(
-                          child: const Text(
-                            'Cadastre-se',
-                            style: TextStyle(
-                              fontFamily: 'OUTFIT',
-                              color: Color(0xFF0F76CE),
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          onPressed: () =>
-                              Navigator.pushNamed(context, 'registerPage'),
+                          'Não possui uma conta? Entre em contato com o Avaliador',
+                          style: comp10Out(),
                         ),
                       ],
                     ),
@@ -194,10 +183,40 @@ class _LoginPageState extends State<LoginPage> {
                             }
                             if (success) {
                               Navigator.pushReplacement(
-                                  // ignore: use_build_context_synchronously
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Form3Page()));
+                                // ignore: use_build_context_synchronously
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, animation,
+                                          secondaryAnimation) =>
+                                      const HomePage(
+                                          selectedcategory: '',
+                                          initialCategory: ''),
+                                  transitionsBuilder: (context, animation,
+                                      secondaryAnimation, child) {
+                                    const beginOffset = Offset(0.2,
+                                        0.0); // Começa próximo ao centro à direita
+                                    const endOffset =
+                                        Offset.zero; // Termina no centro
+                                    const curve = Curves
+                                        .easeInOut; // Curva suave para entrada/saída
+
+                                    var slideTween = Tween(
+                                            begin: beginOffset, end: endOffset)
+                                        .chain(CurveTween(curve: curve));
+                                    var fadeTween = Tween<double>(
+                                        begin: 0.7,
+                                        end: 1.0); // Começa quase visível
+
+                                    return SlideTransition(
+                                      position: animation.drive(slideTween),
+                                      child: FadeTransition(
+                                        opacity: animation.drive(fadeTween),
+                                        child: child,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
                             } else {
                               _passwordController.clear();
                               // ignore: use_build_context_synchronously
@@ -209,58 +228,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     const Image(
-                    //       image: AssetImage('assets/images/line.png'),
-                    //     ),
-                    //     Text(
-                    //       '   Ou   ',
-                    //       style: comp16Out(),
-                    //     ),
-                    //     const Image(
-                    //       image: AssetImage('assets/images/line.png'),
-                    //     ),
-                    //   ],
-                    // ),
-                    const SizedBox(height: 15),
-                    // Column(
-                    //   children: [
-                    //     SizedBox(
-                    //       width: 316,
-                    //       height: 40,
-                    //       child: ElevatedButton(
-                    //         style: ElevatedButton.styleFrom(
-                    //           foregroundColor: Colors.black,
-                    //           shape: RoundedRectangleBorder(
-                    //             borderRadius: BorderRadius.circular(12),
-                    //           ),
-                    //         ),
-                    //         child: const Row(
-                    //           children: [
-                    //             Image(
-                    //               image: AssetImage(
-                    //                 'assets/images/googlevetor.png',
-                    //               ),
-                    //             ),
-                    //             Text(
-                    //               '         Continuar com Google',
-                    //               style: TextStyle(
-                    //                 color: Color(0xFF121212),
-                    //                 fontSize: 16,
-                    //                 fontFamily: 'OUTFIT',
-                    //                 fontWeight: FontWeight.bold,
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //         onPressed: () {},
-                    //       ),
-                    //     ),
-                    //     const SizedBox(height: 15),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),
@@ -281,7 +248,6 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<bool> userLogin() async {
     String expenseListApi = dotenv.get('API_HOST', fallback: '');
-    // ignore: unused_local_variable
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var url = Uri.parse('${expenseListApi}api/login');
     var restAwnser = await http.post(
@@ -292,7 +258,7 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
     if (restAwnser.statusCode == 200) {
-      // ignore: prefer_interpolation_to_compose_strings, avoid_print
+      // ignore: prefer_interpolation_to_compose_strings
       print('token' + jsonDecode(restAwnser.body)['token']);
       final decode = jsonDecode(restAwnser.body);
 
@@ -302,7 +268,6 @@ class _LoginPageState extends State<LoginPage> {
       );
       return true;
     } else {
-      // ignore: avoid_print
       print(jsonDecode(restAwnser.body));
       return false;
     }

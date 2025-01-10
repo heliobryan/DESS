@@ -42,11 +42,13 @@ class _QuestCardState extends State<QuestCard> {
       optionFeedback = widget.options.asMap().map((_, option) {
         if (option == widget.correctAnswer) {
           // Sempre verde para a resposta correta
+          // ignore: deprecated_member_use
           return MapEntry(option, Colors.green.withOpacity(0.3));
         } else {
           // Vermelho apenas se a seleção foi incorreta
           return MapEntry(
             option,
+            // ignore: deprecated_member_use
             selectedOption == option ? Colors.red.withOpacity(0.3) : null,
           );
         }

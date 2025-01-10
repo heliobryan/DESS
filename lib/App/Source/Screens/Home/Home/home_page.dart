@@ -120,11 +120,11 @@ class Home1Page extends StatefulWidget {
 
 class _Home1PageState extends State<Home1Page> {
   Map<String, dynamic> userDados = {};
-
   List participantsList = [];
   List filteredParticipantsList = [];
   TextEditingController searchController = TextEditingController();
   String? token;
+  bool isLoading = true; // Variável para controlar o carregamento
 
   @override
   void initState() {
@@ -150,6 +150,70 @@ class _Home1PageState extends State<Home1Page> {
         return participantName.contains(searchQuery);
       }).toList();
     });
+  }
+
+  Future<void> loadToken() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      token = sharedPreferences.getString('token');
+    });
+    userInfo();
+    getParticipants(widget.selectedCategory);
+  }
+
+  Future<void> userInfo() async {
+    if (token == null) return;
+
+    try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+      var url = Uri.parse('${expenseListApi}api/user');
+      var restAnswer = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      if (restAnswer.statusCode == 200) {
+        final decode = jsonDecode(restAnswer.body);
+        setState(() {
+          userDados = decode;
+        });
+      }
+    } catch (e) {
+      // Lidar com erro
+    }
+  }
+
+  Future<void> getParticipants(String category) async {
+    if (token == null) return;
+
+    setState(() {
+      isLoading = true; // Começa o carregamento
+    });
+
+    try {
+      String expenseListApi = dotenv.get('API_HOST', fallback: '');
+      var url = Uri.parse(
+          '${expenseListApi}api/participants?page=1&perPage=30&groupBySub=1&getAll=1');
+      var restAnswer = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      if (restAnswer.statusCode == 200) {
+        final decode = jsonDecode(restAnswer.body);
+        setState(() {
+          participantsList = decode;
+          filteredParticipantsList = participantsList;
+          isLoading = false; // Termina o carregamento
+        });
+      }
+    } catch (e) {
+      setState(() {
+        isLoading = false; // Se houver erro, também termina o carregamento
+      });
+    }
   }
 
   @override
@@ -238,18 +302,26 @@ class _Home1PageState extends State<Home1Page> {
                 ),
                 const SizedBox(height: 20),
                 Expanded(
-                  child: ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    itemBuilder: (context, index) {
-                      final participants = filteredParticipantsList[index];
-                      return CardPlayer(
-                        participants: participants,
-                        onTap: (Map<String, dynamic> data) {},
-                      );
-                    },
-                    itemCount: filteredParticipantsList.length,
-                  ),
+                  child: isLoading // Verifica o estado de carregamento
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.blue),
+                          ),
+                        )
+                      : ListView.builder(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0, horizontal: 10),
+                          itemBuilder: (context, index) {
+                            final participants =
+                                filteredParticipantsList[index];
+                            return CardPlayer(
+                              participants: participants,
+                              onTap: (Map<String, dynamic> data) {},
+                            );
+                          },
+                          itemCount: filteredParticipantsList.length,
+                        ),
                 ),
               ],
             ),
@@ -257,61 +329,5 @@ class _Home1PageState extends State<Home1Page> {
         ],
       ),
     );
-  }
-
-  Future<void> loadToken() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    setState(() {
-      token = sharedPreferences.getString('token');
-    });
-    userInfo();
-    getParticipants(widget.selectedCategory);
-  }
-
-  Future<void> userInfo() async {
-    if (token == null) return;
-
-    try {
-      String expenseListApi = dotenv.get('API_HOST', fallback: '');
-      var url = Uri.parse('${expenseListApi}api/user');
-      var restAnswer = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-      if (restAnswer.statusCode == 200) {
-        final decode = jsonDecode(restAnswer.body);
-        setState(() {
-          userDados = decode;
-        });
-      }
-    } catch (e) {
-      // Lidar com erro
-    }
-  }
-
-  Future<void> getParticipants(String category) async {
-    if (token == null) return;
-
-    try {
-      String expenseListApi = dotenv.get('API_HOST', fallback: '');
-      var url = Uri.parse(
-          '${expenseListApi}api/participants?page=1&perPage=30&groupBySub=1&getAll=1');
-      var restAnswer = await http.get(
-        url,
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
-      );
-      if (restAnswer.statusCode == 200) {
-        final decode = jsonDecode(restAnswer.body);
-        setState(() {
-          participantsList = decode;
-          filteredParticipantsList = participantsList;
-        });
-      }
-      // ignore: empty_catches
-    } catch (e) {}
   }
 }

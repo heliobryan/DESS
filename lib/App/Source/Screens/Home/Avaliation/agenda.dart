@@ -23,6 +23,7 @@ class AgendaPage extends StatefulWidget {
 class _AgendaPageState extends State<AgendaPage> {
   List eventList = [];
   List filteredEventList = [];
+  bool isLoading = true; // Variável para controlar o estado de carregamento
 
   @override
   void initState() {
@@ -83,34 +84,46 @@ class _AgendaPageState extends State<AgendaPage> {
                 const SizedBox(height: 20),
                 AgendaData(onMonthChanged: filterEventsByMonth),
                 const SizedBox(height: 50),
-                Expanded(
-                  child: ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                    itemBuilder: (context, index) {
-                      final event = filteredEventList[index];
-                      return AgendaCard(
-                        event: event,
-                        participantData: widget.participantData,
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AvaliationPage(
-                                participantData: widget.participantData,
-                                evaluationData: null,
+                // Exibe apenas a lista quando não está carregando
+                if (!isLoading)
+                  Expanded(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 0, horizontal: 10),
+                      itemBuilder: (context, index) {
+                        final event = filteredEventList[index];
+                        return AgendaCard(
+                          event: event,
+                          participantData: widget.participantData,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AvaliationPage(
+                                  participantData: widget.participantData,
+                                  evaluationData: null,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    itemCount: filteredEventList.length,
+                            );
+                          },
+                        );
+                      },
+                      itemCount: filteredEventList.length,
+                    ),
                   ),
-                ),
               ],
             ),
           ),
+          // Overlay de loading centralizado
+          if (isLoading)
+            Positioned.fill(
+              child: Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Color(0xFF981DB9)), // Cor roxa
+                ),
+              ),
+            ),
         ],
       ),
     );
@@ -139,10 +152,14 @@ class _AgendaPageState extends State<AgendaPage> {
             return evaluation['participant_id'] == participantId;
           }).toList();
           filteredEventList = eventList;
+          isLoading = false; // Termina o carregamento
         });
       }
     } catch (e) {
       log(e.toString());
+      setState(() {
+        isLoading = false; // Caso haja erro, termina o carregamento
+      });
     }
   }
 }

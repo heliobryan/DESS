@@ -54,7 +54,6 @@ class _AvatecPageState extends State<AvatecPage> {
       body: Stack(
         children: [
           const GradientBack(),
-          const BackgroudImage(),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

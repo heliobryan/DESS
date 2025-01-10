@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:dess/App/Source/Screens/Register/initial_page.dart';
+import 'package:dess/App/Source/Screens/Register/splash_page.dart';
 import 'package:dess/App/Source/Services/exit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -281,7 +281,7 @@ class _ExitButtonState extends State<ExitButton> {
                       // ignore: use_build_context_synchronously
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const InitialPage(),
+                        builder: (context) => const SplashPage(),
                       ),
                     );
                   }

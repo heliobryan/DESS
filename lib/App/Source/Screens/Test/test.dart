@@ -1,4 +1,3 @@
-import 'package:dess/App/Source/Core/Components/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -157,6 +156,7 @@ class _PodiumCardState1 extends State<PodiumCard1> {
             'assets/images/coroa.svg',
             height: 40,
             width: 40,
+            // ignore: deprecated_member_use
             color: Colors.yellowAccent,
           ),
           Icon(
