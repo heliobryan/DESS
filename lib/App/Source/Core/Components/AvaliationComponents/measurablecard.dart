@@ -27,39 +27,18 @@ class MeasurableCard extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _MeasurableCardState createState() => _MeasurableCardState();
 }
 
 class _MeasurableCardState extends State<MeasurableCard> {
-  String measurement;
-  String unit;
-
-  _MeasurableCardState()
-      : measurement = "",
-        unit = "";
+  late String measurement;
+  late String unit;
 
   @override
   void initState() {
     super.initState();
     measurement = widget.measurement;
     unit = widget.unit;
-    _loadData();
-  }
-
-  Future<void> _loadData() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      measurement =
-          prefs.getString('${widget.title}_measurement') ?? widget.measurement;
-      unit = prefs.getString('${widget.title}_unit') ?? widget.unit;
-    });
-  }
-
-  Future<void> _saveData() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('${widget.title}_measurement', measurement);
-    await prefs.setString('${widget.title}_unit', unit);
   }
 
   Future<void> _updateJudgment(String newScore) async {
@@ -146,7 +125,6 @@ class _MeasurableCardState extends State<MeasurableCard> {
                   setState(() {
                     measurement = result['measurement'] ?? measurement;
                     unit = result['unit'] ?? unit;
-                    _saveData();
 
                     // Atualize o julgamento na API
                     _updateJudgment(measurement);

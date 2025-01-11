@@ -11,7 +11,6 @@ class RankPage extends StatefulWidget {
 }
 
 class _RankPageState extends State<RankPage> {
-  // Lista de jogadores com seus dados
   final List<Map<String, dynamic>> playersData = [
     {
       'id': 67,
@@ -53,7 +52,6 @@ class _RankPageState extends State<RankPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Ordenar os jogadores pelo overall em ordem decrescente
     final sortedPlayers = playersData
       ..sort((a, b) => b['over'].compareTo(a['over']));
 
@@ -114,11 +112,14 @@ class _RankPageState extends State<RankPage> {
                     image: sortedPlayers[1]['image'],
                   ),
                   const SizedBox(width: 10),
-                  // Primeiro lugar
-                  PodiumCard1(
-                    name: sortedPlayers[0]['name'],
-                    overall: sortedPlayers[0]['over'],
-                    image: sortedPlayers[0]['image'],
+                  // Primeiro lugar - um pouco mais acima
+                  Transform.translate(
+                    offset: const Offset(0, -20), // Move o card para cima
+                    child: PodiumCard1(
+                      name: sortedPlayers[0]['name'],
+                      overall: sortedPlayers[0]['over'],
+                      image: sortedPlayers[0]['image'],
+                    ),
                   ),
                   const SizedBox(width: 10),
                   // Terceiro lugar
@@ -176,7 +177,6 @@ class PodiumCard1 extends StatelessWidget {
           'assets/images/coroa.svg',
           height: 40,
           width: 40,
-          // ignore: deprecated_member_use
           color: Colors.yellowAccent,
         ),
         ClipOval(
@@ -202,6 +202,13 @@ class PodiumCard1 extends StatelessWidget {
               width: 3,
               gradient: gradientLk(),
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.4),
+                offset: const Offset(0, 5),
+                blurRadius: 8,
+              ),
+            ],
           ),
           alignment: Alignment.center,
           child: Text(
@@ -352,15 +359,18 @@ class RankingCard extends StatelessWidget {
           border: GradientBoxBorder(
             gradient: gradientLk(),
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.4),
+              offset: const Offset(0, 5),
+              blurRadius: 8,
+            ),
+          ],
         ),
         child: Row(
           children: [
             const SizedBox(width: 8),
-            // Posição do jogador no ranking
-            Text(
-              '#$rank',
-              style: comp15Out(),
-            ),
+
             const SizedBox(width: 16),
             // Imagem do jogador
             Container(
@@ -383,7 +393,6 @@ class RankingCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 16),
-            // Nome do jogador
             Expanded(
               child: Text(
                 name,
@@ -391,7 +400,6 @@ class RankingCard extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            // Overall do jogador
             Container(
               width: 45,
               height: 45,

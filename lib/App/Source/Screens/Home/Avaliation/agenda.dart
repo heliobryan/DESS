@@ -114,7 +114,6 @@ class _AgendaPageState extends State<AgendaPage> {
               ],
             ),
           ),
-          // Overlay de loading centralizado
           if (isLoading)
             Positioned.fill(
               child: Center(
@@ -135,30 +134,34 @@ class _AgendaPageState extends State<AgendaPage> {
 
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      var url = Uri.parse('${expenseListApi}api/evaluations?page=1');
+      var url = Uri.parse('${expenseListApi}api/evaluations?page=1&perPage=30');
       final token = sharedPreferences.getString('token');
+
       var restAnswer = await http.get(
         url,
         headers: {
           'Authorization': 'Bearer $token',
         },
       );
+
       if (restAnswer.statusCode == 200) {
         final decode = jsonDecode(restAnswer.body);
+
         setState(() {
-          // Filtrar avaliações pelo participant_id
           int participantId = widget.participantData['id'];
           eventList = decode['data'].where((evaluation) {
             return evaluation['participant_id'] == participantId;
           }).toList();
           filteredEventList = eventList;
-          isLoading = false; // Termina o carregamento
+          isLoading = false;
         });
+      } else {
+        throw Exception('Erro ao buscar dados: ${restAnswer.statusCode}');
       }
     } catch (e) {
       log(e.toString());
       setState(() {
-        isLoading = false; // Caso haja erro, termina o carregamento
+        isLoading = false;
       });
     }
   }

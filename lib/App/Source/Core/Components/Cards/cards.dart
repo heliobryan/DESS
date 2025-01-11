@@ -400,8 +400,6 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
   }
 }
 
-
-
 class AgendaCard extends StatelessWidget {
   final Map<String, dynamic> participantData;
   final dynamic event;

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:dess/App/Source/Core/Components/Cards/cards.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/timer.dart';
 import 'package:http/http.dart' as http;
 import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:flutter/material.dart';
@@ -120,6 +121,7 @@ class _AvaliationPageState extends State<AvaliationPage> {
                     },
                   ),
                 ),
+                TimerCard(),
                 PassPortCard(
                   participantData: widget.participantData,
                 ),

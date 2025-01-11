@@ -309,234 +309,197 @@ class _EditQuantitativeCardState extends State<EditQuantitativeCard> {
             style: comp15Out(),
           ),
           const SizedBox(height: 20),
-          Container(
-            width: 317,
-            height: 117,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: GradientBoxBorder(
-                gradient: gradientCenter(),
-              ),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.check,
-                    size: 30,
-                    color: Colors.green,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    'Tentativas certas',
-                    style: comp15Out(),
-                  ),
-                  const SizedBox(height: 15),
-                  Container(
-                    width: 280,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: gradientCenter(),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              if (_correctAttempts > 0) _incorrectAttempts--;
-                              _updateNotaFinal();
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.horizontal_rule_outlined,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(
-                          '$_correctAttempts',
-                          style: comp15Out(),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _correctAttempts++;
-                              _updateNotaFinal();
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.add,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          _buildAttemptCard(
+            'Tentativas Certas',
+            _correctAttempts,
+            Colors.green,
+            () {
+              setState(() {
+                if (_correctAttempts > 0) _correctAttempts--;
+                _updateNotaFinal();
+              });
+            },
+            () {
+              setState(() {
+                _correctAttempts++;
+                _updateNotaFinal();
+              });
+            },
           ),
           const SizedBox(height: 20),
-          Container(
-            width: 317,
-            height: 117,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: GradientBoxBorder(
-                gradient: gradientCenter(),
-              ),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.close,
-                    size: 30,
-                    color: Colors.red,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    'Tentativas erradas',
-                    style: comp15Out(),
-                  ),
-                  const SizedBox(height: 15),
-                  Container(
-                    width: 280,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: gradientCenter(),
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              if (_incorrectAttempts > 0) _incorrectAttempts--;
-                              _updateNotaFinal();
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.horizontal_rule_outlined,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Text(
-                          '$_incorrectAttempts',
-                          style: comp15Out(),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              _incorrectAttempts++;
-                              _updateNotaFinal();
-                            });
-                          },
-                          icon: const Icon(
-                            Icons.add,
-                            size: 20,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          _buildAttemptCard(
+            'Tentativas Erradas',
+            _incorrectAttempts,
+            Colors.red,
+            () {
+              setState(() {
+                if (_incorrectAttempts > 0) _incorrectAttempts--;
+                _updateNotaFinal();
+              });
+            },
+            () {
+              setState(() {
+                _incorrectAttempts++;
+                _updateNotaFinal();
+              });
+            },
           ),
           const SizedBox(height: 20),
-          Container(
-            width: 317,
-            height: 217,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: GradientBoxBorder(
-                gradient: gradientCenter(),
-              ),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    Icons.account_circle_outlined,
-                    size: 40,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    'Nota Final',
-                    style: comp15Out(),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    width: 100,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: gradientCenter(),
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        _finalNotice.toStringAsFixed(1),
-                        style: comp16Out(),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  // Botão de salvar
-                  Container(
-                    width: 120,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      border: GradientBoxBorder(
-                        gradient: gradientCenter(),
-                      ),
-                    ),
-                    child: Center(
-                      child: OutlinedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop({
-                            'passesCertos': _correctAttempts,
-                            'passesErrados': _incorrectAttempts,
-                            'notaFinal': _finalNotice,
-                          });
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.transparent),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                          ),
-                        ),
-                        child: Text(
-                          'Salvar',
-                          style: comp15Out(),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            ),
-          ),
+          _buildFinalScoreCard(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildAttemptCard(
+    String title,
+    int value,
+    Color color,
+    VoidCallback onDecrement,
+    VoidCallback onIncrement,
+  ) {
+    return Container(
+      width: 317,
+      height: 117,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        border: GradientBoxBorder(
+          gradient: gradientCenter(),
+        ),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              color == Colors.green ? Icons.check : Icons.close,
+              size: 30,
+              color: color,
+            ),
+            const SizedBox(height: 5),
+            Text(
+              title,
+              style: comp15Out(),
+            ),
+            const SizedBox(height: 15),
+            Container(
+              width: 280,
+              height: 28,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                border: GradientBoxBorder(
+                  gradient: gradientCenter(),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: onDecrement,
+                    icon: const Icon(
+                      Icons.horizontal_rule_outlined,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    '$value',
+                    style: comp15Out(),
+                  ),
+                  IconButton(
+                    onPressed: onIncrement,
+                    icon: const Icon(
+                      Icons.add,
+                      size: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFinalScoreCard() {
+    return Container(
+      width: 317,
+      height: 217,
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        border: GradientBoxBorder(
+          gradient: gradientCenter(),
+        ),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.account_circle_outlined,
+              size: 40,
+              color: Colors.white,
+            ),
+            Text(
+              'Nota Final',
+              style: comp15Out(),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              width: 100,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                border: GradientBoxBorder(
+                  gradient: gradientCenter(),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  _finalNotice.toStringAsFixed(1),
+                  style: comp16Out(),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              width: 120,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+                border: GradientBoxBorder(
+                  gradient: gradientCenter(),
+                ),
+              ),
+              child: Center(
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop({
+                      'passesCertos': _correctAttempts,
+                      'passesErrados': _incorrectAttempts,
+                      'notaFinal': _finalNotice,
+                    });
+                  },
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: Colors.transparent),
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    'Salvar',
+                    style: comp15Out(),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }
