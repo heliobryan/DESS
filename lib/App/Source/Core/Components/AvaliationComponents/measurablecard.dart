@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +89,7 @@ class _MeasurablecardState extends State<Measurablecard> {
           'evaluation_id': widget.evaluationId,
           'item_id': widget.itemID,
           'score': double.tryParse(_measurementController.text) ?? 0,
-          'participant_id': widget.participantId, // Enviando o participant_id
+          'participant_id': widget.participantId,
         }),
       );
 
@@ -123,7 +125,7 @@ class _MeasurablecardState extends State<Measurablecard> {
   Widget build(BuildContext context) {
     return Container(
       width: 325,
-      height: 250,
+      height: 200,
       decoration: BoxDecoration(
         border: GradientBoxBorder(
           gradient: gradientLk(),
@@ -137,8 +139,8 @@ class _MeasurablecardState extends State<Measurablecard> {
         children: [
           const SizedBox(height: 15),
           Text(
-            widget.title,
-            style: comp15Out(),
+            widget.title.toUpperCase(),
+            style: comp15Str(),
           ),
           const SizedBox(height: 15),
           Center(
@@ -209,32 +211,6 @@ class _MeasurablecardState extends State<Measurablecard> {
                     : Text(
                         'SALVAR',
                         style: comp20Str(),
-                      ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 5),
-          Container(
-            width: 200,
-            height: 50,
-            decoration: BoxDecoration(
-              border: GradientBoxBorder(
-                gradient: gradientLk(),
-                width: 1,
-              ),
-              borderRadius: BorderRadius.circular(9),
-            ),
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: Colors.transparent),
-              ),
-              onPressed: () {},
-              child: Center(
-                child: isSaving
-                    ? const CircularProgressIndicator()
-                    : Text(
-                        'RESULTADOS',
-                        style: comp15Str(),
                       ),
               ),
             ),

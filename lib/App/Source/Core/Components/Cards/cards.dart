@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, deprecated_member_use
+
 import 'package:dess/App/Source/Core/Components/AvaliationComponents/quantitativecard.dart';
 import 'package:dess/App/Source/Core/Components/AvaliationComponents/questionnaire.dart';
 import 'package:dess/App/Source/Core/Components/AvaliationComponents/subjetivecard.dart';
@@ -353,13 +355,10 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                     return Column(
                       children: [
                         QuantitativeCard(
-                          title: item['name'] ?? 'Sem Título',
-                          passesFeitos: item['passesFeitos'] ?? 0,
-                          correctPass: item['passesCertos'] ?? 0,
-                          incorrectPass: item['passesErrados'] ?? 0,
-                          notaFinal: item['notaFinal'] ?? 0.0,
+                          title: item['name'],
                           participantId: widget.participantId,
-                          itemId: itemId,
+                          itemID: itemId,
+                          evaluationId: widget.evaluationId,
                         ),
                         const SizedBox(height: 10),
                       ],
