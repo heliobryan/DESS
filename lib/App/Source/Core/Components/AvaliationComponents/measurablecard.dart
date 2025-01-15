@@ -1,181 +1,36 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
-import 'package:gradient_borders/input_borders/gradient_outline_input_border.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
-class MeasurableCard extends StatefulWidget {
+class Measurablecard extends StatefulWidget {
   final String title;
+  final String participantId;
   final String measurement;
   final String unit;
-  final String participantId;
-  final String itemId;
+  final String itemID;
   final String evaluationId;
 
-  const MeasurableCard({
+  const Measurablecard({
     super.key,
     required this.title,
+    required this.participantId,
     required this.measurement,
     required this.unit,
-    required this.participantId,
-    required this.itemId,
+    required this.itemID,
     required this.evaluationId,
   });
 
   @override
-  _MeasurableCardState createState() => _MeasurableCardState();
+  State<Measurablecard> createState() => _MeasurablecardState();
 }
 
-class _MeasurableCardState extends State<MeasurableCard> {
-  late String measurement;
-  late String unit;
-
-  @override
-  void initState() {
-    super.initState();
-    measurement = widget.measurement;
-    unit = widget.unit;
-  }
-
-  Future<void> _updateJudgment(String newScore) async {
-    try {
-      // Obtenha a URL base da API do dotenv
-      final apiHost = dotenv.get('API_HOST', fallback: '');
-      final url = Uri.parse("$apiHost/api/judgments/${widget.itemId}");
-
-      // Obtenha o token de autenticação
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
-      final token = sharedPreferences.getString('token');
-
-      if (token == null || token.isEmpty) {
-        log("Token de autenticação não encontrado.");
-        return;
-      }
-
-      // Crie o corpo da requisição
-      final body = {
-        "evaluation_id": widget.evaluationId,
-        "item_id": widget.itemId,
-        "score": newScore,
-      };
-
-      // Faça a requisição PUT
-      final response = await http.put(
-        url,
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode(body),
-      );
-
-      // Verifique a resposta
-      if (response.statusCode == 200) {
-        log("Score atualizado com sucesso!");
-      } else {
-        log("Erro ao atualizar o score: ${response.statusCode} - ${response.body}");
-      }
-    } catch (e) {
-      log("Erro na requisição PUT: $e");
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        double cardWidth = constraints.maxWidth * 0.9;
-        double cardHeight = 100;
-
-        return SizedBox(
-          width: cardWidth,
-          height: cardHeight,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(12)),
-              border: GradientBoxBorder(
-                gradient: gradientCenter(),
-              ),
-            ),
-            child: OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                ),
-                side: const BorderSide(color: Colors.transparent),
-              ),
-              onPressed: () async {
-                final result = await showDialog<Map<String, dynamic>>(
-                  context: context,
-                  builder: (context) => Dialog(
-                    backgroundColor: Colors.grey[900],
-                    child: EditMeasurableCard(
-                      measurement: measurement,
-                      title: widget.title,
-                    ),
-                  ),
-                );
-
-                if (result != null) {
-                  setState(() {
-                    measurement = result['measurement'] ?? measurement;
-                    unit = result['unit'] ?? unit;
-
-                    // Atualize o julgamento na API
-                    _updateJudgment(measurement);
-                  });
-                }
-              },
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(widget.title, style: comp15Out()),
-                      const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '$measurement ${widget.unit.isNotEmpty ? widget.unit : ''}',
-                            style: comp20Str(),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class EditMeasurableCard extends StatefulWidget {
-  final String measurement;
-  final String title;
-
-  const EditMeasurableCard({
-    super.key,
-    required this.measurement,
-    required this.title,
-  });
-
-  @override
-  State<EditMeasurableCard> createState() => _EditMeasurableCardState();
-}
-
-class _EditMeasurableCardState extends State<EditMeasurableCard> {
+class _MeasurablecardState extends State<Measurablecard> {
   late TextEditingController _measurementController;
+  bool isSaving = false;
 
   @override
   void initState() {
@@ -189,99 +44,202 @@ class _EditMeasurableCardState extends State<EditMeasurableCard> {
     super.dispose();
   }
 
+  Future<void> saveMeasurement() async {
+    setState(() {
+      isSaving = true;
+    });
+
+    try {
+      if (widget.evaluationId.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('evaluationId está vazio!')),
+        );
+        return;
+      }
+
+      print('Enviando avaliação com:');
+      print('evaluationId: ${widget.evaluationId}');
+      print('item_id: ${widget.itemID}');
+      print('score: ${double.tryParse(_measurementController.text) ?? 0}');
+
+      String apiHost = dotenv.get('API_HOST', fallback: '');
+      var url = Uri.parse('${apiHost}api/judgments');
+
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      final token = sharedPreferences.getString('token');
+
+      if (token == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Token de autenticação não encontrado!')),
+        );
+        return;
+      }
+
+      final response = await http.post(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'evaluation_id': widget.evaluationId,
+          'item_id': widget.itemID,
+          'score': double.tryParse(_measurementController.text) ?? 0,
+          'participant_id': widget.participantId, // Enviando o participant_id
+        }),
+      );
+
+      if (response.statusCode == 201) {
+        final decoded = jsonDecode(response.body);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Julgamento criado com sucesso: ${decoded['score']}'),
+          ),
+        );
+      } else if (response.statusCode == 400) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Dados inválidos! Verifique os valores.')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro na API: ${response.body}')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro: $e')),
+      );
+    } finally {
+      setState(() {
+        isSaving = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 250,
-              width: 317,
+    return Container(
+      width: 325,
+      height: 250,
+      decoration: BoxDecoration(
+        border: GradientBoxBorder(
+          gradient: gradientLk(),
+        ),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(12),
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(height: 15),
+          Text(
+            widget.title,
+            style: comp15Out(),
+          ),
+          const SizedBox(height: 15),
+          Center(
+            child: Container(
+              width: 200,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
                 border: GradientBoxBorder(
-                  gradient: gradientDD(),
+                  gradient: gradientLk(),
+                  width: 1,
                 ),
+                borderRadius: BorderRadius.circular(9),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        widget.title,
-                        style: comp20Out(),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        height: 50,
-                        width: 180,
-                        child: TextField(
-                          keyboardType: const TextInputType.numberWithOptions(),
-                          controller: _measurementController,
-                          style: comp20Out(),
-                          decoration: InputDecoration(
-                            prefix: const Text('   '),
-                            contentPadding: const EdgeInsets.all(1),
-                            border: GradientOutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(9)),
-                              gradient: gradientLk(),
-                              width: 1,
-                            ),
-                            focusedBorder: GradientOutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
-                              gradient: gradientLk(),
-                              width: 1,
-                            ),
-                          ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      keyboardType: const TextInputType.numberWithOptions(),
+                      controller: _measurementController,
+                      style: comp20Out(),
+                      textAlign: TextAlign.center,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 10,
                         ),
+                        border: InputBorder.none,
                       ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                        height: 50,
-                        width: 180,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                          border: GradientBoxBorder(
-                            gradient: gradientLk(),
-                          ),
-                        ),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Colors.transparent),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop({
-                              'measurement': _measurementController.text,
-                            });
-                          },
-                          child: Text(
-                            'SALVAR',
-                            style: comp20Str(),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          widget.unit.isNotEmpty ? widget.unit : '',
+                          style: comp20Str(),
+                        ),
+                        Text(
+                          widget.itemID,
+                          style: const TextStyle(color: Colors.transparent),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 15),
+          Container(
+            width: 200,
+            height: 50,
+            decoration: BoxDecoration(
+              border: GradientBoxBorder(
+                gradient: gradientLk(),
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(9),
+            ),
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: Colors.transparent),
+              ),
+              onPressed: isSaving ? null : saveMeasurement,
+              child: Center(
+                child: isSaving
+                    ? const CircularProgressIndicator()
+                    : Text(
+                        'SALVAR',
+                        style: comp20Str(),
+                      ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 5),
+          Container(
+            width: 200,
+            height: 50,
+            decoration: BoxDecoration(
+              border: GradientBoxBorder(
+                gradient: gradientLk(),
+                width: 1,
+              ),
+              borderRadius: BorderRadius.circular(9),
+            ),
+            child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(color: Colors.transparent),
+              ),
+              onPressed: () {},
+              child: Center(
+                child: isSaving
+                    ? const CircularProgressIndicator()
+                    : Text(
+                        'RESULTADOS',
+                        style: comp15Str(),
+                      ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

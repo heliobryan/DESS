@@ -23,7 +23,7 @@ class AgendaPage extends StatefulWidget {
 class _AgendaPageState extends State<AgendaPage> {
   List eventList = [];
   List filteredEventList = [];
-  bool isLoading = true; // Variável para controlar o estado de carregamento
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -84,7 +84,6 @@ class _AgendaPageState extends State<AgendaPage> {
                 const SizedBox(height: 20),
                 AgendaData(onMonthChanged: filterEventsByMonth),
                 const SizedBox(height: 50),
-                // Exibe apenas a lista quando não está carregando
                 if (!isLoading)
                   Expanded(
                     child: ListView.builder(
@@ -101,7 +100,8 @@ class _AgendaPageState extends State<AgendaPage> {
                               MaterialPageRoute(
                                 builder: (context) => AvaliationPage(
                                   participantData: widget.participantData,
-                                  evaluationData: null,
+                                  evaluationData: event,
+                                  evaluationId: event['id'].toString(),
                                 ),
                               ),
                             );

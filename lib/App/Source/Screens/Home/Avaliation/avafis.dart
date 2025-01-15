@@ -11,11 +11,13 @@ import 'package:http/http.dart' as http;
 class AvafisPage extends StatefulWidget {
   final List<dynamic> subCriterias;
   final Map<String, dynamic> participantData;
+  final String evaluationId; // Adicionado o evaluationId
 
   const AvafisPage({
     super.key,
     required this.subCriterias,
     required this.participantData,
+    required this.evaluationId, // Adicionado o evaluationId
   });
 
   @override
@@ -29,7 +31,43 @@ class _AvafisPageState extends State<AvafisPage> {
   @override
   void initState() {
     super.initState();
+    validateEvaluationId();
+    logParticipantData();
     loadToken();
+  }
+
+  void validateEvaluationId() {
+    if (widget.evaluationId.isEmpty) {
+      debugPrint(
+          'AvafisPage - [ERROR] Evaluation ID não foi passado corretamente.');
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Erro'),
+            content:
+                const Text('O ID da avaliação não foi fornecido corretamente.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      debugPrint(
+          'AvafisPage - [INFO] Evaluation ID recebido: ${widget.evaluationId}');
+    }
+  }
+
+  /// Log dos dados do participante
+  void logParticipantData() {
+    // ignore: avoid_print
+    debugPrint(
+        'AvafisPage - [INFO] Dados do participante: ${widget.participantData}');
   }
 
   Future<void> loadToken() async {
@@ -41,7 +79,7 @@ class _AvafisPageState extends State<AvafisPage> {
       await userInfo();
     } else {
       // ignore: avoid_print
-      print('Token não encontrada');
+      debugPrint('AvafisPage - [ERROR] Token não encontrado');
     }
   }
 
@@ -59,24 +97,22 @@ class _AvafisPageState extends State<AvafisPage> {
       );
       if (restAnswer.statusCode == 200) {
         final decode = jsonDecode(restAnswer.body);
-        // ignore: avoid_print
-        print('Resposta da API /api/user: $decode');
+        debugPrint('AvafisPage - [INFO] Resposta da API /api/user: $decode');
 
         if (decode.containsKey('name')) {
           setState(() {
             userDados = decode;
           });
         } else {
-          // ignore: avoid_print
-          print('Campo "name" não encontrado na resposta da API');
+          debugPrint(
+              'AvafisPage - [ERROR] Campo "name" não encontrado na resposta da API');
         }
       } else {
-        // ignore: avoid_print
-        print('Erro ao obter dados do usuário: ${restAnswer.statusCode}');
+        debugPrint(
+            'AvafisPage - [ERROR] Erro ao obter dados do usuário: ${restAnswer.statusCode}');
       }
     } catch (e) {
-      // ignore: avoid_print
-      print('Erro ao obter dados do usuário: $e');
+      debugPrint('AvafisPage - [ERROR] Erro ao obter dados do usuário: $e');
     }
   }
 
@@ -172,6 +208,7 @@ class _AvafisPageState extends State<AvafisPage> {
                           onTap: () {},
                           onSubCriteriaPressed: (List<dynamic> items) {},
                           participantId: '',
+                          evaluationId: widget.evaluationId,
                         ),
                       );
                     },

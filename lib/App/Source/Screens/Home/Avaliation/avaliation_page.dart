@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:dess/App/Source/Core/Components/Cards/cards.dart';
 import 'package:dess/App/Source/Screens/Home/Avaliation/avafis.dart';
-import 'package:dess/App/Source/Screens/Home/Avaliation/timer.dart';
+import 'package:dess/App/Source/Screens/Home/Avaliation/AvaliationTools/timer.dart';
 import 'package:http/http.dart' as http;
 import 'package:dess/App/Source/Core/Components/GlobalComponents/components.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +10,12 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AvaliationPage extends StatefulWidget {
+  final String evaluationId;
   final Map<String, dynamic> participantData;
 
   const AvaliationPage({
     super.key,
+    required this.evaluationId,
     required this.participantData,
     required evaluationData,
   });
@@ -28,6 +30,12 @@ class _AvaliationPageState extends State<AvaliationPage> {
   @override
   void initState() {
     super.initState();
+
+    // Log para verificar os dados recebidos
+    log('AvaliationPage - Dados recebidos:');
+    log('evaluationId: ${widget.evaluationId}');
+    log('participantData: ${widget.participantData}');
+
     criteriaList = getCriteria();
   }
 
@@ -103,10 +111,14 @@ class _AvaliationPageState extends State<AvaliationPage> {
                                     builder: (context) => AvafisPage(
                                       subCriterias: criterias['subCriterias'],
                                       participantData: widget.participantData,
+                                      evaluationId: widget
+                                          .evaluationId, // Passando o evaluationId
                                     ),
                                   ),
                                 );
                               },
+                              evaluationId: widget
+                                  .evaluationId, // Passando evaluationId para CriteriaCard
                             );
                           },
                         );

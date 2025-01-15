@@ -269,7 +269,7 @@ class RadarGraph extends StatelessWidget {
     return Center(
       child: SizedBox(
         height: 300,
-        width: 300,
+        width: 500,
         child: RadarChart(
           ticks: const [20, 40, 60, 80, 100],
           features: [

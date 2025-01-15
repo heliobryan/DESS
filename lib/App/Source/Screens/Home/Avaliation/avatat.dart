@@ -6,10 +6,12 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 class AvatatPage extends StatefulWidget {
   final List<dynamic> subCriterias;
   final Map<String, dynamic> participantData;
+  final String evaluationId;
   const AvatatPage({
     super.key,
     required this.participantData,
     required this.subCriterias,
+    required this.evaluationId,
   });
 
   @override
@@ -108,6 +110,7 @@ class _AvatatPageState extends State<AvatatPage> {
                         onTap: () {},
                         onSubCriteriaPressed: (List<dynamic> items) {},
                         participantId: '',
+                        evaluationId: widget.evaluationId,
                       );
                     },
                   ),

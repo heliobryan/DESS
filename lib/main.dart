@@ -44,6 +44,7 @@ class DesApp extends StatelessWidget {
         'avaliationPage': (context) => const AvaliationPage(
               participantData: {},
               evaluationData: null,
+              evaluationId: '',
             ),
         'managePage': (context) => const ManagePage(),
         'passportPage': (context) => const PassportPage(
@@ -58,10 +59,12 @@ class DesApp extends StatelessWidget {
         'avafisPage': (context) => const AvafisPage(
               subCriterias: [],
               participantData: {},
+              evaluationId: '',
             ),
         'avaTec': (context) => const AvatecPage(
               subCriterias: [],
               participantData: {},
+              evaluationId: '',
             ),
         'infoPage': (context) => const InfoPage(),
         'passAvaliation': (context) => const AvaliationForm(),

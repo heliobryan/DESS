@@ -168,11 +168,13 @@ class _CompCardState extends State<CompCard> {
 class CriteriaCard extends StatefulWidget {
   final Map<String, dynamic> criterias;
   final Map<String, dynamic> participantData;
+  final String evaluationId; // Adicionado evaluationId
 
   const CriteriaCard({
     super.key,
     required this.criterias,
     required this.participantData,
+    required this.evaluationId, // Adicionado evaluationId
     required Null Function() onTap,
   });
 
@@ -183,6 +185,9 @@ class CriteriaCard extends StatefulWidget {
 class _CriteriaCardState extends State<CriteriaCard> {
   @override
   Widget build(BuildContext context) {
+    // Log para verificar o evaluationId
+    print('CriteriaCard - Evaluation ID recebido: ${widget.evaluationId}');
+
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Container(
@@ -200,6 +205,9 @@ class _CriteriaCardState extends State<CriteriaCard> {
             ),
           ),
           onPressed: () {
+            // Log para confirmar a navegação
+            print('CriteriaCard - Navegando para a página de avaliação');
+
             final routes = {
               'Físico': () => Navigator.push(
                     context,
@@ -207,6 +215,8 @@ class _CriteriaCardState extends State<CriteriaCard> {
                       builder: (context) => AvafisPage(
                         subCriterias: widget.criterias['subcriteria'],
                         participantData: widget.participantData,
+                        evaluationId:
+                            widget.evaluationId, // Passando evaluationId
                       ),
                     ),
                   ),
@@ -216,6 +226,8 @@ class _CriteriaCardState extends State<CriteriaCard> {
                       builder: (context) => AvatecPage(
                         subCriterias: widget.criterias['subcriteria'],
                         participantData: widget.participantData,
+                        evaluationId:
+                            widget.evaluationId, // Passando evaluationId
                       ),
                     ),
                   ),
@@ -225,6 +237,8 @@ class _CriteriaCardState extends State<CriteriaCard> {
                       builder: (context) => AvapsiPage(
                         subCriterias: widget.criterias['subcriteria'],
                         participantData: widget.participantData,
+                        evaluationId:
+                            widget.evaluationId, // Passando evaluationId
                       ),
                     ),
                   ),
@@ -234,6 +248,8 @@ class _CriteriaCardState extends State<CriteriaCard> {
                       builder: (context) => AvatatPage(
                         subCriterias: widget.criterias['subcriteria'],
                         participantData: widget.participantData,
+                        evaluationId:
+                            widget.evaluationId, // Passando evaluationId
                       ),
                     ),
                   ),
@@ -263,8 +279,8 @@ class SubCriteriaCard extends StatefulWidget {
   final Map<String, dynamic> subCriterias;
   final VoidCallback onTap;
   final Function(List items) onSubCriteriaPressed;
-  final String participantId; // Identificador do participante
-
+  final String participantId;
+  final String evaluationId;
   const SubCriteriaCard({
     super.key,
     required this.subCriterias,
@@ -272,6 +288,7 @@ class SubCriteriaCard extends StatefulWidget {
     required this.onSubCriteriaPressed,
     required this.participantId,
     required subCriteria,
+    required this.evaluationId,
   });
 
   @override
@@ -350,12 +367,13 @@ class _SubCriteriaCardState extends State<SubCriteriaCard> {
                   } else if (item['aspect'] == 'measurable') {
                     return Column(
                       children: [
-                        MeasurableCard(
-                          title: item['name'] ?? 'Sem Título',
-                          measurement: '', // Valor padrão
-                          unit: item['measurement_unit'] ?? "",
+                        Measurablecard(
+                          title: item['name'],
                           participantId: widget.participantId,
-                          itemId: itemId, evaluationId: '',
+                          measurement: '',
+                          unit: '',
+                          itemID: itemId,
+                          evaluationId: widget.evaluationId,
                         ),
                         const SizedBox(height: 20),
                       ],
@@ -433,15 +451,15 @@ class AgendaCard extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => AvaliationPage(
                   participantData: participantData,
-                  evaluationData: event, // Passando os dados do evento
+                  evaluationData: event,
+                  evaluationId:
+                      event['id'].toString(), // Passando o ID da avaliação
                 ),
               ),
             );
           },
           style: ButtonStyle(
-            // ignore: deprecated_member_use
             padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
-            // ignore: deprecated_member_use
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),

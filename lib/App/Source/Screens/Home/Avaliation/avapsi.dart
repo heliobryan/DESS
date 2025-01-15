@@ -6,10 +6,12 @@ import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 class AvapsiPage extends StatefulWidget {
   final List<dynamic> subCriterias;
   final Map<String, dynamic> participantData;
+  final String evaluationId;
   const AvapsiPage({
     super.key,
     required this.subCriterias,
     required this.participantData,
+    required this.evaluationId,
   });
 
   @override
@@ -109,6 +111,7 @@ class _AvapsiPageState extends State<AvapsiPage> {
                           onTap: () {},
                           onSubCriteriaPressed: (List<dynamic> items) {},
                           participantId: '',
+                          evaluationId: widget.evaluationId,
                         ),
                       );
                     },
